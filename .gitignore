@@ -79,3 +79,10 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+.project
+**/.settings
+**/.classpath
+node_modules/**
+TechnoLib
+tsconfig.tsbuildinfo
