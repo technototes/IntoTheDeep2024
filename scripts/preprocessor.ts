@@ -85,19 +85,19 @@ const typeMap = new Map([
 
 /*** END CONFIGURATION STUFF ***/
 
-const [, , outDir, className, filesAsString] = process.argv;
-const outputLocation = path.join(outDir, 'generated-sources', ...packageDir);
+const [, , outDir, className, ...filesAsString] = process.argv;
+// console.log("Output Directory:", outDir);
+// console.log("filesAsString:", filesAsString);
+const outputLocation = path.join(outDir, ...packageDir);
 
 // We're only finding files that include "auto" and "const" in their paths.
-const filesNoBrackets = filesAsString.substring(1, filesAsString.length - 1);
-const files = filesNoBrackets
-  .split(', ')
-  .filter(
-    (val) =>
-      val.toLocaleLowerCase().indexOf('auto') >= 0 &&
-      val.toLocaleLowerCase().indexOf('const') >= 0 &&
-      val.toLocaleLowerCase().indexOf('meepmeep') < 0,
-  );
+// const filesNoBrackets = filesAsString.substring(1, filesAsString.length - 1);
+const files = filesAsString.filter(
+  (val) =>
+    val.toLocaleLowerCase().indexOf('auto') >= 0 &&
+    val.toLocaleLowerCase().indexOf('const') >= 0 &&
+    val.toLocaleLowerCase().indexOf('meepmeep') < 0,
+); // filesNoBrackets.split(', ')
 
 // A really dumb symbol table (That I'm only filling, but never using...)
 const symbolTypes = new Map<string, string>();
