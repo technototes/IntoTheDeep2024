@@ -54,10 +54,10 @@ task makeMeepMeep16750Java {
 
     inputs.files theFiles.asFileTree.files
     outputs.dir processedLocations
-
+    def frontSlash = buildDir.path.replace('\\', '/')
     doLast {
         exec {
-            commandLine buildCommand, 'meep', buildDir, 'DO_NOT_EDIT_16750', theFiles.files
+            commandLine buildCommand, 'meep', frontSlash, 'DO_NOT_EDIT_16750', theFiles.files
         }
     }
 }
@@ -79,10 +79,10 @@ task makeMeepMeep20403Java {
 
     inputs.files theFiles.asFileTree.files
     outputs.dir processedLocations
-
+    def frontSlash = buildDir.path.replace('\\', '/')
     doLast {
         exec {
-            commandLine buildCommand, 'meep', buildDir, 'DO_NOT_EDIT_20403', theFiles.files
+            commandLine buildCommand, 'meep', frontSlash, 'DO_NOT_EDIT_20403', theFiles.files
         }
     }
 }
