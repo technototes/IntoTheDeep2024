@@ -1,6 +1,7 @@
-package org.firstinspires.ftc.teamcode.messages;
+package org.firstinspires.ftc.rrqs.messages;
 
 public final class TankCommandMessage {
+
     public long timestamp;
     public double voltage;
     public double leftPower;

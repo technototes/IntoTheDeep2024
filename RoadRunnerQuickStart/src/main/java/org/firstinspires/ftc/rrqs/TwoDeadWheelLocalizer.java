@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.rrqs;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.DualNum;
@@ -13,18 +13,18 @@ import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
-
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-import org.firstinspires.ftc.teamcode.messages.TwoDeadWheelInputsMessage;
+import org.firstinspires.ftc.rrqs.messages.TwoDeadWheelInputsMessage;
 
 @Config
 public final class TwoDeadWheelLocalizer implements Localizer {
+
     public static class Params {
+
         public double parYTicks = 0.0; // y position of the parallel encoder (in tick units)
         public double perpXTicks = 0.0; // x position of the perpendicular encoder (in tick units)
     }
@@ -66,7 +66,10 @@ public final class TwoDeadWheelLocalizer implements Localizer {
         YawPitchRollAngles angles = imu.getRobotYawPitchRollAngles();
         AngularVelocity angularVelocity = imu.getRobotAngularVelocity(AngleUnit.RADIANS);
 
-        FlightRecorder.write("TWO_DEAD_WHEEL_INPUTS", new TwoDeadWheelInputsMessage(parPosVel, perpPosVel, angles, angularVelocity));
+        FlightRecorder.write(
+            "TWO_DEAD_WHEEL_INPUTS",
+            new TwoDeadWheelInputsMessage(parPosVel, perpPosVel, angles, angularVelocity)
+        );
 
         Rotation2d heading = Rotation2d.exp(angles.getYaw(AngleUnit.RADIANS));
 
@@ -86,8 +89,8 @@ public final class TwoDeadWheelLocalizer implements Localizer {
             lastHeading = heading;
 
             return new Twist2dDual<>(
-                    Vector2dDual.constant(new Vector2d(0.0, 0.0), 2),
-                    DualNum.constant(0.0, 2)
+                Vector2dDual.constant(new Vector2d(0.0, 0.0), 2),
+                DualNum.constant(0.0, 2)
             );
         }
 
@@ -96,20 +99,21 @@ public final class TwoDeadWheelLocalizer implements Localizer {
         double headingDelta = heading.minus(lastHeading);
 
         Twist2dDual<Time> twist = new Twist2dDual<>(
-                new Vector2dDual<>(
-                        new DualNum<Time>(new double[] {
-                                parPosDelta - PARAMS.parYTicks * headingDelta,
-                                parPosVel.velocity - PARAMS.parYTicks * headingVel,
-                        }).times(inPerTick),
-                        new DualNum<Time>(new double[] {
-                                perpPosDelta - PARAMS.perpXTicks * headingDelta,
-                                perpPosVel.velocity - PARAMS.perpXTicks * headingVel,
-                        }).times(inPerTick)
-                ),
-                new DualNum<>(new double[] {
-                        headingDelta,
-                        headingVel,
-                })
+            new Vector2dDual<>(
+                new DualNum<Time>(
+                    new double[] {
+                        parPosDelta - PARAMS.parYTicks * headingDelta,
+                        parPosVel.velocity - PARAMS.parYTicks * headingVel,
+                    }
+                ).times(inPerTick),
+                new DualNum<Time>(
+                    new double[] {
+                        perpPosDelta - PARAMS.perpXTicks * headingDelta,
+                        perpPosVel.velocity - PARAMS.perpXTicks * headingVel,
+                    }
+                ).times(inPerTick)
+            ),
+            new DualNum<>(new double[] { headingDelta, headingVel })
         );
 
         lastParPos = parPosVel.position;

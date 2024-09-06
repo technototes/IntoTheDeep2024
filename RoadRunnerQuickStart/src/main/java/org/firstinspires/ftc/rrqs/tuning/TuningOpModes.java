@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.tuning;
+package org.firstinspires.ftc.rrqs.tuning;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.reflection.ReflectionConfig;
@@ -20,18 +20,17 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
-
-import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
-import org.firstinspires.ftc.teamcode.MecanumDrive;
-import org.firstinspires.ftc.teamcode.TankDrive;
-import org.firstinspires.ftc.teamcode.ThreeDeadWheelLocalizer;
-import org.firstinspires.ftc.teamcode.TwoDeadWheelLocalizer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta;
+import org.firstinspires.ftc.rrqs.MecanumDrive;
+import org.firstinspires.ftc.rrqs.TankDrive;
+import org.firstinspires.ftc.rrqs.ThreeDeadWheelLocalizer;
+import org.firstinspires.ftc.rrqs.TwoDeadWheelLocalizer;
 
 public final class TuningOpModes {
+
     // TODO: change this to TankDrive.class if you're using tank
     public static final Class<?> DRIVE_CLASS = MecanumDrive.class;
 
@@ -42,10 +41,10 @@ public final class TuningOpModes {
 
     private static OpModeMeta metaForClass(Class<? extends OpMode> cls) {
         return new OpModeMeta.Builder()
-                .setName(cls.getSimpleName())
-                .setGroup(GROUP)
-                .setFlavor(OpModeMeta.Flavor.TELEOP)
-                .build();
+            .setName(cls.getSimpleName())
+            .setGroup(GROUP)
+            .setFlavor(OpModeMeta.Flavor.TELEOP)
+            .build();
     }
 
     @OpModeRegistrar
@@ -75,33 +74,32 @@ public final class TuningOpModes {
                     parEncs.add(dl.par);
                     perpEncs.add(dl.perp);
                 } else {
-                    throw new RuntimeException("unknown localizer: " + md.localizer.getClass().getName());
+                    throw new RuntimeException(
+                        "unknown localizer: " + md.localizer.getClass().getName()
+                    );
                 }
 
                 return new DriveView(
                     DriveType.MECANUM,
-                        MecanumDrive.PARAMS.inPerTick,
-                        MecanumDrive.PARAMS.maxWheelVel,
-                        MecanumDrive.PARAMS.minProfileAccel,
-                        MecanumDrive.PARAMS.maxProfileAccel,
-                        hardwareMap.getAll(LynxModule.class),
-                        Arrays.asList(
-                                md.leftFront,
-                                md.leftBack
-                        ),
-                        Arrays.asList(
-                                md.rightFront,
-                                md.rightBack
-                        ),
-                        leftEncs,
-                        rightEncs,
-                        parEncs,
-                        perpEncs,
-                        md.lazyImu,
-                        md.voltageSensor,
-                        () -> new MotorFeedforward(MecanumDrive.PARAMS.kS,
-                                MecanumDrive.PARAMS.kV / MecanumDrive.PARAMS.inPerTick,
-                                MecanumDrive.PARAMS.kA / MecanumDrive.PARAMS.inPerTick)
+                    MecanumDrive.PARAMS.inPerTick,
+                    MecanumDrive.PARAMS.maxWheelVel,
+                    MecanumDrive.PARAMS.minProfileAccel,
+                    MecanumDrive.PARAMS.maxProfileAccel,
+                    hardwareMap.getAll(LynxModule.class),
+                    Arrays.asList(md.leftFront, md.leftBack),
+                    Arrays.asList(md.rightFront, md.rightBack),
+                    leftEncs,
+                    rightEncs,
+                    parEncs,
+                    perpEncs,
+                    md.lazyImu,
+                    md.voltageSensor,
+                    () ->
+                        new MotorFeedforward(
+                            MecanumDrive.PARAMS.kS,
+                            MecanumDrive.PARAMS.kV / MecanumDrive.PARAMS.inPerTick,
+                            MecanumDrive.PARAMS.kA / MecanumDrive.PARAMS.inPerTick
+                        )
                 );
             };
         } else if (DRIVE_CLASS.equals(TankDrive.class)) {
@@ -124,27 +122,32 @@ public final class TuningOpModes {
                     parEncs.add(dl.par);
                     perpEncs.add(dl.perp);
                 } else {
-                    throw new RuntimeException("unknown localizer: " + td.localizer.getClass().getName());
+                    throw new RuntimeException(
+                        "unknown localizer: " + td.localizer.getClass().getName()
+                    );
                 }
 
                 return new DriveView(
                     DriveType.TANK,
-                        TankDrive.PARAMS.inPerTick,
-                        TankDrive.PARAMS.maxWheelVel,
-                        TankDrive.PARAMS.minProfileAccel,
-                        TankDrive.PARAMS.maxProfileAccel,
-                        hardwareMap.getAll(LynxModule.class),
-                        td.leftMotors,
-                        td.rightMotors,
-                        leftEncs,
-                        rightEncs,
-                        parEncs,
-                        perpEncs,
-                        td.lazyImu,
-                        td.voltageSensor,
-                        () -> new MotorFeedforward(TankDrive.PARAMS.kS,
-                                TankDrive.PARAMS.kV / TankDrive.PARAMS.inPerTick,
-                                TankDrive.PARAMS.kA / TankDrive.PARAMS.inPerTick)
+                    TankDrive.PARAMS.inPerTick,
+                    TankDrive.PARAMS.maxWheelVel,
+                    TankDrive.PARAMS.minProfileAccel,
+                    TankDrive.PARAMS.maxProfileAccel,
+                    hardwareMap.getAll(LynxModule.class),
+                    td.leftMotors,
+                    td.rightMotors,
+                    leftEncs,
+                    rightEncs,
+                    parEncs,
+                    perpEncs,
+                    td.lazyImu,
+                    td.voltageSensor,
+                    () ->
+                        new MotorFeedforward(
+                            TankDrive.PARAMS.kS,
+                            TankDrive.PARAMS.kV / TankDrive.PARAMS.inPerTick,
+                            TankDrive.PARAMS.kA / TankDrive.PARAMS.inPerTick
+                        )
                 );
             };
         } else {
@@ -156,25 +159,38 @@ public final class TuningOpModes {
         manager.register(metaForClass(ForwardRampLogger.class), new ForwardRampLogger(dvf));
         manager.register(metaForClass(LateralPushTest.class), new LateralPushTest(dvf));
         manager.register(metaForClass(LateralRampLogger.class), new LateralRampLogger(dvf));
-        manager.register(metaForClass(ManualFeedforwardTuner.class), new ManualFeedforwardTuner(dvf));
-        manager.register(metaForClass(MecanumMotorDirectionDebugger.class), new MecanumMotorDirectionDebugger(dvf));
-        manager.register(metaForClass(DeadWheelDirectionDebugger.class), new DeadWheelDirectionDebugger(dvf));
+        manager.register(
+            metaForClass(ManualFeedforwardTuner.class),
+            new ManualFeedforwardTuner(dvf)
+        );
+        manager.register(
+            metaForClass(MecanumMotorDirectionDebugger.class),
+            new MecanumMotorDirectionDebugger(dvf)
+        );
+        manager.register(
+            metaForClass(DeadWheelDirectionDebugger.class),
+            new DeadWheelDirectionDebugger(dvf)
+        );
 
         manager.register(metaForClass(ManualFeedbackTuner.class), ManualFeedbackTuner.class);
         manager.register(metaForClass(SplineTest.class), SplineTest.class);
         manager.register(metaForClass(LocalizationTest.class), LocalizationTest.class);
 
-        FtcDashboard.getInstance().withConfigRoot(configRoot -> {
-            for (Class<?> c : Arrays.asList(
+        FtcDashboard.getInstance()
+            .withConfigRoot(configRoot -> {
+                for (Class<?> c : Arrays.asList(
                     AngularRampLogger.class,
                     ForwardRampLogger.class,
                     LateralRampLogger.class,
                     ManualFeedforwardTuner.class,
                     MecanumMotorDirectionDebugger.class,
                     ManualFeedbackTuner.class
-            )) {
-                configRoot.putVariable(c.getSimpleName(), ReflectionConfig.createVariableFromClass(c));
-            }
-        });
+                )) {
+                    configRoot.putVariable(
+                        c.getSimpleName(),
+                        ReflectionConfig.createVariableFromClass(c)
+                    );
+                }
+            });
     }
 }

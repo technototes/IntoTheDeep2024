@@ -1,8 +1,9 @@
-package org.firstinspires.ftc.teamcode.messages;
+package org.firstinspires.ftc.rrqs.messages;
 
 import com.acmerobotics.roadrunner.Pose2d;
 
 public final class PoseMessage {
+
     public long timestamp;
     public double x;
     public double y;
@@ -15,4 +16,3 @@ public final class PoseMessage {
         this.heading = pose.heading.toDouble();
     }
 }
-

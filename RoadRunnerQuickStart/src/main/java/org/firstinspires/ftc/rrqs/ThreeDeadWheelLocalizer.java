@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.rrqs;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.DualNum;
@@ -12,14 +12,14 @@ import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
 import com.acmerobotics.roadrunner.ftc.PositionVelocityPair;
 import com.acmerobotics.roadrunner.ftc.RawEncoder;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.teamcode.messages.ThreeDeadWheelInputsMessage;
+import org.firstinspires.ftc.rrqs.messages.ThreeDeadWheelInputsMessage;
 
 @Config
 public final class ThreeDeadWheelLocalizer implements Localizer {
+
     public static class Params {
+
         public double par0YTicks = 0.0; // y position of the first parallel encoder (in tick units)
         public double par1YTicks = 1.0; // y position of the second parallel encoder (in tick units)
         public double perpXTicks = 0.0; // x position of the perpendicular encoder (in tick units)
@@ -55,7 +55,10 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         PositionVelocityPair par1PosVel = par1.getPositionAndVelocity();
         PositionVelocityPair perpPosVel = perp.getPositionAndVelocity();
 
-        FlightRecorder.write("THREE_DEAD_WHEEL_INPUTS", new ThreeDeadWheelInputsMessage(par0PosVel, par1PosVel, perpPosVel));
+        FlightRecorder.write(
+            "THREE_DEAD_WHEEL_INPUTS",
+            new ThreeDeadWheelInputsMessage(par0PosVel, par1PosVel, perpPosVel)
+        );
 
         if (!initialized) {
             initialized = true;
@@ -65,8 +68,8 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
             lastPerpPos = perpPosVel.position;
 
             return new Twist2dDual<>(
-                    Vector2dDual.constant(new Vector2d(0.0, 0.0), 2),
-                    DualNum.constant(0.0, 2)
+                Vector2dDual.constant(new Vector2d(0.0, 0.0), 2),
+                DualNum.constant(0.0, 2)
             );
         }
 
@@ -75,20 +78,34 @@ public final class ThreeDeadWheelLocalizer implements Localizer {
         int perpPosDelta = perpPosVel.position - lastPerpPos;
 
         Twist2dDual<Time> twist = new Twist2dDual<>(
-                new Vector2dDual<>(
-                        new DualNum<Time>(new double[] {
-                                (PARAMS.par0YTicks * par1PosDelta - PARAMS.par1YTicks * par0PosDelta) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
-                                (PARAMS.par0YTicks * par1PosVel.velocity - PARAMS.par1YTicks * par0PosVel.velocity) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
-                        }).times(inPerTick),
-                        new DualNum<Time>(new double[] {
-                                (PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks) * (par1PosDelta - par0PosDelta) + perpPosDelta),
-                                (PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks) * (par1PosVel.velocity - par0PosVel.velocity) + perpPosVel.velocity),
-                        }).times(inPerTick)
-                ),
-                new DualNum<>(new double[] {
-                        (par0PosDelta - par1PosDelta) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
-                        (par0PosVel.velocity - par1PosVel.velocity) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
-                })
+            new Vector2dDual<>(
+                new DualNum<Time>(
+                    new double[] {
+                        (PARAMS.par0YTicks * par1PosDelta - PARAMS.par1YTicks * par0PosDelta) /
+                        (PARAMS.par0YTicks - PARAMS.par1YTicks),
+                        (PARAMS.par0YTicks * par1PosVel.velocity -
+                            PARAMS.par1YTicks * par0PosVel.velocity) /
+                        (PARAMS.par0YTicks - PARAMS.par1YTicks),
+                    }
+                ).times(inPerTick),
+                new DualNum<Time>(
+                    new double[] {
+                        ((PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks)) *
+                                (par1PosDelta - par0PosDelta) +
+                            perpPosDelta),
+                        ((PARAMS.perpXTicks / (PARAMS.par0YTicks - PARAMS.par1YTicks)) *
+                                (par1PosVel.velocity - par0PosVel.velocity) +
+                            perpPosVel.velocity),
+                    }
+                ).times(inPerTick)
+            ),
+            new DualNum<>(
+                new double[] {
+                    (par0PosDelta - par1PosDelta) / (PARAMS.par0YTicks - PARAMS.par1YTicks),
+                    (par0PosVel.velocity - par1PosVel.velocity) /
+                    (PARAMS.par0YTicks - PARAMS.par1YTicks),
+                }
+            )
         );
 
         lastPar0Pos = par0PosVel.position;
