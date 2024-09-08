@@ -1,0 +1,4 @@
+**/yarn.lock      binary
+.pnp.*            binary
+.yarn/release/**  binary
+.yarn/plugins/**  binary

@@ -136,6 +136,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings("WeakerAccess")
 public class FtcRobotControllerActivity extends Activity
   {
+  public static double endAutoHeading = 0.0;
+  public static double headingUpdateTime = 0.0;
+
   public static final String TAG = "RCActivity";
   public String getTag() { return TAG; }
 
