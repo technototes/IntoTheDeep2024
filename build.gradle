@@ -27,3 +27,11 @@ allprojects {
 repositories {
     mavenCentral()
 }
+
+// This is the task that is run by GitHub on PR's
+task justAssembleDebug(type: GradleBuild) {
+    tasks = [
+        ':Twenty403:assembleDebug',
+        ':Sixteen750:assembleDebug'
+    ]
+}

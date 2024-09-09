@@ -16,10 +16,11 @@ apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
 
 android {
-    namespace = 'org.firstinspires.ftc.twenty403'
+    namespace = 'org.firstinspires.ftc.sixteen750'
     androidResources {
         noCompress 'tflite'
     }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
@@ -28,16 +29,10 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url = 'https://maven.brott.dev/'
-    }
-}
-
 dependencies {
     implementation project(':FtcRobotController')
     // Uncomment this to use a local version of TechnoLib
-    implementation project(':RobotLibrary') // FLIP: TechnoLibLocal
-    implementation project(':Path')         // FLIP: TechnoLibLocal
-    implementation project(':Vision')       // FLIP: TechnoLibLocal
+    // implementation project(':RobotLibrary') // FLIP: TechnoLibLocal
+    // implementation project(':Path')         // FLIP: TechnoLibLocal
+    // implementation project(':Vision')       // FLIP: TechnoLibLocal
 }

@@ -42,11 +42,9 @@
     "- // h-": "",
     "- // h ": "platform-specific commands",
     "- // h+": "",
-    "gradle": "bun run os gradle",
-    "gradle:win": "gradlew",
-    "gradle:def": "./gradlew",
+    "gradle": "./gradlew",
     "adb": "bun run os adb",
-    "adb:win": ".\\\\scripts\\\\adb.cmd",
+    "adb:win": "./scripts/adb.cmd",
     "adb:mac": "~/Library/Android/sdk/platform-tools/adb",
     "adb:lin": "~/Android/Sdk/platform-tools/adb",
     "open": "bun run os open",
@@ -76,7 +74,7 @@
     "java-parser": "^2.3.2",
     "prettier": "^3.3.3",
     "prettier-plugin-java": "^2.6.4",
-    "simple-git": "^3.25.0",
+    "simple-git": "^3.26.0",
     "typescript": "^5.5.4",
     "@freik/workspace": "^0.6.4"
   }
