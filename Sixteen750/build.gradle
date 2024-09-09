@@ -16,21 +16,16 @@ apply from: '../build.common.gradle'
 apply from: '../build.dependencies.gradle'
 
 android {
-    namespace = 'org.firstinspires.ftc.twenty403'
+    namespace = 'org.firstinspires.ftc.sixteen750'
     androidResources {
         noCompress 'tflite'
     }
+
     packagingOptions {
         jniLibs {
             pickFirsts += ['**/*.so']
         }
         jniLibs.useLegacyPackaging true
-    }
-}
-
-repositories {
-    maven {
-        url = 'https://maven.brott.dev/'
     }
 }
 

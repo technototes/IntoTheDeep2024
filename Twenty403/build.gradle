@@ -28,12 +28,6 @@ android {
     }
 }
 
-repositories {
-    maven {
-        url = 'https://maven.brott.dev/'
-    }
-}
-
 dependencies {
     implementation project(':FtcRobotController')
     // Uncomment this to use a local version of TechnoLib
@@ -41,4 +35,3 @@ dependencies {
     implementation project(':Path')         // FLIP: TechnoLibLocal
     implementation project(':Vision')       // FLIP: TechnoLibLocal
 }
- 
