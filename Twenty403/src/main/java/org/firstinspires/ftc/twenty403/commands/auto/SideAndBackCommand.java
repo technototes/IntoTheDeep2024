@@ -11,11 +11,11 @@ public class SideAndBackCommand extends SequentialCommandGroup {
         super(
             new TrajectorySequenceCommand(
                 r.drivebaseSubsystem,
-                AutoConstants.WingRed.SIDE_LEFT_TO_SIDE_RIGHT
+                AutoConstants.SIDE_LEFT_TO_SIDE_RIGHT
             ).andThen(
                 new TrajectorySequenceCommand(
                     r.drivebaseSubsystem,
-                    AutoConstants.WingRed.SIDE_RIGHT_TO_SIDE_LEFT
+                    AutoConstants.SIDE_RIGHT_TO_SIDE_LEFT
                 )
             )
         );

@@ -12,7 +12,6 @@ import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
-import org.firstinspires.ftc.sixteen750.commands.DroneStart;
 import org.firstinspires.ftc.sixteen750.commands.driving.ResetGyroCommand;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorController;
@@ -36,14 +35,11 @@ public class DualTeleOp extends CommandOpMode {
         if (Setup.Connected.DRIVEBASE) {
             controlsDriver = new DriverController(driverGamepad, robot);
             // Just pick a starting point
-            robot.drivebase.setPoseEstimate(AutoConstants.WingRed.START.toPose());
+            robot.drivebase.setPoseEstimate(AutoConstants.START.toPose());
             CommandScheduler.scheduleForState(
                 new ResetGyroCommand(robot.drivebase),
                 OpModeState.INIT
             );
-            if (Setup.Connected.DRONE) {
-                CommandScheduler.scheduleForState(new DroneStart(robot.drone), OpModeState.INIT);
-            }
         }
     }
 }

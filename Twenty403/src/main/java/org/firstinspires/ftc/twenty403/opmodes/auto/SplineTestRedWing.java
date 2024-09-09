@@ -11,20 +11,16 @@ import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
-import org.firstinspires.ftc.twenty403.commands.VisionCommand;
 import org.firstinspires.ftc.twenty403.commands.auto.red.SplineWingPushPlacePark;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
-import org.firstinspires.ftc.twenty403.subsystems.ArmSubsystem;
 
-// The last 4 weird things are '🟥' and '🪶' (wing)
 @Autonomous(name = "SplineTestRedWing")
 @SuppressWarnings("unused")
 public class SplineTestRedWing extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;
-    public ArmSubsystem armSubsystem;
     public Hardware hardware;
 
     @Override
@@ -32,11 +28,7 @@ public class SplineTestRedWing extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.WingRed.START.toPose());
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.START.toPose());
         CommandScheduler.scheduleForState(new SplineWingPushPlacePark(robot), OpModeState.RUN); // RedWingParkCorner
-        CommandScheduler.scheduleInit(EZCmd.Arm.Neutral(robot.armSubsystem));
-        if (Setup.Connected.WEBCAM) {
-            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
-        }
     }
 }

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.twenty403.commands.auto;
 
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.path.command.TrajectorySequenceCommand;
-import org.firstinspires.ftc.twenty403.AutoConstants.WingRed;
+import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Robot;
 
 public class ForwardBackwardCommand extends SequentialCommandGroup {
@@ -11,9 +11,9 @@ public class ForwardBackwardCommand extends SequentialCommandGroup {
         super(
             new TrajectorySequenceCommand(
                 r.drivebaseSubsystem,
-                WingRed.BACKWARD_TO_FORWARD
+                AutoConstants.BACKWARD_TO_FORWARD
             ).andThen(
-                new TrajectorySequenceCommand(r.drivebaseSubsystem, WingRed.FORWARD_TO_BACKWARD)
+                new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_TO_BACKWARD)
             )
         );
         //        super(

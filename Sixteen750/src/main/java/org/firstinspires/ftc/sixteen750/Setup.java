@@ -1,48 +1,25 @@
 package org.firstinspires.ftc.sixteen750;
 
 import com.acmerobotics.dashboard.config.Config;
-import org.firstinspires.ftc.sixteen750.subsystems.DroneSubsystem;
 
 public class Setup {
 
     @Config
     public static class Connected {
-
         public static boolean DRIVEBASE = true;
-        public static boolean INTAKE = true;
-        public static boolean WEBCAM = true;
-        public static boolean PLACEMENT = true;
-
-        public static boolean HANG = false;
-
-        public static boolean DRONE = false;
     }
 
     @Config
     public static class HardwareNames {
-
-        public static String FLMOTOR = "fl";
-        public static String FRMOTOR = "fr";
-        public static String RLMOTOR = "rl";
-        public static String RRMOTOR = "rr";
+        public static String FL_DRIVE_MOTOR = "fl";
+        public static String FR_DRIVE_MOTOR = "fr";
+        public static String RL_DRIVE_MOTOR = "rl";
+        public static String RR_DRIVE_MOTOR = "rr";
         public static String IMU = "imu";
-        public static String INTAKELEFT = "lwheel";
-        //public static String INTAKERIGHT = "rwheel";
-        public static String CAMERA = "webcam";
-        public static String LIFTMOTOR = "liftmotor";
-
-        public static String ARMSERVO = "aservo";
-
-        public static String SCORESERVO = "sservo";
-        public static String HANGSERVO = "hangS";
-        public static String HANGMOTOR = "hangM";
-
-        public static String DRONESERVO = "droneS";
     }
 
     @Config
     public static class OtherSettings {
-
         public static double STRAIGHTEN_DEAD_ZONE = 0.08;
     }
 }

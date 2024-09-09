@@ -11,8 +11,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
-import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants.WingBlue;
-import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants.WingRed;
+import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
@@ -20,7 +19,7 @@ import javax.imageio.ImageIO;
 public class Twenty403Testing {
 
     //Wing Red
-    WingBlue vals;
+    AutoConstants vals;
 
     public static void main(String[] args) {
         // Make this as large as possible while still fitting on our laptop screens:
@@ -44,7 +43,7 @@ public class Twenty403Testing {
             30
             /* @MaxAccel */
         );
-        WingRed.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
+        AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 18)
             .followTrajectorySequence(drive -> getRedTrajectory(drive));
@@ -60,8 +59,8 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(WingRed.START)
-            .addTrajectory(WingRed.START_TO_LEFT_SPIKE.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_START_TO_RIGHT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_MIDSPIKE_TO_START.get())
             // .addTrajectory(AutoConstantsRed.Wing.MIDSPIKE_TO_RIGHT_SPIKE.get())
@@ -75,9 +74,9 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(WingRed.START)
+            .trajectorySequenceBuilder(AutoConstants.START)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
-            .addTrajectory(WingRed.START_TO_MID_CLEAR.get())
+            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())

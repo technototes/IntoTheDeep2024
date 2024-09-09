@@ -17,7 +17,6 @@ public class SingleController {
 
     public Stick driveLeftStick, driveRightStick;
     public CommandButton resetGyroButton, driveStraight, turboButton;
-    public CommandButton clawOpenButton, clawCloseButton, armFirstLineButton, armSecondLineButton, armThirdLineButton, launchDroneButton;
 
     public SingleController(CommandGamepad g, Robot r, Setup s) {
         this.robot = r;
@@ -29,9 +28,6 @@ public class SingleController {
         if (Setup.Connected.DRIVEBASE) {
             bindDriveControls();
         }
-        if (Setup.Connected.DRONESUBSYSTEM) {
-            bindDroneControls();
-        }
     }
 
     private void AssignNamedControllerButton() {
@@ -40,7 +36,6 @@ public class SingleController {
         driveRightStick = gamepad.rightStick;
         turboButton = gamepad.leftStickButton;
         driveStraight = gamepad.rightTrigger.getAsButton(0.5);
-        launchDroneButton = gamepad.ps_share;
     }
 
     public void bindDriveControls() {
@@ -50,14 +45,5 @@ public class SingleController {
         turboButton.whenPressed(EZCmd.Drive.TurboMode(robot.drivebaseSubsystem));
         turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
         resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
-    }
-
-    public void bindDroneControls() {
-        launchDroneButton.whenPressed(EZCmd.Drone.Launch(robot.droneSubsystem));
-    }
-
-    public void bindLiftControls() {
-        // TODO: Name & Bind lift controls
-
     }
 }

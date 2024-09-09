@@ -8,9 +8,6 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean ARMSUBSYSTEM = true;
-        public static boolean DRONESUBSYSTEM = false;
-        public static boolean WEBCAM = true;
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = true;
     }
@@ -23,12 +20,6 @@ public class Setup {
         public static String RLMOTOR = "rl";
         public static String RRMOTOR = "rr";
         public static String IMU = "imu";
-        public static String CAMERA = "webcam";
-        public static String INTAKESERVO = "intakeservo";
-        public static String WRISTSERVO = "wristservo";
-        public static String SHOULDERMOTOR = "shoulder";
-        public static String SHOULDER2 = "odor";
-        public static String DRONESERVO = "droneservo";
         public static String ODOF = "odof";
         public static String ODOR = "odor";
     }

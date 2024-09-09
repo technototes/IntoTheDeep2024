@@ -11,8 +11,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
-import com.robotcode.shared.DO_NOT_EDIT_16750.AutoConstants.WingBlue;
-import com.robotcode.shared.DO_NOT_EDIT_16750.AutoConstants.WingRed;
+import com.robotcode.shared.DO_NOT_EDIT_16750.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
@@ -20,7 +19,7 @@ import javax.imageio.ImageIO;
 public class Sixteen750Testing {
 
     //Wing Red
-    WingBlue vals;
+    AutoConstants vals;
 
     public static void main(String[] args) {
         // Make this as large as possible while still fitting on our laptop screens:
@@ -44,7 +43,7 @@ public class Sixteen750Testing {
             30
             /* @MaxAccel */
         );
-        WingRed.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
+        AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 18)
             .followTrajectorySequence(drive -> getRedTrajectory(drive));
@@ -60,9 +59,9 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(WingRed.START)
-            .addTrajectory(WingRed.START_TO_RIGHT_SPIKE.get())
-            .addTrajectory(WingRed.RIGHT_SPIKE_TO_STAGE.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
+            .addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
             //.addTrajectory(WingRed.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MID_CLEAR_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MID_CLEAR.get())
@@ -75,10 +74,10 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(WingRed.START)
+            .trajectorySequenceBuilder(AutoConstants.START)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
 
-            .addTrajectory(WingRed.START_TO_MID_CLEAR.get())
+            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())

@@ -29,7 +29,7 @@ public class SingleDriverTeleOp extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.NONE, StartingPosition.Unspecified);
         controls = new SingleController(driverGamepad, robot, setup);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.WingRed.TELESTART.toPose());
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.TELESTART.toPose());
         CommandScheduler.scheduleForState(
             EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem),
             OpModeState.INIT

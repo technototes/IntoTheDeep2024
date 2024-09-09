@@ -22,12 +22,6 @@ public class Hardware implements Loggable {
 
     public IMU imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
-    public Webcam camera;
-    public Servo wristServo;
-    public CRServo launchServo;
-    public CRServo intakeServo;
-    public EncodedMotor<DcMotorEx> shoulderMotor;
-    public Motor<DcMotorEx> shoulder2Motor;
     public MotorEncoder odoF, odoR;
 
     /* Put other hardware here! */
@@ -44,18 +38,6 @@ public class Hardware implements Loggable {
             fr = new EncodedMotor<>(Setup.HardwareNames.FRMOTOR);
             rl = new EncodedMotor<>(Setup.HardwareNames.RLMOTOR);
             rr = new EncodedMotor<>(Setup.HardwareNames.RRMOTOR);
-        }
-        if (Setup.Connected.WEBCAM) {
-            camera = new Webcam(Setup.HardwareNames.CAMERA);
-        }
-        if (Setup.Connected.ARMSUBSYSTEM) {
-            wristServo = new Servo(Setup.HardwareNames.WRISTSERVO);
-            intakeServo = hwmap.get(CRServo.class, Setup.HardwareNames.INTAKESERVO);
-            shoulderMotor = new EncodedMotor<>(Setup.HardwareNames.SHOULDERMOTOR);
-            shoulder2Motor = new Motor<>(Setup.HardwareNames.SHOULDER2);
-        }
-        if (Setup.Connected.DRONESUBSYSTEM) {
-            launchServo = hwmap.get(CRServo.class, Setup.HardwareNames.DRONESERVO);
         }
         if (Setup.Connected.ODOSUBSYSTEM) {
             odoR = new MotorEncoder(Setup.HardwareNames.ODOR);

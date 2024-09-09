@@ -11,13 +11,11 @@ import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
-import org.firstinspires.ftc.twenty403.commands.VisionCommand;
 import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.twenty403.commands.auto.SideAndBackCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-// The last 4 weird things are '🟥' and '🪶' (wing)
 @Autonomous(name = "Sideways")
 @SuppressWarnings("unused")
 public class Sideways extends CommandOpMode {
@@ -31,7 +29,7 @@ public class Sideways extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.WingRed.SIDE_LEFT.toPose());
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.SIDE_LEFT.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                 new SideAndBackCommand(robot),
@@ -39,8 +37,5 @@ public class Sideways extends CommandOpMode {
             ),
             OpModeState.RUN
         );
-        if (Setup.Connected.WEBCAM) {
-            CommandScheduler.scheduleInit(new VisionCommand(robot.vision));
-        }
     }
 }
