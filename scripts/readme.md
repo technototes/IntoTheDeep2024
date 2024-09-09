@@ -6,26 +6,93 @@ developer. There are a couple scripts in here, of various levels of value.
 ## Scripts
 
 There are some scripts you can invoke from the package.json file that are useful
-for doing some stuff:
+for doing some stuff.
 
-### `flip.js`
+### Using the scripts
+
+In order to use the scripts, you'll first need to have the [Bun](https://bun.sh)
+script runtime installed. Once that's installed, just like any of the Javascript
+runtimes, you'll need to open a command prompt to the root of the repository,
+then type `bun install`. From there, to use any of these scripts, you go to that
+same directory and type `bun` _scriptname_, for example `bun format` will format
+all the files the current student is editing.
+
+### `flip`
 
 This script comments/uncomments lines of text according to the `fileList` map.
-As of this writing, there are two uses of this script: One enables/disabled
-using [TechnoLib](https://github.com/technototes/TechnoLib) as a local library,
-instead of using the published one. This is helpful when you're trying to debug
-something that fails inside the library, as well as when you're fixing/changing
-the library. You just need to clone the repo at the root of this repo and make
-sure it's named `TechnoLib` and you're good to go.
+As of this writing, there are two uses of this script:
 
-### `fastforward.js`
+1. `libflip`: Enable/disable using
+   [TechnoLib](https://github.com/technototes/TechnoLib) as a local library,
+   instead of using the published one. This is helpful when you're trying to
+   debug something that fails inside the library, as well as when you're
+   fixing/changing the library. You just need to clone the repo at the root of
+   this repo and make sure it's named `TechnoLib` and you're good to go.
+
+2. `botflip`: Enable/disable "extra" robots and portions of the repository. This
+   turns the RoadRunnerQuickStart, MeepMeepTesting, and LearnBot portions on or
+   off. It's a good idea to turn them off when you head to a competition, so
+   that building code won't take as long
+
+### `fastforward`
 
 I used this script last year to move all branches forward. I'm not using it
 anymore, as I'm trying a different workflow from last year. It does have some
 usages of the `git` NPM package so keeping it around as an example isn't
 terrible.
 
+### `format`
+
+This runs the [Prettier](https://prettier.io) _opinionated_ code formatter on
+any files that are being edited (not committed). I expect to integrate this into
+a `git` pre-commit action at some point.
+
+### `dash`
+
+Open the FTC Dashboard in the local browser.
+
+### `connect`
+
+Connect to the robot (if you're already on the robot's wifi network)
+
+### `disconnect`
+
+Disconnect from the robot.
+
+### Build scripts
+
+#### `fast`
+
+This _compiles_ just the two team bots and nothing else. It's basically good for
+sanity checking the code.
+
+#### `fast16` / `fast20` / `fastlb`
+
+Just _compile_ the code for the 16750, 20403, or LearnBot portion of the repo.
+
+#### `build` (must type `bun run build` not `bun build`)
+
+Build both the 16750 and 20403 robots.
+
+#### `full`
+
+A full build of everything (at least everything currently enabled). This
+_should_ be the same as the "Build->Make Project" menu item in Android Studio.
+
+#### `build16` / `build20` / `buildlb`
+
+Build just the 16750, 20403, or LearnBot portion of the repository.
+
+#### `meep`
+
+This runs a fairly complex transformation step to allow sharing code from the
+robots with the MeepMeep simulator. It's invoked by Gradle when building the
+MeepMeepTesting target. If you have issues with it, please hit up
+[Kevin](mailto:kevinfrei@hotmail.com) directly!
+
 ## Workflow
+
+TODO: This stuff is working (use `bun work`). I need to document what I did.
 
 There's a "workflow challenge" with students that I'm trying to solve. We share
 our code on github. The students are mostly fine, but a proper workflow requires
