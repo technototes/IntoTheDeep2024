@@ -45,8 +45,8 @@ public class Sixteen750Testing {
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-            .setDimensions(17.5, 18)
-            .followTrajectorySequence(drive -> getRedTrajectory(drive));
+            .setDimensions(15, 17.5)
+            .followTrajectorySequence(Sixteen750Testing::getRedTrajectory);
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));

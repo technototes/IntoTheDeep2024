@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.sixteen750.subsystems;
 
+import static org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem.DriveConstants.AUTO_MOTOR_SPEED;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
@@ -12,6 +14,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 
 public class DrivebaseSubsystem
     extends PathingMecanumDrivebaseSubsystem
@@ -176,6 +179,10 @@ public class DrivebaseSubsystem
         return getPoseEstimate();
     }
 
+    public void saveHeading() {
+        HeadingHelper.saveHeading(get().getX(), get().getY(), imu.gyroHeading());
+    }
+
     @Override
     public void periodic() {
         if (ENABLE_POSE_DIAGNOSTICS) {
@@ -199,11 +206,11 @@ public class DrivebaseSubsystem
         double maxlfvlrv = Math.max(Math.abs(lfv), Math.abs(lrv));
         double maxrfvrrv = Math.max(Math.abs(rfv), Math.abs(rrv));
         double maxall = Math.max(maxlfvlrv, maxrfvrrv);
-        if (Snail == true) {
+        if (Snail) {
             maxall = 1.0 / DriveConstants.SLOW_MOTOR_SPEED;
         }
-        if (Turbo == false && Snail == false) {
-            maxall = 1.0 / DriveConstants.AUTO_MOTOR_SPEED;
+        if (!Turbo && !Snail) {
+            maxall = 1.0 / AUTO_MOTOR_SPEED;
         }
         leftFront.setVelocity(
             (lfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFL_SCALE) / maxall
@@ -225,8 +232,8 @@ public class DrivebaseSubsystem
     }
 
     public void setTurboMode() {
-        Turbo = true;
         Snail = false;
+        Turbo = true;
     }
 
     public void setNormalMode() {

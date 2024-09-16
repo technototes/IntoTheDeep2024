@@ -11,6 +11,7 @@ import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
+import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.twenty403.commands.auto.SafetyStartCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
@@ -37,6 +38,7 @@ public class ForwardBackward extends CommandOpMode {
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                 new ForwardBackwardCommand(robot),
+                EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),
             OpModeState.RUN
@@ -46,6 +48,5 @@ public class ForwardBackward extends CommandOpMode {
             new SafetyStartCommand(robot.safetySubsystem),
             OpModeState.RUN
         );
-
     }
 }

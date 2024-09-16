@@ -29,6 +29,11 @@ public class SplineTestRedWing extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.START.toPose());
-        CommandScheduler.scheduleForState(new SplineWingPushPlacePark(robot), OpModeState.RUN); // RedWingParkCorner
+        CommandScheduler.scheduleForState(
+            new SplineWingPushPlacePark(robot).andThen(
+                EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem)
+            ),
+            OpModeState.RUN
+        ); // RedWingParkCorner
     }
 }

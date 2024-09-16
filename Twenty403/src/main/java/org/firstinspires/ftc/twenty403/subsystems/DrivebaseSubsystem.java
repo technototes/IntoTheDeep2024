@@ -186,7 +186,7 @@ public class DrivebaseSubsystem
     }
 
     public void saveHeading() {
-        HeadingHelper.updateHeading(imu.gyroHeading());
+        HeadingHelper.saveHeading(get().getX(), get().getY(), imu.gyroHeading());
     }
 
     @Override

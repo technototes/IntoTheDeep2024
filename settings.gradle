@@ -1,6 +1,6 @@
 include ':FtcRobotController'
 // Uncomment this to use TechnoLib from a subdirectory.
-// Or just try 'yarn libflip' to let the script do it for you...
+// Or just try 'bun libflip' to let the script do it for you...
 // include 'RobotLibrary'                                                   // FLIP: TechnoLibLocal
 // project(':RobotLibrary').projectDir = new File('TechnoLib/RobotLibrary') // FLIP: TechnoLibLocal
 // include 'Path'                                                           // FLIP: TechnoLibLocal

@@ -4,15 +4,13 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
-import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-import java.util.Set;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
-import org.firstinspires.ftc.sixteen750.commands.driving.ResetGyroCommand;
+import org.firstinspires.ftc.sixteen750.commands.driving.DrivingCommands;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
@@ -37,7 +35,7 @@ public class DualTeleOp extends CommandOpMode {
             // Just pick a starting point
             robot.drivebase.setPoseEstimate(AutoConstants.START.toPose());
             CommandScheduler.scheduleForState(
-                new ResetGyroCommand(robot.drivebase),
+                DrivingCommands.ResetGyro(robot.drivebase),
                 OpModeState.INIT
             );
         }
