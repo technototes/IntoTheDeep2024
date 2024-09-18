@@ -24,10 +24,6 @@ public class DrivebaseSubsystem
         return getPoseEstimate();
     }
 
-    // Notes from Kevin:
-    // The 5203 motors when direct driven
-    // move about 63 inches forward and is measured as roughly 3000 ticks on the encoders
-
     @Config
     public abstract static class DriveConstants implements MecanumConstants {
 
@@ -37,10 +33,10 @@ public class DrivebaseSubsystem
         public static double TRIGGER_THRESHOLD = 0.7;
 
         @TicksPerRev
-        public static final double TICKS_PER_REV = 385.6; // previous: 537.6
+        public static final double TICKS_PER_REV = 537.7; // From GoBilda's website
 
         @MaxRPM
-        public static final double MAX_RPM = 435; // 2021: 6000;
+        public static final double MAX_RPM = 312;
 
         public static double MAX_TICKS_PER_SEC = (TICKS_PER_REV * MAX_RPM) / 60.0;
 
@@ -56,17 +52,16 @@ public class DrivebaseSubsystem
         );
 
         @WheelRadius
-        public static double WHEEL_RADIUS = 1.88976; // in
+        public static double WHEEL_RADIUS = 1.88976; // inches "roughly" lol
 
         @GearRatio
-        public static double GEAR_RATIO = 0.6; // output (wheel) speed / input (motor) speed og: 1 / 19.2;
+        public static double GEAR_RATIO = 1.0; // output (wheel) speed / input (motor) speed
 
-        //gear ration is actually .667 but i think it might mess up what we already have
         @TrackWidth
-        public static double TRACK_WIDTH = 11.75; // 2021: 10; // in
+        public static double TRACK_WIDTH = 9.25; // inches
 
         @WheelBase
-        public static double WHEEL_BASE = 8.5; // in
+        public static double WHEEL_BASE = 9.25; // inches
 
         @KV
         public static double kV =
@@ -84,7 +79,7 @@ public class DrivebaseSubsystem
 
         // This was 35, which also felt a bit too fast. The bot controls more smoothly now
         @MaxAccel
-        public static double MAX_ACCEL = 30; //30
+        public static double MAX_ACCEL = 30;
 
         // This was 180 degrees
         @MaxAngleVelo
@@ -101,7 +96,7 @@ public class DrivebaseSubsystem
         public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, 0);
 
         @LateralMult
-        public static double LATERAL_MULTIPLIER = 1.0; // Lateral position is off by 14%
+        public static double LATERAL_MULTIPLIER = 1.0; // For Mecanum, this was by 1.14 (14% off)
 
         @VXWeight
         public static double VX_WEIGHT = 1;
@@ -115,10 +110,7 @@ public class DrivebaseSubsystem
         @PoseLimit
         public static int POSE_HISTORY_LIMIT = 100;
 
-        // FL - 0.82
-        // FR - 0.8
-        // RL - 0.1
-        // RR - 0.74
+        // Helps deal with tired motors
         public static double AFR_SCALE = 0.9;
         public static double AFL_SCALE = 0.9;
         public static double ARR_SCALE = 0.9;
@@ -142,34 +134,28 @@ public class DrivebaseSubsystem
     @Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
-    @Log.Number(name = "Dist")
-    public Rev2MDistanceSensor distanceSensor;
-
     @Log(name = "Turbo")
     public boolean Turbo = false;
 
     @Log(name = "Snail")
     public boolean Snail = false;
 
-    @Log
-    public String locState = "none";
-
     @Log(name = "cur heading")
     double curHeading;
-
-    double curDistance;
 
     public DrivebaseSubsystem(
         EncodedMotor<DcMotorEx> flMotor,
         EncodedMotor<DcMotorEx> frMotor,
         EncodedMotor<DcMotorEx> rlMotor,
         EncodedMotor<DcMotorEx> rrMotor,
-        IMU imu,
-        Rev2MDistanceSensor distanceSensor
+        IMU imu
     ) {
         super(flMotor, frMotor, rlMotor, rrMotor, imu, () -> DriveConstants.class);
+        fl2 = flMotor;
+        fr2 = frMotor;
+        rl2 = rlMotor;
+        rr2 = rrMotor;
         curHeading = imu.gyroHeading();
-        this.distanceSensor = distanceSensor;
     }
 
     @Override
@@ -180,10 +166,9 @@ public class DrivebaseSubsystem
             Pose2d poseVelocity = getPoseVelocity();
             poseDisplay = pose.toString() +
             " : " +
-            (poseVelocity != null ? poseVelocity.toString() : "<null>");
+            (poseVelocity != null ? poseVelocity.toString() : "nullv");
+            curHeading = this.imu.gyroHeading();
         }
-        curHeading = this.imu.gyroHeading();
-        curDistance = this.distanceSensor.getDistance(DistanceUnit.CM);
     }
 
     public void fast() {
@@ -215,24 +200,17 @@ public class DrivebaseSubsystem
 
     @Override
     public void setMotorPowers(double lfv, double lrv, double rrv, double rfv) {
-        // Slug is Snail mode + "slow down so you don't hit someone's leg" mode
-        boolean Slug = Snail;
-        if (curDistance < 30) {
-            Slug = true;
-        }
-
         // TODO: Use the stick position to determine how to scale these values
         // in Turbo mode (If the robot is driving in a straight line, the values are
         // going to max out at sqrt(2)/2, rather than: We can go faster, but we don't
         // *always* want to scale faster, only when we're it turbo mode, and when one (or more)
         // of the control sticks are at their limit
-        double maxlfvlrv = Math.max(Math.abs(lfv), Math.abs(lrv));
-        double maxrfvrrv = Math.max(Math.abs(rfv), Math.abs(rrv));
-        double maxall = Math.max(maxlfvlrv, maxrfvrrv);
-        if (Slug == true) {
+        double maxlv = Math.max(Math.abs(lfv), Math.abs(lrv));
+        double maxrv = Math.max(Math.abs(rfv), Math.abs(rrv));
+        double maxall = Math.max(maxlv, maxrv);
+        if (Snail == true) {
             maxall = 1.0 / DriveConstants.SLOW_MOTOR_SPEED;
-        }
-        if (Turbo == false && Slug == false) {
+        } else if (Turbo == false) {
             maxall = 1.0 / DriveConstants.AUTO_MOTOR_SPEED;
         }
         leftFront.setVelocity(

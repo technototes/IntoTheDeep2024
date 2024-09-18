@@ -7,14 +7,13 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.technototes.library.command.Command;
 import com.technototes.library.control.Stick;
-import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.MathUtils;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import org.firstinspires.ftc.learnbot.Setup;
 import org.firstinspires.ftc.learnbot.subsystems.DrivebaseSubsystem;
 
-public class JoystickDriveCommand implements Command, Loggable {
+public class JoystickDriveCommand implements Command {
 
     public DrivebaseSubsystem subsystem;
     public DoubleSupplier x, y, r;
