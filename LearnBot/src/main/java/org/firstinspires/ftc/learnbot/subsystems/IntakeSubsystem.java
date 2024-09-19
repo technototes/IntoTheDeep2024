@@ -10,7 +10,7 @@ import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 
-@Config
+//@Config
 public class IntakeSubsystem implements Subsystem, Loggable {
 
     public static double MIN_INTAKE_SPEED = -1;

@@ -10,7 +10,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 public class VisionSubsystem implements Subsystem, Loggable {
 
-    @Config
+    //@Config
     public static class VisionSubsystemConstants {
 
         // This is a super-low res image. I don't think we need higher resolution...

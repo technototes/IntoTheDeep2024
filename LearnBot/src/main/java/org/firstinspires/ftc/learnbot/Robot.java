@@ -26,8 +26,7 @@ public class Robot implements Loggable {
                 hw.frMotor,
                 hw.rlMotor,
                 hw.rrMotor,
-                hw.imu,
-                hw.distanceSensor
+                hw.imu
             );
         }
         if (Setup.Connected.TESTSUBSYSTEM) {

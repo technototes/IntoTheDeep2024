@@ -9,7 +9,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.learnbot.Hardware;
 
-@Config
+//@Config
 public class PlacementSubsystem implements Subsystem, Loggable {
 
     public static double INTAKE_SPEED = .3;

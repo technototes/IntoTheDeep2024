@@ -21,8 +21,8 @@ import org.firstinspires.ftc.learnbot.Setup;
  * Wing position: 🪶
  * Backstage pos: 🎦
  */
-@Config
-@Autonomous(name = "Basic Auto")
+//@Config
+@Autonomous(name = "Basic Auto", preselectTeleOp = "PlainDrive")
 @SuppressWarnings("unused")
 public class Basic extends CommandOpMode implements Loggable {
 

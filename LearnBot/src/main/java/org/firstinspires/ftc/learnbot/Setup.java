@@ -7,7 +7,7 @@ public class Setup {
     @Config
     public static class Connected {
 
-        public static boolean DRIVEBASE = false;
+        public static boolean DRIVEBASE = true;
         public static boolean TESTSUBSYSTEM = false;
         public static boolean MOTOR = false;
         public static boolean SERVO = false;
@@ -31,5 +31,14 @@ public class Setup {
         public static String DISTANCE = "d";
         public static String COLOR = "c";
         public static String CAMERA = "camera";
+    }
+
+    @Config
+    public static class GlobalSettings {
+
+        public static double STICK_DEAD_ZONE = 0.1;
+        public static double STRAIGHTEN_SCALE_FACTOR = 0.25;
+        public static double STRAIGHTEN_RANGE = .15; // Fraction of 45 degrees...
+        public static double TRIGGER_THRESHOLD = 0.7;
     }
 }

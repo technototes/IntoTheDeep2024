@@ -6,7 +6,7 @@ import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 
-@Config
+//@Config
 public class FlywheelSubsystem implements Subsystem, Loggable {
 
     public static double INTAKE_SPEED = -0.8; //tested 1/9/24

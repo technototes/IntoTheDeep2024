@@ -19,7 +19,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-@Config
+//@Config
 public class VisionPipeline extends OpenCvPipeline implements Supplier<Integer>, Loggable {
 
     public Alliance alliance;
@@ -33,10 +33,10 @@ public class VisionPipeline extends OpenCvPipeline implements Supplier<Integer>,
         boolean StartingPosition = middleDetected;
     }
 
-    @Config
+    //@Config
     public static class VisionConstants {
 
-        @Config
+        //@Config
         public static class Left {
 
             public static int X = 10;
@@ -45,7 +45,7 @@ public class VisionPipeline extends OpenCvPipeline implements Supplier<Integer>,
             public static int HEIGHT = 90;
         }
 
-        @Config
+        //@Config
         public static class Middle {
 
             public static int X = 130;

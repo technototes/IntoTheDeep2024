@@ -5,12 +5,10 @@ import com.technototes.library.command.Command;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import java.util.function.DoubleSupplier;
+import org.firstinspires.ftc.learnbot.Setup;
 import org.firstinspires.ftc.learnbot.subsystems.MotorTestSubsystem;
 
-@Config
 public class AnalogMotorControlCmd implements Command, Loggable {
-
-    public static double STICK_DEAD_ZONE = 0.1;
 
     @Log(name = "")
     public String instruction = "RStick ^/v";
@@ -30,11 +28,13 @@ public class AnalogMotorControlCmd implements Command, Loggable {
     @Override
     public void execute() {
         double stickPos = ds.getAsDouble();
-        if (Math.abs(stickPos) < STICK_DEAD_ZONE) {
+        if (Math.abs(stickPos) < Setup.GlobalSettings.STICK_DEAD_ZONE) {
             stickPos = 0;
         } else {
             // Scale stickPos from deadzone to 1 and square it to make it a little easier to control
-            double scaled = (Math.abs(stickPos) - STICK_DEAD_ZONE) / (1 - STICK_DEAD_ZONE);
+            double scaled =
+                (Math.abs(stickPos) - Setup.GlobalSettings.STICK_DEAD_ZONE) /
+                (1 - Setup.GlobalSettings.STICK_DEAD_ZONE);
             // This gets the sign from stickPos, and puts it on scaled ^ 3
             stickPos = Math.copySign(scaled * scaled * scaled, stickPos);
         }
