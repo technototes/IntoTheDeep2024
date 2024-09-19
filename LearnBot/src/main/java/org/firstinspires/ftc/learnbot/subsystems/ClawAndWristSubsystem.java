@@ -7,7 +7,7 @@ import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 
-@Config
+//@Config
 public class ClawAndWristSubsystem implements Subsystem, Loggable {
 
     public static double CLAW_STEP = 0.1;

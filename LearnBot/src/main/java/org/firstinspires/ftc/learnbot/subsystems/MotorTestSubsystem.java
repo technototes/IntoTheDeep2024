@@ -11,7 +11,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.learnbot.Hardware;
 
-@Config
+//@Config
 public class MotorTestSubsystem implements Subsystem, Loggable {
 
     public static double POWER_CHANGE = 0.02;

@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.servo.Servo;
 import org.firstinspires.ftc.learnbot.subsystems.ClawAndWristSubsystem;
 
-@Config
+//@Config
 public class ClawAndWristBot {
 
     public String CLAW1 = "claw1";

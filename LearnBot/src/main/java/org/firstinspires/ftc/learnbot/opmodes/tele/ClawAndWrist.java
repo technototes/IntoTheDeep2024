@@ -2,12 +2,14 @@ package org.firstinspires.ftc.learnbot.opmodes.tele;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.structure.CommandOpMode;
 import org.firstinspires.ftc.learnbot.ClawAndWristBot;
 import org.firstinspires.ftc.learnbot.controllers.ClawAndWristController;
 
+@Disabled
 @TeleOp(name = "ClawAndWrist")
 @SuppressWarnings("unused")
 public class ClawAndWrist extends CommandOpMode implements Loggable {

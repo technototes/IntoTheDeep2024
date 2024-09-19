@@ -11,7 +11,7 @@ import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.learnbot.Hardware;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-@Config
+//@Config
 public class TestSubsystem implements Subsystem, Loggable {
 
     public static int DISTANCE = 10; // centimeters!
