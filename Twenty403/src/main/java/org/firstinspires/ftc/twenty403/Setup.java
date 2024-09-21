@@ -10,6 +10,7 @@ public class Setup {
         public static boolean DRIVEBASE = true;
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = true;
+        public static boolean KIDSSHAMPOOSUBSYSTEM = true;
     }
 
     @Config
@@ -22,6 +23,9 @@ public class Setup {
         public static String IMU = "imu";
         public static String ODOF = "odof";
         public static String ODOR = "odor";
+        public static String INTAKE = "intake";
+        public static String RETAINER = "retainer";
+        public static String JAW = "jaw";
     }
 
     @Config
