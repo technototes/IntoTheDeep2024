@@ -5,10 +5,10 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.ServoController;
+import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.sensor.IMU;
-import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
@@ -45,7 +45,7 @@ public class Hardware implements Loggable {
             odoR = new MotorEncoder(Setup.HardwareNames.ODOR);
             odoF = new MotorEncoder(Setup.HardwareNames.ODOF);
         }
-        if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM){
+        if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             intake = new CRServo(Setup.HardwareNames.INTAKE);
             retainer = new Servo(Setup.HardwareNames.RETAINER);
             jaw = new Servo(Setup.HardwareNames.JAW);

@@ -5,11 +5,11 @@ import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
-
 import org.firstinspires.ftc.twenty403.Hardware;
 
 @Config
 public class KidShampoo implements Subsystem, Loggable {
+
     private Servo retainer, jaw;
     private CRServo intake;
 
@@ -24,37 +24,37 @@ public class KidShampoo implements Subsystem, Loggable {
 
     public static double INTAKE_SPIT = .1;
 
-    public KidShampoo(Hardware hw){
+    public KidShampoo(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
         jaw = hw.jaw;
     }
 
-    public void openRetainer(){
+    public void openRetainer() {
         retainer.setPosition(RETAINER_OPEN_POSITION);
     }
-    public void eatRetainer(){
-        retainer.setPosition(RETAINER_EAT_POSITION);
 
+    public void eatRetainer() {
+        retainer.setPosition(RETAINER_EAT_POSITION);
     }
-    public void closeRetainer(){
+
+    public void closeRetainer() {
         retainer.setPosition(RETAINER_CLOSE_POSITION);
     }
-    public void biteJaw(){
+
+    public void biteJaw() {
         jaw.setPosition(JAW_BITE_POSITION);
     }
-    public void releaseJaw(){
+
+    public void releaseJaw() {
         jaw.setPosition(JAW_RELEASE_POSITION);
     }
 
     public void slurpIntake() {
-      intake.setPower(INTAKE_SLURP);
+        intake.setPower(INTAKE_SLURP);
     }
+
     public void spitIntake() {
         intake.setPower(INTAKE_SPIT);
-    }
-    @Override
-    public void periodic() {
-
     }
 }
