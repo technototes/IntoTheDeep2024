@@ -17,6 +17,13 @@ public class KidShampoo implements Subsystem, Loggable {
     public static double RETAINER_EAT_POSITION = -.1;
     public static double RETAINER_CLOSE_POSITION = .1;
 
+    public static double JAW_BITE_POSITION = .1;
+
+    public static double JAW_RELEASE_POSITION = -.1;
+    public static double INTAKE_SLURP = -.1;
+
+    public static double INTAKE_SPIT = .1;
+
     public KidShampoo(Hardware hw){
         intake = hw.intake;
         retainer = hw.retainer;
@@ -33,10 +40,21 @@ public class KidShampoo implements Subsystem, Loggable {
     public void closeRetainer(){
         retainer.setPosition(RETAINER_CLOSE_POSITION);
     }
-    public void BiteJaw(){
-        retainer.setPosition(RETAINER_OPEN_POSITION);
+    public void biteJaw(){
+        jaw.setPosition(JAW_BITE_POSITION);
     }
-    public void ReleaseJaw(){
-        retainer.setPosition(RETAINER_CLOSE_POSITION);
+    public void releaseJaw(){
+        jaw.setPosition(JAW_RELEASE_POSITION);
+    }
+
+    public void slurpIntake() {
+      intake.setPower(INTAKE_SLURP);
+    }
+    public void spitIntake() {
+        intake.setPower(INTAKE_SPIT);
+    }
+    @Override
+    public void periodic() {
+
     }
 }
