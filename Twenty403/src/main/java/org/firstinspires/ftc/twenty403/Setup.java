@@ -7,9 +7,9 @@ public class Setup {
     @Config
     public static class Connected {
 
-        public static boolean DRIVEBASE = true;
-        public static boolean ODOSUBSYSTEM = true;
-        public static boolean SAFETYSUBSYSTEM = true;
+        public static boolean DRIVEBASE = false;
+        public static boolean ODOSUBSYSTEM = false;
+        public static boolean SAFETYSUBSYSTEM = false;
         public static boolean KIDSSHAMPOOSUBSYSTEM = true;
     }
 

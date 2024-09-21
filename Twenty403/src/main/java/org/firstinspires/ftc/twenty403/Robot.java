@@ -4,6 +4,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 import org.firstinspires.ftc.twenty403.subsystems.DrivebaseSubsystem;
+import org.firstinspires.ftc.twenty403.subsystems.KidShampooSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.SafetySubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.TwoDeadWheelLocalizer;
 
@@ -14,7 +15,7 @@ public class Robot implements Loggable {
     public double initialVoltage;
 
     public DrivebaseSubsystem drivebaseSubsystem;
-
+    public KidShampooSubsystem kidShampooSubsystem;
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
 
@@ -40,7 +41,9 @@ public class Robot implements Loggable {
                 // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
                 localizer.setDrivebase(this.drivebaseSubsystem);
             }
+            this.safetySubsystem = new SafetySubsystem(hw);
+            this.kidShampooSubsystem = new KidShampooSubsystem(hw);
         }
-        this.safetySubsystem = new SafetySubsystem(hw);
+
     }
 }

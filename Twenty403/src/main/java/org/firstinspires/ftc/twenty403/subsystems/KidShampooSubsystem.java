@@ -8,7 +8,7 @@ import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.twenty403.Hardware;
 
 @Config
-public class KidShampoo implements Subsystem, Loggable {
+public class KidShampooSubsystem implements Subsystem, Loggable {
 
     private Servo retainer, jaw;
     private CRServo intake;
@@ -24,7 +24,7 @@ public class KidShampoo implements Subsystem, Loggable {
 
     public static double INTAKE_SPIT = .1;
 
-    public KidShampoo(Hardware hw) {
+    public KidShampooSubsystem(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
         jaw = hw.jaw;
@@ -56,5 +56,8 @@ public class KidShampoo implements Subsystem, Loggable {
 
     public void spitIntake() {
         intake.setPower(INTAKE_SPIT);
+    }
+    public void stopIntake() {
+        intake.setPower(0);
     }
 }
