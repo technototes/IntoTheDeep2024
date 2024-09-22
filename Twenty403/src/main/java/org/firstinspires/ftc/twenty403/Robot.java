@@ -41,9 +41,12 @@ public class Robot implements Loggable {
                 // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
                 localizer.setDrivebase(this.drivebaseSubsystem);
             }
+        }
+        if (Setup.Connected.SAFETYSUBSYSTEM) {
             this.safetySubsystem = new SafetySubsystem(hw);
+        }
+        if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             this.kidShampooSubsystem = new KidShampooSubsystem(hw);
         }
-
     }
 }

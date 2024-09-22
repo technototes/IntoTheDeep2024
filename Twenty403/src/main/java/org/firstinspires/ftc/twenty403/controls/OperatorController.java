@@ -22,7 +22,7 @@ public class OperatorController {
 
 
     public OperatorController(CommandGamepad g, Robot r) {
-        this.robot = r;
+        robot = r;
         gamepad = g;
 
         AssignNamedControllerButton();
