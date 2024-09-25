@@ -15,7 +15,8 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.vision.hardware.Webcam;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
-
+import com.technototes.library.hardware.sensor.ColorSensor;
+import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
@@ -25,6 +26,8 @@ public class Hardware implements Loggable {
     public MotorEncoder odoF, odoR;
     public Servo retainer, jaw;
     public CRServo intake;
+    public ColorSensor colorSensor;
+    public Rev2MDistanceSensor rev2MDistanceSensor;
 
     /* Put other hardware here! */
 
@@ -49,6 +52,8 @@ public class Hardware implements Loggable {
             intake = new CRServo(Setup.HardwareNames.INTAKE);
             retainer = new Servo(Setup.HardwareNames.RETAINER);
             jaw = new Servo(Setup.HardwareNames.JAW);
+            colorSensor = new ColorSensor(Setup.HardwareNames.COLOR1);
+            rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
         }
     }
 
