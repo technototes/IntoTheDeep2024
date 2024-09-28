@@ -59,8 +59,14 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
+            .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
+            .addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
+            .addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
+            .addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST7.get())
+            .addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST3.get())
             // .addTrajectory(WingRed.SPLINE_START_TO_RIGHT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_MIDSPIKE_TO_START.get())
             // .addTrajectory(AutoConstantsRed.Wing.MIDSPIKE_TO_RIGHT_SPIKE.get())
@@ -76,7 +82,7 @@ public class Twenty403Testing {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
-            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
+            //.addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
