@@ -60,8 +60,9 @@ public class Sixteen750Testing {
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START)
+            //.addTrajectory(AutoConstants.OBSERVATION_SIDE_CYCLE.get())
             .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
-            .addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
+            //.addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
             //.addTrajectory(WingRed.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MID_CLEAR_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MID_CLEAR.get())
