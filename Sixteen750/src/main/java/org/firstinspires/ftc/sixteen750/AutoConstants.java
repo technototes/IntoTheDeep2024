@@ -12,11 +12,22 @@ import java.util.function.Function;
 public class AutoConstants {
 
 
+        //New testing constants for this year's game
+        public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+        public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
+        public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
+
+        public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
+        public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
+        public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
+        public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, 90);
+        public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 180);
+
+
         //These are testing constants for last year's game
-        public static ConfigurablePoseD START = new ConfigurablePoseD(35, 60, -90);
+        public static ConfigurablePoseD START1 = new ConfigurablePoseD(35, 60, -90);
         public static ConfigurablePoseD START_STAGE = new ConfigurablePoseD(35, 58, 0);
         public static ConfigurablePoseD RIGHT_SPIKE = new ConfigurablePoseD(31, 32, -180); // near the metal,  fine tuned
-        // This is "clear of the pixels, ready to go somewhere else"
         public static ConfigurablePoseD MID_SPLINE_CLEAR =  new ConfigurablePoseD(35, 34, -180); // fine tuned OKAYY
         public static ConfigurablePoseD HEAD_TO_STAGE = new ConfigurablePoseD(0, 58, 0);
         public static ConfigurablePoseD PLACE_RIGHT = new ConfigurablePoseD(-46,40,180);// not fine tuned
@@ -30,8 +41,41 @@ public class AutoConstants {
         // These are 'trajectory pieces' which should be named like this:
         // {STARTING_POSITION}_TO_{ENDING_POSITION}
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                START_TO_NETSCORING = b ->
+                b.apply(START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                NETSCORING_TO_INTAKE1 = b ->
+                b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE1.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                INTAKE1_TO_NETSCORING = b ->
+                b.apply(INTAKE1.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                NETSCORING_TO_INTAKE2 = b ->
+                b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE2.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                INTAKE2_TO_NETSCORING = b ->
+                b.apply(INTAKE2.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                NETSCORING_TO_INTAKE3 = b ->
+                b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE3.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                INTAKE3_TO_NETSCORING = b ->
+                b.apply(INTAKE3.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                NETSCORING_TO_ASCENT = b ->
+                b.apply(NETSCORING_TEST.toPose())
+//                        .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
+                        .splineToConstantHeading(ASCENT.toPose().vec(), ASCENT.getHeading())
+                        //.setReversed(true)
+
+                        .build();
+
+
+
+        //testing trajectories
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_RIGHT_SPIKE = b ->
-                b.apply(START.toPose())
+                b.apply(START1.toPose())
                     .splineTo(MID_SPLINE_CLEAR.toPose().vec(), MID_SPLINE_CLEAR.getHeading())
                     .splineToLinearHeading(RIGHT_SPIKE.toPose(), RIGHT_SPIKE.getHeading())
                     .build();
