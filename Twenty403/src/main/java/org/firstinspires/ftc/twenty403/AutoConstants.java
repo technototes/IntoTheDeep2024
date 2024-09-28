@@ -35,6 +35,13 @@ public class AutoConstants {
         public static ConfigurablePoseD MID_SPLINE_CLEAR = new ConfigurablePoseD(35,34,-180);
         public static ConfigurablePoseD START_STAGE = new ConfigurablePoseD(35,58,0);
         public static ConfigurablePoseD HEAD_TO_STAGE = new ConfigurablePoseD(0,58,0);
+
+        public static ConfigurablePoseD SAMPLE_PUSH_AREA = new ConfigurablePoseD(-60,54,90);
+        public static ConfigurablePoseD SAMPLE_COLLECT_AREA = new ConfigurablePoseD(-40,57,120);
+        public static ConfigurablePoseD SAMPLES_START_PUSH = new ConfigurablePoseD(-60,20,90);
+        public static ConfigurablePoseD SAMPLE_BAR_SCORE = new ConfigurablePoseD(0,34,270);
+        public static ConfigurablePoseD START_POS = new ConfigurablePoseD(-34,58,270);
+        public static ConfigurablePoseD CORNER_OBS = new ConfigurablePoseD(-30,30,180);
         // These are 'trajectory pieces' which should be named like this:
         // {STARTING_POSITION}_TO_{ENDING_POSITION}
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
@@ -143,4 +150,19 @@ public class AutoConstants {
                         .splineToConstantHeading(HEAD_TO_STAGE.toPose().vec(),Math.PI - START_STAGE.getHeading())
                         .splineToConstantHeading(PLACE_RIGHT.toPose().vec(),Math.PI - START_STAGE.getHeading())
                         .build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+
+                BASKET_HOLDERS = b ->
+                b.apply(START_POS.toPose())
+                .splineToSplineHeading(SAMPLE_BAR_SCORE.toPose(),Math.PI - SAMPLE_BAR_SCORE.getHeading())
+                        .splineToSplineHeading(CORNER_OBS.toPose(),Math.PI - CORNER_OBS.getHeading())
+                .splineToSplineHeading(SAMPLES_START_PUSH.toPose(),Math.PI - SAMPLES_START_PUSH.getHeading())
+                .splineToSplineHeading(SAMPLE_PUSH_AREA.toPose(),Math.PI - SAMPLE_PUSH_AREA.getHeading())
+                .splineToSplineHeading(SAMPLE_COLLECT_AREA.toPose(),Math.PI - SAMPLE_COLLECT_AREA.getHeading())
+                .splineToSplineHeading(SAMPLE_BAR_SCORE.toPose(),Math.PI - SAMPLE_BAR_SCORE.getHeading())
+                        .build();
+
+
+
+
     }
