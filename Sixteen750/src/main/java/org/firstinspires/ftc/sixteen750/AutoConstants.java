@@ -10,6 +10,16 @@ import java.util.function.Function;
 
 @Config
 public class AutoConstants {
+        public static ConfigurablePoseD TEST1 = new ConfigurablePoseD(17, 56, 0);
+        public static ConfigurablePoseD TEST2 = new ConfigurablePoseD(37, 35, 45);
+        public static ConfigurablePoseD TEST3 = new ConfigurablePoseD(56, 38, 90);
+
+        // BEYBLADE BEYBLADE BEYBLADE
+        /*
+        public static ConfigurablePoseD TEST1 = new ConfigurablePoseD(17, 56, 180);
+        public static ConfigurablePoseD TEST2 = new ConfigurablePoseD(37, 35, 0);
+        public static ConfigurablePoseD TEST3 = new ConfigurablePoseD(56, 38, 90);
+         */
         public static ConfigurablePoseD START = new ConfigurablePoseD(35, 60, -90);
         public static ConfigurablePoseD START_STAGE = new ConfigurablePoseD(35, 58, 0);
         public static ConfigurablePoseD LEFT_SPIKE = new ConfigurablePoseD(43, 35, -60); // fine tuned
@@ -130,6 +140,9 @@ public class AutoConstants {
                 SIDE_LEFT_TO_SIDE_RIGHT = b ->
                 b.apply(SIDE_LEFT.toPose()).lineToLinearHeading(SIDE_RIGHT.toPose()).build();
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SIDE_RIGHT_TO_SIDE_LEFT = b ->
-                b.apply(SIDE_RIGHT.toPose()).lineToLinearHeading(SIDE_LEFT.toPose()).build();
+                TEST1_TO_TEST2 = b ->
+                b.apply(TEST1.toPose()).lineToLinearHeading(TEST2.toPose()).build();
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                TEST2_TO_TEST3 = b ->
+                b.apply(TEST2.toPose()).lineToLinearHeading(TEST3.toPose()).build();
 }
