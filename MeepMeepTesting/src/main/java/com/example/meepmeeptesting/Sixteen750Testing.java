@@ -59,9 +59,10 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
-            .addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
+            .trajectorySequenceBuilder(AutoConstants.TEST1)
+            .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
+            .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
+            //.addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
             //.addTrajectory(WingRed.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MID_CLEAR_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MID_CLEAR.get())
@@ -74,10 +75,11 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
+            .trajectorySequenceBuilder(AutoConstants.TEST1)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
 
-            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
+            .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
+            .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
