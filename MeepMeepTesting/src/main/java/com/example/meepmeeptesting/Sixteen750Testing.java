@@ -1,7 +1,6 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
@@ -13,8 +12,6 @@ import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
 import com.robotcode.shared.DO_NOT_EDIT_16750.AutoConstants;
-import com.robotcode.shared.DO_NOT_EDIT_20403;
-
 import java.io.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
@@ -62,9 +59,9 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-        .trajectorySequenceBuilder(AutoConstants.START)
-        .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
-            //.addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
+            .addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
             //.addTrajectory(WingRed.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MID_CLEAR_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MID_CLEAR.get())
@@ -75,16 +72,12 @@ public class Sixteen750Testing {
             .build();
     }
 
-    private static void addTrajectory(Trajectory trajectory) {
-    }
-
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.TEST1)
+            .trajectorySequenceBuilder(AutoConstants.START)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
 
-            .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
-            .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
+            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
