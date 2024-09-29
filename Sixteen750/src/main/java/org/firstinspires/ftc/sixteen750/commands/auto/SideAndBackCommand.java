@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.sixteen750.commands.auto;
 
-import static org.firstinspires.ftc.sixteen750.AutoConstants.TEST2_TO_TEST3;
-
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
@@ -14,6 +12,11 @@ public class SideAndBackCommand extends SequentialCommandGroup {
             new TrajectorySequenceCommand(
                 r.drivebase,
                 AutoConstants.SIDE_LEFT_TO_SIDE_RIGHT
+            ).andThen(
+                new TrajectorySequenceCommand(
+                    r.drivebase,
+                    AutoConstants.SIDE_RIGHT_TO_SIDE_LEFT
+                )
             )
         );
     }

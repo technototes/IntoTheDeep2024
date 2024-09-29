@@ -11,7 +11,6 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
-import com.robotcode.shared.DO_NOT_EDIT_16750;
 import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
@@ -46,7 +45,7 @@ public class Twenty403Testing {
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-            .setDimensions(17.5, 16.5)
+            .setDimensions(17.5, 18)
             .followTrajectorySequence(drive -> getRedTrajectory(drive));
         try {
             // Try to load the field image from the repo:
@@ -60,12 +59,8 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.TEST1)
-            .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
-            .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
-
-            //.trajectorySequenceBuilder(AutoConstants.START)
-            //.addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_START_TO_RIGHT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_MIDSPIKE_TO_START.get())
             // .addTrajectory(AutoConstantsRed.Wing.MIDSPIKE_TO_RIGHT_SPIKE.get())
