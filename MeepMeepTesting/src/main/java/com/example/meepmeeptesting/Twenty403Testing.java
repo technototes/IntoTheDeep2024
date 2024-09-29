@@ -59,11 +59,8 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START_POS)
-            .addTrajectory(AutoConstants.BASKET_HOLDERS.get())
-
-            //.trajectorySequenceBuilder(AutoConstants.START)
-            //.addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
+            .trajectorySequenceBuilder(AutoConstants.START)
+            .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_START_TO_RIGHT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_MIDSPIKE_TO_START.get())
             // .addTrajectory(AutoConstantsRed.Wing.MIDSPIKE_TO_RIGHT_SPIKE.get())
