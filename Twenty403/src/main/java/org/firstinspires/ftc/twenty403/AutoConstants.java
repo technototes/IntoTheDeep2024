@@ -10,21 +10,6 @@ import java.util.function.Function;
 
 @Config
 public class AutoConstants {
-        //constants for Into the Deeeeeeeep
-
-        public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
-        public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 32, -90);
-        public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-60, 55, 120);
-        public static ConfigurablePoseD SUBMARINE2 = new ConfigurablePoseD(0, 32, -90);
-
-        public static ConfigurablePoseD PUSH_1 = new ConfigurablePoseD(-32, 35, 90);
-        public static ConfigurablePoseD PUSH_2 = new ConfigurablePoseD(-32, 10, 90);
-        public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-44, 10, 90);
-        //public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-60, 55, 135);
-
-
-
-        //constants for CenterStoige
         public static ConfigurablePoseD START = new ConfigurablePoseD(35, 60, -90);
         public static ConfigurablePoseD LEFT_SPIKE = new ConfigurablePoseD(43, 35, -60); // fine tuned
         public static ConfigurablePoseD MIDDLE_SPIKE = new ConfigurablePoseD(35, 29, -90); //  fine tuned
@@ -52,64 +37,6 @@ public class AutoConstants {
         public static ConfigurablePoseD HEAD_TO_STAGE = new ConfigurablePoseD(0,58,0);
         // These are 'trajectory pieces' which should be named like this:
         // {STARTING_POSITION}_TO_{ENDING_POSITION}
-
-        //Lines for Into the Deeeeeeeep
-
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_SIDE_CYCLE = b ->
-                b.apply(OBSERVATION_START.toPose())
-                        .lineToLinearHeading(SUBMARINE.toPose())
-                        .lineToLinearHeading(OBSERVATION_ZONE.toPose())
-                        //.lineToLinearHeading(SUBMARINE2.toPose())
-                        //.lineToLinearHeading(PUSH_1.toPose())
-                        //.lineToLinearHeading(PUSH_2.toPose())
-                        //.lineToLinearHeading(PUSH_3.toPose())
-                        //.lineToLinearHeading(OBSERVATION_ZONE.toPose())
-                        .build();
-
-
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST1 = b ->
-                b.apply(OBSERVATION_START.toPose())
-                        .lineToLinearHeading(SUBMARINE.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST2 = b ->
-                b.apply(OBSERVATION_ZONE.toPose())
-                        .lineToLinearHeading(SUBMARINE2.toPose())
-                        .build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST3 = b ->
-                b.apply(OBSERVATION_ZONE.toPose())
-                        .lineToLinearHeading(SUBMARINE2.toPose())
-                        .build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST4 = b ->
-                b.apply(SUBMARINE.toPose())
-                        .lineToLinearHeading(PUSH_1.toPose())
-                        .build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST5 = b ->
-                b.apply(PUSH_1.toPose())
-                        .splineToConstantHeading(PUSH_2.toPose().vec(), Math.PI - PUSH_2.getHeading())
-                        .splineToConstantHeading(PUSH_3.toPose().vec(), Math.PI - PUSH_3.getHeading())
-                        .splineToConstantHeading(OBSERVATION_ZONE.toPose().vec(), Math.PI - OBSERVATION_ZONE.getHeading())
-                        .build();
-        /*public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_TEST6 = b ->
-                b.apply(PUSH_2.toPose())
-                        .splineToConstantHeading(PUSH_3.toPose().vec(), Math.PI - PUSH_3.getHeading())
-                        .splineToConstantHeading(OBSERVATION_ZONE.toPose().vec(), Math.PI - OBSERVATION_ZONE.getHeading())
-                        .build();
-                        */
-
-        //public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                //OBSERVATION_TEST7 = b ->
-                //b.apply(PUSH_3.toPose())
-                        //.splineToConstantHeading(OBSERVATION_ZONE.toPose().vec(), Math.PI - OBSERVATION_ZONE.getHeading())
-                        //.build();
-
-
-
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_LEFT_SPIKE = b ->
                 b.apply(START.toPose()).lineToLinearHeading(LEFT_SPIKE.toPose()).build(),
