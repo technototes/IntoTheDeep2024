@@ -10,14 +10,6 @@ import java.util.function.Function;
 
 @Config
 public class AutoConstants {
-
-
-        public static ConfigurablePoseD FIRST = new ConfigurablePoseD(0, 65, -90);
-        public static ConfigurablePoseD SECOND = new ConfigurablePoseD(0, 34, -90);
-        public static ConfigurablePoseD THIRD = new ConfigurablePoseD(0, 35, 180);
-        public static ConfigurablePoseD FOURTH = new ConfigurablePoseD(-24, 35, 180);
-        public static ConfigurablePoseD FIFTH = new ConfigurablePoseD(-34, 15, -90);
-        public static ConfigurablePoseD SIXTH = new ConfigurablePoseD(-48, 15, 90);
         public static ConfigurablePoseD START = new ConfigurablePoseD(35, 60, -90);
         public static ConfigurablePoseD START_STAGE = new ConfigurablePoseD(35, 58, 0);
         public static ConfigurablePoseD LEFT_SPIKE = new ConfigurablePoseD(43, 35, -60); // fine tuned
@@ -60,7 +52,6 @@ public class AutoConstants {
                         b.apply(MIDDLE_SPIKE.toPose()).lineToLinearHeading(CLEAR.toPose()).build(),
                 RIGHT_SPIKE_TO_CLEAR = b ->
                         b.apply(RIGHT_SPIKE.toPose()).lineToLinearHeading(CLEAR.toPose()).build();
-
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_RIGHT_SPIKE = b ->
                 b.apply(START.toPose())
@@ -69,7 +60,8 @@ public class AutoConstants {
                     .build();
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             RIGHT_SPIKE_TO_STAGE = b ->
-                b.apply(RIGHT_SPIKE.toPose()).splineToLinearHeading(MID_SPLINE_CLEAR.toPose(), Math.PI - MID_SPLINE_CLEAR.getHeading())
+                b.apply(RIGHT_SPIKE.toPose())
+                        .splineToLinearHeading(MID_SPLINE_CLEAR.toPose(), Math.PI - MID_SPLINE_CLEAR.getHeading())
                         .splineToConstantHeading(START_STAGE.toPose().vec(), Math.PI - START_STAGE.getHeading())
                         .splineToConstantHeading(HEAD_TO_STAGE.toPose().vec(), Math.PI - START_STAGE.getHeading())
                         .splineToConstantHeading(PLACE_RIGHT.toPose().vec(), Math.PI - START_STAGE.getHeading())
@@ -140,19 +132,4 @@ public class AutoConstants {
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
                 SIDE_RIGHT_TO_SIDE_LEFT = b ->
                 b.apply(SIDE_RIGHT.toPose()).lineToLinearHeading(SIDE_LEFT.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                FIRST_TO_SECOND = b ->
-                b.apply(FIRST.toPose()).splineToLinearHeading(SECOND.toPose(), SECOND.getHeading()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SECOND_TO_THIRD = b ->
-                b.apply(SECOND.toPose()).splineToLinearHeading(THIRD.toPose(), THIRD.getHeading()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                THIRD_TO_FOURTH = b ->
-                b.apply(THIRD.toPose()).splineToLinearHeading(FOURTH.toPose(), FOURTH.getHeading()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                FOURTH_TO_FIFTH = b ->
-                b.apply(FOURTH.toPose()).splineToLinearHeading(FIFTH.toPose(), FIFTH.getHeading()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                FIFTH_TO_SIXTH = b ->
-                b.apply(FIFTH.toPose()).splineToLinearHeading(SIXTH.toPose(), SIXTH.getHeading()).build();
 }
