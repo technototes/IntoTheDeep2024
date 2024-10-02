@@ -82,8 +82,8 @@ public class AutoConstants {
                     .build();
 
 
-    //testing trajectories
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+        //testing trajectories from last year
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_RIGHT_SPIKE = b ->
             b.apply(START1.toPose())
                     .splineTo(MID_SPLINE_CLEAR.toPose().vec(), MID_SPLINE_CLEAR.getHeading())
