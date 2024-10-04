@@ -22,14 +22,22 @@ public class PrestonTesting {
         public static Pose2d FIRST = new Pose2d(0, 65, toRadians(-90));
         public static Pose2d SECOND = new Pose2d(0, 34, toRadians(-90));
         public static Pose2d THIRD = new Pose2d(0, 35, toRadians(180));
-        public static Pose2d FOURTH = new Pose2d(-24, 35, toRadians(180));
-        public static Pose2d FIFTH = new Pose2d(-34, 15, toRadians(-90));
-        public static Pose2d SIXTH = new Pose2d(-48, 15, toRadians(90));
+        public static Pose2d FOURTH = new Pose2d(-29, 35, toRadians(180));
+        public static Pose2d FIFTH = new Pose2d(-34, 13, toRadians(-90));
+        public static Pose2d SIXTH = new Pose2d(-48, 13, toRadians(90));
+        public static Pose2d SEVENTH = new Pose2d(-48, 48, toRadians(90));
+        public static Pose2d EIGHTH = new Pose2d(-48, 13, toRadians(90));
+        public static Pose2d NINTH = new Pose2d(-56, 13, toRadians(90));
+        public static Pose2d TENTH = new Pose2d(-56, 13, toRadians(90));
         public static final Supplier<Trajectory> FIRST_TO_SECOND = () -> func.apply(FIRST).splineToLinearHeading(SECOND,SECOND.getHeading()).build();
         public static final Supplier<Trajectory> SECOND_TO_THIRD = () -> func.apply(SECOND).splineToLinearHeading(THIRD,THIRD.getHeading()).build();
         public static final Supplier<Trajectory> THIRD_TO_FOURTH = () -> func.apply(THIRD).splineToLinearHeading(FOURTH,FOURTH.getHeading()).build();
         public static final Supplier<Trajectory> FOURTH_TO_FIFTH = () -> func.apply(FOURTH).splineToLinearHeading(FIFTH,FIFTH.getHeading()).build();
         public static final Supplier<Trajectory> FIFTH_TO_SIXTH = () -> func.apply(FIFTH).splineToLinearHeading(SIXTH,SIXTH.getHeading()).build();
+        public static final Supplier<Trajectory> SIXTH_TO_SEVENTH = () -> func.apply(SIXTH).splineToLinearHeading(SEVENTH,SEVENTH.getHeading()).build();
+        public static final Supplier<Trajectory> SEVENTH_TO_EIGHTH = () -> func.apply(SEVENTH).splineToLinearHeading(EIGHTH,EIGHTH.getHeading()).build();
+        public static final Supplier<Trajectory> EIGHTH_TO_NINTH = () -> func.apply(EIGHTH).splineToLinearHeading(NINTH,NINTH.getHeading()).build();
+
     }
 
     public static void main(String[] args) {
@@ -73,6 +81,9 @@ public class PrestonTesting {
                 .addTrajectory(AutoConstants.THIRD_TO_FOURTH.get())
                 .addTrajectory(AutoConstants.FOURTH_TO_FIFTH.get())
                 .addTrajectory(AutoConstants.FIFTH_TO_SIXTH.get())
+                .addTrajectory(AutoConstants.SIXTH_TO_SEVENTH.get())
+                .addTrajectory(AutoConstants.SEVENTH_TO_EIGHTH.get())
+                .addTrajectory(AutoConstants.EIGHTH_TO_NINTH.get())
                 .build();
     }
 }
