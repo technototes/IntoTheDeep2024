@@ -7,6 +7,8 @@ public class Setup {
     @Config
     public static class Connected {
         public static boolean DRIVEBASE = true;
+        public static boolean VERTSLIDES = true;
+        public static boolean HORIZSLIDES = true;
     }
 
     @Config
@@ -16,6 +18,14 @@ public class Setup {
         public static String RL_DRIVE_MOTOR = "rl";
         public static String RR_DRIVE_MOTOR = "rr";
         public static String IMU = "imu";
+
+        public static String CAMERA = "webcam";
+        public static String INTAKESERVO = "intakeservo";
+        public static String VERTSLIDEMOTOR = "slidemotor";
+
+        public static String CLAWSERVO = "clawservo";
+        public static String WRISTSERVO = "wristservo";
+
     }
 
     @Config
