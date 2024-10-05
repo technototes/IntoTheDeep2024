@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 
 import java.util.List;
@@ -18,7 +19,10 @@ public class Hardware implements Loggable {
 
     public IMU imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
-
+    public Servo clawservo;
+    public Servo wristservo;
+    public EncodedMotor<DcMotorEx> vertslidemotor;
+    public EncodedMotor<DcMotorEx> horizslidemotor;
     /* Put other hardware here! */
 
     public Hardware(HardwareMap hwmap) {
@@ -32,6 +36,13 @@ public class Hardware implements Loggable {
         if (Setup.Connected.DRIVEBASE) {
             fl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.FL_DRIVE_MOTOR);
             fr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.FR_DRIVE_MOTOR);
+            rl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RL_DRIVE_MOTOR);
+            rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
+        }
+        if (Setup.Connected.VERTSLIDES) {
+            clawservo = new Servo(Setup.HardwareNames.CLAWSERVO);
+            wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
+            vertslidemotor = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.VERTSLIDEMOTOR);
             rl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RL_DRIVE_MOTOR);
             rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
         }

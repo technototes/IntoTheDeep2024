@@ -13,10 +13,8 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Setup;
 
 @Config
-public class VerticalSlidesSubsystem implements Subsystem, Loggable {
+public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
-    public static double LOW_BUCKET = -950;
-    public static double HIGH_BUCKET = -1350;
     //    public static double HIGH_POS = 1000;
     public static double WRIST_POS = 0;
     public static double MIN_MOTOR_SPEED = -0.7;
@@ -25,6 +23,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //    public static double ScoreServo = 0.5;
 
     //    public static double ArmServo = 0.5;
+    //slides motor - outstretched, retracted, transfer
+    //wrist servo - transfer, pickup, neutral
+    //claw servo - drop, pickup (long and short)
+    //camera - red and blue
 
     public static double ClawServoOpenShort = 0.4;
     public static double ClawServoClose = 0.55;
@@ -38,29 +40,31 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static PIDCoefficients PID = new PIDCoefficients(0.0027, 0.0, 0.00015);
     public Servo wristServo;
     public Servo clawServo;
-    public EncodedMotor<DcMotorEx> vertSlideMotor;
+    public EncodedMotor<DcMotorEx> horizSlideMotor;
     private boolean isHardware;
     private PIDFController leftPidController;
 
-    public VerticalSlidesSubsystem(Hardware hw) {
+    public HorizontalSlidesSubsystem(Hardware hw) {
+        wristServo = hw.wristservo;
+        clawServo = hw.clawservo;
         // We need to configure the liftMotor to work like a servo.
         // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
         // Comment from CenterStage but may still be relevant? for hang
-        vertSlideMotor = hw.vertslidemotor;
+        horizSlideMotor = hw.horizslidemotor;
         isHardware = true;
         leftPidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
     }
 
-    public VerticalSlidesSubsystem() {
+    public HorizontalSlidesSubsystem() {
         isHardware = false;
-        vertSlideMotor = null;
+        horizSlideMotor = null;
         wristServo = null;
         clawServo = null;
     }
 
     private int get___CurrentPosition() {
-        if (Setup.Connected.VERTSLIDES) {
-            return (int) vertSlideMotor.getSensorValue();
+        if (Setup.Connected.HORIZSLIDES) {
+            return (int) horizSlideMotor.getSensorValue();
         } else {
             return 0;
         }
@@ -74,29 +78,15 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         leftPidController.setTargetPosition(p);
     } //was lift
 
-    public void slidesup() {
-        // lift bucket system up
+    public void slidesout() {
+        // extends slides to pickup
 
     }
 
-    public void slidesdown() {
-        // lowers the bucket system
+    public void slidesin() {
+        // retracts slides to transfer
 
     }
-
-    public void LiftHeightLow() {
-        //takes the arm to the first level
-        leftPidController.setTargetPosition(LOW_BUCKET);
-    }
-
-    public void LiftHeightHigh() {
-        leftPidController.setTargetPosition(HIGH_BUCKET);
-    }
-
-    /*public void LiftHeightMedium() {
-        //takes the arm to the third level
-        leftPidController.setTargetPosition(HIGH_BUCKET);
-    }*/
 
     public void LiftHeightIntake() {
         //brings the arm all the way down
@@ -118,7 +108,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     private void setSlideMotorPower(double speed) {
         if (isHardware) {
-            vertSlideMotor.setSpeed(speed);
+            horizSlideMotor.setSpeed(speed);
         }
     }
 
