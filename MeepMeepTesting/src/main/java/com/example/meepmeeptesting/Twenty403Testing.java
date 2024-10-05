@@ -45,9 +45,8 @@ public class Twenty403Testing {
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-            .setDimensions(17.5, 18)
-            // .followTrajectorySequence(drive -> getRedTrajectory(drive));
-            .followTrajectorySequence(drive -> getBlueTrajectory(drive));
+            .setDimensions(17.5, 17)
+            .followTrajectorySequence(drive -> getRedTrajectory(drive));
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));
