@@ -50,7 +50,12 @@ import { removeComments } from './helpers/removeComments.js';
 // This is the package name that we're going to use for our generated code.
 const packageDir = ['com', 'robotcode', 'shared'];
 // This is a set of imports that we want to remove from the generated code.
-const removeImports = new Set(['com.acmerobotics.dashboard.config.Config']);
+const removeImports = new Set([
+  'com.acmerobotics.dashboard.config.Config',
+  'com.technototes.library.command.Command',
+  'com.technototes.library.command.SequentialCommandGroup',
+  'com.technototes.path.command.TrajectorySequenceCommand',
+]);
 // This is a map of old import names to new ones for the generated code.
 const importMap = new Map([
   [
@@ -132,7 +137,7 @@ function codeReset() {
 
 function unsupported(name: string, obj: object): void {
   if (obj && obj[name]) {
-    throw new Error(`${name} is unsupported`);
+    throw new Error(`${name} is unsupported by the MeepMeep synchronizer`);
   }
 }
 function required(obj: unknown, message?: string): obj is NonNullable<unknown> {
