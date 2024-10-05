@@ -21,12 +21,16 @@ public class HarshiniTesting {
         //constants for Into the Deeeeeeeep
         public static Function<Pose2d, TrajectoryBuilder> func;
         public static Pose2d OBSERVATION_START = new Pose2d(0, 60, toRadians(-90));
-        public static Pose2d SUBMARINE = new Pose2d(-5, 32, toRadians(-90));
-        public static Pose2d OBSERVATION_ZONE = new Pose2d(-60, 55, toRadians(120));
-        public static Pose2d SUBMARINE2 = new Pose2d(0, 32, toRadians(-90));
-        public static Pose2d PUSH_1 = new Pose2d(-32, 35, toRadians(90));
+        public static Pose2d SUBMARINE = new Pose2d(-5, 32, toRadians(90));
+        public static Pose2d OBSERVATION_ZONE = new Pose2d(-57, 55, toRadians(120));
+        public static Pose2d SUBMARINE2 = new Pose2d(0, 32, toRadians(90));
+        public static Pose2d PUSH_HALF = new Pose2d(-16, 35, toRadians(180));
+
+        public static Pose2d PUSH_1 = new Pose2d(-32, 35, toRadians(120));
         public static Pose2d PUSH_2 = new Pose2d(-32, 10, toRadians(90));
-        public static Pose2d PUSH_3 = new Pose2d(-44, 10, toRadians(90));
+        public static Pose2d PUSH_3_AND_A_HALF = new Pose2d(-47, 17, toRadians(270));
+        public static Pose2d PUSH_3 = new Pose2d(-35, 10, toRadians(225));
+        public static Pose2d SAMPLE_1 = new Pose2d(-48, 26, toRadians(90));
         //public static Pose2d OBSERVATION_ZONE = new Pose2d(-60, 55, toRadians(135));
 
         //Lines for Into the Deeeeeeeep
@@ -42,17 +46,17 @@ public class HarshiniTesting {
             func.apply(OBSERVATION_ZONE).lineToLinearHeading(SUBMARINE2).build();
         public static final Supplier<Trajectory> OBSERVATION_TEST3 = () ->
             func.apply(OBSERVATION_ZONE).lineToLinearHeading(SUBMARINE2).build();
-        public static final Supplier<Trajectory> OBSERVATION_TEST4 = () ->
-            func.apply(SUBMARINE).lineToLinearHeading(PUSH_1).build();
+        //public static final Supplier<Trajectory> OBSERVATION_TEST4 = () ->
+            //func.apply(SUBMARINE).lineToLinearHeading(PUSH_1).build();
         public static final Supplier<Trajectory> OBSERVATION_TEST5 = () ->
             func
-                .apply(PUSH_1)
-                .splineToConstantHeading(PUSH_2.vec(), Math.PI - PUSH_2.getHeading())
-                .splineToConstantHeading(PUSH_3.vec(), Math.PI - PUSH_3.getHeading())
-                .splineToConstantHeading(
-                    OBSERVATION_ZONE.vec(),
-                    Math.PI - OBSERVATION_ZONE.getHeading()
-                )
+                .apply(SUBMARINE)
+                    .splineToLinearHeading(PUSH_HALF, 0)
+//                    .splineToLinearHeading(PUSH_1, -90)
+//                .splineToLinearHeading(PUSH_3, PUSH_3.getHeading())
+//                .splineToLinearHeading(PUSH_3_AND_A_HALF, PUSH_3_AND_A_HALF.getHeading())
+//                .splineToLinearHeading(SAMPLE_1, Math.PI - SAMPLE_1.getHeading())
+//                .splineToLinearHeading(OBSERVATION_ZONE, Math.PI - OBSERVATION_ZONE.getHeading())
                 .build();
         public static final Supplier<Trajectory> OBSERVATION_TEST6 = () ->
             func
@@ -111,7 +115,7 @@ public class HarshiniTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
             .addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
             .addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST7.get())
