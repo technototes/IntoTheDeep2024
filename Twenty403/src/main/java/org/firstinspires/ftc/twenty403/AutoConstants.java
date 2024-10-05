@@ -61,15 +61,8 @@ public class AutoConstants {
                         .build();
 
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SPLINETEST1_TO_SPLINETEST2_TEST = b ->
+                SPLINETEST1_TO_SPLINETEST2 = b ->
                 b.apply(SPLINETEST1.toPose())
                         .splineToConstantHeading(SPLINETEST2.toPose().vec(),SPLINETEST2.getHeading())
                         .build();
-/*
-        public static Command splineTestCommand(Robot r) {
-                return new TrajectorySequenceCommand(
-                        r.drivebaseSubsystem,
-                        AutoConstants.SPLINETEST1_TO_SPLINETEST2
-                );
-        }*/
     }

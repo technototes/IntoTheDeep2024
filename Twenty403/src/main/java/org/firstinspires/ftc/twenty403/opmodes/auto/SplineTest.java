@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.twenty403.opmodes.auto;
 
-import static org.firstinspires.ftc.twenty403.AutoConstants.splineTestCommand;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -15,6 +13,7 @@ import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
+import org.firstinspires.ftc.twenty403.commands.auto.Paths;
 import org.firstinspires.ftc.twenty403.commands.auto.SafetyStartCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
@@ -39,7 +38,7 @@ public class SplineTest extends CommandOpMode {
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                splineTestCommand(robot),
+                    Paths.splineTestCommand(robot),
                 EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),
