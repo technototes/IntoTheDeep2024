@@ -111,14 +111,4 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             SIDE_RIGHT_TO_SIDE_LEFT = b ->
             b.apply(SIDE_RIGHT.toPose()).lineToLinearHeading(SIDE_LEFT.toPose()).build();
-/* 
-
-    public static Command splineTestCommand(Robot r) {
-        return new TrajectorySequenceCommand(
-                r.drivebase,
-                AutoConstants.SPLINETEST1_TO_SPLINETEST2
-        );
-    }
-*/
-
 }
