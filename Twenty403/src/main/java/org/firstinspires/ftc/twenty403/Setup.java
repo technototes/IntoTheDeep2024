@@ -8,7 +8,7 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean ODOSUBSYSTEM = false;
+        public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
         public static boolean KIDSSHAMPOOSUBSYSTEM = true;
     }
