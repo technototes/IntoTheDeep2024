@@ -15,52 +15,56 @@ import org.firstinspires.ftc.sixteen750.Setup;
 @Config
 public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
-    public static double LOW_BUCKET = -950;
-    public static double HIGH_BUCKET = -1350;
+    //TODO: if time: can we change speed of servo?
+    // numbers need to be calibrated for the lift
+    public static double LOW_BUCKET = -950; //TODO: test
+    public static double HIGH_BUCKET = -1350; //tested
     //    public static double HIGH_POS = 1000;
-    public static double WRIST_POS = 0;
-    public static double MIN_MOTOR_SPEED = -0.7;
+    public static double WRIST_POS = 0; //TODO: test
+    public static double MIN_MOTOR_SPEED = -0.7; //TODO: test
     public static double MAX_MOTOR_SPEED = 1;
 
     //    public static double ScoreServo = 0.5;
 
     //    public static double ArmServo = 0.5;
 
-    public static double ClawServoOpenShort = 0.4;
-    public static double ClawServoClose = 0.55;
-    public static double ClawServoOpenLong = 0;
-    public static double ScoreServoFlat = 0.33;
-    public static double ArmServoInput = 0.545;
-    public static double WristServoPickup = 0.05;
-    public static double WristServoDrop = 0.555; //drops in bucket
-    public static double WristServoIncrement = 0.555;
+    public static double ClawServoOpenShort = 0.4; //tested 1/9/24
+    public static double ClawServoClose = 0.55; //tested 1/8/24
+    public static double ClawServoOpenLong = 0; //tested 1/8/24
+    public static double ScoreServoFlat = 0.33; //tested 1/8/24
+    public static double ArmServoInput = 0.545; //tested 6/14/24 0.55
+    public static double ArmServoOutput = 0.05; //possible range from 0.2 - 0 tested 1/8/24
+    public static double ArmServoHold = 0.555; //possibly unnecessary
 
     public static PIDCoefficients PID = new PIDCoefficients(0.0027, 0.0, 0.00015);
     public Servo wristServo;
     public Servo clawServo;
-    public EncodedMotor<DcMotorEx> vertSlideMotor;
+    public EncodedMotor<DcMotorEx> liftMotor;
     private boolean isHardware;
     private PIDFController leftPidController;
 
     public VerticalSlidesSubsystem(Hardware hw) {
+        wristServo = hw.wristServo;
+        clawServo = hw.clawServo;
+        //
+        // For bhavjot and Laksh:
         // We need to configure the liftMotor to work like a servo.
         // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
-        // Comment from CenterStage but may still be relevant? for hang
-        vertSlideMotor = hw.vertslidemotor;
+        liftMotor = hw.liftMotor;
         isHardware = true;
         leftPidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
     }
 
     public VerticalSlidesSubsystem() {
         isHardware = false;
-        vertSlideMotor = null;
+        liftMotor = null;
         wristServo = null;
         clawServo = null;
     }
 
     private int get___CurrentPosition() {
         if (Setup.Connected.VERTSLIDES) {
-            return (int) vertSlideMotor.getSensorValue();
+            return (int) liftMotor.getSensorValue();
         } else {
             return 0;
         }
@@ -68,11 +72,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     private int get___TargetPosition() {
         return (int) leftPidController.getTargetPosition();
-    } //was lift
+    }
 
-    private void set___TargetPosition(int p) {
+    private void set___TargetPostion(int p) {
         leftPidController.setTargetPosition(p);
-    } //was lift
+    }
 
     public void slidesup() {
         // lift bucket system up
@@ -90,13 +94,14 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void LiftHeightHigh() {
-        leftPidController.setTargetPosition(HIGH_BUCKET);
+        //Mechanically we can't get to the high line
+        //        leftPidController.setTargetPosition(HIGH_POS);
     }
 
-    /*public void LiftHeightMedium() {
+    public void LiftHeightMedium() {
         //takes the arm to the third level
         leftPidController.setTargetPosition(HIGH_BUCKET);
-    }*/
+    }
 
     public void LiftHeightIntake() {
         //brings the arm all the way down
@@ -108,7 +113,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void periodic() {
         double targetSpeed = leftPidController.update(get___CurrentPosition());
         double clippedSpeed = Range.clip(targetSpeed, MIN_MOTOR_SPEED, MAX_MOTOR_SPEED);
-        setSlideMotorPower(clippedSpeed);
+        setLiftMotorPower(clippedSpeed);
         //        setLiftPosition_OVERRIDE(
         //                leftPidController.getTargetPosition(),
         //                rightPidController.getTargetPosition()
@@ -116,17 +121,18 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     }
 
-    private void setSlideMotorPower(double speed) {
+    private void setLiftMotorPower(double speed) {
         if (isHardware) {
-            vertSlideMotor.setSpeed(speed);
+            liftMotor.setSpeed(speed);
         }
     }
 
-    public void WristServoIncrement() {
+    public void ArmServoOutput() {
         // the arm's position to score
-        wristServo.setPosition(WristServoIncrement);
+        wristServo.setPosition(ArmServoOutput);
     }
 
+    //TODO: idea to add a increment decrement for scoreservooutput
     public void ScoreServoOutput() {
         // the intake system's postion to score
         clawServo.setPosition(ClawServoClose);
@@ -136,18 +142,18 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         clawServo.setPosition(ClawServoOpenLong);
     }
 
-    public void WristServoPickup() {
-        wristServo.setPosition(WristServoPickup);
+    public void ArmServoHold() {
+        wristServo.setPosition(ArmServoHold);
     }
 
-    public void WristServoDrop() {
+    public void ArmServoInput() {
         // positions for the arm of the bot
         wristServo.setPosition(ArmServoInput);
     }
 
-    public void ClawServoDrop() {
+    public void ScoreServoInput() {
         // positions for the arm of the bot
-        clawServo.setPosition(ClawServoOpenLong);
+        clawServo.setPosition(ClawServoOpenShort);
     }
 
     public void ScoreServoFlat() {
