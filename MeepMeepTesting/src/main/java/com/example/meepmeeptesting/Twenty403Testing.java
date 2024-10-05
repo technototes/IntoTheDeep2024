@@ -46,7 +46,8 @@ public class Twenty403Testing {
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 18)
-            .followTrajectorySequence(drive -> getRedTrajectory(drive));
+            // .followTrajectorySequence(drive -> getRedTrajectory(drive));
+            .followTrajectorySequence(drive -> getBlueTrajectory(drive));
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));
@@ -59,8 +60,8 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_LEFT_SPIKE.get())
+            .trajectorySequenceBuilder(AutoConstants.SIDE_RIGHT)
+            .addTrajectory(AutoConstants.SIDE_RIGHT_TO_SIDE_LEFT.get())
             // .addTrajectory(WingRed.SPLINE_START_TO_RIGHT_SPIKE.get())
             // .addTrajectory(WingRed.SPLINE_MIDSPIKE_TO_START.get())
             // .addTrajectory(AutoConstantsRed.Wing.MIDSPIKE_TO_RIGHT_SPIKE.get())
@@ -74,9 +75,9 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
+            .trajectorySequenceBuilder(AutoConstants.SIDE_LEFT)
             //.addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
-            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
+            .addTrajectory(AutoConstants.SIDE_LEFT_TO_SIDE_RIGHT.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
             //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
             //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
