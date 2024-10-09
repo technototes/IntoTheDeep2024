@@ -34,7 +34,7 @@ public class SplineTest extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.BACKWARD.toPose());
-        safety = new SafetyTestController(driverGamepad, robot);
+//        safety = new SafetyTestController(driverGamepad, robot);
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
@@ -45,9 +45,9 @@ public class SplineTest extends CommandOpMode {
             OpModeState.RUN
         );
 
-        CommandScheduler.scheduleForState(
-            new SafetyStartCommand(robot.safetySubsystem),
-            OpModeState.RUN
-        );
+//        CommandScheduler.scheduleForState(
+//            new SafetyStartCommand(robot.safetySubsystem),
+//            OpModeState.RUN
+//        );
     }
 }
