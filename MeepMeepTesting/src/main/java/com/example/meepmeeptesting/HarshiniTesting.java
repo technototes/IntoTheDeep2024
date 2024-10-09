@@ -25,7 +25,9 @@ public class HarshiniTesting {
         public static Pose2d OBSERVATION_ZONE = new Pose2d(-57, 55, toRadians(130));
         public static Pose2d SUBMARINE2 = new Pose2d(0, 36, toRadians(-90));
         public static Pose2d SUBMARINE3 = new Pose2d(5, 36, toRadians(-90));
-        public static Pose2d PUSH_HALF = new Pose2d(-16, 36, toRadians(0));
+        public static Pose2d MINI_LINE = new Pose2d(3, 36, toRadians(90));
+
+        public static Pose2d PUSH_HALF = new Pose2d(-16, 36, toRadians(90));
 
         public static Pose2d PUSH_1 = new Pose2d(-34, 45, toRadians(90));
         public static Pose2d PUSH_2 = new Pose2d(-34, 10, toRadians(90));
@@ -65,10 +67,12 @@ public class HarshiniTesting {
 
         public static final Supplier<Trajectory> OBSERVATION_TEST3 = () ->
                 func
-                        .apply(PUSH_1)
+                        .apply(SUBMARINE)
+                        .lineToLinearHeading(MINI_LINE)
+                        .splineToConstantHeading(PUSH_HALF.vec(), Math.PI - PUSH_HALF.getHeading())
                         .splineToConstantHeading(PUSH_1.vec(), Math.PI - PUSH_1.getHeading())
                         .splineToConstantHeading(PUSH_2.vec(), Math.PI - PUSH_2.getHeading())
-                        .splineToConstantHeading(PUSH_3.vec(), PUSH_3.getHeading())
+                        .splineToConstantHeading(PUSH_3.vec(), Math.PI - PUSH_3.getHeading())
                         .splineToConstantHeading(PUSH_3_AND_A_HALF.vec(), PUSH_3_AND_A_HALF.getHeading())
                         .splineToConstantHeading(SAMPLE_1.vec(), Math.PI - SAMPLE_1.getHeading())
                         .splineToConstantHeading(OBSERVATION_PUSH_HALF.vec(), Math.PI - OBSERVATION_PUSH_HALF.getHeading())
@@ -132,7 +136,7 @@ public class HarshiniTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
             .addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
             .addTrajectory(AutoConstants.OBSERVATION_TEST3.get())
             .addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
