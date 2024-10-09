@@ -34,23 +34,43 @@ public class ViggoTesting {
                 func
                         .apply(TEST1)
                         .splineToSplineHeading(TEST2, Math.PI - TEST2.getHeading())
-                        .splineToSplineHeading(TEST3, Math.PI - TEST3.getHeading())
-                        .splineToSplineHeading(TEST4, Math.PI - TEST4.getHeading())
-                        .splineToSplineHeading(TEST5, Math.PI - TEST5.getHeading())
-                        .splineToSplineHeading(TEST6, Math.PI - TEST6.getHeading())
-                        .splineToSplineHeading(TEST6a, Math.PI - TEST6a.getHeading())
+                        .build();
+        public static final Supplier<Trajectory> TEST2_TO_TEST2 = () ->
+                func
+                        .apply(TEST2)
+                        .lineToLinearHeading(TEST3)
+                        .build();
+        public static final Supplier<Trajectory> TEST2_TO_TESTB = () ->
+                func
+                        .apply(TEST3)
+                        .lineToLinearHeading(TEST4)
                         .build();
 
+        public static final Supplier<Trajectory> TESTB_TO_TESTC = () ->
+                func
+                        .apply(TEST4)
+                        .lineToLinearHeading(TEST5)
+                        .build();
+        public static final Supplier<Trajectory> TESTC_TO_TESTD = () ->
+                func
+                        .apply(TEST5)
+                        .lineToLinearHeading(TEST6)
+                        .build();
+        public static final Supplier<Trajectory> TESTD_TO_TESTE = () ->
+                func
+                        .apply(TEST6)
+                        .splineToSplineHeading(TEST6a, Math.PI - TEST6a.getHeading())
+                        .build();
         public static final Supplier<Trajectory> TEST2_TO_TEST3 = () ->
                 func
-                        .apply(TEST6a)
-                        .lineToLinearHeading(TEST6b)
-                        .build();
+                    .apply(TEST6a)
+                    .lineToLinearHeading(TEST6b)
+                    .build();
         public static final Supplier<Trajectory> TEST3_TO_TEST4 = () ->
                 func
-                    .apply(TEST6b)
-                    .lineToLinearHeading(TEST7)
-                    .build();
+                        .apply(TEST6b)
+                        .lineToLinearHeading(TEST7)
+                        .build();
         public static final Supplier<Trajectory> TEST4_TO_TEST5 = () ->
                 func
                         .apply(TEST7)
@@ -97,9 +117,14 @@ public class ViggoTesting {
         return drive
             .trajectorySequenceBuilder(AutoConstants.TEST1)
             .addTrajectory(AutoConstants.TEST1_TO_TEST2.get())
+            .addTrajectory(AutoConstants.TEST2_TO_TEST2.get())
+            .addTrajectory(AutoConstants.TEST2_TO_TESTB.get())
+            .addTrajectory(AutoConstants.TESTB_TO_TESTC.get())
+            .addTrajectory(AutoConstants.TESTC_TO_TESTD.get())
+            .addTrajectory(AutoConstants.TESTD_TO_TESTE.get())
             .addTrajectory(AutoConstants.TEST2_TO_TEST3.get())
             .addTrajectory(AutoConstants.TEST3_TO_TEST4.get())
-            .addTrajectory(AutoConstants.TEST4_TO_TEST5.get())
-            .build();
+                .addTrajectory(AutoConstants.TEST4_TO_TEST5.get())
+                .build();
     }
 }
