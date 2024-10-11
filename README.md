@@ -1,3 +1,23 @@
+# Technototes
+This is the IntoTheDeep project for technototes
+
+## Getting started
+1. Clone the project
+2. Install Android Studio
+3. Install Java 17 if you haven't already
+4. Install Gradle (or ensure that you have Gradle 7.2)
+5. Install Bun using `powershell -c "irm bun.sh/install.ps1 | iex"`
+6. Open a terminal where your project is located and run bun install
+7. Open the project in Android Studio
+8. Build
+9. (if build fails, find out which step is missing and update this list)
+
+## Working with branches
+Since we work with different items in parallel and some are exploratory/test, we keep our work in branches. 
+Create a new branch for new work, at the end of the meet push your changes (don't keep them just in your computer!)
+
+# FIRST
+What follos is what is present in the IntoTheDeep2024 repo, reproduced verbatim
 ## NOTICE
 
 This repository contains the public FTC SDK for the INTO THE DEEP (2024-2025) competition season.
