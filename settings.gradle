@@ -8,6 +8,8 @@ include ':FtcRobotController'
 // include 'Vision'                                                         // FLIP: TechnoLibLocal
 // project(':Vision').projectDir = new File('TechnoLib/Vision')             // FLIP: TechnoLibLocal
 
+include 'MeepMeep'                                                       // FLIP: MeepMeepLocal
+project(':MeepMeep').projectDir = new File('MeepMeep')                   // FLIP: MeepMeepLocal
 
 include ':Sixteen750'
 include ':Twenty403'

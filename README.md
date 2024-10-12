@@ -26,6 +26,18 @@ allprojects {
 Since we work with different items in parallel and some are exploratory/test, we keep our work in branches. 
 Create a new branch for new work, at the end of the meet push your changes (don't keep them just in your computer!)
 
+
+## Advanced: Using local library
+
+Instead of pulling libraries from Maven, you can clone repositories:
+* [TechnoLib](https://github.com/technototes/TechnLib)
+* [MeepMeep](https://github.com/NoahBres/MeepMeep)
+
+Once you have them cloned, you can use these commands to switch between Maven and the local library: 
+
+* `bun libflip` for TechnoLib
+* `bun meepflip` for MeepMeep
+
 # FIRST
 What follos is what is present in the IntoTheDeep2024 repo, reproduced verbatim
 ## NOTICE

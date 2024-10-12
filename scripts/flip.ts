@@ -47,6 +47,16 @@ const fileList = new Map<string, FileList>([
     'bot',
     { name: 'BUILD ALL BOTS', files: ['settings.gradle', 'build.gradle'] },
   ],
+  [
+    'meepmeep',
+    {
+      name: 'MeepMeepLocal',
+      files: [
+        'MeepMeepTesting/build.gradle',
+        'settings.gradle',
+      ]
+    }
+  ]
 ]);
 
 // For any line that ends with '// FLIP: id',
