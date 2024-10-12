@@ -48,7 +48,7 @@ public class Sixteen750Testing {
             new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(14, 17)
-            .followTrajectorySequence(Sixteen750Testing::getParkingTrajectory);
+            .followTrajectorySequence(Sixteen750Testing::getRedTrajectory);
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));
@@ -61,17 +61,17 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_NETSCORING.get())
-            /*
-            .turn(Math.toRadians(-135))
-            .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE1.get())
-            .addTrajectory(AutoConstants.INTAKE1_TO_NETSCORING.get())
-            .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE2.get())
-            .addTrajectory(AutoConstants.INTAKE2_TO_NETSCORING.get())
-            .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
-            .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get()
+                .trajectorySequenceBuilder(AutoConstants.START)
+                .addTrajectory(AutoConstants.START_TO_NETSCORING.get())
 
+                //.turn(Math.toRadians(-135))
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE1.get())
+                .addTrajectory(AutoConstants.INTAKE1_TO_NETSCORING.get())
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE2.get())
+                .addTrajectory(AutoConstants.INTAKE2_TO_NETSCORING.get())
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
+                .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get())
+            /* 
             splines
             .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
             .addTrajectory(AutoConstants.RIGHT_SPIKE_TO_STAGE.get())
@@ -88,26 +88,34 @@ public class Sixteen750Testing {
 
     private static TrajectorySequence getParkingTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.NETSCORING)
-            // .turn(Math.toRadians(135))
-            .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT.get())
-            .addTrajectory(AutoConstants.ASCENT_TO_NETSCORING.get())
-            .build();
+                .trajectorySequenceBuilder(AutoConstants.NETSCORING)
+                //.turn(Math.toRadians(135))
+               // .setReversed(true)
+                //.addTrajectory(AutoConstants.NETSCORING_TO_NETSCORING_CLEAR.get())
+                //.addTrajectory(AutoConstants.NETSCORING_CLEAR_TO_ASCENT.get())
+                .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT.get())
+                .build();
     }
 
     private static TrajectorySequence getBlueTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.START)
-            /*
-            .addTrajectory(AutoConstantsRed.Stage.START_TO_LEFT_LOW.get())
-            .addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
-            .addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
-            .addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
-            .addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
-            .addTrajectory(AutoConstantsRed.Wing.BACK_TO_PARK_CORNER.get())
-            .addTrajectory(AutoConstantsRed.Stage.LEFT_SPIKE_TO_CENTER_SPIKE.get())
-            .addTrajectory(AutoConstantsRed.Stage.CENTER_SPIKE_TO_RIGHT_SPIKE.get())
-            */
+                .trajectorySequenceBuilder(AutoConstants.START)
+                .addTrajectory(AutoConstants.START_TO_NETSCORING.get())
+
+                //.turn(Math.toRadians(-135))
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE1.get())
+                .addTrajectory(AutoConstants.INTAKE1_TO_NETSCORING.get())
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE2.get())
+                .addTrajectory(AutoConstants.INTAKE2_TO_NETSCORING.get())
+                .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
+                .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get())
+            //.addTrajectory(AutoConstants.START_TO_MID_CLEAR.get())
+            //.addTrajectory(WingRed.MIDSPIKE_TO_RIGHT_SPIKE.get())
+            //.addTrajectory(WingRed.RIGHT_SPIKE_TO_MIDSPIKE.get())
+            //.addTrajectory(WingRed.MIDSPIKE_TO_BACK.get())
+            //.addTrajectory(AutoConstantsRed.Wing.BACK_TO_PARK_CORNER.get())
+            //.addTrajectory(AutoConstantsRed.Stage.LEFT_SPIKE_TO_CENTER_SPIKE.get())
+            //.addTrajectory(AutoConstantsRed.Stage.CENTER_SPIKE_TO_RIGHT_SPIKE.get())
             .build();
     }
     /*
