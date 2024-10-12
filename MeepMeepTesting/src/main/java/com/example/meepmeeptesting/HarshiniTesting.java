@@ -22,10 +22,10 @@ public class HarshiniTesting {
         public static Function<Pose2d, TrajectoryBuilder> func;
         public static Pose2d OBSERVATION_START = new Pose2d(0, 60, toRadians(-90));
         public static Pose2d SUBMARINE = new Pose2d(-5, 36, toRadians(-90));
-        public static Pose2d OBSERVATION_ZONE = new Pose2d(-57, 55, toRadians(130));
-        public static Pose2d SUBMARINE2 = new Pose2d(0, 36, toRadians(-90));
+        public static Pose2d OBSERVATION_ZONE = new Pose2d(-57, 55, toRadians(-90));
+        public static Pose2d SUBMARINE2 = new Pose2d(0, 36, toRadians(90));
         public static Pose2d SUBMARINE3 = new Pose2d(5, 36, toRadians(-90));
-        public static Pose2d MINI_LINE = new Pose2d(3, 36, toRadians(90));
+        public static Pose2d MINI_LINE = new Pose2d(-3, 36, toRadians(90));
 
         public static Pose2d PUSH_HALF = new Pose2d(-16, 36, toRadians(90));
 
@@ -97,6 +97,14 @@ public class HarshiniTesting {
                         .build();
 
 
+        public static final Supplier<Trajectory> TANGENT_TEST = () ->
+                func
+                        .apply(OBSERVATION_ZONE)
+                        //.splineToConstantHeading(OBSERVATION_ZONE.vec(), Math.toRadians(130))
+                        .splineToLinearHeading(SUBMARINE3, Math.toRadians(0))
+                        .build();
+
+
     }
 
     public static void main(String[] args) {
@@ -135,13 +143,14 @@ public class HarshiniTesting {
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
             .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
-            .addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
-            //.addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
-            //.addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST3.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
-            .addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
+            // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
+            // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST3.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
+            //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
+            .addTrajectory(AutoConstants.TANGENT_TEST.get())
             .build();
     }
 }
