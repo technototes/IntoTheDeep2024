@@ -87,6 +87,6 @@ makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
 makeMeepMeep20403Java.mustRunAfter cleanMeepMeep
 
 dependencies {
-    // implementation 'com.github.NoahBres:MeepMeep:2.0.3' // FLIP: MeepMeepLocal
-    implementation project(':MeepMeep') // FLIP: MeepMeepLocal
+    implementation 'com.github.NoahBres:MeepMeep:2.0.3' // FLIP: MeepMeepLocal
+    // implementation project(':MeepMeep') // FLIP: MeepMeepLocal
 }
