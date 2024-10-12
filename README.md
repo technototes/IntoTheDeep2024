@@ -7,7 +7,7 @@ This is the IntoTheDeep project for technototes
 3. Install Java 17 if you haven't already
 4. Install Gradle (or ensure that you have Gradle 7.2)
 5. Install Bun using `powershell -c "irm bun.sh/install.ps1 | iex"`
-6. Open a terminal where your project is located and run bun install
+6. Open a terminal where your project is located and run `bun install`
 7. Open the project in Android Studio
 8. Build
 9. (if build fails, find out which step is missing and update this list)
