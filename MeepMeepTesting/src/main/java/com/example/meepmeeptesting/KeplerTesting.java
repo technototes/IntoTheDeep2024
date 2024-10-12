@@ -24,23 +24,26 @@ public class KeplerTesting {
         public static Pose2d SAMPLES_START_PUSH = new Pose2d(-60, 20, toRadians(90));
         public static Pose2d SAMPLE_BAR_SCORE = new Pose2d(0, 34, toRadians(270));
         public static Pose2d START_POS = new Pose2d(-34, 58, toRadians(270));
-        public static Pose2d CORNER_OBS = new Pose2d(-30, 30, toRadians(180));
-        public static final Supplier<Trajectory> BASKET_HOLDERS = () ->
+        public static Pose2d CORNER_OBS = new Pose2d(10, 50, toRadians(270));
+        public static Pose2d CORNER_SECOND = new Pose2d(-35, 25.5, toRadians(260));
+        public static Pose2d CORNER_THIRD = new Pose2d(-50, 50, toRadians(180));
+        public static final Supplier<Trajectory> BASKET_HOLDERS_ONE = () ->
             func
                 .apply(START_POS)
                 .splineToSplineHeading(SAMPLE_BAR_SCORE, Math.PI - SAMPLE_BAR_SCORE.getHeading())
                 .splineToSplineHeading(CORNER_OBS, Math.PI - CORNER_OBS.getHeading())
-                .splineToSplineHeading(
-                    SAMPLES_START_PUSH,
-                    Math.PI - SAMPLES_START_PUSH.getHeading()
-                )
-                .splineToSplineHeading(SAMPLE_PUSH_AREA, Math.PI - SAMPLE_PUSH_AREA.getHeading())
-                .splineToSplineHeading(
-                    SAMPLE_COLLECT_AREA,
-                    Math.PI - SAMPLE_COLLECT_AREA.getHeading()
-                )
-                .splineToSplineHeading(SAMPLE_BAR_SCORE, Math.PI - SAMPLE_BAR_SCORE.getHeading())
+                    .splineToSplineHeading(CORNER_SECOND, Math.PI - CORNER_SECOND.getHeading())
+                    .splineToSplineHeading(SAMPLES_START_PUSH, Math.PI - SAMPLES_START_PUSH.getHeading())
+                    .splineToSplineHeading(SAMPLE_PUSH_AREA, Math.PI - SAMPLE_PUSH_AREA.getHeading())
+                    .splineToSplineHeading(CORNER_THIRD, Math.PI - CORNER_THIRD.getHeading())
                 .build();
+        public static final Supplier<Trajectory> BASKET_HOLDERS_TWO = () ->
+                func
+                        .apply(CORNER_THIRD)
+
+                        .splineToSplineHeading(SAMPLE_COLLECT_AREA, Math.PI - SAMPLE_COLLECT_AREA.getHeading())
+                        .splineToSplineHeading(SAMPLE_BAR_SCORE, Math.PI - SAMPLE_BAR_SCORE.getHeading())
+                        .build();
     }
 
     public static void main(String[] args) {
@@ -73,13 +76,15 @@ public class KeplerTesting {
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 16.5)
             .followTrajectorySequence(drive -> getTestTrajectory(drive));
+
         meepMeep.setBackgroundAlpha(0.75f).addEntity(myBot).start();
     }
 
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
             .trajectorySequenceBuilder(AutoConstants.START_POS)
-            .addTrajectory(AutoConstants.BASKET_HOLDERS.get())
+                .addTrajectory(AutoConstants.BASKET_HOLDERS_ONE.get())
+                .addTrajectory(AutoConstants.BASKET_HOLDERS_TWO.get())
             .build();
     }
 }

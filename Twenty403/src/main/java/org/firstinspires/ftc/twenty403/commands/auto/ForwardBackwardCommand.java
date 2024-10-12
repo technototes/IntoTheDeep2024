@@ -11,10 +11,8 @@ public class ForwardBackwardCommand extends SequentialCommandGroup {
         super(
             new TrajectorySequenceCommand(
                 r.drivebaseSubsystem,
-                AutoConstants.BACKWARD_TO_FORWARD
-            ).andThen(
-                new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_TO_BACKWARD)
-            )
+                AutoConstants.OBS_START_TO_SCORING )
+
         );
         //        super(
         //                new TrajectorySequenceCommand(r.drivebaseSubsystem, WingRed.SIDE_LEFT_TO_SIDE_RIGHT)

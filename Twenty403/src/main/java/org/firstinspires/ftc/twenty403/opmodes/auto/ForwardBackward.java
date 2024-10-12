@@ -18,7 +18,7 @@ import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "Forward_Backward")
+@Autonomous(name = "Kepler1")
 @SuppressWarnings("unused")
 public class ForwardBackward extends CommandOpMode {
 
