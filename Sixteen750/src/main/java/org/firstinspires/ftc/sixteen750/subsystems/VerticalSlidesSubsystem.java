@@ -130,12 +130,20 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     }
 
-    public void LiftHeightLow() {
+    public void SlideBucketLow() {
         //takes the arm to the first level
         slidePidController.setTargetPosition(LOW_BUCKET);
     }
 
-    public void LiftHeightHigh() {
+    public void SlideBucketHigh() {
+        slidePidController.setTargetPosition(HIGH_BUCKET);
+    }
+    public void SlideChamberLow() {
+        //takes the arm to the first level
+        slidePidController.setTargetPosition(LOW_BUCKET);
+    }
+
+    public void SlideChamberHigh() {
         slidePidController.setTargetPosition(HIGH_BUCKET);
     }
 
@@ -159,30 +167,33 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void WristServoIncrement() {
         // the arm's position to score
-        wristServo.setPosition(WristServoIncrement);
+        armServo.setPosition(WristServoIncrement);
     }
 
-    public void ScoreServoOutput() {
-        // the intake system's postion to score
-        clawServo.setPosition(ClawServoClose);
+    public void BucketServoTransfer() {
+        // the intake system's position to score
+        bucketServo.setPosition(ClawServoClose);
     }
 
-    public void ScoreServoHold() {
-        clawServo.setPosition(ClawServoOpenLong);
+    public void BucketServoLift() {
+        bucketServo.setPosition(ClawServoOpenLong);
     }
-
-    public void WristServoPickup() {
-        wristServo.setPosition(WristServoPickup);
-    }
-
-    public void WristServoDrop() {
+    public void BucketServoEmpty() {
         // positions for the arm of the bot
-        wristServo.setPosition(ArmServoInput);
+        bucketServo.setPosition(ClawServoOpenLong);
     }
 
-    public void ClawServoDrop() {
+
+    public void ArmServoTransfer() {
         // positions for the arm of the bot
-        clawServo.setPosition(ClawServoOpenLong);
+        armServo.setPosition(ClawServoOpenLong);
+    }
+    public void ArmServoLowBucket() {
+        armServo.setPosition(WristServoPickup);
+    }
+    public void ArmServoHighBucket() {
+        // positions for the arm of the bot
+        armServo.setPosition(ArmServoInput);
     }
 
 }
