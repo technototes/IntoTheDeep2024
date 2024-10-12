@@ -15,10 +15,16 @@ import org.firstinspires.ftc.sixteen750.Setup;
 @Config
 public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
+    //    public static double ArmServo = 0.5;
+    //slides motor - receive/down/reset, first basket, second basket
+    //movebuck servo - transfer, pickup, neutral
+    //bucket servo - drop, pickup (long and short)
+    //camera - red and blue
     public static double LOW_BUCKET = -950;
     public static double HIGH_BUCKET = -1350;
     //    public static double HIGH_POS = 1000;
     public static double WRIST_POS = 0;
+    public static double ARM_POS = 0;
     public static double MIN_MOTOR_SPEED = -0.7;
     public static double MAX_MOTOR_SPEED = 1;
 
@@ -35,7 +41,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double WristServoDrop = 0.555; //drops in bucket
     public static double WristServoIncrement = 0.555;
 
-    public static PIDCoefficients PID = new PIDCoefficients(0.0027, 0.0, 0.00015);
+    public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
     public Servo wristServo;
     public Servo clawServo;
     public EncodedMotor<DcMotorEx> vertSlideMotor;
