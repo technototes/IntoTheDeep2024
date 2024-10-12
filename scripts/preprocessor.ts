@@ -86,6 +86,10 @@ const typeMap = new Map([
     'Function<Function<Pose2d,TrajectorySequenceBuilder>,TrajectorySequence>',
     'Supplier<Trajectory>',
   ],
+  [
+    'Function<BiFunction<Pose2d,Double,TrajectorySequenceBuilder>,TrajectorySequence>',
+    'Supplier<Trajectory>',
+  ],
 ]);
 
 /*** END CONFIGURATION STUFF ***/
@@ -195,6 +199,7 @@ function emitClassHelpers() {
   //    new MecanumVelocityConstraint(60 /*MAX_VEL*/, 14 /*TRACK_WIDTH*/)));
   // public static ProfileAccelerationConstraint PROF_ACCEL = new ProfileAccelerationConstraint(20/*MAX_ACCEL*/);
   codeSpit('public static Function<Pose2d, TrajectoryBuilder> func;'); // = pose -> new TrajectoryBuilder(pose, MIN_VEL, PROF_ACCEL);")`);
+  codeSpit('public static BiFunction<Pose2d, Double, TrajectoryBuilder> biFunction;'); // = pose, reverse -> new TrajectoryBuilder(pose, MIN_VEL, PROF_ACCEL);")`);
 }
 
 // A little "context" stack
@@ -355,12 +360,20 @@ class AutoConstVisitor extends BaseJavaCstVisitorWithDefaults {
       top.kind === TokenKind.LambdaParam &&
       expr.startsWith(`${top.value}.apply(`)
     ) {
-      // This is pretty dumb given that we have the full syntax tree,
-      // But it's *easy* :D
-      const cleanupExpr = expr
-        .substring(top.value.length)
-        .replaceAll('.toPose()', '');
-      codeSpit('() -> ', 'func', cleanupExpr, ';');
+        // this is experimental. Reverse requires more work
+        const cleanupExpr = expr
+                    .substring(top.value.length)
+                    .replaceAll('.toPose()', '');
+                    codeSpit('/* ', cleanupExpr, ' */');
+        if (cleanupExpr.split(',').length == 3) {
+          codeSpit('() -> ', 'biFunction', cleanupExpr, ';');
+            }
+        else {
+          // This is pretty dumb given that we have the full syntax tree,
+          // But it's *easy* :D
+
+          codeSpit('() -> ', 'func', cleanupExpr, ';');
+      }
     } else if (top) {
       codeSpit(top.value, ' -> ', expr);
     } else {

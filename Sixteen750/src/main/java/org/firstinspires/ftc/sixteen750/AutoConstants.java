@@ -11,6 +11,7 @@ import com.technototes.path.geometry.ConfigurablePoseD;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @Config
@@ -69,12 +70,12 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             INTAKE3_TO_NETSCORING = b ->
             b.apply(INTAKE3.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+    public static final Function<BiFunction<Pose2d, Double, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_ASCENT = b ->
-            b.apply(NETSCORING_TEST.toPose())
+            b.apply(NETSCORING_TEST.toPose(), Math.toRadians(-90))
 //                        .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
+//                    .setReversed(true)
                     .splineToConstantHeading(ASCENT.toPose().vec(), ASCENT.getHeading())
-                    //.setReversed(true)
                     .build();
 
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
@@ -85,12 +86,14 @@ public class AutoConstants {
 
 
         //testing trajectories from last year
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+    /*
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_RIGHT_SPIKE = b ->
             b.apply(START1.toPose())
                     .splineTo(MID_SPLINE_CLEAR.toPose().vec(), MID_SPLINE_CLEAR.getHeading())
                     .splineToLinearHeading(RIGHT_SPIKE.toPose(), RIGHT_SPIKE.getHeading())
                     .build();
+        */
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             RIGHT_SPIKE_TO_STAGE = b ->
             b.apply(RIGHT_SPIKE.toPose())
