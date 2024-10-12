@@ -9,7 +9,6 @@ import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
 import java.util.function.Function;
-import java.util.function.BiFunction;
 
 @Config
 public class AutoConstants {
@@ -47,13 +46,11 @@ public class AutoConstants {
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
                 SIDE_RIGHT_TO_SIDE_LEFT = b ->
                 b.apply(SIDE_RIGHT.toPose()).lineToLinearHeading(SIDE_LEFT.toPose()).build();
-        /*
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
                 SPLINE_START_TO_RIGHT_SPIKE = b ->
                 b.apply(START.toPose())
                         .splineTo(MID_SPLINE_CLEAR.toPose().vec(), Math.PI - MID_SPLINE_CLEAR.getHeading())
                         .splineToLinearHeading(RIGHT_SPIKE.toPose(), RIGHT_SPIKE.getHeading()).build();
-        */
         public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
                 RIGHT_SPIKE_TO_STAGE = b ->
                 b.apply(RIGHT_SPIKE.toPose())

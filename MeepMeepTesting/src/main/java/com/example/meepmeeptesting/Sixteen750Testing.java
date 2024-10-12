@@ -44,7 +44,7 @@ public class Sixteen750Testing {
             /* @MaxAccel */
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
-        AutoConstants.biFunction = (Pose2d pose, Double startTangent) -> new TrajectoryBuilder(pose, startTangent, min_vel, prof_accel);
+        AutoConstants.reverseFunction = (Pose2d pose) -> new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(14, 17)
             .followTrajectorySequence(Sixteen750Testing::getParkingTrajectory);
@@ -91,7 +91,6 @@ public class Sixteen750Testing {
         return drive
                 .trajectorySequenceBuilder(AutoConstants.NETSCORING)
                 //.turn(Math.toRadians(135))
-                .setReversed(true)
                 .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT.get())
                 .build();
     }

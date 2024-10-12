@@ -11,6 +11,7 @@ import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 import com.noahbres.meepmeep.roadrunner.trajectorysequence.TrajectorySequence;
+import com.robotcode.shared.DO_NOT_EDIT_16750;
 import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
@@ -44,6 +45,7 @@ public class Twenty403Testing {
             /* @MaxAccel */
         );
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
+        DO_NOT_EDIT_16750.AutoConstants.reverseFunction = (Pose2d pose) -> new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 17)
             .followTrajectorySequence(drive -> getRedTrajectory(drive));
