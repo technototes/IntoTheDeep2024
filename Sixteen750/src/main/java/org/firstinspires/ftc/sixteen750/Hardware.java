@@ -21,8 +21,9 @@ public class Hardware implements Loggable {
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
     public Servo clawservo;
     public Servo wristservo;
-    public EncodedMotor<DcMotorEx> vertslidemotor;
-    public EncodedMotor<DcMotorEx> horizslidemotor;
+    public Servo linkservo;
+    public EncodedMotor<DcMotorEx> slidemotor;
+
     /* Put other hardware here! */
 
     public Hardware(HardwareMap hwmap) {
@@ -42,7 +43,7 @@ public class Hardware implements Loggable {
         if (Setup.Connected.VERTSLIDES) {
             clawservo = new Servo(Setup.HardwareNames.CLAWSERVO);
             wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
-            vertslidemotor = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.VERTSLIDEMOTOR);
+            slidemotor = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.SLIDEMOTOR);
             rl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RL_DRIVE_MOTOR);
             rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
         }
