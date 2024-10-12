@@ -21,6 +21,7 @@ public class AutoConstants {
     public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
     public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
+    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
     public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
     public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
 
@@ -29,7 +30,7 @@ public class AutoConstants {
     public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
     public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, 90);
-    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 10, 180);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, -0);
 
 
     //These are testing constants for last year's game
@@ -72,16 +73,21 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_ASCENT = b ->
             b.apply(NETSCORING_TEST.toPose())
-                 // .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
-                .setReversed(true)
-                .splineToLinearHeading(ASCENT.toPose(), ASCENT.getHeading())
-                .build();
+//                        .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
+                   // .splineToSplineHeading(NETSCORING_CLEAR.toPose(), NETSCORING_CLEAR.getHeading())
+                    .splineToLinearHeading(ASCENT.toPose(), ASCENT.getHeading())
+                    //.setReversed(true)
+                    .build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-            ASCENT_TO_NETSCORING = b ->
-            b.apply(ASCENT.toPose())
-                .setReversed(true)
-                .splineToLinearHeading(NETSCORING_TEST.toPose(), NETSCORING_TEST.getHeading())
-                .build();
+            NETSCORING_TO_NETSCORING_CLEAR = b ->
+            b.apply(NETSCORING_TEST.toPose())
+                    .splineToLinearHeading(NETSCORING_CLEAR.toPose(), NETSCORING_CLEAR.getHeading())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_CLEAR_TO_ASCENT = b ->
+            b.apply(NETSCORING_CLEAR.toPose())
+                    .splineToLinearHeading(ASCENT.toPose(), ASCENT.getHeading())
+                    .build();
 
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             SPLINETEST1_TO_SPLINETEST2 = b ->
