@@ -6,20 +6,20 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 
 import org.firstinspires.ftc.sixteen750.Hardware;
-import org.firstinspires.ftc.sixteen750.Setup;
 
 @Config
 public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     //    public static double ArmServo = 0.5;
     //slides motor - receive/down/reset, first basket, second basket
-    //movebuck servo - transfer, pickup, neutral
+    //arm servo - transfer, pickup, neutral
     //bucket servo - drop, pickup (long and short)
-    //camera - red and blue
+
     public static double LOW_BUCKET = -950;
     public static double HIGH_BUCKET = -1350;
     //    public static double HIGH_POS = 1000;
@@ -35,50 +35,90 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double ClawServoOpenShort = 0.4;
     public static double ClawServoClose = 0.55;
     public static double ClawServoOpenLong = 0;
-    public static double ScoreServoFlat = 0.33;
     public static double ArmServoInput = 0.545;
     public static double WristServoPickup = 0.05;
     public static double WristServoDrop = 0.555; //drops in bucket
     public static double WristServoIncrement = 0.555;
+    @Log(name = "slidePos")
+    public int slidePos;
 
+    @Log(name = "slidePow")
+    public double slidePow;
+
+    @Log(name = "slideTarget")
+    public int slideTargetPos;
+
+    @Log(name = "wristPos")
+    public double wristPos;
+    @Log(name = "wristTarget")
+    public double wristTargetPos;
     public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
-    public Servo wristServo;
-    public Servo clawServo;
-    public EncodedMotor<DcMotorEx> vertSlideMotor;
+    public Servo armServo;
+    public Servo bucketServo;
+    public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    private PIDFController leftPidController;
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0, 0.0, 0.0);
+    private PIDFController slidePidController;
+    public int slideResetPos;
 
     public VerticalSlidesSubsystem(Hardware hw) {
         // We need to configure the liftMotor to work like a servo.
         // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
         // Comment from CenterStage but may still be relevant? for hang
-        vertSlideMotor = hw.vertslidemotor;
+        slideMotor = hw.slidemotor;
         isHardware = true;
-        leftPidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
+        slidePidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
+        resetSlideZero();
+    }
+    public void resetSlideZero() {
+        slideResetPos = getSlideUnmodifiedPosition();
+        // We don't want the destination to go nuts, so update the target with the new zero
+        slideTargetPos = slideResetPos;
     }
 
     public VerticalSlidesSubsystem() {
         isHardware = false;
-        vertSlideMotor = null;
-        wristServo = null;
-        clawServo = null;
+        slideMotor = null;
+        armServo = null;
+        bucketServo = null;
     }
 
-    private int get___CurrentPosition() {
-        if (Setup.Connected.VERTSLIDES) {
-            return (int) vertSlideMotor.getSensorValue();
+    @Override
+    public void periodic() {
+        slidePos = getSlideCurrentPos();
+        slidePow = slidePidController.update(slidePos);
+        setSlideMotorPower(slidePow);
+    }
+
+    private void setSlidePos(int e) {
+        slidePidController.setTargetPosition(e);
+        slideTargetPos = e;
+    }
+
+    private void setWristPos(double w) {
+        if (armServo != null) {
+            armServo.setPosition(w);
+            wristTargetPos = w;
+        }
+    }
+    private int getSlideTargetPosition() {
+        return (int) slidePidController.getTargetPosition();
+    }
+    private int getSlideCurrentPos() {
+        return getSlideUnmodifiedPosition() - slideResetPos;
+    }
+
+    private int getSlideUnmodifiedPosition() {
+        if (isHardware) {
+            return (int) slideMotor.getSensorValue();
         } else {
             return 0;
         }
     }
 
-    private int get___TargetPosition() {
-        return (int) leftPidController.getTargetPosition();
-    } //was lift
-
-    private void set___TargetPosition(int p) {
-        leftPidController.setTargetPosition(p);
-    } //was lift
+    private void setSlideTargetPosition(int p) {
+        slidePidController.setTargetPosition(p);
+    }
 
     public void slidesup() {
         // lift bucket system up
@@ -92,11 +132,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void LiftHeightLow() {
         //takes the arm to the first level
-        leftPidController.setTargetPosition(LOW_BUCKET);
+        slidePidController.setTargetPosition(LOW_BUCKET);
     }
 
     public void LiftHeightHigh() {
-        leftPidController.setTargetPosition(HIGH_BUCKET);
+        slidePidController.setTargetPosition(HIGH_BUCKET);
     }
 
     /*public void LiftHeightMedium() {
@@ -106,25 +146,14 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void LiftHeightIntake() {
         //brings the arm all the way down
-        leftPidController.setTargetPosition(WRIST_POS);
+        slidePidController.setTargetPosition(WRIST_POS);
         //        armServo.setPosition(0);
         //        scoreServo.setPosition(0);
     }
 
-    public void periodic() {
-        double targetSpeed = leftPidController.update(get___CurrentPosition());
-        double clippedSpeed = Range.clip(targetSpeed, MIN_MOTOR_SPEED, MAX_MOTOR_SPEED);
-        setSlideMotorPower(clippedSpeed);
-        //        setLiftPosition_OVERRIDE(
-        //                leftPidController.getTargetPosition(),
-        //                rightPidController.getTargetPosition()
-        //        );
-
-    }
-
     private void setSlideMotorPower(double speed) {
         if (isHardware) {
-            vertSlideMotor.setSpeed(speed);
+            slideMotor.setSpeed(speed);
         }
     }
 
@@ -156,7 +185,4 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         clawServo.setPosition(ClawServoOpenLong);
     }
 
-    public void ScoreServoFlat() {
-        clawServo.setPosition(ScoreServoFlat);
-    }
 }

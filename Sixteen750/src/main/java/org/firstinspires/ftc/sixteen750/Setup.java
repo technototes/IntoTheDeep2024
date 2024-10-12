@@ -20,8 +20,9 @@ public class Setup {
         public static String IMU = "imu";
 
         public static String CAMERA = "webcam";
-        public static String INTAKESERVO = "intakeservo";
-        public static String VERTSLIDEMOTOR = "slidemotor";
+        public static String BUCKETSERVO = "bucketservo";
+        public static String ARMSERVO = "armservo";
+        public static String SLIDEMOTOR = "slidemotor";
 
         public static String CLAWSERVO = "clawservo";
         public static String WRISTSERVO = "wristservo";
