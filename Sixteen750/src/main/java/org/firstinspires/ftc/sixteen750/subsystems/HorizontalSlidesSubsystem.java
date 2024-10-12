@@ -23,10 +23,11 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     //    public static double ScoreServo = 0.5;
 
     //    public static double ArmServo = 0.5;
-    //slides motor - outstretched, retracted, transfer
-    //wrist servo - transfer, pickup, neutral
-    //claw servo - drop, pickup (long and short)
-    //camera - red and blue
+    //slides motor - outstretched, retracted, transfer/neutral?
+    //wrist servo - transfer, pickup, neutral, wall pickup for specimen
+    //claw servo - drop (open), pickup (long and short)(close)
+    //camera - red and blue and yellow based on if red and if blue alliance
+    //LEDs - different colors for different collectionsb
 
     public static double ClawServoOpenShort = 0.4;
     public static double ClawServoClose = 0.55;
