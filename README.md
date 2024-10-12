@@ -12,6 +12,16 @@ This is the IntoTheDeep project for technototes
 8. Build
 9. (if build fails, find out which step is missing and update this list)
 
+### Common problems
+Error `-Xlint:deprecation`. You may need to add the following to build.common.gradle
+```
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+    }
+}
+```
+
 ## Working with branches
 Since we work with different items in parallel and some are exploratory/test, we keep our work in branches. 
 Create a new branch for new work, at the end of the meet push your changes (don't keep them just in your computer!)
