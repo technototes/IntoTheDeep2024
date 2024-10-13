@@ -1,35 +1,28 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { removeComments } from './helpers/removeComments.js';
-import {
-  AutoConstTransformer,
-  collectImports,
-  getEmittedCode,
-} from './helpers/AutoConstTransformer.js';
+import { MakeAutoConstantsTransformer } from './helpers/AutoConstTransformer.js';
 
 /*** BEGIN CONFIGURATION STUFF ***/
+
 // This is the package name that we're going to use for our generated code.
 const packageDir = ['com', 'robotcode', 'shared'];
+
 /*** END CONFIGURATION STUFF ***/
 
 const [, , outDir, className, ...filesAsString] = process.argv;
-// console.log("Output Directory:", outDir);
-// console.log("filesAsString:", filesAsString);
 const outputLocation = path.join(outDir, ...packageDir);
 
 // We're only finding files that include "auto" and "const" in their paths.
-// const filesNoBrackets = filesAsString.substring(1, filesAsString.length - 1);
-const files = filesAsString.filter(
+const constantsFiles = filesAsString.filter(
   (val) =>
     val.toLocaleLowerCase().indexOf('auto') >= 0 &&
     val.toLocaleLowerCase().indexOf('const') >= 0 &&
     val.toLocaleLowerCase().indexOf('meepmeep') < 0,
-); // filesNoBrackets.split(', ')
+);
 const drivebase = filesAsString.find(
   (name) => name.toLocaleLowerCase().indexOf('drivebase') >= 0,
 );
-
-// let curFile: string = '';
 
 async function main(): Promise<void> {
   // Make the output directory structure
@@ -39,26 +32,16 @@ async function main(): Promise<void> {
     console.error(e);
   }
 
-  const transformer = new AutoConstTransformer();
+  // TODO: Extract the drivebase specs/RR setup code from the bot,
+  // then pass those values into the Constants Transformer
+
+  const transformer = MakeAutoConstantsTransformer();
   // Remove the comments then parse the file
-  for (const file of files) {
+  for (const file of constantsFiles) {
     const origFileContents = await fs.readFile(file, 'utf8');
     const contents = removeComments(origFileContents);
     transformer.transformFile(contents.join('\n'));
   }
-
-  /*
-  parsedFiles.forEach((cst, key) => {
-    console.log('Name: ', key);
-    if (hasField(cst.children, 'ordinaryCompilationUnit')) {
-      console.log(typeof cst.children.ordinaryCompilationUnit);
-      console.log(cst.children.ordinaryCompilationUnit);
-    }
-  });
-  */
-  // console.log(parsedFiles);
-
-  // TODO: Extract the drivebase specs/RR setup code from the bot, maybe?
 
   let output = `package ${packageDir.join('.')};
 /*
@@ -71,9 +54,9 @@ async function main(): Promise<void> {
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  *
  * Any edits you make will get obliterated when you build.
- * Instead, make edits to th${files.length > 1 ? 'ese files' : 'is file'}:
+ * Instead, make edits to th${constantsFiles.length > 1 ? 'ese files' : 'is file'}:
  *
- * ${files.join('\n * ')}
+ * ${constantsFiles.join('\n * ')}
  *
  * and your changes will be reflected in here when you next build.
  *
@@ -93,10 +76,10 @@ async function main(): Promise<void> {
   
    */
 
-  output += collectImports();
+  output += transformer.collectImports();
 
   output += `\n\npublic class ${className} {\n`;
-  output += getEmittedCode().join('\n  ');
+  output += transformer.getTransformedCode().join('\n  ');
   output += '\n}\n';
   await fs.writeFile(path.join(outputLocation, `${className}.java`), output);
 }
