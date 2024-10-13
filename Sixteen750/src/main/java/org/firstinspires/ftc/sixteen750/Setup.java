@@ -6,6 +6,7 @@ public class Setup {
 
     @Config
     public static class Connected {
+
         public static boolean DRIVEBASE = true;
         public static boolean VERTSLIDES = true;
         public static boolean HORIZSLIDES = true;
@@ -13,6 +14,7 @@ public class Setup {
 
     @Config
     public static class HardwareNames {
+
         public static String FL_DRIVE_MOTOR = "fl";
         public static String FR_DRIVE_MOTOR = "fr";
         public static String RL_DRIVE_MOTOR = "rl";
@@ -26,11 +28,11 @@ public class Setup {
 
         public static String CLAWSERVO = "clawservo";
         public static String WRISTSERVO = "wristservo";
-
     }
 
     @Config
     public static class OtherSettings {
+
         public static double STRAIGHTEN_DEAD_ZONE = 0.08;
     }
 }

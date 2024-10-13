@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.sixteen750.subsystems;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
-
 import org.firstinspires.ftc.sixteen750.Hardware;
 
 @Config
 public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
+
     //slides servo - outstretched, retracted, transfer/neutral?
     //wrist servo - transfer, pickup, neutral, wall pickup for specimen
     //claw servo - drop (open), pickup (long and short)(close)
@@ -52,12 +53,10 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     public void slidesout() {
         linkServo.setPosition(LinkServoExtend);
-
     }
 
     public void slidesin() {
         linkServo.setPosition(LinkServoRetract);
-
     }
 
     public void ClawServoChomp() {
@@ -77,10 +76,12 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         // positions for the arm of the bot for transfer
         wristServo.setPosition(WristServoTransfer);
     }
+
     public void WristServoIncrement() {
         // the arm's position to score
         wristServo.setPosition(WristServoIncrement);
     }
+
     public void WristServoDecrement() {
         // the arm's position to score
         wristServo.setPosition(-WristServoIncrement);
