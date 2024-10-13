@@ -43,7 +43,9 @@ public class Twenty403Testing {
             30
             /* @MaxAccel */
         );
-        AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
+        AutoConstants.fwdFunc = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
+        AutoConstants.revFunc = (Pose2d pose) ->
+            new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(17.5, 17)
             .followTrajectorySequence(drive -> getRedTrajectory(drive));

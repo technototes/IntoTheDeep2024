@@ -194,7 +194,8 @@ function emitClassHelpers() {
   //    new AngularVelocityConstraint(60 /*MAX_ANG_VEL*/),
   //    new MecanumVelocityConstraint(60 /*MAX_VEL*/, 14 /*TRACK_WIDTH*/)));
   // public static ProfileAccelerationConstraint PROF_ACCEL = new ProfileAccelerationConstraint(20/*MAX_ACCEL*/);
-  codeSpit('public static Function<Pose2d, TrajectoryBuilder> func;'); // = pose -> new TrajectoryBuilder(pose, MIN_VEL, PROF_ACCEL);")`);
+  codeSpit('public static Function<Pose2d, TrajectoryBuilder> fwdFunc;'); // = pose -> new TrajectoryBuilder(pose, MIN_VEL, PROF_ACCEL);")`);
+  codeSpit('public static Function<Pose2d, TrajectoryBuilder> revFunc;'); // = pose -> new TrajectoryBuilder(pose, MIN_VEL, PROF_ACCEL);")`);
 }
 
 // A little "context" stack
@@ -355,12 +356,15 @@ class AutoConstVisitor extends BaseJavaCstVisitorWithDefaults {
       top.kind === TokenKind.LambdaParam &&
       expr.startsWith(`${top.value}.apply(`)
     ) {
-      // This is pretty dumb given that we have the full syntax tree,
-      // But it's *easy* :D
       const cleanupExpr = expr
         .substring(top.value.length)
         .replaceAll('.toPose()', '');
-      codeSpit('() -> ', 'func', cleanupExpr, ';');
+      // This is a hack to deal with the fact that it looks like
+      // MeepMeep doesn't allow us to use the .setReversed method.
+      // It's not perfect, but it lets MeepMeep drive the bot backwards.
+      const setRev = '.setReversed(true)';
+      const thisFunc = cleanupExpr.includes(setRev) ? 'revFunc' : 'fwdFunc';
+      codeSpit('() -> ', thisFunc, cleanupExpr.replace(setRev, ''), ';');
     } else if (top) {
       codeSpit(top.value, ' -> ', expr);
     } else {
@@ -521,7 +525,7 @@ async function main(): Promise<void> {
   output += collectImports();
 
   output += `\n\npublic class ${className} {\n`;
-  output += theCode.join('\n');
+  output += theCode.join('\n  ');
   output += '\n}\n';
   await fs.writeFile(path.join(outputLocation, `${className}.java`), output);
 }
