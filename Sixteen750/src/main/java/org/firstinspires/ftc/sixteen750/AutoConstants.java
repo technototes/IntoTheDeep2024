@@ -29,7 +29,7 @@ public class AutoConstants {
     public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
     public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, 90);
-    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 180);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 10, 180);
 
 
     //These are testing constants for last year's game
@@ -72,10 +72,16 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_ASCENT = b ->
             b.apply(NETSCORING_TEST.toPose())
-//                        .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
-                    .setReversed(true)
-                    .splineToSplineHeading(ASCENT.toPose(), ASCENT.getHeading())
-                    .build();
+                 // .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
+                .setReversed(true)
+                .splineToLinearHeading(ASCENT.toPose(), ASCENT.getHeading())
+                .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            ASCENT_TO_NETSCORING = b ->
+            b.apply(ASCENT.toPose())
+                .setReversed(true)
+                .splineToLinearHeading(NETSCORING_TEST.toPose(), NETSCORING_TEST.getHeading())
+                .build();
 
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             SPLINETEST1_TO_SPLINETEST2 = b ->
