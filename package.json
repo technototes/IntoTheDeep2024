@@ -68,17 +68,20 @@
     "os": "bun run scripts/os.ts",
     "- // z-": "",
     "- // z ": "Build stuff for all the scripts (BUG: It's typechecking node_modules too!)",
-    "types": "tsc --noEmit -p tsconfig.json"
+    "types": "tsc --noEmit -p tsconfig.json",
+    "- // We're using husky to auto-format code upon commit": "",
+    "prepare": "husky"
   },
   "dependencies": {
     "@freik/containers": "^0.2.17",
     "@freik/typechk": "^0.6.4",
-    "@types/bun": "^1.1.9",
+    "@freik/workspace": "^0.6.4",
+    "@types/bun": "^1.1.11",
+    "husky": "^9.1.6",
     "java-parser": "^2.3.2",
     "prettier": "^3.3.3",
     "prettier-plugin-java": "^2.6.4",
-    "simple-git": "^3.26.0",
-    "typescript": "^5.6.2",
-    "@freik/workspace": "^0.6.4"
+    "simple-git": "^3.27.0",
+    "typescript": "^5.6.3"
   }
 }
