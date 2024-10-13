@@ -10,6 +10,7 @@ const packageDir = ['com', 'robotcode', 'shared'];
 
 /*** END CONFIGURATION STUFF ***/
 
+// The first two command line arguments are the bun binary and this script
 const [, , outDir, className, ...filesAsString] = process.argv;
 const outputLocation = path.join(outDir, ...packageDir);
 
@@ -20,7 +21,7 @@ const constantsFiles = filesAsString.filter(
     val.toLocaleLowerCase().indexOf('const') >= 0 &&
     val.toLocaleLowerCase().indexOf('meepmeep') < 0,
 );
-const drivebase = filesAsString.find(
+const drivebaseFile = filesAsString.find(
   (name) => name.toLocaleLowerCase().indexOf('drivebase') >= 0,
 );
 
@@ -40,7 +41,7 @@ async function main(): Promise<void> {
   for (const file of constantsFiles) {
     const origFileContents = await fs.readFile(file, 'utf8');
     const contents = removeComments(origFileContents);
-    transformer.transformFile(contents.join('\n'));
+    transformer.transformFile(contents);
   }
 
   let output = `package ${packageDir.join('.')};

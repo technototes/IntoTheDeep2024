@@ -4,11 +4,11 @@ const IN_SQSTRING = Symbol('in sqstring');
 const IN_MLCOMMENT = Symbol('in multiline comment');
 const IN_SLCOMMENT = Symbol('in singleline comment');
 
-export function removeComments(contents: string): string[] {
+export function removeComments(contents: string): string {
   // This is a big ol' state-machine-based parser to remove
-  // comments. I should draw the state machine out explicitly
-  // sometime. Currently, I'm assuming it's not perfect, but
-  // it works well enough for now...
+  // comments. See the "CommentStateMachine.excalidraw" file
+  // for a basic understanding of the state-machine being run.
+  // I assume it's not perfect, but it works well enough for now...
   let result = '';
   let state = PLAIN;
   let justSawSlash = false;
@@ -68,6 +68,7 @@ export function removeComments(contents: string): string[] {
     if (!justSawSlash && char !== '\r') {
       // For a front-slash not in a string, don't output it.
       // It might be the beginning of a comment. We handle it above...
+      // Also: Strip out any carriage returns.
       result += char;
     }
   }
@@ -75,5 +76,5 @@ export function removeComments(contents: string): string[] {
   if (justSawSlash && state === PLAIN) {
     result += '/';
   }
-  return result.split('\n');
+  return result;
 }
