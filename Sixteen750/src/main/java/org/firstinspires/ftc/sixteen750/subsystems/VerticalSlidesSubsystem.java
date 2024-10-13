@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.sixteen750.subsystems;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
@@ -9,7 +10,6 @@ import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
-
 import org.firstinspires.ftc.sixteen750.Hardware;
 
 @Config
@@ -39,6 +39,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double WristServoPickup = 0.05;
     public static double WristServoDrop = 0.555; //drops in bucket
     public static double WristServoIncrement = 0.555;
+
     @Log(name = "slidePos")
     public int slidePos;
 
@@ -50,8 +51,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     @Log(name = "wristPos")
     public double wristPos;
+
     @Log(name = "wristTarget")
     public double wristTargetPos;
+
     public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
     public Servo armServo;
     public Servo bucketServo;
@@ -70,6 +73,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slidePidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
         resetSlideZero();
     }
+
     public void resetSlideZero() {
         slideResetPos = getSlideUnmodifiedPosition();
         // We don't want the destination to go nuts, so update the target with the new zero
@@ -101,9 +105,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             wristTargetPos = w;
         }
     }
+
     private int getSlideTargetPosition() {
         return (int) slidePidController.getTargetPosition();
     }
+
     private int getSlideCurrentPos() {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }
@@ -138,6 +144,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void SlideBucketHigh() {
         slidePidController.setTargetPosition(HIGH_BUCKET);
     }
+
     public void SlideChamberLow() {
         //takes the arm to the first level
         slidePidController.setTargetPosition(LOW_BUCKET);
@@ -178,22 +185,23 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void BucketServoLift() {
         bucketServo.setPosition(ClawServoOpenLong);
     }
+
     public void BucketServoEmpty() {
         // positions for the arm of the bot
         bucketServo.setPosition(ClawServoOpenLong);
     }
 
-
     public void ArmServoTransfer() {
         // positions for the arm of the bot
         armServo.setPosition(ClawServoOpenLong);
     }
+
     public void ArmServoLowBucket() {
         armServo.setPosition(WristServoPickup);
     }
+
     public void ArmServoHighBucket() {
         // positions for the arm of the bot
         armServo.setPosition(ArmServoInput);
     }
-
 }

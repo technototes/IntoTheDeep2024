@@ -8,9 +8,7 @@ import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
-
 import java.util.List;
-
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
 
 public class Hardware implements Loggable {
