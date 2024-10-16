@@ -29,8 +29,8 @@ public class PrestonTesting {
         public static Pose2d SEVENTH1 = new Pose2d(0, 35, toRadians(-90));
         public static Pose2d SEVENTH2 = new Pose2d(0, 35.1, toRadians(180));
         public static Pose2d SEVENTH3 = new Pose2d(-32, 35, toRadians(180));
-        public static Pose2d SEVENTH4 = new Pose2d(-42, 10, toRadians(180));
-        public static Pose2d EIGHTH = new Pose2d(-45, 13, toRadians(90));
+        public static Pose2d SEVENTH4 = new Pose2d(-45, 10, toRadians(180));
+        public static Pose2d EIGHTH = new Pose2d(-45, 47, toRadians(90));
         public static Pose2d EIGHTH1 = new Pose2d(0, 35, toRadians(-90));
         public static Pose2d EIGHTH2 = new Pose2d(0, 35.1, toRadians(180));
         public static Pose2d EIGHTH3 = new Pose2d(-32, 35, toRadians(180));

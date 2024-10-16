@@ -21,6 +21,10 @@ public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
 
+    public EncodedMotor<DcMotorEx> extension_m;
+    public EncodedMotor<DcMotorEx> r_shoulder_m;
+    public EncodedMotor<DcMotorEx> l_shoulder_m;
+
     public IMU imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
     public MotorEncoder odoF, odoR;
