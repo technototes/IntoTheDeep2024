@@ -16,7 +16,7 @@ public class HangSubsystem implements Subsystem, Loggable {
 
     public static double SUSPEND_1_POSITION = .1;
     public static double SUSPEND_2_POSITION = .2;
-    public static double SUSPEND_3_POSITION = .3;
+    public static double SUSPEND_3_POSITION = .4;
 
     @Log(name = "distance value ")
     public double distance_value;
