@@ -26,14 +26,14 @@ public class HangSubsystem implements Subsystem, Loggable {
         suspend = hw.suspend;
     }
 
-    public void Sigmapos1() {
+    public void Suspendpos1() {
         suspend.setPosition(SUSPEND_1_POSITION);
     }
 
-    public void Sigmapos2() {
+    public void Suspendpos2() {
         suspend.setPosition(SUSPEND_2_POSITION);
     }
-    public void Sigmapos3() {
+    public void Suspendpos3() {
         suspend.setPosition(SUSPEND_3_POSITION);
     }
 
