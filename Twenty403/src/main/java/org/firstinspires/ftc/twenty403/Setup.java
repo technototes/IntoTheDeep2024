@@ -11,6 +11,7 @@ public class Setup {
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
         public static boolean KIDSSHAMPOOSUBSYSTEM = true;
+        public static boolean HANGSUBSYSTEM = true;
     }
 
     @Config
@@ -28,6 +29,7 @@ public class Setup {
         public static String JAW = "jaw";
         public static String COLOR1 = "color";
         public static String DIST1 = "dist";
+        public static String SUSPEND = "suspend";
 
     }
 

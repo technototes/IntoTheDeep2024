@@ -28,6 +28,7 @@ public class Hardware implements Loggable {
     public CRServo intake;
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
+    public EncodedMotor suspend;
 
     /* Put other hardware here! */
 
@@ -54,6 +55,9 @@ public class Hardware implements Loggable {
             jaw = new Servo(Setup.HardwareNames.JAW);
             colorSensor = new ColorSensor(Setup.HardwareNames.COLOR1);
             rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
+        }
+        if (Setup.Connected.HANGSUBSYSTEM) {
+            suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
         }
     }
 
