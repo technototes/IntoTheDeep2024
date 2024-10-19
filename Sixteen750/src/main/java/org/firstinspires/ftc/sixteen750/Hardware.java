@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
+import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Hardware implements Loggable {
     public EncodedMotor<DcMotorEx> slidemotor;
     public Servo armservo;
     public Servo bucketservo;
+    public MotorEncoder odoF, odoR;
 
     /* Put other hardware here! */
 
@@ -45,10 +47,13 @@ public class Hardware implements Loggable {
             wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
             linkservo = new Servo(Setup.HardwareNames.LINKSERVO);
         }
-
         if (Setup.Connected.BUCKET) {
             armservo = new Servo(Setup.HardwareNames.ARMSERVO);
             bucketservo = new Servo(Setup.HardwareNames.BUCKETSERVO);
+        }
+        if (Setup.Connected.ODOSUBSYSTEM) {
+            odoR = new MotorEncoder(Setup.HardwareNames.ODOR);
+            odoF = new MotorEncoder(Setup.HardwareNames.ODOF);
         }
     }
 
