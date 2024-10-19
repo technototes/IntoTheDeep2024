@@ -19,7 +19,8 @@ public class OperatorController {
     public CommandButton slurpIntake;
     public CommandButton spitIntake;
     public CommandButton stopIntake;
-
+    public CommandButton suspend;
+    public CommandButton SuspendReverse;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -38,12 +39,15 @@ public class OperatorController {
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-
+        suspend = gamepad.ps_circle;
     }
 
     public void BindControls() {
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM){
             bindKidShampooControls();
+        }
+        if (Setup.Connected.HANGSUBSYSTEM){
+            bindHangControls();
         }
     }
     public void bindKidShampooControls() {
@@ -56,5 +60,10 @@ public class OperatorController {
         spitIntake.whenPressed(Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem));
         slurpIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
         spitIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
+    }
+
+    public void bindHangControls() {
+        suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
+
     }
 }
