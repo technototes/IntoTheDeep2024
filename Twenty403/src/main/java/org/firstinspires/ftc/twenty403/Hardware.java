@@ -59,6 +59,11 @@ public class Hardware implements Loggable {
             colorSensor = new ColorSensor(Setup.HardwareNames.COLOR1);
             rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
         }
+        if (Setup.Connected.ARMSUBSYSTEM) {
+            extension_m = new EncodedMotor(Setup.HardwareNames.EXTENSION_M);
+            r_shoulder_m = new EncodedMotor(Setup.HardwareNames.R_SHOULDER_M);
+            l_shoulder_m = new EncodedMotor(Setup.HardwareNames.L_SHOULDER_M);
+        }
     }
 
     // We can read the voltage from the different hubs for fun...

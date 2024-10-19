@@ -19,6 +19,8 @@ public class OperatorController {
     public CommandButton slurpIntake;
     public CommandButton spitIntake;
     public CommandButton stopIntake;
+    public CommandButton extendArm;
+    public CommandButton rotateArmTop;
 
 
     public OperatorController(CommandGamepad g, Robot r) {
@@ -38,12 +40,16 @@ public class OperatorController {
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-
+        extendArm = gamepad.ps_square;
+        rotateArmTop = gamepad.ps_circle;
     }
 
     public void BindControls() {
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM){
             bindKidShampooControls();
+        }
+        if (Setup.Connected.ARMSUBSYSTEM){
+            bindArmSubsystem();
         }
     }
     public void bindKidShampooControls() {
@@ -56,5 +62,10 @@ public class OperatorController {
         spitIntake.whenPressed(Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem));
         slurpIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
         spitIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
+    }
+    public void bindArmSubsystem() {
+        extendArm.whenPressed(Command.create(robot.armSubsystem::setExtension_m, robot.armSubsystem));
+        rotateArmTop.whenPressed(Command.create(robot.armSubsystem::rotateToTop, robot.armSubsystem));
+
     }
 }

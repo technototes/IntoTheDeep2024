@@ -19,39 +19,32 @@ import org.firstinspires.ftc.twenty403.Hardware;
 @Config
 public class ArmSubsystem implements Subsystem, Loggable {
 
+
     private EncodedMotor<DcMotorEx> extension_m;
     private EncodedMotor<DcMotorEx> r_shoulder_m;
     private EncodedMotor<DcMotorEx> l_shoulder_m;
 
-    public static double RETAINER_OPEN_POSITION = -.2;
-    public static double RETAINER_EAT_POSITION = -.1;
-    public static double RETAINER_CLOSE_POSITION = .1;
+    public static double EXTENSION_M_FULL = 0.5;
+    public static double R_SHOULDER_M = 0.5;
+    public static double L_SHOULDER_M = 0.5;
 
-    public static double JAW_BITE_POSITION = .1;
 
-    public static double JAW_RELEASE_POSITION = -.1;
-    public static double INTAKE_SLURP = -.1;
 
-    public static double INTAKE_SPIT = .1;
-
-    @Log(name = "distance value ")
-    public double distance_value;
-    @Log(name = "color value ")
-    public double color_value;
     public ArmSubsystem(Hardware hw) {
         this.extension_m = hw.extension_m;
         this.r_shoulder_m = hw.r_shoulder_m;
         this.l_shoulder_m = hw.l_shoulder_m;
-
+        this.r_shoulder_m.setBackward();
     }
 
-    public void extend(double length) {
-        extension_m
+    public void setExtension_m(){extension_m.setPosition(EXTENSION_M_FULL);}
+    public void rotateToTop(){
+        r_shoulder_m.setPosition(R_SHOULDER_M);
+        l_shoulder_m.setPosition(L_SHOULDER_M);
     }
 
     @Override
     public void periodic() {
-        distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
-        color_value = colorSensor.rgb();
+
     }
 }
