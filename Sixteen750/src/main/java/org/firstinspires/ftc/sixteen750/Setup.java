@@ -8,8 +8,8 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean VERTSLIDES = true;
-        public static boolean HORIZSLIDES = true;
+        public static boolean VERTICALSLIDESUBSYSTEM = true;
+        public static boolean HORIZONTALSLIDESUBSYSTEM = true;
     }
 
     @Config

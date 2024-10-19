@@ -38,7 +38,7 @@ public class Hardware implements Loggable {
             rl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RL_DRIVE_MOTOR);
             rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
         }
-        if (Setup.Connected.VERTSLIDES) {
+        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
             clawservo = new Servo(Setup.HardwareNames.CLAWSERVO);
             wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
             slidemotor = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.SLIDEMOTOR);
