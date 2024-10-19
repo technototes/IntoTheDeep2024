@@ -4,6 +4,9 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.SafetySubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.TwoDeadWheelLocalizer;
 
 public class Robot implements Loggable {
 
@@ -13,14 +16,33 @@ public class Robot implements Loggable {
     public double initialVoltage;
 
     public DrivebaseSubsystem drivebase;
+    public HorizontalSlidesSubsystem horizontalSlidesSubsystem;
+    public TwoDeadWheelLocalizer localizer;
+    public SafetySubsystem safetySubsystem;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
         this.alliance = team;
         this.initialVoltage = hw.voltage();
 
-        if (Setup.Connected.DRIVEBASE) {
-            drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu);
+        if (Setup.Connected.ODOSUBSYSTEM) {
+            this.localizer = new TwoDeadWheelLocalizer(hw.odoR, hw.odoF);
+        } else {
+            this.localizer = null;
         }
+
+        if (Setup.Connected.DRIVEBASE) {
+            drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu, localizer);
+
+            if (localizer != null) {
+                // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
+                localizer.setDrivebase(this.drivebase);
+            }
+        }
+
+        if (Setup.Connected.SAFETYSUBSYSTEM){
+            this.safetySubsystem = new SafetySubsystem(hw);
+        }
+
     }
 }
