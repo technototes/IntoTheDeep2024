@@ -13,27 +13,18 @@ import org.firstinspires.ftc.twenty403.Hardware;
 public class HangSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor suspend;
-    private EncodedMotor suspendReverse;
+
 
     public static double SUSPEND_POSITION = .4;
-    public static double SUSPENDREVERSE_POSITION = .4;
-
 
     public HangSubsystem(Hardware hw) {
         suspend = hw.suspend;
-        suspendReverse = hw.suspendReverse.setBackward();
     }
 
 
     public void Suspend() {
         suspend.setPosition(SUSPEND_POSITION);
     }
-    public void Supendreverse() {
-        suspendReverse.setPosition(SUSPENDREVERSE_POSITION);
-    }
 
-    @Override
-    public void periodic() {
 
-    }
 }

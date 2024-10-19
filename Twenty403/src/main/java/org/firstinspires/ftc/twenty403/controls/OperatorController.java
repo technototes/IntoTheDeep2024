@@ -40,7 +40,6 @@ public class OperatorController {
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
         Suspend = gamepad.ps_circle;
-        SuspendReverse= gamepad.ps_circle;
     }
 
     public void BindControls() {
@@ -65,6 +64,6 @@ public class OperatorController {
 
     public void bindHangControls() {
         Suspend.whenPressed(Command.create(robot.hangSubsystem::Suspend, robot.hangSubsystem));
-        SuspendReverse.whenReleased(Command.create(robot.hangSubsystem::Supendreverse, robot.hangSubsystem));
+
     }
 }

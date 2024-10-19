@@ -20,6 +20,7 @@ public class Robot implements Loggable {
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
     public HangSubsystem hangSubsystem;
+   // public ArmSubsystem armSubsytem;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -52,6 +53,9 @@ public class Robot implements Loggable {
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             this.hangSubsystem = new HangSubsystem(hw);
+        }
+        if (Setup.Connected.ARMSUBSYSTEM) {
+          //  this.armSubsytem = new ArmSubsystem(hw);
         }
     }
 }

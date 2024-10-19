@@ -22,15 +22,12 @@ public class Hardware implements Loggable {
     public List<LynxModule> hubs;
 
     public IMU imu;
-    public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
+    public EncodedMotor<DcMotorEx> fl, fr, rl, rr, suspend, armL, armR;
     public MotorEncoder odoF, odoR;
     public Servo retainer, jaw;
     public CRServo intake;
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
-    public EncodedMotor suspend;
-    public EncodedMotor suspendReverse;
-
     /* Put other hardware here! */
 
     public Hardware(HardwareMap hwmap) {
@@ -58,8 +55,11 @@ public class Hardware implements Loggable {
             rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
-            suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
-            suspendReverse = new EncodedMotor(Setup.HardwareNames.SUSPENDREVERSE);
+            suspend = new EncodedMotor<>(Setup.HardwareNames.SUSPEND);
+        }
+        if (Setup.Connected.ARMSUBSYSTEM) {
+            armL = new EncodedMotor<>(Setup.HardwareNames.ARML);
+            armR = new EncodedMotor<>(Setup.HardwareNames.ARMR);
         }
     }
 
