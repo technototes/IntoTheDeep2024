@@ -31,7 +31,7 @@ public class Hardware implements Loggable {
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
     public Motor suspend;
-    public EncodedMotor rotate1, rotate2, slides;
+    public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
 
     /* Put other hardware here! */
 
@@ -63,8 +63,8 @@ public class Hardware implements Loggable {
             suspend = new Motor(Setup.HardwareNames.SUSPEND);
         }
         if (Setup.Connected.ARMSUBSYSTEM) {
-            armL = new EncodedMotor<>(Setup.HardwareNames.ARML);
-            armR = new EncodedMotor<>(Setup.HardwareNames.ARMR);
+            rotate1 = new EncodedMotor<>(Setup.HardwareNames.ARML);
+            rotate2 = new EncodedMotor<>(Setup.HardwareNames.ARMR);
             slides = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
         }
     }
