@@ -30,6 +30,7 @@ public class Setup {
         public static String COLOR1 = "color";
         public static String DIST1 = "dist";
         public static String SUSPEND = "suspend";
+        public static String SUSPENDREVERSE = "suspend reverse";
 
     }
 

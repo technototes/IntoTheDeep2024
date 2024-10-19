@@ -29,6 +29,7 @@ public class Hardware implements Loggable {
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
     public EncodedMotor suspend;
+    public EncodedMotor suspendReverse;
 
     /* Put other hardware here! */
 
@@ -58,6 +59,7 @@ public class Hardware implements Loggable {
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
+            suspendReverse = new EncodedMotor(Setup.HardwareNames.SUSPENDREVERSE);
         }
     }
 

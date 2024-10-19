@@ -13,30 +13,24 @@ import org.firstinspires.ftc.twenty403.Hardware;
 public class HangSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor suspend;
+    private EncodedMotor suspendReverse;
 
-    public static double SUSPEND_1_POSITION = .1;
-    public static double SUSPEND_2_POSITION = .2;
-    public static double SUSPEND_3_POSITION = .4;
+    public static double SUSPEND_POSITION = .4;
+    public static double SUSPENDREVERSE_POSITION = .4;
 
-    @Log(name = "distance value ")
-    public double distance_value;
-    @Log(name = "color value ")
-    public double color_value;
+
     public HangSubsystem(Hardware hw) {
         suspend = hw.suspend;
+        suspendReverse = hw.suspendReverse.setBackward();
     }
 
-    public void Suspendpos1() {
-        suspend.setPosition(SUSPEND_1_POSITION);
-    }
 
-    public void Suspendpos2() {
-        suspend.setPosition(SUSPEND_2_POSITION);
+    public void Suspend() {
+        suspend.setPosition(SUSPEND_POSITION);
     }
-    public void Suspendpos3() {
-        suspend.setPosition(SUSPEND_3_POSITION);
+    public void Supendreverse() {
+        suspendReverse.setPosition(SUSPENDREVERSE_POSITION);
     }
-
 
     @Override
     public void periodic() {
