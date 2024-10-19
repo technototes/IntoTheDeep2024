@@ -19,7 +19,7 @@ public class OperatorController {
     public CommandButton slurpIntake;
     public CommandButton spitIntake;
     public CommandButton stopIntake;
-    public CommandButton Suspend;
+    public CommandButton suspend;
     public CommandButton SuspendReverse;
 
     public OperatorController(CommandGamepad g, Robot r) {
@@ -39,7 +39,7 @@ public class OperatorController {
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-        Suspend = gamepad.ps_circle;
+        suspend = gamepad.ps_circle;
     }
 
     public void BindControls() {
@@ -63,7 +63,7 @@ public class OperatorController {
     }
 
     public void bindHangControls() {
-        Suspend.whenPressed(Command.create(robot.hangSubsystem::Suspend, robot.hangSubsystem));
+        suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
 
     }
 }

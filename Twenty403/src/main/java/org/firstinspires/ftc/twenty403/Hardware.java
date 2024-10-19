@@ -17,17 +17,19 @@ import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
 import com.technototes.library.hardware.sensor.ColorSensor;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
+import com.technototes.library.hardware.motor.Motor;
 public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
 
     public IMU imu;
-    public EncodedMotor<DcMotorEx> fl, fr, rl, rr, suspend, armL, armR;
+    public EncodedMotor<DcMotorEx> fl, fr, rl, rr, armL, armR;
     public MotorEncoder odoF, odoR;
     public Servo retainer, jaw;
     public CRServo intake;
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
+    public Motor suspend;
     /* Put other hardware here! */
 
     public Hardware(HardwareMap hwmap) {
@@ -55,7 +57,7 @@ public class Hardware implements Loggable {
             rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
-            suspend = new EncodedMotor<>(Setup.HardwareNames.SUSPEND);
+            suspend = new Motor(Setup.HardwareNames.SUSPEND);
         }
         if (Setup.Connected.ARMSUBSYSTEM) {
             armL = new EncodedMotor<>(Setup.HardwareNames.ARML);
