@@ -2,7 +2,9 @@ package org.firstinspires.ftc.sixteen750;
 
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
+import java.util.Set;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
+import org.firstinspires.ftc.sixteen750.subsystems.BucketSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
@@ -16,6 +18,7 @@ public class Robot implements Loggable {
 
     public DrivebaseSubsystem drivebase;
     public VerticalSlidesSubsystem slideH;
+    public BucketSubsystem bucket;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -26,7 +29,10 @@ public class Robot implements Loggable {
             drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu);
         }
         if (Setup.Connected.VERTSLIDES) {
-            slideH = new VerticalSlidesSubsystem(hw.slidemotor);
+            slideH = new VerticalSlidesSubsystem(hw);
+        }
+        if (Setup.Connected.BUCKET) {
+            bucket = new BucketSubsystem(hw);
         }
     }
 }

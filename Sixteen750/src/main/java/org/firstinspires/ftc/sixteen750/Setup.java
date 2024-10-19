@@ -10,6 +10,7 @@ public class Setup {
         public static boolean DRIVEBASE = true;
         public static boolean VERTSLIDES = true;
         public static boolean HORIZSLIDES = true;
+        public static boolean BUCKET = true;
     }
 
     @Config

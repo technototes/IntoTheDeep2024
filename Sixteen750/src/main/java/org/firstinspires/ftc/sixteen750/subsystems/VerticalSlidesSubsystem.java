@@ -35,7 +35,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double ClawServoOpenShort = 0.4;
     public static double ClawServoClose = 0.55;
     public static double ClawServoOpenLong = 0;
-    public static double ArmServoInput = 0.545;
+    //public static double ArmServoInput = 0.545;
     public static double WristServoPickup = 0.05;
     public static double WristServoDrop = 0.555; //drops in bucket
     public static double WristServoIncrement = 0.555;
@@ -56,8 +56,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public double wristTargetPos;
 
     public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
-    public Servo armServo;
-    public Servo bucketServo;
+    //public Servo armServo;
+    //public Servo bucketServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
     public static PIDCoefficients slidePID = new PIDCoefficients(0.0, 0.0, 0.0);
@@ -83,8 +83,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public VerticalSlidesSubsystem() {
         isHardware = false;
         slideMotor = null;
-        armServo = null;
-        bucketServo = null;
+        //armServo = null;
+        //bucketServo = null;
     }
 
     @Override
@@ -113,8 +113,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     private int getSlideCurrentPos() {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }
-
-
 
     private void setSlideTargetPosition(int p) {
         slidePidController.setTargetPosition(p);
@@ -160,8 +158,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         //        scoreServo.setPosition(0);
     }
 
-
-
     public void WristServoIncrement() {
         // the arm's position to score
         armServo.setPosition(WristServoIncrement);
@@ -194,6 +190,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // positions for the arm of the bot
         armServo.setPosition(ArmServoInput);
     }
+
     private void setSlideMotorPower(double speed) {
         if (isHardware) {
             slideMotor.setSpeed(speed);
