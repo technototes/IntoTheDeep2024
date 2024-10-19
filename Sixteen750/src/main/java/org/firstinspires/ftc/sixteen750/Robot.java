@@ -4,6 +4,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
 
 public class Robot implements Loggable {
 
@@ -13,6 +14,7 @@ public class Robot implements Loggable {
     public double initialVoltage;
 
     public DrivebaseSubsystem drivebase;
+    public HorizontalSlidesSubsystem horizontalSlidesSubsystem;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -21,6 +23,10 @@ public class Robot implements Loggable {
 
         if (Setup.Connected.DRIVEBASE) {
             drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu);
+        }
+
+        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
+            horizontalSlidesSubsystem = new HorizontalSlidesSubsystem(hw);
         }
     }
 }
