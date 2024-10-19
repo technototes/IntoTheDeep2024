@@ -8,16 +8,17 @@ import com.qualcomm.robotcore.hardware.ServoController;
 import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
+import com.technototes.library.hardware.motor.Motor;
+import com.technototes.library.hardware.sensor.ColorSensor;
 import com.technototes.library.hardware.sensor.IMU;
+import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import com.technototes.vision.hardware.Webcam;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
-import com.technototes.library.hardware.sensor.ColorSensor;
-import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
-import com.technototes.library.hardware.motor.Motor;
+
 public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
@@ -30,6 +31,8 @@ public class Hardware implements Loggable {
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
     public Motor suspend;
+    public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
+
     /* Put other hardware here! */
 
     public Hardware(HardwareMap hwmap) {
@@ -60,8 +63,9 @@ public class Hardware implements Loggable {
             suspend = new Motor(Setup.HardwareNames.SUSPEND);
         }
         if (Setup.Connected.ARMSUBSYSTEM) {
-            armL = new EncodedMotor<>(Setup.HardwareNames.ARML);
-            armR = new EncodedMotor<>(Setup.HardwareNames.ARMR);
+            rotate1 = new EncodedMotor<>(Setup.HardwareNames.ARML);
+            rotate2 = new EncodedMotor<>(Setup.HardwareNames.ARMR);
+            slides = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
         }
     }
 
