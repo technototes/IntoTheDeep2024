@@ -12,7 +12,7 @@ public class Setup {
         public static boolean SAFETYSUBSYSTEM = false;
         public static boolean KIDSSHAMPOOSUBSYSTEM = true;
         public static boolean HANGSUBSYSTEM = true;
-        public static boolean ARMSUBSYSTEM = true;
+        public static boolean ARMSUBSYSTEM = false;
     }
 
     @Config
@@ -33,7 +33,7 @@ public class Setup {
         public static String SUSPEND = "suspend";
         public static String ARML = "armL";
         public static String ARMR = "armR";
-
+        public static String SLIDEMOTOR = "slide";
     }
 
     @Config

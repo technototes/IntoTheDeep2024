@@ -3,6 +3,7 @@ package org.firstinspires.ftc.twenty403;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
+import org.firstinspires.ftc.twenty403.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.DrivebaseSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.HangSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.KidShampooSubsystem;
@@ -20,7 +21,7 @@ public class Robot implements Loggable {
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
     public HangSubsystem hangSubsystem;
-   // public ArmSubsystem armSubsytem;
+    public ArmSubsystem armSubsystem;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -55,7 +56,7 @@ public class Robot implements Loggable {
             this.hangSubsystem = new HangSubsystem(hw);
         }
         if (Setup.Connected.ARMSUBSYSTEM) {
-          //  this.armSubsytem = new ArmSubsystem(hw);
+            this.armSubsystem = new ArmSubsystem(hw);
         }
     }
 }
