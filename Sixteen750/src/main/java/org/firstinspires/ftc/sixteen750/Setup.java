@@ -11,6 +11,8 @@ public class Setup {
         public static boolean VERTICALSLIDESUBSYSTEM = false;
         public static boolean HORIZONTALSLIDESUBSYSTEM = true;
         public static boolean BUCKET = true;
+        public static boolean ODOSUBSYSTEM = false;
+        public static boolean SAFETYSUBSYSTEM = false;
     }
 
     @Config
@@ -21,11 +23,13 @@ public class Setup {
         public static String RL_DRIVE_MOTOR = "rl";
         public static String RR_DRIVE_MOTOR = "rr";
         public static String IMU = "imu";
+        public static String ODOF = "odof";
+        public static String ODOR = "odor";
 
         public static String CAMERA = "webcam";
         public static String BUCKETSERVO = "bucketservo";
-        public static String ARMSERVO = "armservo";
         public static String SLIDEMOTOR = "slidemotor";
+        public static String ARMSERVO = "armservo";
 
         public static String CLAWSERVO = "clawservo";
         public static String WRISTSERVO = "wristservo";
