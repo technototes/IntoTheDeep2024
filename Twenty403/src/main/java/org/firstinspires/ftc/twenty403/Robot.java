@@ -10,7 +10,7 @@ import org.firstinspires.ftc.twenty403.subsystems.KidShampooSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.SafetySubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.TwoDeadWheelLocalizer;
 
-public class Robot implements Loggable {
+public class  Robot implements Loggable {
 
     public StartingPosition position;
     public Alliance alliance;
