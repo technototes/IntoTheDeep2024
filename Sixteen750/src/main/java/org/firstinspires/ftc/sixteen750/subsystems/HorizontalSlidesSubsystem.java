@@ -80,11 +80,11 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     public void ClawWristServoIncrement() {
         // the arm's position to score
-        clawwristServo.setPosition(ClawWristServoIncrement);
+        clawwristServo.setPosition(ClawWristServoIncrement + 0.05);
     }
 
     public void ClawWristServoDecrement() {
         // the arm's position to score
-        clawwristServo.setPosition(-ClawWristServoIncrement);
+        clawwristServo.setPosition(ClawWristServoIncrement - 0.05);
     }
 }
