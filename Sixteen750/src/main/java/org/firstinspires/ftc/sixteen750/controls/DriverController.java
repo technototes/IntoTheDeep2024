@@ -54,7 +54,6 @@ public class DriverController {
         turboButton.whenReleased(DrivingCommands.NormalDriving(robot.drivebase));
         snailButton.whenPressed(DrivingCommands.SnailDriving(robot.drivebase));
         snailButton.whenReleased(DrivingCommands.NormalDriving(robot.drivebase));
-
         resetGyroButton.whenPressed(DrivingCommands.ResetGyro(robot.drivebase));
     }
 }

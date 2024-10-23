@@ -5,6 +5,7 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
+import org.firstinspires.ftc.sixteen750.commands.slides.SlidesCommands;
 
 public class OperatorController {
 
@@ -28,6 +29,7 @@ public class OperatorController {
         openClaw = gamepad.ps_circle;
         closeClaw = gamepad.ps_cross;
         wristTransfer = gamepad.ps_triangle;
+        wristPickup = gamepad.ps_square;
         wristIncrement = gamepad.dpadUp;
         wristDecrement = gamepad.dpadDown;
     }
@@ -41,40 +43,22 @@ public class OperatorController {
 
     private void bindHorizontalSlidesControls() {
         openClaw.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::ClawServoBigOpen,
-                robot.horizontalSlidesSubsystem
+            Command.create(SlidesCommands.clawOpen(robot)
             )
         );
         closeClaw.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::ClawServoChomp,
-                robot.horizontalSlidesSubsystem
+            Command.create(SlidesCommands.clawChomp(robot)
             )
         );
         wristPickup.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::WristServoPickup,
-                robot.horizontalSlidesSubsystem
+            Command.create(SlidesCommands.wristPickup(robot))
+        );
+        wristTransfer.whenPressed(SlidesCommands.wristTransfer(robot));
+
+        wristIncrement.whenPressed(SlidesCommands.wristIncrement(robot
             )
         );
-        wristTransfer.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::WristServoTransfer,
-                robot.horizontalSlidesSubsystem
-            )
-        );
-        wristIncrement.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::WristServoIncrement,
-                robot.horizontalSlidesSubsystem
-            )
-        );
-        wristDecrement.whenPressed(
-            Command.create(
-                robot.horizontalSlidesSubsystem::WristServoDecrement,
-                robot.horizontalSlidesSubsystem
-            )
-        );
+        wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot)
+            );
     }
 }
