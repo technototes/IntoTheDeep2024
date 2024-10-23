@@ -20,11 +20,13 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public static double ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 1;
     public static double ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 2;
-    public static double ROTATE_MOTOR_SPECIMEN_SCORING_POSITION = 3;
+    public static double ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION = 3;
+    public static double ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION = 3;
     public static double ROTATE_MOTOR_INTAKE_POSITION = 4;
     public static double SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 5;
     public static double SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 6;
-    public static double SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 7;
+    public static double SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION = 7;
+    public static double SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION = 7;
     public static double SLIDES_MOTOR_INTAKE_POSITION = 8;
 
     public ArmSubsystem(Hardware hw) {
@@ -47,7 +49,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     //high basket scoring
-    public void highBasketRotate1() {
+    public void highBasketRotate() {
         rotate1.setPosition(ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION);
     }
 
@@ -60,16 +62,27 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     //specimen scoring
-    public void specimenRotate1() {
-        rotate1.setPosition(ROTATE_MOTOR_SPECIMEN_SCORING_POSITION);
+    public void lowSpecimenRotate1() {
+        rotate1.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
     }
 
-    public void specimenRotate2() {
-        rotate2.setPosition(ROTATE_MOTOR_SPECIMEN_SCORING_POSITION);
+    public void lowSpecimenRotate2() {
+        rotate2.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
     }
 
-    public void specimenSlides() {
-        slides.setPosition(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
+    public void lowSpecimenSlides() {
+        slides.setPosition(SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
+    }
+    public void highSpecimenRotate1() {
+        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
+    }
+
+    public void highSpecimenRotate2() {
+        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
+    }
+
+    public void highSpecimenSlides() {
+        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
     }
 
     //intake position
