@@ -23,18 +23,18 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double LinkServoRetract = 0;
     public static double ClawServoClose = 0.55;
     public static double ClawServoOpen = 0;
-    public static double WristServoTransfer = 0.545;
-    public static double WristServoPickup = 0.05;
-    public static double WristServoIncrement = 0.555;
+    public static double ClawWristServoTransfer = 0.545;
+    public static double ClawWristServoPickup = 0.05;
+    public static double ClawWristServoIncrement = 0.555;
 
-    public Servo wristServo;
+    public Servo clawwristServo;
     public Servo clawServo;
     public Servo linkServo;
 
     private boolean isHardware;
 
     public HorizontalSlidesSubsystem(Hardware hw) {
-        wristServo = hw.wristservo;
+        clawwristServo = hw.wristservo;
         clawServo = hw.clawservo;
         linkServo = hw.linkservo;
 
@@ -47,10 +47,11 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public HorizontalSlidesSubsystem() {
         isHardware = false;
         linkServo = null;
-        wristServo = null;
+        clawwristServo = null;
         clawServo = null;
     }
 
+    //these are methods, needed to be called in a command
     public void slidesout() {
         linkServo.setPosition(LinkServoExtend);
     }
@@ -68,22 +69,22 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         clawServo.setPosition(ClawServoOpen); //opens claw for intake and release
     }
 
-    public void WristServoPickup() {
-        wristServo.setPosition(WristServoPickup); //lowers claw to intake
+    public void ClawWristServoPickup() {
+        clawwristServo.setPosition(ClawWristServoPickup); //lowers claw to intake
     }
 
-    public void WristServoTransfer() {
+    public void ClawWristServoTransfer() {
         // positions for the arm of the bot for transfer
-        wristServo.setPosition(WristServoTransfer);
+        clawwristServo.setPosition(ClawWristServoTransfer);
     }
 
-    public void WristServoIncrement() {
+    public void ClawWristServoIncrement() {
         // the arm's position to score
-        wristServo.setPosition(WristServoIncrement);
+        clawwristServo.setPosition(ClawWristServoIncrement);
     }
 
-    public void WristServoDecrement() {
+    public void ClawWristServoDecrement() {
         // the arm's position to score
-        wristServo.setPosition(-WristServoIncrement);
+        clawwristServo.setPosition(-ClawWristServoIncrement);
     }
 }

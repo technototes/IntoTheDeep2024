@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
@@ -172,7 +171,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         }
     }
 
-    public void WristServoIncrement() {
+    public void BucketWristServoIncrement() {
         // the arm's position to score
         armServo.setPosition(WristServoIncrement);
     }
