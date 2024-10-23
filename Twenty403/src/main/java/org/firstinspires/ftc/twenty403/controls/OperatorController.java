@@ -53,7 +53,6 @@ public class OperatorController {
     public void bindKidShampooControls() {
         openRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem));
         closeRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem));
-        eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
         biteJaw.whenPressed(Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem));
         releaseJaw.whenPressed(Command.create(robot.kidShampooSubsystem::releaseJaw, robot.kidShampooSubsystem));
         slurpIntake.whenPressed(Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem));

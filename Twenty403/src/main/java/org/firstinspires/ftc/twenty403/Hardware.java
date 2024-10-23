@@ -26,7 +26,7 @@ public class Hardware implements Loggable {
     public IMU imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr, armL, armR;
     public MotorEncoder odoF, odoR;
-    public Servo retainer, jaw;
+    public Servo retainer, jaw, wrist;
     public CRServo intake;
     public ColorSensor colorSensor;
     public Rev2MDistanceSensor rev2MDistanceSensor;
@@ -55,6 +55,7 @@ public class Hardware implements Loggable {
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             intake = new CRServo(Setup.HardwareNames.INTAKE);
             retainer = new Servo(Setup.HardwareNames.RETAINER);
+            wrist = new Servo(Setup.HardwareNames.WRIST);
             jaw = new Servo(Setup.HardwareNames.JAW);
             colorSensor = new ColorSensor(Setup.HardwareNames.COLOR1);
             rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);

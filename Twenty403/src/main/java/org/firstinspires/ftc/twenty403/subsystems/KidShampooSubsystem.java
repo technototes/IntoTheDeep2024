@@ -15,13 +15,13 @@ import org.firstinspires.ftc.twenty403.Hardware;
 @Config
 public class KidShampooSubsystem implements Subsystem, Loggable {
 
-    private Servo retainer, jaw;
+    private Servo retainer, jaw, wrist;
     private CRServo intake;
     private ColorSensor colorSensor;
     private Rev2MDistanceSensor rev2MDistanceSensor;
 
     public static double RETAINER_OPEN_POSITION = -.2;
-    public static double RETAINER_EAT_POSITION = -.1;
+
     public static double RETAINER_CLOSE_POSITION = .1;
 
     public static double JAW_BITE_POSITION = .1;
@@ -31,13 +31,19 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public static double INTAKE_SPIT = .1;
 
+    public static double WRIST_SCOOP = .1;
+    public static double WRIST_DUMP = -.1;
+
+
     @Log(name = "distance value ")
     public double distance_value;
     @Log(name = "color value ")
     public double color_value;
+
     public KidShampooSubsystem(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
+        wrist = hw.wrist;
         jaw = hw.jaw;
         colorSensor = hw.colorSensor;
         rev2MDistanceSensor = hw.rev2MDistanceSensor;
@@ -47,9 +53,6 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
         retainer.setPosition(RETAINER_OPEN_POSITION);
     }
 
-    public void eatRetainer() {
-        retainer.setPosition(RETAINER_EAT_POSITION);
-    }
 
     public void closeRetainer() {
         retainer.setPosition(RETAINER_CLOSE_POSITION);
@@ -57,6 +60,14 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public void biteJaw() {
         jaw.setPosition(JAW_BITE_POSITION);
+    }
+
+    public void dumpWrist() {
+        wrist.setPosition(WRIST_DUMP);
+    }
+
+    public void scoopWrist() {
+        wrist.setPosition(WRIST_SCOOP);
     }
 
     public void releaseJaw() {
@@ -67,15 +78,25 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
         intake.setPower(INTAKE_SLURP);
     }
 
-    public void spitIntake() {
-        intake.setPower(INTAKE_SPIT);
+    public void collectHorizontalSample() {
+        // closeRetainer(),
+        // scoopWrist(),
     }
-    public void stopIntake() {
-        intake.setPower(0);
-    }
-    @Override
-    public void periodic() {
-        distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
-        color_value = colorSensor.rgb();
-    }
+
+}
+
+
+public void spitIntake() {
+    intake.setPower(INTAKE_SPIT);
+}
+
+public void stopIntake() {
+    intake.setPower(0);
+}
+
+@Override
+public void periodic() {
+    distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
+    color_value = colorSensor.rgb();
+}
 }
