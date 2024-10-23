@@ -28,6 +28,7 @@ public class Setup {
         public static String INTAKE = "intake";
         public static String RETAINER = "retainer";
         public static String JAW = "jaw";
+        public static String WRIST = "wrist";
         public static String COLOR1 = "color";
         public static String DIST1 = "dist";
         public static String SUSPEND = "suspend";
