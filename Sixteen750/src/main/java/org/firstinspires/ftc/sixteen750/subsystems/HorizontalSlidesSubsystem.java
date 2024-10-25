@@ -2,6 +2,7 @@ package org.firstinspires.ftc.sixteen750.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.sixteen750.Hardware;
@@ -9,7 +10,7 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 @Config
 public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
-    //slides servo - outstretched, retracted, transfer/neutral?
+    //slides servo (link servo) - outstretched, retracted, transfer/neutral?
     //wrist servo - transfer, pickup, neutral, wall pickup for specimen
     //claw servo - drop (open), pickup (long and short)(close)
 
@@ -27,9 +28,12 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double ClawWristServoPickup = 0.05;
     public static double ClawWristServoIncrement = 0.555;
 
-    public Servo clawwristServo;
+    @Log(name = "wristTarget")
+    public double wristTargetPos;
+    public Servo wristServo;
     public Servo clawServo;
     public Servo linkServo;
+
 
     private boolean isHardware;
 
@@ -80,11 +84,18 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     public void ClawWristServoIncrement() {
         // the arm's position to score
-        clawwristServo.setPosition(ClawWristServoIncrement + 0.05);
+        setWristPos(wristTargetPos + WristServoIncrement);
     }
 
     public void ClawWristServoDecrement() {
         // the arm's position to score
-        clawwristServo.setPosition(ClawWristServoIncrement - 0.05);
+        setWristPos(wristTargetPos - WristServoIncrement);
+    }
+  
+    private void setWristPos(double w) {
+        if (wristServo != null) {
+            wristServo.setPosition(w);
+            wristTargetPos = w;
+        }
     }
 }
