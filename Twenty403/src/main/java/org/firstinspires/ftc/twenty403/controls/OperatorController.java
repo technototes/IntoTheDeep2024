@@ -6,7 +6,8 @@ import com.technototes.library.control.CommandGamepad;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
-import org.firstinspires.ftc.twenty403.commands.LowBasketCommand;
+import org.firstinspires.ftc.twenty403.commands.HangCmd;
+import org.firstinspires.ftc.twenty403.commands.KidShampooCmds;
 
 public class OperatorController {
 
@@ -44,8 +45,7 @@ public class OperatorController {
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-        suspend = gamepad.ps_circle;
-        //lowBasket = gamepad.ps_square;
+        suspend = gamepad.dpadLeft;
     }
 
     public void BindControls() {
@@ -61,22 +61,21 @@ public class OperatorController {
         }
     }
     public void bindKidShampooControls() {
-        openRetainer.whilePressed(Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem));
-        closeRetainer.whileReleased(Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem));
-        // eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
-        biteJaw.whenPressed(Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem));
-        releaseJaw.whenPressed(Command.create(robot.kidShampooSubsystem::releaseJaw, robot.kidShampooSubsystem));
-        slurpIntake.whenPressed(Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem));
-        spitIntake.whenPressed(Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem));
-        slurpIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
-        spitIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
+        openRetainer.whenPressed(KidShampooCmds.cmds.OpenRetainer(robot.kidShampooSubsystem));
+        closeRetainer.whenPressed(KidShampooCmds.cmds.CloseRetainer(robot.kidShampooSubsystem));
+        // eatRetainer.whenPressed(KidShampooCmds.cmds.EatRetainer(robot.kidShampooSubsystem));
+        biteJaw.whenPressed(KidShampooCmds.cmds.BiteJaw(robot.kidShampooSubsystem));
+        releaseJaw.whenPressed(KidShampooCmds.cmds.ReleaseJaw(robot.kidShampooSubsystem));
+        slurpIntake.whenPressed(KidShampooCmds.cmds.SlurpIntake(robot.kidShampooSubsystem));
+        spitIntake.whenPressed(KidShampooCmds.cmds.SpitIntake(robot.kidShampooSubsystem));
+        slurpIntake.whenReleased(KidShampooCmds.cmds.StopIntake(robot.kidShampooSubsystem));
+        spitIntake.whenReleased(KidShampooCmds.cmds.StopIntake(robot.kidShampooSubsystem));
     }
     public void bindArmControls() {
         //lowBasket.whenPressed(new LowBasketCommand.LowBasket(robot));
 
     }
     public void bindHangControls() {
-        suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
-
+        suspend.whenPressed(HangCmd.hang.Suspend(robot.hangSubsystem));
     }
 }

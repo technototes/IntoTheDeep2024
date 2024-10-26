@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.twenty403.Hardware;
 
 @Config
-public class KidShampooSubsystem implements Subsystem, Loggable {
+    public class KidShampooSubsystem implements Subsystem, Loggable {
 
     private Servo retainer, jaw, wrist;
     private CRServo intake;

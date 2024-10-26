@@ -8,7 +8,7 @@ public class EZCmd {
     public static class Drive {
 
         public static Command NormalMode(DrivebaseSubsystem drive) {
-            return Command.create(drive::setNormalMode);
+                return Command.create(drive::setNormalMode);
         }
 
         public static Command SnailMode(DrivebaseSubsystem drive) {
