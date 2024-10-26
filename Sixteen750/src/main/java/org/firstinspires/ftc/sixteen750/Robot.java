@@ -30,7 +30,7 @@ public class Robot implements Loggable {
             drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu);
         }
         if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
-            slideH = new VerticalSlidesSubsystem(hw.slidemotor);
+            slideH = new VerticalSlidesSubsystem(hw);
         }
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
             horizontalSlidesSubsystem = new HorizontalSlidesSubsystem(hw);

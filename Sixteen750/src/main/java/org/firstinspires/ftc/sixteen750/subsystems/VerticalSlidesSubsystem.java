@@ -22,7 +22,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double LOW_BUCKET = -950;
     public static double HIGH_BUCKET = -1350;
     //    public static double HIGH_POS = 1000;
-    public static double WRIST_POS = 0;
+    public static double SLIDE_POS = 0;
     public static double ARM_POS = 0;
     public static double MIN_MOTOR_SPEED = -0.7;
     public static double MAX_MOTOR_SPEED = 1;
@@ -48,11 +48,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "slideTarget")
     public int slideTargetPos;
 
-    @Log(name = "wristPos")
-    public double wristPos;
 
-    @Log(name = "wristTarget")
-    public double wristTargetPos;
+    @Log(name = "armTarget")
+    public double armTargetPos;
+    @Log(name = "bucketTarget")
+    public double bucketTargetPos;
 
     public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
     public Servo armServo;
@@ -98,10 +98,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slideTargetPos = e;
     }
 
-    private void setWristPos(double w) {
+    private void setArmPos(double w) {
         if (armServo != null) {
             armServo.setPosition(w);
-            wristTargetPos = w;
+            armTargetPos = w;
         }
     }
 
@@ -152,12 +152,12 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void LiftHeightIntake() {
         //brings the arm all the way down
-        slidePidController.setTargetPosition(WRIST_POS);
+        slidePidController.setTargetPosition(SLIDE_POS);
         //        armServo.setPosition(0);
         //        scoreServo.setPosition(0);
     }
 
-    public void BucketWristServoIncrement() {
+    public void BucketServoIncrement() {
         // the arm's position to score
         armServo.setPosition(WristServoIncrement);
     }
@@ -201,6 +201,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             return (int) slideMotor.getSensorValue();
         } else {
             return 0;
+        }
+    }
+
+    private void setBucketPos(double w) {
+        if (bucketServo != null) {
+            bucketServo.setPosition(w);
+            bucketTargetPos = w;
         }
     }
 }
