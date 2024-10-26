@@ -38,6 +38,7 @@ public class SplineTest1 extends CommandOpMode {
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                     Paths.splineTestCommand(robot),
+                    Paths.pushPathSpline(robot),
                 EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),

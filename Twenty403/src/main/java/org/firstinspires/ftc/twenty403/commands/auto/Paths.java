@@ -13,4 +13,13 @@ public class Paths {
                 AutoConstants.SPLINETEST1_TO_SPLINETEST2
         );
     }
+
+    public static Command pushPathSpline(Robot r) {
+        return new TrajectorySequenceCommand(
+                r.drivebaseSubsystem,
+                AutoConstants.PUSH_BOT
+        );
+
+
+    }
 }
