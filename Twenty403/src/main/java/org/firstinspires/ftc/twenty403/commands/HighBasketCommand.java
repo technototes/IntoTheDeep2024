@@ -12,7 +12,9 @@ public class HighBasketCommand {
         public SequentialCommandGroup HighBasket(Robot r) {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::highBasketRotate, r.armSubsystem),
-                    Command.create(r.armSubsystem::highBasketSlides, r.armSubsystem)
+                    Command.create(r.armSubsystem::highBasketSlides, r.armSubsystem),
+                    Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem)
+
             );
         }
     }

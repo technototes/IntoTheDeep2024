@@ -27,7 +27,9 @@ public class LowSpecimenCommand {
         public SequentialCommandGroup LowSpecimen(Robot r) {
             return new SequentialCommandGroup(
                     LowSpecimen1(r),
-                    LowSpecimen2(r)
+                    LowSpecimen2(r),
+                    Command.create(r.kidShampooSubsystem::releaseJaw, r.armSubsystem)
+
             );
         }
 

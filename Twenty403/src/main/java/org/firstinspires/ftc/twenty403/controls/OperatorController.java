@@ -45,7 +45,7 @@ public class OperatorController {
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
         suspend = gamepad.ps_circle;
-        lowBasket = gamepad.ps_square;
+        //lowBasket = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -72,7 +72,7 @@ public class OperatorController {
         spitIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
     }
     public void bindArmControls() {
-        lowBasket.whenPressed(new LowBasketCommand.LowBasket(robot));
+        //lowBasket.whenPressed(new LowBasketCommand.LowBasket(robot));
 
     }
     public void bindHangControls() {
