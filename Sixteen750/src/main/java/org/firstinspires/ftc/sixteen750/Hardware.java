@@ -21,6 +21,8 @@ public class Hardware implements Loggable {
     public Servo wristservo;
     public Servo linkservo;
     public EncodedMotor<DcMotorEx> slidemotor;
+    public Servo armservo;
+    public Servo bucketservo;
 
     /* Put other hardware here! */
 
@@ -44,6 +46,11 @@ public class Hardware implements Loggable {
             slidemotor = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.SLIDEMOTOR);
             rl = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RL_DRIVE_MOTOR);
             rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
+        }
+
+        if (Setup.Connected.BUCKET) {
+            armservo = new Servo(Setup.HardwareNames.ARMSERVO);
+            bucketservo = new Servo(Setup.HardwareNames.BUCKETSERVO);
         }
     }
 

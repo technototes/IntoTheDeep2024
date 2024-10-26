@@ -113,14 +113,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }
 
-    private int getSlideUnmodifiedPosition() {
-        if (isHardware) {
-            return (int) slideMotor.getSensorValue();
-        } else {
-            return 0;
-        }
-    }
-
     private void setSlideTargetPosition(int p) {
         slidePidController.setTargetPosition(p);
     }
@@ -165,12 +157,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         //        scoreServo.setPosition(0);
     }
 
-    private void setSlideMotorPower(double speed) {
-        if (isHardware) {
-            slideMotor.setSpeed(speed);
-        }
-    }
-
     public void BucketServoIncrement() {
         // the arm's position to score
         armServo.setPosition(WristServoIncrement);
@@ -203,6 +189,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // positions for the arm of the bot
         armServo.setPosition(ArmServoInput);
     }
+
+    private void setSlideMotorPower(double speed) {
+        if (isHardware) {
+            slideMotor.setSpeed(speed);
+        }
+    }
+
+    private int getSlideUnmodifiedPosition() {
+        if (isHardware) {
+            return (int) slideMotor.getSensorValue();
+        } else {
+            return 0;
+        }
+    }
+
     private void setBucketPos(double w) {
         if (bucketServo != null) {
             bucketServo.setPosition(w);
