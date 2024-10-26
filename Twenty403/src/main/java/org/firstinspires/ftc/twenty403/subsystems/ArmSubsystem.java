@@ -20,14 +20,23 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public static double ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 1;
     public static double ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 2;
-    public static double ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION = 3;
-    public static double ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION = 3;
-    public static double ROTATE_MOTOR_INTAKE_POSITION = 4;
+    public static double ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION1 = 3;
+    public static double ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION2 = 3;
+    public static double ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1 = 3;
+    public static double ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2 = 3;
+    public static double ROTATE_MOTOR_INTAKE_SAMPLE_POSITION = 4;
+    public static double ROTATE_MOTOR_INTAKE_SPECIMEN_POSITION = 4;
     public static double SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 5;
     public static double SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 6;
-    public static double SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION = 7;
-    public static double SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION = 7;
-    public static double SLIDES_MOTOR_INTAKE_POSITION = 8;
+    public static double SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION1 = 7;
+    public static double SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION2 = 7;
+    public static double SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1 = 7;
+    public static double SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2 = 7;
+    public static double SLIDES_MOTOR_INTAKE_SAMPLE_POSITION = 8;
+    public static double SLIDES_MOTOR_INTAKE_SPECIMEN_POSITION = 8;
+    public static double ROTATE_MOTOR_NEUTRAL_POSITION = 10;
+    public static double SLIDES_MOTOR_NEUTRAL_POSITION = 10;
+
 
     public ArmSubsystem(Hardware hw) {
         rotate1 = hw.rotate1;
@@ -36,11 +45,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     //low basket scoring
-    public void lowBasketRotate1() {
+    public void lowBasketRotate() {
         rotate1.setPosition(ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION);
-    }
-
-    public void lowBasketRotate2() {
         rotate2.setPosition(ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION);
     }
 
@@ -51,9 +57,6 @@ public class ArmSubsystem implements Subsystem, Loggable {
     //high basket scoring
     public void highBasketRotate() {
         rotate1.setPosition(ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION);
-    }
-
-    public void highBasketRotate2() {
         rotate2.setPosition(ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION);
     }
 
@@ -63,38 +66,72 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     //specimen scoring
     public void lowSpecimenRotate1() {
-        rotate1.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
+        rotate1.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION1);
+        rotate2.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION1);
+    }
+
+    public void lowSpecimenSlides1() {
+        slides.setPosition(SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION1);
     }
 
     public void lowSpecimenRotate2() {
-        rotate2.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
+        rotate1.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
+        rotate2.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
     }
 
-    public void lowSpecimenSlides() {
-        slides.setPosition(SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION);
+    public void lowSpecimenSlides2() {
+        slides.setPosition(SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
     }
+
     public void highSpecimenRotate1() {
-        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
+        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
+        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
+    }
+
+    public void highSpecimenSlides1() {
+        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
     }
 
     public void highSpecimenRotate2() {
-        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
+        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
+        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
     }
 
-    public void highSpecimenSlides() {
-        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION);
+    public void highSpecimenSlides2() {
+        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
     }
 
     //intake position
-    public void intakeRotate1() {
-        rotate1.setPosition(ROTATE_MOTOR_INTAKE_POSITION);
+    public void intakeRotateSample() {
+
+        rotate1.setPosition(ROTATE_MOTOR_INTAKE_SAMPLE_POSITION);
+        rotate2.setPosition(ROTATE_MOTOR_INTAKE_SAMPLE_POSITION);
     }
 
-    public void intakeRotate2() {
-        rotate2.setPosition(ROTATE_MOTOR_INTAKE_POSITION);
+    public void intakeSlidesSample() {
+        slides.setPosition(SLIDES_MOTOR_INTAKE_SAMPLE_POSITION);
     }
 
-    public void intakeSlides() {
-        slides.setPosition(SLIDES_MOTOR_INTAKE_POSITION);
+    public void intakeRotateSpecimen() {
+
+        rotate1.setPosition(ROTATE_MOTOR_INTAKE_SPECIMEN_POSITION);
+        rotate2.setPosition(ROTATE_MOTOR_INTAKE_SPECIMEN_POSITION);
     }
+
+    public void intakeSlidesSpecimen() {
+        slides.setPosition(SLIDES_MOTOR_INTAKE_SPECIMEN_POSITION);
+    }
+
+    //neutral position
+
+    public void neutralRotate() {
+
+        rotate1.setPosition(ROTATE_MOTOR_NEUTRAL_POSITION);
+        rotate2.setPosition(ROTATE_MOTOR_NEUTRAL_POSITION);
+    }
+
+    public void neutralSlides() {
+        slides.setPosition(SLIDES_MOTOR_NEUTRAL_POSITION);
+    }
+
 }
