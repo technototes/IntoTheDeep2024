@@ -16,7 +16,9 @@ public class LowBasketCommand {
         public SequentialCommandGroup LowBasket(Robot r) {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::lowBasketRotate, r.armSubsystem),
-                    Command.create(r.armSubsystem::lowBasketSlides, r.armSubsystem)
+                    Command.create(r.armSubsystem::lowBasketSlides, r.armSubsystem),
+                    Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem)
+
             );
         }
     }
