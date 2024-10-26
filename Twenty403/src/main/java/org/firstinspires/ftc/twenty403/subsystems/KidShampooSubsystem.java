@@ -81,22 +81,24 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public void collectHorizontalSample() {
         // closeRetainer(),
         // scoopWrist(),
+
+    }
+    @Override
+    public void periodic() {
+        distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
+        color_value = colorSensor.rgb();
+    }
+    public void spitIntake() {
+        intake.setPower(INTAKE_SPIT);
     }
 
+    public void stopIntake() {
+        intake.setPower(0);
+    }
 }
 
 
-public void spitIntake() {
-    intake.setPower(INTAKE_SPIT);
-}
 
-public void stopIntake() {
-    intake.setPower(0);
-}
 
-@Override
-public void periodic() {
-    distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
-    color_value = colorSensor.rgb();
-}
-}
+
+
