@@ -21,8 +21,8 @@ public class HarshiniTesting {
         //constants for Into the Deeeeeeeep
         public static Function<Pose2d, TrajectoryBuilder> func;
         public static Pose2d OBSERVATION_START = new Pose2d(0, 60, toRadians(-90));
-        public static Pose2d SUBMARINE = new Pose2d(-5, 36, toRadians(-90));
-        public static Pose2d OBSERVATION_ZONE = new Pose2d(-57, 55, toRadians(-90));
+        public static Pose2d SUBMARINE = new Pose2d(-5, 36, toRadians(90));
+        public static Pose2d OBSERVATION_ZONE = new Pose2d(-46, 55, toRadians(90));
         public static Pose2d SUBMARINE2 = new Pose2d(0, 36, toRadians(90));
         public static Pose2d SUBMARINE3 = new Pose2d(5, 36, toRadians(-90));
         public static Pose2d MINI_LINE = new Pose2d(-3, 36, toRadians(90));
@@ -31,8 +31,13 @@ public class HarshiniTesting {
 
         public static Pose2d PUSH_1 = new Pose2d(-34, 45, toRadians(90));
         public static Pose2d PUSH_2 = new Pose2d(-34, 10, toRadians(90));
-        public static Pose2d PUSH_3_AND_A_HALF = new Pose2d(-47, 17, toRadians(90));
+        public static Pose2d PUSH_3_AND_A_HALF = new Pose2d(-46, 11, toRadians(90));
         public static Pose2d PUSH_3 = new Pose2d(-35, 10, toRadians(90));
+        public static Pose2d PUSH_4 = new Pose2d(-56, 10, toRadians(90));
+        public static Pose2d OBSERVATION_ZONE_2 = new Pose2d(-56, 55, toRadians(90));
+        public static Pose2d PUSH_5 = new Pose2d(-61, 10, toRadians(90));
+        public static Pose2d OBSERVATION_ZONE_3 = new Pose2d(-61, 55, toRadians(90));
+
         public static Pose2d SAMPLE_1 = new Pose2d(-48, 26, toRadians(90));
         public static Pose2d OBSERVATION_PUSH_HALF = new Pose2d(-47, 40, toRadians(90));
 
@@ -105,6 +110,68 @@ public class HarshiniTesting {
                         .build();
 
 
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO1 = () ->
+                func
+                        .apply(OBSERVATION_START)
+                        .lineToLinearHeading(PUSH_1)
+                        .build();
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO2 = () ->
+                func
+                        .apply(PUSH_1)
+                        .lineToLinearHeading(PUSH_2)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO4 = () ->
+                func
+                        .apply(PUSH_2)
+                        .lineToLinearHeading(PUSH_3_AND_A_HALF)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF = () ->
+                func
+                        .apply(PUSH_3_AND_A_HALF)
+                        .lineToLinearHeading(OBSERVATION_ZONE)
+                        .build();
+
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO5 = () ->
+                func
+                        .apply(OBSERVATION_ZONE)
+                        .lineToLinearHeading(PUSH_3_AND_A_HALF)
+                        .build();
+
+
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO6 = () ->
+                func
+                        .apply(PUSH_3_AND_A_HALF)
+                        .lineToLinearHeading(PUSH_4)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO7 = () ->
+                func
+                        .apply(PUSH_4)
+                        .lineToLinearHeading(OBSERVATION_ZONE_2)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO8 = () ->
+                func
+                        .apply(OBSERVATION_ZONE_2)
+                        .lineToLinearHeading(PUSH_4)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO9 = () ->
+                func
+                        .apply(PUSH_4)
+                        .lineToLinearHeading(PUSH_5)
+                        .build();
+
+        public static final Supplier<Trajectory> PUSH_BOT_OBSERVATION_SIDE_AUTO10 = () ->
+                func
+                        .apply(PUSH_5)
+                        .lineToLinearHeading(OBSERVATION_ZONE_3)
+                        .build();
+
     }
 
     public static void main(String[] args) {
@@ -150,7 +217,17 @@ public class HarshiniTesting {
             //.addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
-            .addTrajectory(AutoConstants.TANGENT_TEST.get())
+            //.addTrajectory(AutoConstants.TANGENT_TEST.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
             .build();
     }
 }
