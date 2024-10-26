@@ -8,7 +8,7 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean VERTICALSLIDESUBSYSTEM = true;
+        public static boolean VERTICALSLIDESUBSYSTEM = false;
         public static boolean HORIZONTALSLIDESUBSYSTEM = true;
         public static boolean BUCKET = true;
     }
@@ -29,6 +29,7 @@ public class Setup {
 
         public static String CLAWSERVO = "clawservo";
         public static String WRISTSERVO = "wristservo";
+        public static String LINKSERVO = "linkservo";
     }
 
     @Config

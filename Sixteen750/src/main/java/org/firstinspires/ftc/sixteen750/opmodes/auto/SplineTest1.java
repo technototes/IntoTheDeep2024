@@ -10,14 +10,13 @@ import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
-import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "SplineTest")
+@Autonomous(name = "SplineTest1")
 @SuppressWarnings("unused")
-public class SplineTest extends CommandOpMode {
+public class SplineTest1 extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;

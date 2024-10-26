@@ -12,16 +12,15 @@ import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
-import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.twenty403.commands.auto.Paths;
-import org.firstinspires.ftc.twenty403.commands.auto.SafetyStartCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "SplineTest")
+//TODO: figure out where the other splineTest is coming from (duplicate spline error)
+@Autonomous(name = "SplineTest1")
 @SuppressWarnings("unused")
-public class SplineTest extends CommandOpMode {
+public class SplineTest1 extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;
