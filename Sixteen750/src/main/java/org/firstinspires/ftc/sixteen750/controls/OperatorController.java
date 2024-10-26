@@ -46,9 +46,9 @@ public class OperatorController {
     }
 
     private void bindHorizontalSlidesControls() {
-        openClaw.whenPressed(Command.create(SlidesCommands.clawOpen(robot)));
-        closeClaw.whenPressed(Command.create(SlidesCommands.clawChomp(robot)));
-        wristPickup.whenPressed(Command.create(SlidesCommands.wristPickup(robot)));
+        openClaw.whenPressed(SlidesCommands.clawOpen(robot));
+        closeClaw.whenPressed(SlidesCommands.clawChomp(robot));
+        wristPickup.whenPressed(SlidesCommands.wristPickup(robot));
         wristTransfer.whenPressed(SlidesCommands.wristTransfer(robot));
         wristIncrement.whenPressed(SlidesCommands.wristIncrement(robot));
         wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
