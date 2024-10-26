@@ -6,6 +6,7 @@ import com.technototes.library.control.CommandGamepad;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
+import org.firstinspires.ftc.twenty403.commands.LowBasketCommand;
 
 public class OperatorController {
 
@@ -21,6 +22,10 @@ public class OperatorController {
     public CommandButton stopIntake;
     public CommandButton suspend;
     public CommandButton SuspendReverse;
+    public CommandButton lowBasket;
+    public CommandButton highBasket;
+    public CommandButton lowSpecimen;
+    public CommandButton highSpecimen;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -33,13 +38,14 @@ public class OperatorController {
 
     private void AssignNamedControllerButton() {
         openRetainer = gamepad.dpadUp;
-        closeRetainer = gamepad.dpadDown;
+        closeRetainer = gamepad.dpadUp;
         eatRetainer = gamepad.dpadRight;
         slurpIntake = gamepad.leftBumper;
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
         suspend = gamepad.ps_circle;
+        lowBasket = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -49,10 +55,15 @@ public class OperatorController {
         if (Setup.Connected.HANGSUBSYSTEM){
             bindHangControls();
         }
+
+        if (Setup.Connected.ARMSUBSYSTEM) {
+            bindArmControls();
+        }
     }
     public void bindKidShampooControls() {
-        openRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem));
-        closeRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem));
+        openRetainer.whilePressed(Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem));
+        closeRetainer.whileReleased(Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem));
+        eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
         biteJaw.whenPressed(Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem));
         releaseJaw.whenPressed(Command.create(robot.kidShampooSubsystem::releaseJaw, robot.kidShampooSubsystem));
         slurpIntake.whenPressed(Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem));
@@ -60,7 +71,10 @@ public class OperatorController {
         slurpIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
         spitIntake.whenReleased(Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem));
     }
+    public void bindArmControls() {
+        lowBasket.whenPressed(new LowBasketCommand.LowBasket(robot));
 
+    }
     public void bindHangControls() {
         suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
 
