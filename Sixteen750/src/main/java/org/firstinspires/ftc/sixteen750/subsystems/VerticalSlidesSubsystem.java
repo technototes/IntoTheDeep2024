@@ -35,7 +35,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double ArmServoInput = 0.545;
     public static double ArmServoEmpty = 0.05;
     public static double WristServoDrop = 0.555; //drops in bucket
-    public static double WristServoIncrement = 0.555;
+    public static double BucketServoIncrement = 0.555;
+    public static double ArmServoIncrement = 0.555;
     public static double ArmServoTransfer = 0;
 
     @Log(name = "slidePos")
@@ -118,10 +119,12 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void slidesup() {
         // lift bucket system up
+        //probably going to do the slide thing with the joysticks
     }
 
     public void slidesdown() {
         // lowers the bucket system
+        //probably going to do the slide thing with the joysticks (negative of slidesup)
     }
 
     public void SlideBucketLow() {
@@ -156,8 +159,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void BucketServoIncrement() {
         // the arm's position to score
-        armServo.setPosition(WristServoIncrement);
+        bucketServo.setPosition(bucketTargetPos + BucketServoIncrement);
     }
+    public void BucketServoDecrement() {
+        // the arm's position to score
+        bucketServo.setPosition(bucketTargetPos - BucketServoIncrement);
+    }
+    public void ArmServoIncrement() {
+        // the arm's position to score
+        armServo.setPosition(armTargetPos + ArmServoIncrement);
+    }
+    public void ArmServoDecrement() {
+        // the arm's position to score
+        armServo.setPosition(armTargetPos - ArmServoIncrement);
+    }
+
 
     public void BucketServoTransfer() {
         // the intake system's position to score
