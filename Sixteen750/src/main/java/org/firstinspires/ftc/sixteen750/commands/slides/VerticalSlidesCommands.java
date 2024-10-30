@@ -3,7 +3,7 @@ package org.firstinspires.ftc.sixteen750.commands.slides;
 import com.technototes.library.command.Command;
 import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
 
-public class SimpleSlidesCommands {
+public class VerticalSlidesCommands {
 
     public static Command HighBasket(VerticalSlidesSubsystem vs) {
         return Command.create(vs::SlideBucketHigh, vs);
