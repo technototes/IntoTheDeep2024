@@ -27,8 +27,8 @@ public class Obs_Park extends CommandOpMode {
     public void uponInit() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
-        robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
-        robot.drivebase.setPoseEstimate(AutoConstants.OBS_START.toPose());
+        robot = new Robot(hardware, Alliance.RED, StartingPosition.Observation);
+        robot.drivebase.setPoseEstimate(AutoConstants.BACKWARD.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(Paths.Obs_Parking(robot), CommandScheduler::terminateOpMode),
             OpModeState.RUN
