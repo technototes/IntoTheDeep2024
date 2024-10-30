@@ -14,13 +14,14 @@ public class AutoConstants {
 
     //New testing constants for this year's game
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
-    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(-22, 65, -90);
+    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
     public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
     public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
     public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
-    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(-62, 65, -90);
+    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
 
 
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
@@ -50,7 +51,7 @@ public class AutoConstants {
             OBS_START_TO_OBS_PARK = b ->
             b.apply(OBS_START.toPose()).lineToLinearHeading(OBS_PARK.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-            NET_START_TO_NETSCORING = b ->
+            START_TO_NETSCORING = b ->
             b.apply(NET_START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_INTAKE1 = b ->

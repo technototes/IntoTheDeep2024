@@ -12,7 +12,7 @@ public class Paths {
     }
 
     public static Command SampleScoring(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.NET_START_TO_NETSCORING)
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             .andThen(
                 new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1)
             )
