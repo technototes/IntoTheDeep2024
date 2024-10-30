@@ -13,8 +13,8 @@ public class IntakeSampleCommand {
             return new ParallelCommandGroup(
                     Command.create(r.armSubsystem::intakeRotateSample, r.armSubsystem),
                     Command.create(r.armSubsystem::intakeSlidesSample, r.armSubsystem),
-                    Command.create(r.kidShampooSubsystem::slurpIntake, r.kidShampooSubsystem),
-                    Command.create(r.kidShampooSubsystem::eatRetainer, r.kidShampooSubsystem)
+                    Command.create(r.kidShampooSubsystem::slurpIntake, r.kidShampooSubsystem)/*,
+                    Command.create(r.kidShampooSubsystem::eatRetainer, r.kidShampooSubsystem)*/
             );
         }
     }
