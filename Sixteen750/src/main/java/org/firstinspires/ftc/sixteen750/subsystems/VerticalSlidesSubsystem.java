@@ -26,18 +26,17 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double ARM_POS = 0;
     public static double MIN_MOTOR_SPEED = -0.7;
     public static double MAX_MOTOR_SPEED = 1;
-
     //    public static double ScoreServo = 0.5;
-
     //    public static double ArmServo = 0.5;
-
     public static double ClawServoOpenShort = 0.4;
-    public static double ClawServoClose = 0.55;
-    public static double ClawServoOpenLong = 0;
+    public static double BucketServoTransfer = 0.55;
+    public static double BucketServoEmpty = 0;
+    public static double BucketServoLift = 0;
     public static double ArmServoInput = 0.545;
-    public static double WristServoPickup = 0.05;
+    public static double ArmServoEmpty = 0.05;
     public static double WristServoDrop = 0.555; //drops in bucket
     public static double WristServoIncrement = 0.555;
+    public static double ArmServoTransfer = 0;
 
     @Log(name = "slidePos")
     public int slidePos;
@@ -48,9 +47,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "slideTarget")
     public int slideTargetPos;
 
-
     @Log(name = "armTarget")
     public double armTargetPos;
+
     @Log(name = "bucketTarget")
     public double bucketTargetPos;
 
@@ -119,12 +118,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void slidesup() {
         // lift bucket system up
-
     }
 
     public void slidesdown() {
         // lowers the bucket system
-
     }
 
     public void SlideBucketLow() {
@@ -164,31 +161,31 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void BucketServoTransfer() {
         // the intake system's position to score
-        bucketServo.setPosition(ClawServoClose);
+        bucketServo.setPosition(BucketServoTransfer);
     }
 
     public void BucketServoLift() {
-        bucketServo.setPosition(ClawServoOpenLong);
-    }
+        bucketServo.setPosition(BucketServoLift);
+    } //is this needed
 
     public void BucketServoEmpty() {
         // positions for the arm of the bot
-        bucketServo.setPosition(ClawServoOpenLong);
+        bucketServo.setPosition(BucketServoEmpty);
     }
 
     public void ArmServoTransfer() {
         // positions for the arm of the bot
-        armServo.setPosition(ClawServoOpenLong);
+        armServo.setPosition(ArmServoTransfer);
     }
 
-    public void ArmServoLowBucket() {
-        armServo.setPosition(WristServoPickup);
+    public void ArmServoEmpty() {
+        armServo.setPosition(ArmServoEmpty);
     }
 
-    public void ArmServoHighBucket() {
-        // positions for the arm of the bot
-        armServo.setPosition(ArmServoInput);
-    }
+    //    public void ArmServoHighBucket() {
+    //        // positions for the arm of the bot
+    //        armServo.setPosition(ArmServoInput);
+    //    }
 
     private void setSlideMotorPower(double speed) {
         if (isHardware) {

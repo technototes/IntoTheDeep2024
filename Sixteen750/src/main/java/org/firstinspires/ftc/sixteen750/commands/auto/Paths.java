@@ -12,12 +12,28 @@ public class Paths {
     }
 
     public static Command SampleScoring(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1)).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING)).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2)).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING)).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3)).andThen(
-        new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING));
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.NET_START_TO_NETSCORING)
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1)
+            )
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING)
+            )
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2)
+            )
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING)
+            )
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3)
+            )
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING)
+            );
+    }
+
+    public static Command Obs_Parking(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.OBS_START_TO_OBS_PARK);
     }
 }

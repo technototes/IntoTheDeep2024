@@ -33,7 +33,7 @@ public class DualTeleOp extends CommandOpMode {
         if (Setup.Connected.DRIVEBASE) {
             controlsDriver = new DriverController(driverGamepad, robot);
             // Just pick a starting point
-            robot.drivebase.setPoseEstimate(AutoConstants.START.toPose());
+            robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
             CommandScheduler.scheduleForState(
                 DrivingCommands.ResetGyro(robot.drivebase),
                 OpModeState.INIT
