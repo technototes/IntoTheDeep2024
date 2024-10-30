@@ -2,11 +2,6 @@ package org.firstinspires.ftc.sixteen750;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import com.technototes.library.command.Command;
-import com.technototes.library.command.SequentialCommandGroup;
-import com.technototes.path.command.TrajectorySequenceCommand;
 import com.technototes.path.geometry.ConfigurablePoseD;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
@@ -18,12 +13,14 @@ public class AutoConstants {
 
 
     //New testing constants for this year's game
-    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(-22, 65, -90);
     public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
     public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
     public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
+    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(-62, 65, -90);
 
 
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
@@ -50,8 +47,11 @@ public class AutoConstants {
     // These are 'trajectory pieces' which should be named like this:
     // {STARTING_POSITION}_TO_{ENDING_POSITION}
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-            START_TO_NETSCORING = b ->
-            b.apply(START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+            OBS_START_TO_OBS_PARK = b ->
+            b.apply(OBS_START.toPose()).lineToLinearHeading(OBS_PARK.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NET_START_TO_NETSCORING = b ->
+            b.apply(NET_START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_INTAKE1 = b ->
             b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE1.toPose()).build();
