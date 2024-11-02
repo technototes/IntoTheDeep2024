@@ -1,10 +1,13 @@
 package org.firstinspires.ftc.sixteen750.controls;
 
+import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
+import org.firstinspires.ftc.sixteen750.commands.driving.JoystickDriveCommand;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 
 public class OperatorController {
@@ -44,6 +47,7 @@ public class OperatorController {
         // Remember to only bind buttons for attached subsystems
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
             bindHorizontalSlidesControls();
+            //bindHorizontalAnalogControls(); // not yet tested
         }
     }
 
@@ -56,5 +60,11 @@ public class OperatorController {
         wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
         horislidesExtend.whenPressed(HorizontalSlidesCommands.horizontalExtend(robot));
         horislidesRetract.whenPressed(HorizontalSlidesCommands.horizontalRetract(robot));
+    }
+
+    public void bindHorizontalAnalogControls() {
+        CommandScheduler.scheduleJoystick(
+            new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horislidesLeftStick)
+        );
     }
 }

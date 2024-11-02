@@ -2,6 +2,7 @@ package org.firstinspires.ftc.learnbot.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.hardware.servo.Servo;
@@ -24,6 +25,8 @@ public class TestSubsystem implements Subsystem, Loggable {
     public static double POWER_STEP = 0.05;
     public static double LOW_POWER = -0.7;
     public static double HIGH_POWER = 0.7;
+    public static double BIGADJUSTMENT = 0.001;
+    public static double SMALLADJUSTMENT = 0.0001;
     // Let's say thing this spins a motor between 0 and 3600 'ticks'
     // but only while/if the the distance is greater than 10cm
     private EncodedMotor<DcMotorEx> theMotor;
@@ -44,6 +47,9 @@ public class TestSubsystem implements Subsystem, Loggable {
     @Log(name = "Stop mode")
     public String stopMode = "coast";
 
+    @Log(name = "Current Servo Position")
+    public double currentPos;
+
     public TestSubsystem(Hardware hw) {
         theMotor = hw.theMotor;
         curPower = 0.0;
@@ -52,14 +58,36 @@ public class TestSubsystem implements Subsystem, Loggable {
         resetTicks();
     }
 
+    public void BigExtending() {
+        setServoPosition(currentPos - BIGADJUSTMENT);
+    }
+
+    public void SmallExtending() {
+        setServoPosition(currentPos - SMALLADJUSTMENT);
+    }
+
+    public void BigRetracting() {
+        setServoPosition(currentPos + BIGADJUSTMENT);
+    }
+
+    public void SmallRetracting() {
+        setServoPosition(currentPos + SMALLADJUSTMENT);
+    }
+
+    private void setServoPosition(double pos) {
+        pos = Range.clip(pos, 0.0, 1.0);
+        servo.setPosition(pos);
+        currentPos = pos;
+    }
+
     public void servoIncrement() {
         running = true;
-        servo.setPosition(servo.getPosition() + 0.1);
+        setServoPosition(servo.getPosition() + 0.1);
     }
 
     public void servoDecrement() {
         running = true;
-        servo.setPosition(servo.getPosition() - 0.1);
+        setServoPosition(servo.getPosition() - 0.1);
     }
 
     public void servoMaxPos() {
@@ -67,12 +95,12 @@ public class TestSubsystem implements Subsystem, Loggable {
             throw new RuntimeException("Null servo in TestSubsystem");
         }
         running = true;
-        servo.setPosition(1);
+        setServoPosition(1);
     }
 
     public void servoMinPos() {
         running = true;
-        servo.setPosition(0);
+        setServoPosition(0);
     }
 
     public void servoLeft() {
