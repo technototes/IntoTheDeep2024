@@ -1,12 +1,15 @@
 package org.firstinspires.ftc.learnbot.controllers;
 
+import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandAxis;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
+import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
 import org.firstinspires.ftc.learnbot.Robot;
 import org.firstinspires.ftc.learnbot.commands.AnalogMotorControlCmd;
 import org.firstinspires.ftc.learnbot.commands.EZCmd;
+import org.firstinspires.ftc.learnbot.commands.HorizontalAnalogCommand;
 import org.firstinspires.ftc.learnbot.commands.Test;
 import org.firstinspires.ftc.learnbot.subsystems.TestSubsystem;
 
@@ -23,6 +26,7 @@ public class TestController implements Loggable {
     public CommandButton servoMin;
     public CommandButton servoInc;
     public CommandButton servoDec;
+    public Stick servoAnalog;
 
     public CommandButton liftLow, liftMid, liftHigh;
 
@@ -47,6 +51,7 @@ public class TestController implements Loggable {
         this.servoMin = gamepad.ps_cross;
         this.servoInc = gamepad.dpadUp;
         this.servoDec = gamepad.dpadDown;
+        this.servoAnalog = gamepad.leftStick;
         //        this.servoleft.whenPressed(new ServoLeft(r.test));
         //        this.servoright.whenPressed((new ServoRight(r.test)));
         //this.motorAxis = gamepad.rightStickY;
@@ -67,5 +72,12 @@ public class TestController implements Loggable {
         servoMin.whenPressed(Test.ServoMin(robot));
         servoInc.whenPressed(Test.ServoInc(robot));
         servoDec.whenPressed(Test.ServoDec(robot));
+        bindHorizontalAnalogControls();
+    }
+
+    public void bindHorizontalAnalogControls() {
+        CommandScheduler.scheduleJoystick(
+            new HorizontalAnalogCommand(robot.testsubsystem, servoAnalog)
+        );
     }
 }
