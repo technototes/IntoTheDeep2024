@@ -32,6 +32,12 @@ public class TestController implements Loggable {
     public AnalogMotorControlCmd motorMovement;
 
     public TestController(CommandGamepad g, Robot r) {
+        if (g == null) {
+            throw new RuntimeException("Null CommandGamepad in TestController");
+        }
+        if (r == null) {
+            throw new RuntimeException("Null robot in TestController");
+        }
         this.gamepad = g;
         this.robot = r;
         //        this.liftLow = gamepad.ps_triangle;
