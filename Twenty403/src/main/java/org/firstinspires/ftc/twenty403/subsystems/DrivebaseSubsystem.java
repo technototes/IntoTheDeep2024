@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
@@ -178,6 +179,11 @@ public class DrivebaseSubsystem
         // This is already handled in the parent class constructor (super)
         // setLocalizer(l);
         setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        fl.setDirection(DcMotorSimple.Direction.FORWARD);
+        rl.setDirection(DcMotorSimple.Direction.FORWARD);
+        rr.setDirection(DcMotorSimple.Direction.REVERSE);
+        fr.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
