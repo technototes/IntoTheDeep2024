@@ -11,7 +11,7 @@ public class VerticalSlidesCommands {
     }
 
     public static Command LowBasket(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::SlideBucketLow, r.verticalSlidesSubsystem);
+        return Command.create(r.verticalSlidesSubsystem::SlideBasketLow, r.verticalSlidesSubsystem);
     }
 
     public static Command HighChamber(Robot r) {
