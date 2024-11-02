@@ -89,9 +89,8 @@ public class JoystickDriveCommand implements Command, Loggable {
             // The math & signs looks wonky, because this makes things field-relative
             // (Remember that "3 O'Clock" is zero degrees)
             // We are making this change for the omni wheels on 20403
-            // We are making the orientation of the joystick's x negative to accommodate for the new direction of the wheels..
             double yvalue = -y.getAsDouble();
-            double xvalue = -x.getAsDouble() *-1.0;
+            double xvalue = -x.getAsDouble();
             if (straightDrive != null) {
                 if (straightDrive.getAsDouble() > TRIGGER_THRESHOLD) {
                     if (Math.abs(yvalue) > Math.abs(xvalue)) xvalue = 0;

@@ -15,7 +15,7 @@ import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.OperatorController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@TeleOp(name = "Dual Driving")
+@TeleOp(name = "Just Driving")
 @SuppressWarnings("unused")
 public class JustDrivingTeleOp extends CommandOpMode {
 
