@@ -137,6 +137,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
         setArmPos(ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH);
     }
 
+    public void specimenSlides() {
+        slides.setPosition(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
+    }
+
     //intake position
     public void setArmToIntake() {
         setArmPos(ROTATE_MOTOR_INTAKE_POSITION);

@@ -7,7 +7,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
@@ -34,19 +33,19 @@ public class ObserveAuto extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
         robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.BACKWARD.toPose());
-//        safety = new SafetyTestController(driverGamepad, robot);
+        //        safety = new SafetyTestController(driverGamepad, robot);
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-
+                Paths.splineTestCommand(robot),
+                EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),
             OpModeState.RUN
         );
-
-//        CommandScheduler.scheduleForState(
-//            new SafetyStartCommand(robot.safetySubsystem),
-//            OpModeState.RUN
-//        );
+        //        CommandScheduler.scheduleForState(
+        //            new SafetyStartCommand(robot.safetySubsystem),
+        //            OpModeState.RUN
+        //        );
     }
 }
