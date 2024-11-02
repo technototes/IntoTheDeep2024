@@ -33,7 +33,7 @@ public class Paths {
             );
     }
 
-    public static Command Obs_Parking(Robot r) {
+    public static TrajectorySequenceCommand Obs_Parking(Robot r) {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.OBS_START_TO_OBS_PARK);
     }
 }

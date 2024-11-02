@@ -35,5 +35,9 @@ public class SingleTeleOp extends CommandOpMode {
             DrivingCommands.ResetGyro(robot.drivebase),
             OpModeState.INIT
         );
+        CommandScheduler.scheduleOnceForState(
+            new HorizontalSlideNeutralCommand(robot.horizontalSlidesSubsystem),
+            OpModeState.RUN
+        );
     }
 }
