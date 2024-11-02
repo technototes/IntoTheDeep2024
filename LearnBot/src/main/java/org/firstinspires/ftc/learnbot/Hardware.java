@@ -61,9 +61,9 @@ public class Hardware implements Loggable {
             if (Setup.Connected.SERVO) {
                 this.servo = new Servo(Setup.HardwareNames.SERVO);
             }
-            if (Setup.Connected.COLOR_SENSOR) {
-                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
-            }
+            //            if (Setup.Connected.COLOR_SENSOR) {
+            //                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
+            //            }
         }
         this.imu = new IMU(
             Setup.HardwareNames.IMU,

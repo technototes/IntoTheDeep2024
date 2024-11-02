@@ -52,6 +52,26 @@ public class TestSubsystem implements Subsystem, Loggable {
         resetTicks();
     }
 
+    public void servoIncrement() {
+        running = true;
+        servo.setPosition(servo.getPosition() + 0.1);
+    }
+
+    public void servoDecrement() {
+        running = true;
+        servo.setPosition(servo.getPosition() - 0.1);
+    }
+
+    public void servoMaxPos() {
+        running = true;
+        servo.setPosition(1);
+    }
+
+    public void servoMinPos() {
+        running = true;
+        servo.setPosition(0);
+    }
+
     public void servoLeft() {
         running = true;
         setPosition(0.5);
