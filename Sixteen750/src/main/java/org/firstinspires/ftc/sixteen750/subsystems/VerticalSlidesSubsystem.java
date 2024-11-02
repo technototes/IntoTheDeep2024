@@ -19,9 +19,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //arm servo - transfer, pickup, neutral
     //bucket servo - drop, pickup (long and short)
 
-    public static double LOW_BUCKET = -950;
+    public static double LOW_BASKET = -950;
     public static double HIGH_BUCKET = -1350;
     //    public static double HIGH_POS = 1000;
+    public static double SLIDE_ZERO = 0;
     public static double SLIDE_POS = 0;
     public static double ARM_POS = 0;
     public static double MIN_MOTOR_SPEED = -0.7;
@@ -125,20 +126,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void slidesdown() {
         // lowers the bucket system
         //probably going to do the slide thing with the joysticks (negative of slidesup)
+        slidePidController.setTargetPosition(SLIDE_ZERO);
     }
 
-    public void SlideBucketLow() {
+    public void SlideBasketLow() {
         //takes the arm to the first level
-        slidePidController.setTargetPosition(LOW_BUCKET);
+        slidePidController.setTargetPosition(LOW_BASKET);
     }
 
-    public void SlideBucketHigh() {
+    public void SlideBasketHigh() {
         slidePidController.setTargetPosition(HIGH_BUCKET);
     }
 
     public void SlideChamberLow() {
         //takes the arm to the first level
-        slidePidController.setTargetPosition(LOW_BUCKET);
+        slidePidController.setTargetPosition(LOW_BASKET);
     }
 
     public void SlideChamberHigh() {

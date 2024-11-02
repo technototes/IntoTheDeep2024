@@ -17,7 +17,7 @@ public class Robot implements Loggable {
     public double initialVoltage;
 
     public DrivebaseSubsystem drivebase;
-    public VerticalSlidesSubsystem slideH;
+    public VerticalSlidesSubsystem verticalSlidesSubsystem;
     public HorizontalSlidesSubsystem horizontalSlidesSubsystem;
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
@@ -33,7 +33,7 @@ public class Robot implements Loggable {
             this.localizer = null;
         }
         if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
-            slideH = new VerticalSlidesSubsystem(hw);
+            verticalSlidesSubsystem = new VerticalSlidesSubsystem(hw);
         }
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
             horizontalSlidesSubsystem = new HorizontalSlidesSubsystem(hw);
