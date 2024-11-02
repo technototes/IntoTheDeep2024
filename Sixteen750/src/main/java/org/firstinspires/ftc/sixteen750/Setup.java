@@ -8,9 +8,9 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean VERTICALSLIDESUBSYSTEM = false;
+        public static boolean VERTICALSLIDESUBSYSTEM = true;
         public static boolean HORIZONTALSLIDESUBSYSTEM = true;
-        public static boolean BUCKET = true;
+        public static boolean BUCKET = false;
         public static boolean ODOSUBSYSTEM = false;
         public static boolean SAFETYSUBSYSTEM = false;
     }

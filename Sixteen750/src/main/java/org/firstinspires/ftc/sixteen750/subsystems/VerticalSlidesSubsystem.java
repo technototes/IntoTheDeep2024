@@ -20,23 +20,24 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //bucket servo - drop, pickup (long and short)
 
     public static double LOW_BASKET = -950;
-    public static double HIGH_BUCKET = -1350;
+    public static double HIGH_BASKET = -1350;
     //    public static double HIGH_POS = 1000;
     public static double SLIDE_ZERO = 0;
     public static double SLIDE_POS = 0;
     public static double ARM_POS = 0;
+    public static double MIN_SERVO_SPEED = -.5;
+    public static double MAX_SERVO_SPEED = .5;
     public static double MIN_MOTOR_SPEED = -0.7;
     public static double MAX_MOTOR_SPEED = 1;
     //    public static double ScoreServo = 0.5;
     //    public static double ArmServo = 0.5;
     public static double ClawServoOpenShort = 0.4;
     public static double BucketServoTransfer = 0.55;
-    public static double BucketServoEmpty = 0;
+    public static double BucketServoEmpty = 0.05;
     public static double BucketServoLift = 0;
     public static double ArmServoInput = 0.545;
-    public static double ArmServoEmpty = 0.05;
-    public static double WristServoDrop = 0.555; //drops in bucket
-    public static double BucketServoIncrement = 0.555;
+    public static double ArmServoEmpty = 1;
+    public static double BucketServoIncrement = 0.05;
     public static double ArmServoIncrement = 0.555;
     public static double ArmServoTransfer = 0;
 
@@ -69,6 +70,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
         // Comment from CenterStage but may still be relevant? for hang
         slideMotor = hw.slidemotor;
+        armServo = hw.armservo;
+        bucketServo = hw.bucketservo;
         isHardware = true;
         slidePidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
         resetSlideZero();
@@ -118,33 +121,28 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slidePidController.setTargetPosition(p);
     }
 
-    public void slidesup() {
-        // lift bucket system up
-        //probably going to do the slide thing with the joysticks
-    }
-
-    public void slidesdown() {
+    public void slidesDown() {
         // lowers the bucket system
         //probably going to do the slide thing with the joysticks (negative of slidesup)
         slidePidController.setTargetPosition(SLIDE_ZERO);
     }
 
-    public void SlideBasketLow() {
+    public void slideBasketLow() {
         //takes the arm to the first level
         slidePidController.setTargetPosition(LOW_BASKET);
     }
 
-    public void SlideBasketHigh() {
-        slidePidController.setTargetPosition(HIGH_BUCKET);
+    public void slideBasketHigh() {
+        slidePidController.setTargetPosition(HIGH_BASKET);
     }
 
-    public void SlideChamberLow() {
+    public void slideChamberLow() {
         //takes the arm to the first level
         slidePidController.setTargetPosition(LOW_BASKET);
     }
 
-    public void SlideChamberHigh() {
-        slidePidController.setTargetPosition(HIGH_BUCKET);
+    public void slideChamberHigh() {
+        slidePidController.setTargetPosition(HIGH_BASKET);
     }
 
     /*public void LiftHeightMedium() {
@@ -152,51 +150,44 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         leftPidController.setTargetPosition(HIGH_BUCKET);
     }*/
 
-    public void LiftHeightIntake() {
-        //brings the arm all the way down
-        slidePidController.setTargetPosition(SLIDE_POS);
-        //        armServo.setPosition(0);
-        //        scoreServo.setPosition(0);
-    }
-
-    public void BucketServoIncrement() {
+    public void bucketServoIncrement() {
         // the arm's position to score
-        bucketServo.setPosition(bucketTargetPos + BucketServoIncrement);
+        setBucketPos(bucketTargetPos + BucketServoIncrement);
     }
-    public void BucketServoDecrement() {
+    public void bucketServoDecrement() {
         // the arm's position to score
-        bucketServo.setPosition(bucketTargetPos - BucketServoIncrement);
+        setBucketPos(bucketTargetPos - BucketServoIncrement);
     }
-    public void ArmServoIncrement() {
+    public void armServoIncrement() {
         // the arm's position to score
-        armServo.setPosition(armTargetPos + ArmServoIncrement);
+        setArmPos(armTargetPos + ArmServoIncrement);
     }
-    public void ArmServoDecrement() {
+    public void armServoDecrement() {
         // the arm's position to score
-        armServo.setPosition(armTargetPos - ArmServoIncrement);
+        setArmPos(armTargetPos - ArmServoIncrement);
     }
 
 
-    public void BucketServoTransfer() {
+    public void bucketServoTransfer() {
         // the intake system's position to score
-        bucketServo.setPosition(BucketServoTransfer);
+        setBucketPos(BucketServoTransfer);
     }
 
-    public void BucketServoLift() {
+    public void bucketServoLift() {
         bucketServo.setPosition(BucketServoLift);
-    } //is this needed
+    } //use if we need a position for lifting vertical slides
 
-    public void BucketServoEmpty() {
+    public void bucketServoEmpty() {
         // positions for the arm of the bot
-        bucketServo.setPosition(BucketServoEmpty);
+        setBucketPos(BucketServoEmpty);
     }
 
-    public void ArmServoTransfer() {
+    public void armServoTransfer() {
         // positions for the arm of the bot
-        armServo.setPosition(ArmServoTransfer);
+        setArmPos(ArmServoTransfer);
     }
 
-    public void ArmServoEmpty() {
+    public void armServoEmpty() {
         armServo.setPosition(ArmServoEmpty);
     }
 

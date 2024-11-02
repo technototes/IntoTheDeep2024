@@ -47,9 +47,10 @@ public class Hardware implements Loggable {
             wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
             linkservo = new Servo(Setup.HardwareNames.LINKSERVO);
         }
-        if (Setup.Connected.BUCKET) {
+        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
             armservo = new Servo(Setup.HardwareNames.ARMSERVO);
             bucketservo = new Servo(Setup.HardwareNames.BUCKETSERVO);
+            slidemotor = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
         }
         if (Setup.Connected.ODOSUBSYSTEM) {
             odoR = new MotorEncoder(Setup.HardwareNames.ODOR);
