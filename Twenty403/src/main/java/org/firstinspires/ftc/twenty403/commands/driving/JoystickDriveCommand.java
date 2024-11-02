@@ -56,7 +56,7 @@ public class JoystickDriveCommand implements Command, Loggable {
         ) {
             // No straighten override: return the stick value
             // (with some adjustment...)
-            return -Math.pow(r.getAsDouble(), 3) * subsystem.speed;
+            return -Math.pow(r.getAsDouble(), 3) * NORMAL_ROTATION_SCALE;
         } else {
             // headingInRads is [0-2pi]
             double heading = -Math.toDegrees(headingInRads);

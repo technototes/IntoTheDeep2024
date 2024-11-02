@@ -22,4 +22,8 @@ public class Paths {
 
 
     }
+
+    public static Command observationAuto(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSERVATION_AUTO);
+    }
 }

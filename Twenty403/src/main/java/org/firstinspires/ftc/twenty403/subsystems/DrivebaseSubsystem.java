@@ -115,10 +115,10 @@ public class DrivebaseSubsystem
         @PoseLimit
         public static int POSE_HISTORY_LIMIT = 100;
 
-        public static double AFR_SCALE = 0.9;
-        public static double AFL_SCALE = 0.9;
-        public static double ARR_SCALE = 0.9;
-        public static double ARL_SCALE = 0.9;
+        public static double AFR_SCALE = 0.95;
+        public static double AFL_SCALE = 1;
+        public static double ARR_SCALE = 0.95;
+        public static double ARL_SCALE = 0.95;
 
         public static double encoderTicksToInches(double ticks) {
             return (WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks) / TICKS_PER_REV;
@@ -235,6 +235,34 @@ public class DrivebaseSubsystem
         );
         rightFront.setVelocity(
             (rfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFR_SCALE) / maxall
+        );
+    }
+
+    public void setMotorPark(double lfv, double lrv, double rrv, double rfv) {
+        // TODO: Use the stick position to determine how to scale these values
+        // in Turbo mode (If the robot is driving in a straight line, the values are
+        // going to max out at sqrt(2)/2, rather than: We can go faster, but we don't
+        // *always* want to scale faster, only when we're it turbo mode, and when one (or more)
+        // of the control sticks are at their limit
+        lfv = 1;
+        lrv = 1;
+        rrv = 1;
+        rfv = 1;
+        double maxlfvlrv = Math.max(Math.abs(lfv), Math.abs(lrv));
+        double maxrfvrrv = Math.max(Math.abs(rfv), Math.abs(rrv));
+        double maxall = Math.max(maxlfvlrv, maxrfvrrv);
+
+        leftFront.setVelocity(
+                (lfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFL_SCALE) / maxall
+        );
+        leftRear.setVelocity(
+                (lrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARL_SCALE) / maxall
+        );
+        rightRear.setVelocity(
+                (rrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARR_SCALE) / maxall
+        );
+        rightFront.setVelocity(
+                (rfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFR_SCALE) / maxall
         );
     }
 

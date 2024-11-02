@@ -11,6 +11,8 @@ import com.technototes.path.geometry.ConfigurablePoseD;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
+import org.firstinspires.ftc.twenty403.commands.auto.ObservationAutoConstants;
+
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -94,4 +96,17 @@ public class AutoConstants {
                 b.apply(SAMPLES_START_PUSH.toPose())
                         .splineToSplineHeading(SAMPLE_PUSH_AREA.toPose(), Math.PI - SAMPLE_PUSH_AREA.getHeading())
                         .build();;
+        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+                OBSERVATION_AUTO = b->b.apply(ObservationAutoConstants.OBSERVATION_START)
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+                .build();
+
+
 }
