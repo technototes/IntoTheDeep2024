@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.twenty403;
 
+import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -32,6 +33,7 @@ public class Hardware implements Loggable {
     public Rev2MDistanceSensor rev2MDistanceSensor;
     public Motor suspend;
     public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
+    public OctoQuad octoquad;
 
     /* Put other hardware here! */
 
@@ -67,6 +69,7 @@ public class Hardware implements Loggable {
             rotate1 = new EncodedMotor<>(Setup.HardwareNames.ARML);
             rotate2 = new EncodedMotor<>(Setup.HardwareNames.ARMR);
             slides = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
+            octoquad = hwmap.get(OctoQuad.class, Setup.HardwareNames.OCTOQUAD);
         }
     }
 

@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.logger.Log;
@@ -139,16 +140,16 @@ public class DrivebaseSubsystem
     @Log(name = "Pose2d: ")
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
-        @Log.Number(name = "FL")
+    @Log.Number(name = "FL")
     public EncodedMotor<DcMotorEx> fl2;
 
-        @Log.Number(name = "FR")
+    @Log.Number(name = "FR")
     public EncodedMotor<DcMotorEx> fr2;
 
-        @Log.Number(name = "RL")
+    @Log.Number(name = "RL")
     public EncodedMotor<DcMotorEx> rl2;
 
-        @Log.Number(name = "RR")
+    @Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
     //    @Log(name = "Turbo")
@@ -180,10 +181,32 @@ public class DrivebaseSubsystem
         // setLocalizer(l);
         setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        fl.setDirection(DcMotorSimple.Direction.FORWARD);
-        rl.setDirection(DcMotorSimple.Direction.FORWARD);
-        rr.setDirection(DcMotorSimple.Direction.REVERSE);
+        fl.setDirection(DcMotorSimple.Direction.REVERSE);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        rl.setDirection(DcMotorSimple.Direction.REVERSE);
+        rr.setDirection(DcMotorSimple.Direction.REVERSE);
+    }
+
+    public DrivebaseSubsystem(
+        EncodedMotor<DcMotorEx> fl,
+        EncodedMotor<DcMotorEx> fr,
+        EncodedMotor<DcMotorEx> rl,
+        EncodedMotor<DcMotorEx> rr,
+        IMU i
+    ) {
+        super(fl, fr, rl, rr, i, () -> DriveConstants.class);
+        fl2 = fl;
+        fr2 = fr;
+        rl2 = rl;
+        rr2 = rr;
+        speed = DriveConstants.SLOW_MOTOR_SPEED;
+        // This is already handled in the parent class constructor (super)
+        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+
+        fl.setDirection(DcMotorSimple.Direction.REVERSE);
+        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        rl.setDirection(DcMotorSimple.Direction.REVERSE);
+        rr.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
@@ -253,16 +276,16 @@ public class DrivebaseSubsystem
         double maxall = Math.max(maxlfvlrv, maxrfvrrv);
 
         leftFront.setVelocity(
-                (lfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFL_SCALE) / maxall
+            (lfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFL_SCALE) / maxall
         );
         leftRear.setVelocity(
-                (lrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARL_SCALE) / maxall
+            (lrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARL_SCALE) / maxall
         );
         rightRear.setVelocity(
-                (rrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARR_SCALE) / maxall
+            (rrv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.ARR_SCALE) / maxall
         );
         rightFront.setVelocity(
-                (rfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFR_SCALE) / maxall
+            (rfv * DriveConstants.MAX_TICKS_PER_SEC * DriveConstants.AFR_SCALE) / maxall
         );
     }
 
