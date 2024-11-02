@@ -11,7 +11,6 @@ import org.firstinspires.ftc.learnbot.OnlyMotorRobot;
 import org.firstinspires.ftc.learnbot.Setup;
 import org.firstinspires.ftc.learnbot.controllers.MotorController;
 
-@Disabled
 @TeleOp(name = "AnalogMotorTest")
 @SuppressWarnings("unused")
 public class AnalogMotorTest extends CommandOpMode implements Loggable {

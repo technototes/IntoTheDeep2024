@@ -10,9 +10,9 @@ public class Setup {
         public static boolean DRIVEBASE = true;
         public static boolean ODOSUBSYSTEM = false;
         public static boolean SAFETYSUBSYSTEM = false;
-        public static boolean KIDSSHAMPOOSUBSYSTEM = true;
-        public static boolean HANGSUBSYSTEM = true;
-        public static boolean ARMSUBSYSTEM = false;
+        public static boolean KIDSSHAMPOOSUBSYSTEM = false;
+        public static boolean HANGSUBSYSTEM = false;
+        public static boolean ARMSUBSYSTEM = true;
     }
 
     @Config
@@ -23,6 +23,7 @@ public class Setup {
         public static String RLMOTOR = "rl";
         public static String RRMOTOR = "rr";
         public static String IMU = "imu";
+        public static String OCTOQUAD = "octoquad";
         public static String ODOF = "odof";
         public static String ODOR = "odor";
         public static String INTAKE = "intake";
@@ -35,6 +36,14 @@ public class Setup {
         public static String ARML = "armL";
         public static String ARMR = "armR";
         public static String SLIDEMOTOR = "slide";
+    }
+
+    @Config
+    public static class OctoQuadPorts {
+
+        public static int ARMENCODER = 5;
+        public static int ODOR = 6; //TODO: verify with robot, r & l may be swapped
+        public static int ODOL = 7;
     }
 
     @Config
