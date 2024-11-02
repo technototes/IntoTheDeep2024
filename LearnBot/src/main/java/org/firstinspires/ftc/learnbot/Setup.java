@@ -7,7 +7,7 @@ public class Setup {
     @Config
     public static class Connected {
 
-        public static boolean DRIVEBASE = true;
+        public static boolean DRIVEBASE = false;
         public static boolean TESTSUBSYSTEM = true;
         public static boolean MOTOR = false;
         public static boolean SERVO = true;

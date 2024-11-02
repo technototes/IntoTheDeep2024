@@ -63,6 +63,9 @@ public class TestSubsystem implements Subsystem, Loggable {
     }
 
     public void servoMaxPos() {
+        if (servo == null) {
+            throw new RuntimeException("Null servo in TestSubsystem");
+        }
         running = true;
         servo.setPosition(1);
     }
