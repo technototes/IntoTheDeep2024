@@ -8,9 +8,9 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean TESTSUBSYSTEM = false;
+        public static boolean TESTSUBSYSTEM = true;
         public static boolean MOTOR = false;
-        public static boolean SERVO = false;
+        public static boolean SERVO = true;
         public static boolean DISTANCE_SENSOR = false;
         public static boolean COLOR_SENSOR = false;
         public static boolean FLYWHEEL = false;

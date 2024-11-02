@@ -16,6 +16,7 @@ public class Robot implements Loggable {
     public DrivebaseSubsystem drivebaseSubsystem;
 
     public PlacementSubsystem placementSubsystem;
+    public TestSubsystem testsubsystem;
 
     public Robot(Hardware hw) {
         this.initialVoltage = hw.voltage();
