@@ -20,20 +20,20 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double WRIST_POS = 0;
     public static double LINK_POS = 1;
 
-    public static double LinkServoExtend = 0;
-    public static double LinkServoRetract = 0;
-    public static double ClawServoClose = 0;
-    public static double ClawServoOpen = 0.3;
+    public static double LinkServoExtend = 0.6;
+    public static double LinkServoRetract = 1;
+    public static double ClawServoClose = 0.1;
+    public static double ClawServoOpen = 0.5;
     public static double WristServoTransfer = 0.3;
     public static double WristServoPickup = 1;
     public static double WristServoIncrement = 0.555;
 
     @Log(name = "wristTarget")
     public double wristTargetPos;
+
     public Servo wristServo;
     public Servo clawServo;
     public Servo linkServo;
-
 
     private boolean isHardware;
 
@@ -74,12 +74,12 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void ClawWristServoPickup() {
-        wristServo.setPosition(WristServoPickup); //lowers claw to intake
+        setWristPos(WristServoPickup); //lowers claw to intake
     }
 
     public void ClawWristServoTransfer() {
         // positions for the arm of the bot for transfer
-        wristServo.setPosition(WristServoTransfer);
+        setWristPos(WristServoTransfer);
     }
 
     public void ClawWristServoIncrement() {
@@ -91,7 +91,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         // the arm's position to score
         setWristPos(wristTargetPos - WristServoIncrement);
     }
-  
+
     private void setWristPos(double w) {
         if (wristServo != null) {
             wristServo.setPosition(w);
