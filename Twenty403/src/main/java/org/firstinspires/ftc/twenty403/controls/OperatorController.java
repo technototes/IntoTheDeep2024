@@ -27,6 +27,8 @@ public class OperatorController {
     public CommandButton armLowNet;
     public CommandButton armLowSpecimen;
     public CommandButton armHighSpecimen;
+    public CommandButton armHorizontal;
+    public CommandButton armVertical;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -45,11 +47,13 @@ public class OperatorController {
         spitIntake = gamepad.rightBumper;
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-        suspend = gamepad.ps_circle;
+        // suspend = gamepad.ps_circle;
         armIntake = gamepad.ps_square;
         armLowNet = gamepad.dpadLeft;
         armLowSpecimen = gamepad.leftStickButton;
         armHighSpecimen = gamepad.rightStickButton;
+        armHorizontal = gamepad.ps_share;
+        armVertical = gamepad.ps_circle;
     }
 
     public void BindControls() {
@@ -104,9 +108,14 @@ public class OperatorController {
         armHighSpecimen.whenPressed(
             Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem)
         );
+        armHorizontal.whenPressed(
+            Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
+        );
+        armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));
     }
 
     public void bindHangControls() {
-        suspend.whenPressed(HangCmd.hang.Suspend(robot.hangSubsystem));
+        //suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
+
     }
 }
