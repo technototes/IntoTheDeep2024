@@ -44,7 +44,7 @@ public class HorizontalSlidesCommands {
                 r.horizontalSlidesSubsystem::ClawWristServoTransfer,
                 r.horizontalSlidesSubsystem
             ),
-            Command.create(r.horizontalSlidesSubsystem::slidesin, r.horizontalSlidesSubsystem)
+            horizontalRetract(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
@@ -76,7 +76,7 @@ public class HorizontalSlidesCommands {
                 r.horizontalSlidesSubsystem::ClawWristServoTransfer,
                 r.horizontalSlidesSubsystem
             ),
-            Command.create(r.horizontalSlidesSubsystem::slidesout, r.horizontalSlidesSubsystem),
+            horizontalExtend(r),
             new WaitCommand(1),
             Command.create(
                 r.horizontalSlidesSubsystem::ClawWristServoPickup,
