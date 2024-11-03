@@ -30,7 +30,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double ClawServoOpen = 0.8;
     public static double WristServoTransfer = 0.3;
     public static double WristServoPickup = 1;
-    public static double WristServoIncrement = 0.555;
+    public static double WristServoIncrement = 0.2;
 
     @Log(name = "wristTarget")
     public double wristTargetPos;

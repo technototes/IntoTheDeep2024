@@ -32,12 +32,12 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-        openClaw = gamepad.rightBumper;
-        closeClaw = gamepad.leftBumper;
-        //wristTransfer = gamepad.ps_triangle;
-        //wristPickup = gamepad.ps_square;
-        //wristIncrement = gamepad.dpadRight;
-        //wristDecrement = gamepad.dpadLeft;
+        openClaw = gamepad.leftBumper;
+        closeClaw = gamepad.rightBumper;
+        wristTransfer = gamepad.ps_circle;
+        wristPickup = gamepad.ps_square;
+        wristIncrement = gamepad.dpadRight;
+        wristDecrement = gamepad.dpadLeft;
         horislidesLeftStick = gamepad.leftStick;
         horislidesExtend = gamepad.ps_triangle;
         horislidesRetract = gamepad.ps_cross;
@@ -47,17 +47,17 @@ public class OperatorController {
         // Remember to only bind buttons for attached subsystems
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
             bindHorizontalSlidesControls();
-            //bindHorizontalAnalogControls(); // not yet tested
+            bindHorizontalAnalogControls();
         }
     }
 
     private void bindHorizontalSlidesControls() {
         openClaw.whenPressed(HorizontalSlidesCommands.clawOpen(robot));
         closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
-        //wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
-        //wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
-        //wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
-        //wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
+        wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
+        wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
+        wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
+        wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
         horislidesExtend.whenPressed(HorizontalSlidesCommands.intake(robot));
         horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
     }
