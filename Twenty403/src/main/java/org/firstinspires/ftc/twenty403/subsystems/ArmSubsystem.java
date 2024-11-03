@@ -137,41 +137,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
         setArmPos(ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH);
     }
 
-    public void lowSpecimenRotate2() {
-        rotate1.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
-        rotate2.setPosition(ROTATE_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
-    }
-
-    public void lowSpecimenSlides2() {
-        slides.setPosition(SLIDES_MOTOR_LOW_SPECIMEN_SCORING_POSITION2);
-    }
-
-    public void highSpecimenRotate1() {
-        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
-        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
-    }
-
-    public void highSpecimenSlides1() {
-        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION1);
-    }
-
-    public void highSpecimenRotate2() {
-        rotate1.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
-        rotate2.setPosition(ROTATE_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
-    }
-
-    public void highSpecimenSlides2() {
-        slides.setPosition(SLIDES_MOTOR_HIGH_SPECIMEN_SCORING_POSITION2);
-    }
-
     //intake position
     public void setArmToIntake() {
         setArmPos(ROTATE_MOTOR_INTAKE_POSITION);
-    }
-
-    public void intakeRotateSpecimen() {
-        rotate1.setPosition(ROTATE_MOTOR_INTAKE_SPECIMEN_POSITION);
-        rotate2.setPosition(ROTATE_MOTOR_INTAKE_SPECIMEN_POSITION);
     }
 
     @Override

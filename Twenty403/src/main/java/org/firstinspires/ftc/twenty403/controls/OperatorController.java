@@ -72,9 +72,6 @@ public class OperatorController {
         closeRetainer.whenPressed(
             Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem)
         );
-        eatRetainer.whenPressed(
-            Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem)
-        );
         biteJaw.whenPressed(
             Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem)
         );
