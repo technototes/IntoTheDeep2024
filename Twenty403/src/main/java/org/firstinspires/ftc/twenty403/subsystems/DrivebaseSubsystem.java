@@ -181,9 +181,8 @@ public class DrivebaseSubsystem
         // setLocalizer(l);
         setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        fl.setDirection(DcMotorSimple.Direction.REVERSE);
-        fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        rl.setDirection(DcMotorSimple.Direction.REVERSE);
+        fl.setDirection(DcMotorSimple.Direction.FORWARD);
+        rl.setDirection(DcMotorSimple.Direction.FORWARD);
         rr.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
