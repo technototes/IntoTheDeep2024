@@ -18,13 +18,13 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
     private OctoQuad octoquad;
-    public static double FEEDFORWARD_COEFFICIENT = 0.13;
+    public static double FEEDFORWARD_COEFFICIENT = 0.35; //0.7
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
-    public static double MIN_ARM_MOTOR_SPEED = -0.5;
-    public static double MAX_ARM_MOTOR_SPEED = 0.5;
+    public static double MIN_ARM_MOTOR_SPEED = -0.7;
+    public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
     public static double SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
     public static double SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
@@ -96,7 +96,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
             (ticks, velocity) ->
                 FEEDFORWARD_COEFFICIENT *
                 Math.cos(
-                    (Math.PI * (ticks - ARM_HORIZONTAL)) / (2 * (ARM_VERTICAL - ARM_HORIZONTAL))
+                    (Math.PI * (ticks - ARM_HORIZONTAL)) / (2.0 * (ARM_VERTICAL - ARM_HORIZONTAL))
                 )
         );
         setArmPos(INITIAL_POSITION);
@@ -157,5 +157,13 @@ public class ArmSubsystem implements Subsystem, Loggable {
         double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
         rotate1.setPower(clippedSpeed);
         rotate2.setPower(-clippedSpeed);
+    }
+
+    public void horizontal() {
+        setArmPos(ARM_HORIZONTAL);
+    }
+
+    public void vertical() {
+        setArmPos(ARM_VERTICAL);
     }
 }
