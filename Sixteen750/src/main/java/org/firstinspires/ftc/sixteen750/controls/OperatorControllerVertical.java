@@ -16,6 +16,7 @@ public class OperatorControllerVertical {
     public CommandButton bucketTransfer;
     public CommandButton bucketScore;
     public CommandButton bucketIncrement;
+    public CommandButton bucketDecrement;
     public CommandButton armTransfer;
     public CommandButton armScore;
     public CommandButton slidesLow;
@@ -33,13 +34,13 @@ public class OperatorControllerVertical {
     private void AssignNamedControllerButton() {
         bucketTransfer = gamepad.ps_circle;
         bucketScore = gamepad.ps_triangle;
-        bucketIncrement =
         armTransfer = gamepad.ps_cross;
         armScore = gamepad.ps_square;
-        slidesLow = gamepad.dpadLeft;
-        slidesHigh = gamepad.dpadUp;
+        slidesHigh = gamepad.ps_share;
+        slidesLow = gamepad.dpadUp;
         slidesDown = gamepad.dpadDown;
-        //wristDecrement = gamepad.dpadDown;
+        bucketIncrement = gamepad.dpadDown;
+        bucketDecrement = gamepad.dpadDown;
         vertslidesLeftStick = gamepad.leftStick;
     }
 
