@@ -2,6 +2,7 @@ package org.firstinspires.ftc.sixteen750.commands.slides;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
+import com.technototes.library.command.WaitCommand;
 import org.firstinspires.ftc.sixteen750.Robot;
 
 public class HorizontalSlidesCommands {
@@ -43,11 +44,7 @@ public class HorizontalSlidesCommands {
                 r.horizontalSlidesSubsystem::ClawWristServoTransfer,
                 r.horizontalSlidesSubsystem
             ),
-            Command.create(r.horizontalSlidesSubsystem::slidesin, r.horizontalSlidesSubsystem),
-            Command.create(
-                r.horizontalSlidesSubsystem::ClawServoBigOpen,
-                r.horizontalSlidesSubsystem
-            )
+            Command.create(r.horizontalSlidesSubsystem::slidesin, r.horizontalSlidesSubsystem)
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
@@ -80,6 +77,7 @@ public class HorizontalSlidesCommands {
                 r.horizontalSlidesSubsystem
             ),
             Command.create(r.horizontalSlidesSubsystem::slidesout, r.horizontalSlidesSubsystem),
+            new WaitCommand(1),
             Command.create(
                 r.horizontalSlidesSubsystem::ClawWristServoPickup,
                 r.horizontalSlidesSubsystem
