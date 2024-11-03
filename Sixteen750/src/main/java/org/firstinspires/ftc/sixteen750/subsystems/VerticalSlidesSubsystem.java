@@ -74,9 +74,16 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         armServo = hw.armservo;
         bucketServo = hw.bucketservo;
         isHardware = true;
-        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) ->
-            FEEDFORWARD_COEFFICIENT
-        );
+        slidePidController =
+                new PIDFController(
+                        slidePID,
+                        0,
+                        0,
+                        0,
+
+                        (ticks, velocity) ->
+                                FEEDFORWARD_COEFFICIENT
+                );
         resetSlideZero();
     }
 
