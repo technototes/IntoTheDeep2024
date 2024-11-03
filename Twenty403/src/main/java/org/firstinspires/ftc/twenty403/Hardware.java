@@ -75,7 +75,10 @@ public class Hardware implements Loggable {
             rotate1 = new EncodedMotor<>(Setup.HardwareNames.ARML);
             rotate2 = new EncodedMotor<>(Setup.HardwareNames.ARMR);
             slides = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
+        }
+        if (Setup.Connected.OCTOQUAD) {
             octoquad = hwmap.get(OctoQuad.class, Setup.HardwareNames.OCTOQUAD);
+            octoquad.resetAllPositions();
         }
     }
 

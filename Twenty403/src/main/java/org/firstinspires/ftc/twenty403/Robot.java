@@ -29,7 +29,7 @@ public class Robot implements Loggable {
         this.alliance = team;
         this.initialVoltage = hw.voltage();
         if (Setup.Connected.ODOSUBSYSTEM) {
-            this.localizer = new TwoDeadWheelLocalizer(hw.odoR, hw.odoF);
+            this.localizer = new TwoDeadWheelLocalizer(hw.octoquad);
         } else {
             this.localizer = null;
         }

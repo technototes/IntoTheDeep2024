@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.FORWARD;
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.REVERSE;
 
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
-import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
+import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
+import com.qualcomm.hardware.digitalchickenlabs.OctoQuadBase;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
@@ -16,6 +14,7 @@ import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.DeadWheelConstants;
 import java.util.Arrays;
 import java.util.List;
+import org.firstinspires.ftc.twenty403.Setup;
 
 /*
  * Sample tracking wheel localizer implementation assuming the standard configuration:
@@ -75,20 +74,21 @@ public class TwoDeadWheelLocalizer
     // Parallel moves parallel to the axles of the drive base
     @LogConfig.Run(duringRun = true, duringInit = true)
     @Log(name = "parOdo")
-    public MotorEncoder parallelEncoder;
+    public int parallelEncoder;
 
     // Perpendicular moves perpendicular to the axles of the drive base
     @LogConfig.Run(duringRun = true, duringInit = true)
     @Log(name = "perpOdo")
-    public MotorEncoder perpendicularEncoder;
+    public int perpendicularEncoder;
 
+    protected OctoQuad octoquad;
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
     protected DrivebaseSubsystem drive;
 
     //1862.5 per inch
     protected boolean encoderOverflow;
 
-    public TwoDeadWheelLocalizer(MotorEncoder r, MotorEncoder f) {
+    public TwoDeadWheelLocalizer(OctoQuad o) {
         super(
             Arrays.asList(
                 new Pose2d(
@@ -104,11 +104,19 @@ public class TwoDeadWheelLocalizer
             )
         );
         drive = null;
-
-        parallelEncoder = r;
-        parallelEncoder.setDirection(OdoDeadWheelConstants.paraReverse ? REVERSE : FORWARD);
-        perpendicularEncoder = f;
-        perpendicularEncoder.setDirection(OdoDeadWheelConstants.perpReverse ? REVERSE : FORWARD);
+        octoquad = o;
+        octoquad.setSingleEncoderDirection(
+            Setup.OctoQuadPorts.ODOL,
+            OdoDeadWheelConstants.paraReverse
+                ? OctoQuadBase.EncoderDirection.REVERSE
+                : OctoQuadBase.EncoderDirection.FORWARD
+        );
+        octoquad.setSingleEncoderDirection(
+            Setup.OctoQuadPorts.ODOR,
+            OdoDeadWheelConstants.perpReverse
+                ? OctoQuadBase.EncoderDirection.REVERSE
+                : OctoQuadBase.EncoderDirection.FORWARD
+        );
 
         lateralDistance = OdoDeadWheelConstants.LateralDistance;
         forwardOffset = OdoDeadWheelConstants.ForwardOffset;
@@ -130,8 +138,8 @@ public class TwoDeadWheelLocalizer
     @Override
     public List<Double> getWheelPositions() {
         return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getCurrentPosition()),
-            encoderTicksToInches(perpendicularEncoder.getCurrentPosition())
+            encoderTicksToInches(octoquad.readSinglePosition(Setup.OctoQuadPorts.ODOL)),
+            encoderTicksToInches(octoquad.readSinglePosition(Setup.OctoQuadPorts.ODOR))
         );
     }
 
@@ -143,8 +151,8 @@ public class TwoDeadWheelLocalizer
         //  compensation method
 
         return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getCorrectedVelocity()),
-            encoderTicksToInches(perpendicularEncoder.getCorrectedVelocity())
+            encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOL)),
+            encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOR))
         );
     }
 

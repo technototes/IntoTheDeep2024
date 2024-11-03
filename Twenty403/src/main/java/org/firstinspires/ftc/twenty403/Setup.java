@@ -14,6 +14,7 @@ public class Setup {
         public static boolean HANGSUBSYSTEM = false;
         public static boolean ARMSUBSYSTEM = true;
         public static boolean EXTERNALIMU = true;
+        public static boolean OCTOQUAD = true;
     }
 
     @Config
