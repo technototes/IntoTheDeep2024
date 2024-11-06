@@ -64,11 +64,11 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     //these are methods, needed to be called in a command
     public void slidesout() {
-        setSlide(LinkServoExtend);
+        setSlides(LinkServoExtend);
     }
 
     public void slidesin() {
-        setSlide(LinkServoRetract);
+        setSlides(LinkServoRetract);
     }
 
     public void BigExtending() {
@@ -123,7 +123,12 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     private void setSlide(double pos) {
-        Range.clip(pos, 0.0, 1.0);
+        Range.clip(pos, 0.5, 1.0);
+        linkServo.setPosition(pos);
+        currentPos = pos;
+    }
+
+    private void setSlides(double pos) {
         linkServo.setPosition(pos);
         currentPos = pos;
     }

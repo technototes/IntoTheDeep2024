@@ -34,13 +34,13 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         openClaw = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
-        wristTransfer = gamepad.ps_circle;
-        wristPickup = gamepad.ps_square;
+        wristTransfer = gamepad.ps_triangle;
+        wristPickup = gamepad.ps_circle;
         wristIncrement = gamepad.dpadRight;
         wristDecrement = gamepad.dpadLeft;
         horislidesLeftStick = gamepad.leftStick;
-        horislidesExtend = gamepad.ps_triangle;
-        horislidesRetract = gamepad.ps_cross;
+        horislidesExtend = gamepad.ps_cross;
+        horislidesRetract = gamepad.ps_square;
     }
 
     private void BindButtons() {

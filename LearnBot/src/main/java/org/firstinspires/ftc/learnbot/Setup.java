@@ -9,7 +9,7 @@ public class Setup {
 
         public static boolean DRIVEBASE = false;
         public static boolean TESTSUBSYSTEM = true;
-        public static boolean MOTOR = false;
+        public static boolean MOTOR = true;
         public static boolean SERVO = true;
         public static boolean DISTANCE_SENSOR = false;
         public static boolean COLOR_SENSOR = false;
@@ -20,7 +20,7 @@ public class Setup {
     @Config
     public static class HardwareNames {
 
-        public static String MOTOR = "liftmotor";
+        public static String MOTOR = "motor";
         public static String FLMOTOR = "fl";
         public static String FRMOTOR = "fr";
         public static String RLMOTOR = "rl";

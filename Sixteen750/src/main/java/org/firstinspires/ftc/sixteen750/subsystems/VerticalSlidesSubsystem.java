@@ -124,16 +124,16 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void slidesDown() {
         // lowers the bucket system
         //probably going to do the slide thing with the joysticks (negative of slidesup)
-        slidePidController.setTargetPosition(SLIDE_ZERO);
+        setSlideMotorPower(SLIDE_ZERO);
     }
 
     public void slideBasketLow() {
         //takes the arm to the first level
-        slidePidController.setTargetPosition(LOW_BASKET);
+        setSlideMotorPower(LOW_BASKET);
     }
 
     public void slideBasketHigh() {
-        slidePidController.setTargetPosition(HIGH_BASKET);
+        setSlideMotorPower(HIGH_BASKET);
     }
 
     public void slideChamberLow() {
@@ -154,19 +154,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // the arm's position to score
         setBucketPos(bucketTargetPos + BucketServoIncrement);
     }
+
     public void bucketServoDecrement() {
         // the arm's position to score
         setBucketPos(bucketTargetPos - BucketServoIncrement);
     }
+
     public void armServoIncrement() {
         // the arm's position to score
         setArmPos(armTargetPos + ArmServoIncrement);
     }
+
     public void armServoDecrement() {
         // the arm's position to score
         setArmPos(armTargetPos - ArmServoIncrement);
     }
-
 
     public void bucketServoTransfer() {
         // the intake system's position to score

@@ -19,7 +19,7 @@ public class HorizontalAnalogCommand implements Command, Loggable {
     public DoubleSupplier x, y;
 
     public HorizontalAnalogCommand(TestSubsystem sub, Stick xyStick) {
-        addRequirements(sub);
+        //addRequirements(sub);
         subsystem = sub;
         y = xyStick.getYSupplier();
     }
