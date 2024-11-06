@@ -27,6 +27,9 @@ public class TestController implements Loggable {
     public CommandButton servoInc;
     public CommandButton servoDec;
     public Stick servoAnalog;
+    public CommandButton slidesLow;
+    public CommandButton slidesHigh;
+    public CommandButton slidesDown;
 
     public CommandButton liftLow, liftMid, liftHigh;
 
@@ -52,6 +55,9 @@ public class TestController implements Loggable {
         this.servoInc = gamepad.dpadUp;
         this.servoDec = gamepad.dpadDown;
         this.servoAnalog = gamepad.leftStick;
+        this.slidesLow = gamepad.ps_square;
+        this.slidesHigh = gamepad.ps_circle;
+        this.slidesDown = gamepad.dpadLeft;
         //        this.servoleft.whenPressed(new ServoLeft(r.test));
         //        this.servoright.whenPressed((new ServoRight(r.test)));
         //this.motorAxis = gamepad.rightStickY;
@@ -72,6 +78,9 @@ public class TestController implements Loggable {
         servoMin.whenPressed(Test.ServoMin(robot));
         servoInc.whenPressed(Test.ServoInc(robot));
         servoDec.whenPressed(Test.ServoDec(robot));
+        slidesLow.whenPressed(Test.LowBasket(robot));
+        slidesHigh.whenPressed(Test.HighBasket(robot));
+        slidesDown.whenPressed(Test.SlidesZero(robot));
         bindHorizontalAnalogControls();
     }
 

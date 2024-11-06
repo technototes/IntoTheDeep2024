@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.technototes.library.command.Command;
+import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.MathUtils;
@@ -26,7 +27,7 @@ public class HorizontalAnalogCommand implements Command, Loggable {
     public DoubleSupplier x, y;
 
     public HorizontalAnalogCommand(HorizontalSlidesSubsystem sub, Stick xyStick) {
-        addRequirements(sub);
+        //        addRequirements(sub);
         subsystem = sub;
         y = xyStick.getYSupplier();
     }
@@ -40,12 +41,16 @@ public class HorizontalAnalogCommand implements Command, Loggable {
         //command that changes the horislides position?
         if (yvalue > BIGEXTEND) {
             subsystem.BigExtending();
+            //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigExtending, subsystem));
         } else if (yvalue > SMALLEXTEND) {
             subsystem.SmallExtending();
+            //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallExtending, subsystem));
         } else if (yvalue < BIGRETRACT) {
             subsystem.BigRetracting();
+            //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigRetracting, subsystem));
         } else if (yvalue < SMALLRETRACT) {
             subsystem.SmallRetracting();
+            //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallRetracting, subsystem));
         }
     }
 
