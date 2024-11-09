@@ -45,6 +45,7 @@ public class OperatorController {
         eatRetainer = gamepad.dpadRight;
         slurpIntake = gamepad.leftBumper;
         spitIntake = gamepad.rightBumper;
+        //temp changing the button below from biteJaw to intake :DD
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
         // suspend = gamepad.ps_circle;
