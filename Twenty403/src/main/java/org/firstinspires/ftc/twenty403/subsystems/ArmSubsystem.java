@@ -31,7 +31,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 700;
     public static double SLIDES_MOTOR_INTAKE_POSITION = 800;
     public static int ARM_VERTICAL = 3000;
-    public static int ARM_HORIZONTAL = 850;
+    public static int ARM_HORIZONTAL = 900;
     public static int INITIAL_POSITION = 150;
     public static PIDCoefficients armPID = new PIDCoefficients(0.004, 0.00002, 0.00027);
 
@@ -143,7 +143,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     //intake position
     public void setArmToIntake() {
-        setArmPos(ROTATE_MOTOR_INTAKE_POSITION);
+        setArmPos(INITIAL_POSITION);
     }
 
     @Override
