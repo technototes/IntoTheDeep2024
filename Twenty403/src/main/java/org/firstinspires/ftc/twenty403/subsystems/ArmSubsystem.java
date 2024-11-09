@@ -23,7 +23,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
-    public static double MIN_ARM_MOTOR_SPEED = -0.7;
+    public static double MIN_ARM_MOTOR_SPEED = -0.2;
     public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
     public static double SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
@@ -33,7 +33,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
-    public static PIDCoefficients armPID = new PIDCoefficients(0.004, 0.0, 0.0006);
+    public static int INCREMENT_DECREMENT = 120;
+    // as of now, we arent having a D
+    public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0.000);
 
     @Log(name = "armPow")
     public double armPow;
@@ -49,6 +51,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     @Log(name = "wristPos")
     public double wristPos;
+
+    @Log(name = "feedfwdvalue")
+    public double feedForwardValue;
 
     private PIDFController armPidController;
 
@@ -93,17 +98,38 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
              */
 
-            (ticks, velocity) ->
-                FEEDFORWARD_COEFFICIENT *
+            (ticks, velocity) -> {
+                feedForwardValue = FEEDFORWARD_COEFFICIENT *
                 Math.cos(
                     (Math.PI * (ticks - ARM_HORIZONTAL)) / (2.0 * (ARM_VERTICAL - ARM_HORIZONTAL))
-                )
+                );
+
+                if (Math.abs(feedForwardValue) < 0.1) {
+                    feedForwardValue = 0.0;
+                }
+
+                return feedForwardValue;
+            }
         );
         setArmPos(INITIAL_POSITION);
     }
 
     public ArmSubsystem() {
         armPidController = new PIDFController(armPID, 0, 0, 0, (x, y) -> 0.0);
+    }
+
+    public void increment() {
+        setArmPos(getArmCurrentPos() + INCREMENT_DECREMENT);
+        if (armTargetPos > 3100) {
+            setArmPos(3100);
+        }
+    }
+
+    public void decrement() {
+        setArmPos(getArmCurrentPos() - INCREMENT_DECREMENT);
+        if (armTargetPos < 0) {
+            setArmPos(0);
+        }
     }
 
     private int getArmCurrentPos() {

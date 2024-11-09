@@ -29,6 +29,8 @@ public class OperatorController {
     public CommandButton armHighSpecimen;
     public CommandButton armHorizontal;
     public CommandButton armVertical;
+    public CommandButton armIncrement;
+    public CommandButton armDecrement;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -49,12 +51,14 @@ public class OperatorController {
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
         // suspend = gamepad.ps_circle;
-        armIntake = gamepad.ps_square;
-        armLowNet = gamepad.dpadLeft;
-        armLowSpecimen = gamepad.leftStickButton;
-        armHighSpecimen = gamepad.rightStickButton;
+        //        armIntake = gamepad.ps_square;
+        //        armLowNet = gamepad.dpadLeft;
+        //        armLowSpecimen = gamepad.leftStickButton;
+        //        armHighSpecimen = gamepad.rightStickButton;
         armHorizontal = gamepad.ps_share;
-        armVertical = gamepad.ps_circle;
+        armVertical = gamepad.ps_options;
+        armIncrement = gamepad.ps_circle;
+        armDecrement = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -99,20 +103,16 @@ public class OperatorController {
     }
 
     public void bindArmControls() {
-        armIntake.whenPressed(
-            Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem)
-        );
-        armLowNet.whenPressed(Command.create(robot.armSubsystem::lowBasket, robot.armSubsystem));
-        armLowSpecimen.whenPressed(
-            Command.create(robot.armSubsystem::lowSpecimen, robot.armSubsystem)
-        );
-        armHighSpecimen.whenPressed(
-            Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem)
-        );
+        //        armIntake.whenPressed(Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem));
+        //        armLowNet.whenPressed(Command.create(robot.armSubsystem::lowBasket, robot.armSubsystem));
+        //        armLowSpecimen.whenPressed(Command.create(robot.armSubsystem::lowSpecimen, robot.armSubsystem));
+        //        armHighSpecimen.whenPressed(Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem));
         armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );
         armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));
+        armIncrement.whenPressed(Command.create(robot.armSubsystem::increment, robot.armSubsystem));
+        armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
     }
 
     public void bindHangControls() {
