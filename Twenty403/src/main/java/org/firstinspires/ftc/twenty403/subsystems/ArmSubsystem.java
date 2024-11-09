@@ -18,7 +18,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
     private OctoQuad octoquad;
-    public static double FEEDFORWARD_COEFFICIENT = 0.35; //0.7
+    public static double FEEDFORWARD_COEFFICIENT = 0.3; //0.7
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
@@ -30,10 +30,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
     public static double SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 700;
     public static double SLIDES_MOTOR_INTAKE_POSITION = 800;
-    public static int ARM_VERTICAL = 3000;
-    public static int ARM_HORIZONTAL = 900;
+    public static int ARM_VERTICAL = 3100;
+    public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
-    public static PIDCoefficients armPID = new PIDCoefficients(0.004, 0.00002, 0.00027);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.004, 0.0, 0.0006);
 
     @Log(name = "armPow")
     public double armPow;
@@ -107,7 +107,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     private int getArmCurrentPos() {
-        return octoquad.readSinglePosition(Setup.OctoQuadPorts.ARMENCODER);
+        return -octoquad.readSinglePosition(Setup.OctoQuadPorts.ARMENCODER);
     }
 
     //low basket scoring
