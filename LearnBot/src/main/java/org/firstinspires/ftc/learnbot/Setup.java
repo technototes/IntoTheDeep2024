@@ -7,14 +7,15 @@ public class Setup {
     @Config
     public static class Connected {
 
-        public static boolean DRIVEBASE = false;
-        public static boolean TESTSUBSYSTEM = true;
-        public static boolean MOTOR = true;
-        public static boolean SERVO = true;
+        public static boolean DRIVEBASE = true;
+        public static boolean TESTSUBSYSTEM = false;
+        public static boolean MOTOR = false;
+        public static boolean SERVO = false;
         public static boolean DISTANCE_SENSOR = false;
         public static boolean COLOR_SENSOR = false;
         public static boolean FLYWHEEL = false;
         public static boolean WEBCAM = false;
+        public static boolean EXTERNAL_IMU = true;
     }
 
     @Config
@@ -28,6 +29,7 @@ public class Setup {
         public static String FLYWHEELMOTOR = "fly";
         public static String SERVO = "s";
         public static String IMU = "imu";
+        public static String EXTERNAL_IMU = "adafruit-imu";
         public static String DISTANCE = "d";
         public static String COLOR = "c";
         public static String CAMERA = "camera";

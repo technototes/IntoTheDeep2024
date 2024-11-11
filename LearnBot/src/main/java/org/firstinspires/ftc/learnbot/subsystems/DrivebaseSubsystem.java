@@ -13,6 +13,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
+import org.firstinspires.ftc.learnbot.Setup;
 
 public class DrivebaseSubsystem
     extends PathingMecanumDrivebaseSubsystem
@@ -120,26 +121,26 @@ public class DrivebaseSubsystem
     @Log(name = "Pose2d: ")
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
-    @Log.Number(name = "FL")
+    //    @Log.Number(name = "FL")
     public EncodedMotor<DcMotorEx> fl2;
 
-    @Log.Number(name = "FR")
+    //    @Log.Number(name = "FR")
     public EncodedMotor<DcMotorEx> fr2;
 
-    @Log.Number(name = "RL")
+    //    @Log.Number(name = "RL")
     public EncodedMotor<DcMotorEx> rl2;
 
-    @Log.Number(name = "RR")
+    //    @Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
-    @Log(name = "Turbo")
+    //    @Log(name = "Turbo")
     public boolean Turbo = false;
 
-    @Log(name = "Snail")
+    //    @Log(name = "Snail")
     public boolean Snail = false;
 
-    @Log(name = "cur heading")
-    double curHeading;
+    @Log.Number(name = "cur heading")
+    public double curHeading;
 
     public DrivebaseSubsystem(
         EncodedMotor<DcMotorEx> flMotor,
@@ -154,6 +155,7 @@ public class DrivebaseSubsystem
         rl2 = rlMotor;
         rr2 = rrMotor;
         curHeading = imu.getHeading();
+        Setup.HardwareNames.COLOR = imu.getClass().toString();
     }
 
     @Override
@@ -166,6 +168,7 @@ public class DrivebaseSubsystem
             " : " +
             (poseVelocity != null ? poseVelocity.toString() : "nullv");
             curHeading = this.gyro.getHeading();
+            Setup.HardwareNames.FLYWHEELMOTOR = this.gyro.getClass().toString();
         }
     }
 
