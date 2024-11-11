@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.logger.Log;
@@ -17,7 +16,6 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
-import org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity;
 import org.firstinspires.ftc.twenty403.helpers.HeadingHelper;
 
 public class DrivebaseSubsystem
@@ -214,7 +212,7 @@ public class DrivebaseSubsystem
     }
 
     public void saveHeading() {
-        HeadingHelper.saveHeading(get().getX(), get().getY(), imu.gyroHeading());
+        HeadingHelper.saveHeading(get().getX(), get().getY(), gyro.getHeading());
     }
 
     @Override
@@ -227,7 +225,7 @@ public class DrivebaseSubsystem
             " : " +
             (poseVelocity != null ? poseVelocity.toString() : "<null>");
         }
-        heading = imu.gyroHeading();
+        heading = gyro.getHeading();
     }
 
     // Velocity driving, in the hopes that the bot with drive straight ;)

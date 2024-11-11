@@ -6,14 +6,13 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
-import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class DrivebaseSubsystem
     extends PathingMecanumDrivebaseSubsystem
@@ -147,14 +146,14 @@ public class DrivebaseSubsystem
         EncodedMotor<DcMotorEx> frMotor,
         EncodedMotor<DcMotorEx> rlMotor,
         EncodedMotor<DcMotorEx> rrMotor,
-        IMU imu
+        IGyro imu
     ) {
         super(flMotor, frMotor, rlMotor, rrMotor, imu, () -> DriveConstants.class);
         fl2 = flMotor;
         fr2 = frMotor;
         rl2 = rlMotor;
         rr2 = rrMotor;
-        curHeading = imu.gyroHeading();
+        curHeading = imu.getHeading();
     }
 
     @Override
@@ -166,7 +165,7 @@ public class DrivebaseSubsystem
             poseDisplay = pose.toString() +
             " : " +
             (poseVelocity != null ? poseVelocity.toString() : "nullv");
-            curHeading = this.imu.gyroHeading();
+            curHeading = this.gyro.getHeading();
         }
     }
 

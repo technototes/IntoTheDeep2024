@@ -37,7 +37,7 @@ public class ImuOnlySubsystem implements Subsystem, Loggable {
 
     @Override
     public void periodic() {
-        internal = String.valueOf(internalImu.gyroHeading());
+        internal = String.valueOf(internalImu.getHeading());
         Position p = externalImu.getPosition();
         external = String.valueOf(p);
         YawPitchRollAngles ypr = publicImu.getRobotYawPitchRollAngles();
