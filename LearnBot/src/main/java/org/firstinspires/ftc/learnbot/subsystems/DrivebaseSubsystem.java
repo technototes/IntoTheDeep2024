@@ -6,14 +6,14 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
-import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.learnbot.Setup;
 
 public class DrivebaseSubsystem
     extends PathingMecanumDrivebaseSubsystem
@@ -121,40 +121,41 @@ public class DrivebaseSubsystem
     @Log(name = "Pose2d: ")
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
-    @Log.Number(name = "FL")
+    //    @Log.Number(name = "FL")
     public EncodedMotor<DcMotorEx> fl2;
 
-    @Log.Number(name = "FR")
+    //    @Log.Number(name = "FR")
     public EncodedMotor<DcMotorEx> fr2;
 
-    @Log.Number(name = "RL")
+    //    @Log.Number(name = "RL")
     public EncodedMotor<DcMotorEx> rl2;
 
-    @Log.Number(name = "RR")
+    //    @Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
-    @Log(name = "Turbo")
+    //    @Log(name = "Turbo")
     public boolean Turbo = false;
 
-    @Log(name = "Snail")
+    //    @Log(name = "Snail")
     public boolean Snail = false;
 
-    @Log(name = "cur heading")
-    double curHeading;
+    @Log.Number(name = "cur heading")
+    public double curHeading;
 
     public DrivebaseSubsystem(
         EncodedMotor<DcMotorEx> flMotor,
         EncodedMotor<DcMotorEx> frMotor,
         EncodedMotor<DcMotorEx> rlMotor,
         EncodedMotor<DcMotorEx> rrMotor,
-        IMU imu
+        IGyro imu
     ) {
         super(flMotor, frMotor, rlMotor, rrMotor, imu, () -> DriveConstants.class);
         fl2 = flMotor;
         fr2 = frMotor;
         rl2 = rlMotor;
         rr2 = rrMotor;
-        curHeading = imu.gyroHeading();
+        curHeading = imu.getHeading();
+        Setup.HardwareNames.COLOR = imu.getClass().toString();
     }
 
     @Override
@@ -166,7 +167,8 @@ public class DrivebaseSubsystem
             poseDisplay = pose.toString() +
             " : " +
             (poseVelocity != null ? poseVelocity.toString() : "nullv");
-            curHeading = this.imu.gyroHeading();
+            curHeading = this.gyro.getHeading();
+            Setup.HardwareNames.FLYWHEELMOTOR = this.gyro.getClass().toString();
         }
     }
 

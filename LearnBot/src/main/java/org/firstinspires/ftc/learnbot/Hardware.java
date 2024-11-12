@@ -6,7 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
+import com.technototes.library.hardware.sensor.AdafruitIMU;
 import com.technototes.library.hardware.sensor.ColorDistanceSensor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.hardware.servo.Servo;
@@ -26,7 +28,7 @@ public class Hardware implements Loggable {
     public Servo placeholder2;
     public Servo servo;
 
-    public IMU imu;
+    public IGyro imu;
     public Webcam camera;
 
     public Rev2MDistanceSensor distanceSensor;
@@ -34,11 +36,17 @@ public class Hardware implements Loggable {
 
     public Hardware(HardwareMap hwmap) {
         hubs = hwmap.getAll(LynxModule.class);
-        imu = new IMU(
-            Setup.HardwareNames.IMU,
-            RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-            RevHubOrientationOnRobot.UsbFacingDirection.UP
-        );
+        if (Setup.Connected.EXTERNAL_IMU) {
+            imu = new AdafruitIMU(Setup.HardwareNames.EXTERNAL_IMU, AdafruitIMU.Orientation.Pitch);
+            Setup.HardwareNames.MOTOR = "External IMU is in use";
+        } else {
+            imu = new IMU(
+                Setup.HardwareNames.IMU,
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
+            );
+            Setup.HardwareNames.MOTOR = "Internal IMU is being used";
+        }
         if (Setup.Connected.DRIVEBASE) {
             this.frMotor = new EncodedMotor<>(Setup.HardwareNames.FRMOTOR);
             this.flMotor = new EncodedMotor<>(Setup.HardwareNames.FLMOTOR);
@@ -65,11 +73,6 @@ public class Hardware implements Loggable {
             //                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
             //            }
         }
-        this.imu = new IMU(
-            Setup.HardwareNames.IMU,
-            RevHubOrientationOnRobot.LogoFacingDirection.UP,
-            RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
-        );
     }
 
     // We can read the voltage from the different hubs for fun...
