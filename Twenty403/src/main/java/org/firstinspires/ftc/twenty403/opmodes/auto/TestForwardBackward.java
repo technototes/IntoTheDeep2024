@@ -16,7 +16,7 @@ import org.firstinspires.ftc.twenty403.commands.driving.DriveTestCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "Fwd/Backward")
+@Autonomous(name = "Fwd/Bkwd (not RR)")
 @SuppressWarnings("unused")
 public class TestForwardBackward extends CommandOpMode {
 
@@ -28,8 +28,8 @@ public class TestForwardBackward extends CommandOpMode {
     public void uponInit() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
-        robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.START.toPose());
+        robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.TEST_START.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                 new DriveTestCommand(robot.drivebaseSubsystem, 1),

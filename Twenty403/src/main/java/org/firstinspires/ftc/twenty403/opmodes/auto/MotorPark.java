@@ -8,19 +8,17 @@ import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.auto.MotorParking;
-import org.firstinspires.ftc.twenty403.commands.driving.DriveTestCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
 @Autonomous(name = "MotorPark")
 @SuppressWarnings("unused")
-public class MotorPark    extends CommandOpMode {
+public class MotorPark extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;
@@ -30,11 +28,11 @@ public class MotorPark    extends CommandOpMode {
     public void uponInit() {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
-        robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.START.toPose());
+        robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.OBSERVATION_START.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                    new WaitCommand(0.01),
+                new WaitCommand(0.01),
                 new MotorParking(robot.drivebaseSubsystem, 0.5),
                 new WaitCommand(0.5),
                 new MotorParking(robot.drivebaseSubsystem, 0),
