@@ -11,7 +11,7 @@ public class Setup {
         public static boolean VERTICALSLIDESUBSYSTEM = true;
         public static boolean HORIZONTALSLIDESUBSYSTEM = true;
         public static boolean BUCKET = false;
-        public static boolean ODOSUBSYSTEM = false;
+        public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
     }
 

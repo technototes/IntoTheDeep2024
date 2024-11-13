@@ -13,17 +13,16 @@ public class AutoConstants {
 
 
     //New testing constants for this year's game
-    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
     public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
     public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
-    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
     public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
     public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
     public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
 
-
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
+    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
     public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
