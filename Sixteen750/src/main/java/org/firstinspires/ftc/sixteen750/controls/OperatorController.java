@@ -89,6 +89,10 @@ public class OperatorController {
         //choice commands
         shiftButton = gamepad.ps_share;
         horizontalSlides_verticalSlides = gamepad.ps_triangle;
+
+        //choice commands
+        shiftButton = gamepad.ps_share;
+        horizontalSlides_verticalSlides = gamepad.ps_triangle;
         slidesHigh = gamepad.dpadUp;
         slidesLow = gamepad.dpadDown;
         slidesDown = gamepad.rightStickButton;
