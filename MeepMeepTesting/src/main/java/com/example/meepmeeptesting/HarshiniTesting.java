@@ -41,9 +41,38 @@ public class HarshiniTesting {
         public static Pose2d SAMPLE_1 = new Pose2d(-48, 26, toRadians(90));
         public static Pose2d OBSERVATION_PUSH_HALF = new Pose2d(-47, 40, toRadians(90));
 
+        //forward backward constants
+
+        public static Pose2d FORWARD = new Pose2d(0,48, toRadians(90));
+        public static Pose2d REST = new Pose2d(0,0, toRadians(90));
+        public static Pose2d SIDE = new Pose2d(48,0, toRadians(90));
+
         //public static Pose2d OBSERVATION_ZONE = new Pose2d(-60, 55, toRadians(135));
 
         //Lines for Into the Deeeeeeeep
+
+        public static final Supplier<Trajectory> FORWARD_BACKWARD1 = () ->
+                func
+                        .apply(REST)
+                        .lineToLinearHeading(FORWARD)
+                        .build();
+
+        public static final Supplier<Trajectory> FORWARD_BACKWARD2 = () ->
+                func
+                        .apply(FORWARD)
+                        .lineToLinearHeading(REST)
+                        .build();
+        public static final Supplier<Trajectory> FORWARD_BACKWARD3 = () ->
+                func
+                        .apply(REST)
+                        .lineToLinearHeading(SIDE)
+                        .build();
+
+        public static final Supplier<Trajectory> FORWARD_BACKWARD4 = () ->
+                func
+                        .apply(SIDE)
+                        .lineToLinearHeading(REST)
+                        .build();
         public static final Supplier<Trajectory> OBSERVATION_SIDE_CYCLE = () ->
             func
                 .apply(OBSERVATION_START)
@@ -218,16 +247,22 @@ public class HarshiniTesting {
             //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
             //.addTrajectory(AutoConstants.TANGENT_TEST.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+//            .build();
+            .addTrajectory(AutoConstants.FORWARD_BACKWARD1.get())
+            .addTrajectory(AutoConstants.FORWARD_BACKWARD2.get())
+            .addTrajectory(AutoConstants.FORWARD_BACKWARD3.get())
+            .addTrajectory(AutoConstants.FORWARD_BACKWARD4.get())
             .build();
+
     }
 }

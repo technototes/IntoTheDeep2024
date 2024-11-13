@@ -358,7 +358,8 @@ class AutoConstVisitor extends BaseJavaCstVisitorWithDefaults {
     ) {
       const cleanupExpr = expr
         .substring(top.value.length)
-        .replaceAll('.toPose()', '');
+        .replaceAll('.toPose()', '')
+        .replaceAll('.toVec()', '.vec()');
       // This is a hack to deal with the fact that it looks like
       // MeepMeep doesn't allow us to use the .setReversed method.
       // It's not perfect, but it lets MeepMeep drive the bot backwards.

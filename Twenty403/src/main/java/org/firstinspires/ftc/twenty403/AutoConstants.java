@@ -1,112 +1,254 @@
 package org.firstinspires.ftc.twenty403;
 
-import static java.lang.Math.toRadians;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
-import com.technototes.library.command.Command;
-import com.technototes.path.command.TrajectorySequenceCommand;
 import com.technototes.path.geometry.ConfigurablePoseD;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
-import org.firstinspires.ftc.twenty403.commands.auto.ObservationAutoConstants;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Config
 public class AutoConstants {
 
-        public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
-        public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
+    // Stuff for testing:
+    public static ConfigurablePoseD TEST_START = new ConfigurablePoseD(0, 0, 0);
+    public static ConfigurablePoseD TEST_LEFT = new ConfigurablePoseD(48, 0, 0);
+    public static ConfigurablePoseD TEST_FORWARD = new ConfigurablePoseD(0, 48, 0);
+    public static ConfigurablePoseD TEST_SPLINE_1 = new ConfigurablePoseD(24, 48, 0);
+    public static ConfigurablePoseD TEST_SPLINE_2 = new ConfigurablePoseD(24, 48, -90);
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_RIGHT_TO_LEFT =
+        func -> func.apply(TEST_START.toPose())
+            .lineToLinearHeading(TEST_LEFT.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_LEFT_TO_RIGHT =
+        func -> func.apply(TEST_LEFT.toPose())
+            .lineToLinearHeading(TEST_START.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_FORWARD_PATH =
+        func -> func.apply(TEST_START.toPose())
+            .lineToLinearHeading(TEST_FORWARD.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_BACKWARD_PATH =
+        func -> func.apply(TEST_FORWARD.toPose())
+            .lineToLinearHeading(TEST_START.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_SPLINE_PATH_1 =
+        func -> func.apply(TEST_START.toPose())
+            .splineToLinearHeading(TEST_SPLINE_1.toPose(), TEST_FORWARD.getHeading())
+            .splineToLinearHeading(TEST_START.toPose(), TEST_FORWARD.getHeading())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_SPLINE_PATH_2 =
+        func -> func.apply(TEST_START.toPose())
+            .splineToSplineHeading(TEST_SPLINE_2.toPose(), TEST_FORWARD.getHeading())
+            .splineToSplineHeading(TEST_START.toPose(), TEST_SPLINE_2.getHeading())
+            .build();
+
+    public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
+    public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));
+    public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-46, 55, (90));
+    public static ConfigurablePoseD SUBMARINE2 = new ConfigurablePoseD(0, 36, (90));
+    public static ConfigurablePoseD SUBMARINE3 = new ConfigurablePoseD(5, 36, (-90));
+    public static ConfigurablePoseD MINI_LINE = new ConfigurablePoseD(-3, 36, (90));
+
+    public static ConfigurablePoseD PUSH_HALF = new ConfigurablePoseD(-16, 36, (90));
+
+    public static ConfigurablePoseD PUSH_1 = new ConfigurablePoseD(-34, 45, (90));
+    public static ConfigurablePoseD PUSH_2 = new ConfigurablePoseD(-34, 10, (90));
+    public static ConfigurablePoseD PUSH_3_AND_A_HALF = new ConfigurablePoseD(-46, 11, (90));
+    public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-35, 10, (90));
+    public static ConfigurablePoseD PUSH_4 = new ConfigurablePoseD(-56, 10, (90));
+    public static ConfigurablePoseD OBSERVATION_ZONE_2 = new ConfigurablePoseD(-56, 55, (90));
+    public static ConfigurablePoseD PUSH_5 = new ConfigurablePoseD(-61, 10, (90));
+    public static ConfigurablePoseD OBSERVATION_ZONE_3 = new ConfigurablePoseD(-61, 55, (90));
+
+    public static ConfigurablePoseD SAMPLE_1 = new ConfigurablePoseD(-48, 26, (90));
+    public static ConfigurablePoseD OBSERVATION_PUSH_HALF = new ConfigurablePoseD(-47, 40, (90));
+
+    //forward backward constants
+
+    public static ConfigurablePoseD FORWARD = new ConfigurablePoseD(0, 48, (90));
+    public static ConfigurablePoseD REST = new ConfigurablePoseD(0, 0, (90));
+    public static ConfigurablePoseD SIDE = new ConfigurablePoseD(48, 0, (90));
+
+    //public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-60, 55, (135));
+
+    //Lines for Into the Deeeeeeeep
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+        OBSERVATION_SIDE_CYCLE = func ->
+        func
+            .apply(OBSERVATION_START.toPose())
+            .lineToLinearHeading(SUBMARINE.toPose())
+            .lineToLinearHeading(OBSERVATION_ZONE.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST1 = func ->
+        func
+            .apply(OBSERVATION_START.toPose())
+            .lineToLinearHeading(SUBMARINE.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST1QUARTER = func ->
+        func
+            .apply(SUBMARINE.toPose())
+            .lineToLinearHeading(PUSH_1.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST2 = func ->
+        func
+            .apply(PUSH_HALF.toPose())
+            //.splineToLinearHeading(PUSH_HALF, Math.PI - PUSH_1.getHeading())
+            .splineToLinearHeading(PUSH_1.toPose(), Math.PI - PUSH_1.getHeading())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST3 = func ->
+        func
+            .apply(SUBMARINE.toPose())
+            .lineToLinearHeading(MINI_LINE.toPose())
+            .splineToConstantHeading(PUSH_HALF.toVec(), Math.PI - PUSH_HALF.getHeading())
+            .splineToConstantHeading(PUSH_1.toVec(), Math.PI - PUSH_1.getHeading())
+            .splineToConstantHeading(PUSH_2.toVec(), Math.PI - PUSH_2.getHeading())
+            .splineToConstantHeading(PUSH_3.toVec(), Math.PI - PUSH_3.getHeading())
+            .splineToConstantHeading(PUSH_3_AND_A_HALF.toVec(), PUSH_3_AND_A_HALF.getHeading())
+            .splineToConstantHeading(SAMPLE_1.toVec(), Math.PI - SAMPLE_1.getHeading())
+            .splineToConstantHeading(OBSERVATION_PUSH_HALF.toVec(), Math.PI - OBSERVATION_PUSH_HALF.getHeading())
+            .splineToConstantHeading(OBSERVATION_ZONE.toVec(), Math.PI - OBSERVATION_ZONE.getHeading())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST4 = func ->
+        func
+            .apply(OBSERVATION_ZONE.toPose())
+            .lineToLinearHeading(SUBMARINE2.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST5 = func ->
+        func
+            .apply(SUBMARINE2.toPose())
+            .lineToLinearHeading(OBSERVATION_ZONE.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_TEST6 = func ->
+        func
+            .apply(OBSERVATION_ZONE.toPose())
+            .lineToLinearHeading(SUBMARINE3.toPose())
+            .build();
 
 
-        //testing constants from last year
-        public static ConfigurablePoseD START = new ConfigurablePoseD(35, 60, -90);
-        public static ConfigurablePoseD RIGHT_SPIKE = new ConfigurablePoseD(31, 32, -180); // near the metal,  fine tuned
-        public static ConfigurablePoseD PLACE_RIGHT = new ConfigurablePoseD(-47, 40, 0);// not fine tuned
-        public static ConfigurablePoseD TELESTART = new ConfigurablePoseD(0, 0, 90);
-        public static ConfigurablePoseD FORWARD = new ConfigurablePoseD(48, 0, 0);
-        public static ConfigurablePoseD BACKWARD = new ConfigurablePoseD(0, 0, 0);
-        public static ConfigurablePoseD SIDE_RIGHT = new ConfigurablePoseD(0, -48, 0);
-        public static ConfigurablePoseD SIDE_LEFT = new ConfigurablePoseD(0, 0, 0);
-        public static ConfigurablePoseD MID_PARK_CENTER = new ConfigurablePoseD(-35, 12, 0);
-        public static ConfigurablePoseD PIXEL_INTAKE = new ConfigurablePoseD(50, 12, 0);
-        public static ConfigurablePoseD MID_SPLINE_CLEAR = new ConfigurablePoseD(35, 34, -180);
-        public static ConfigurablePoseD START_STAGE = new ConfigurablePoseD(35, 58, 0);
-        public static ConfigurablePoseD HEAD_TO_STAGE = new ConfigurablePoseD(0, 58, 0);
-        //Kepler stuff
-        public static ConfigurablePoseD SAMPLE_PUSH_AREA = new ConfigurablePoseD(-60, 54, 90);
-        public static ConfigurablePoseD SAMPLE_COLLECT_AREA = new ConfigurablePoseD(-40, 57, 120);
-        public static ConfigurablePoseD SAMPLES_START_PUSH = new ConfigurablePoseD(-60, 20, 90);
-        public static ConfigurablePoseD SAMPLE_BAR_SCORE = new ConfigurablePoseD(0, 34, 270);
-        public static ConfigurablePoseD START_POS = new ConfigurablePoseD(-34, 58, 270);
-        public static ConfigurablePoseD CORNER_OBS = new ConfigurablePoseD(10, 50, 270);
-        public static ConfigurablePoseD CORNER_SECOND = new ConfigurablePoseD(-35, 25.5, 260);
-        public static ConfigurablePoseD CORNER_THIRD = new ConfigurablePoseD(-50, 50, 180);
-        // These are 'trajectory pieces' which should be named like this:
-        // {STARTING_POSITION}_TO_{ENDING_POSITION}
-        // testing trajectories
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                BACKWARD_TO_FORWARD = b ->
-                b.apply(BACKWARD.toPose()).lineToLinearHeading(FORWARD.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                FORWARD_TO_BACKWARD = b ->
-                b.apply(FORWARD.toPose()).lineToLinearHeading(BACKWARD.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SIDE_LEFT_TO_SIDE_RIGHT = b ->
-                b.apply(SIDE_LEFT.toPose()).lineToLinearHeading(SIDE_RIGHT.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SIDE_RIGHT_TO_SIDE_LEFT = b ->
-                b.apply(SIDE_RIGHT.toPose()).lineToLinearHeading(SIDE_LEFT.toPose()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SPLINE_START_TO_RIGHT_SPIKE = b ->
-                b.apply(START.toPose())
-                        .splineTo(MID_SPLINE_CLEAR.toPose().vec(), Math.PI - MID_SPLINE_CLEAR.getHeading())
-                        .splineToLinearHeading(RIGHT_SPIKE.toPose(), RIGHT_SPIKE.getHeading()).build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                RIGHT_SPIKE_TO_STAGE = b ->
-                b.apply(RIGHT_SPIKE.toPose())
-                        .splineToLinearHeading(MID_SPLINE_CLEAR.toPose(), Math.PI - MID_SPLINE_CLEAR.getHeading())
-                        .splineToConstantHeading(START_STAGE.toPose().vec(), Math.PI - START_STAGE.getHeading())
-                        .splineToConstantHeading(HEAD_TO_STAGE.toPose().vec(), Math.PI - START_STAGE.getHeading())
-                        .splineToConstantHeading(PLACE_RIGHT.toPose().vec(), Math.PI - START_STAGE.getHeading())
-                        .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TANGENT_TEST = func ->
+        func
+            .apply(OBSERVATION_ZONE.toPose())
+            //.splineToConstantHeading(OBSERVATION_ZONE.vec(), (130))
+            .splineToLinearHeading(SUBMARINE3.toPose(), (0))
+            .build();
 
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                SPLINETEST1_TO_SPLINETEST2 = b ->
-                b.apply(SPLINETEST1.toPose())
-                        .splineToConstantHeading(SPLINETEST2.toPose().vec(), SPLINETEST2.getHeading())
-                        .build();
-        //kepler stuff paths
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBS_START_TO_SCORING = b ->
-                b.apply(START_POS.toPose())
-                        .splineToSplineHeading(SAMPLE_BAR_SCORE.toPose(), Math.PI - SAMPLE_BAR_SCORE.getHeading())
-                        .splineToSplineHeading(CORNER_OBS.toPose(), Math.PI - CORNER_OBS.getHeading())
-                        .splineToSplineHeading(CORNER_SECOND.toPose(), Math.PI - CORNER_SECOND.getHeading())
-                        .splineToSplineHeading(SAMPLES_START_PUSH.toPose(), Math.PI - SAMPLES_START_PUSH.getHeading())
-                        .splineToSplineHeading(SAMPLE_PUSH_AREA.toPose(), Math.PI - SAMPLE_PUSH_AREA.getHeading())
-                        .splineToSplineHeading(CORNER_THIRD.toPose(), Math.PI - CORNER_THIRD.getHeading())
-                        .build();
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                PUSH_BOT = b ->
-                b.apply(SAMPLES_START_PUSH.toPose())
-                        .splineToSplineHeading(SAMPLE_PUSH_AREA.toPose(), Math.PI - SAMPLE_PUSH_AREA.getHeading())
-                        .build();;
-        public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
-                OBSERVATION_AUTO = b->b.apply(ObservationAutoConstants.OBSERVATION_START)
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
-                .addTrajectory(ObservationAutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO1 = func ->
+        func
+            .apply(OBSERVATION_START.toPose())
+            .lineToLinearHeading(PUSH_1.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO2 = func ->
+        func
+            .apply(PUSH_1.toPose())
+            .lineToLinearHeading(PUSH_2.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO4 = func ->
+        func
+            .apply(PUSH_2.toPose())
+            .lineToLinearHeading(PUSH_3_AND_A_HALF.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF = func ->
+        func
+            .apply(PUSH_3_AND_A_HALF.toPose())
+            .lineToLinearHeading(OBSERVATION_ZONE.toPose())
+            .build();
+
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO5 = func ->
+        func
+            .apply(OBSERVATION_ZONE.toPose())
+            .lineToLinearHeading(PUSH_3_AND_A_HALF.toPose())
+            .build();
+
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO6 = func ->
+        func
+            .apply(PUSH_3_AND_A_HALF.toPose())
+            .lineToLinearHeading(PUSH_4.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO7 = func ->
+        func
+            .apply(PUSH_4.toPose())
+            .lineToLinearHeading(OBSERVATION_ZONE_2.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO8 = func ->
+        func
+            .apply(OBSERVATION_ZONE_2.toPose())
+            .lineToLinearHeading(PUSH_4.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO9 = func ->
+        func
+            .apply(PUSH_4.toPose())
+            .lineToLinearHeading(PUSH_5.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO10 = func ->
+        func
+            .apply(PUSH_5.toPose())
+            .lineToLinearHeading(OBSERVATION_ZONE_3.toPose())
+            .build();
+
+    //forward backward yippee
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FORWARD_BACKWARD1 = func ->
+        func
+            .apply(REST.toPose())
+            .lineToLinearHeading(FORWARD.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FORWARD_BACKWARD2 = func ->
+        func
+            .apply(FORWARD.toPose())
+            .lineToLinearHeading(REST.toPose())
+            .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FORWARD_BACKWARD3 = func ->
+        func
+            .apply(REST.toPose())
+            .lineToLinearHeading(SIDE.toPose())
+            .build();
+
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FORWARD_BACKWARD4 = func ->
+        func
+            .apply(SIDE.toPose())
+            .lineToLinearHeading(REST.toPose())
+            .build();
+
+    //end of forward backward yippee
+
+
+//Do i need the meep-meep stuff down below?
+
+    //gonna comment this stuff out below but idk if i still need it here or somewhere else :DDD
+    //kms :)
+
+        /*
+    .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+                .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
                 .build();
 
-
+*/
 }
