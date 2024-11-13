@@ -9,6 +9,7 @@ import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
@@ -153,7 +154,7 @@ public class DrivebaseSubsystem
         EncodedMotor<DcMotorEx> fr,
         EncodedMotor<DcMotorEx> rl,
         EncodedMotor<DcMotorEx> rr,
-        IMU i,
+        IGyro i,
         TwoTrackingWheelLocalizer l
     ) {
         super(fl, fr, rl, rr, i, () -> DriveConstants.class);
