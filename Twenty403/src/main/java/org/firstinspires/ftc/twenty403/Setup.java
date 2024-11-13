@@ -13,6 +13,7 @@ public class Setup {
         public static boolean KIDSSHAMPOOSUBSYSTEM = false;
         public static boolean HANGSUBSYSTEM = false;
         public static boolean ARMSUBSYSTEM = true;
+        public static boolean EXTERNALIMU = false;
     }
 
     @Config
@@ -23,6 +24,7 @@ public class Setup {
         public static String RLMOTOR = "rl";
         public static String RRMOTOR = "rr";
         public static String IMU = "imu";
+        public static String EXTERNALIMU = "adafruit-imu";
         public static String OCTOQUAD = "octoquad";
         public static String ODOF = "odof";
         public static String ODOR = "odor";

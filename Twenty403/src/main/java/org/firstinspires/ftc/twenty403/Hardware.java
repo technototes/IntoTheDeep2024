@@ -10,7 +10,9 @@ import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.motor.Motor;
+import com.technototes.library.hardware.sensor.AdafruitIMU;
 import com.technototes.library.hardware.sensor.ColorSensor;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
@@ -24,7 +26,7 @@ public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
 
-    public IMU imu;
+    public IGyro imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr, armL, armR;
     public MotorEncoder odoF, odoR;
     public Servo retainer, jaw, wrist;
@@ -39,11 +41,15 @@ public class Hardware implements Loggable {
 
     public Hardware(HardwareMap hwmap) {
         hubs = hwmap.getAll(LynxModule.class);
-        imu = new IMU(
-            Setup.HardwareNames.IMU,
-            RevHubOrientationOnRobot.LogoFacingDirection.UP,
-            RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
-        );
+        if (Setup.Connected.EXTERNALIMU) {
+            imu = new AdafruitIMU(Setup.HardwareNames.EXTERNALIMU, AdafruitIMU.Orientation.Yaw);
+        } else {
+            imu = new IMU(
+                Setup.HardwareNames.IMU,
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+            );
+        }
         if (Setup.Connected.DRIVEBASE) {
             fl = new EncodedMotor<>(Setup.HardwareNames.FLMOTOR);
             fr = new EncodedMotor<>(Setup.HardwareNames.FRMOTOR);
