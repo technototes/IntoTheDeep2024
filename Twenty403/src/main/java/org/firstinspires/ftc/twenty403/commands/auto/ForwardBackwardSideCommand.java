@@ -9,11 +9,25 @@ public class ForwardBackwardSideCommand extends SequentialCommandGroup {
 
     public ForwardBackwardSideCommand(Robot r) {
         super(
-            new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_BACKWARD1.get())
-            .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_BACKWARD2))
-            .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_BACKWARD3))
-            .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_BACKWARD4))
-
+            new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.FORWARD_BACKWARD1)
+                .andThen(
+                    new TrajectorySequenceCommand(
+                        r.drivebaseSubsystem,
+                        AutoConstants.FORWARD_BACKWARD2
+                    )
+                )
+                .andThen(
+                    new TrajectorySequenceCommand(
+                        r.drivebaseSubsystem,
+                        AutoConstants.FORWARD_BACKWARD3
+                    )
+                )
+                .andThen(
+                    new TrajectorySequenceCommand(
+                        r.drivebaseSubsystem,
+                        AutoConstants.FORWARD_BACKWARD4
+                    )
+                )
         );
     }
 }
