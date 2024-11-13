@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
+import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.FORWARD;
+import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.REVERSE;
 
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,6 +9,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuadBase;
+import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
@@ -71,15 +74,18 @@ public class TwoDeadWheelLocalizer
         public static double PERPENDICULAR_Y = 7.6 / 2.54; // Was 3.5 before
     }
 
+    protected MotorEncoder parallelEncoder, perpendicularEncoder;
+    protected int paraPort, perpPort;
+
     // Parallel moves parallel to the axles of the drive base
     @LogConfig.Run(duringRun = true, duringInit = true)
     @Log(name = "parOdo")
-    public int parallelEncoder;
+    public int parPos;
 
     // Perpendicular moves perpendicular to the axles of the drive base
     @LogConfig.Run(duringRun = true, duringInit = true)
     @Log(name = "perpOdo")
-    public int perpendicularEncoder;
+    public int perpPos;
 
     protected OctoQuad octoquad;
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
@@ -88,7 +94,7 @@ public class TwoDeadWheelLocalizer
     //1862.5 per inch
     protected boolean encoderOverflow;
 
-    public TwoDeadWheelLocalizer(OctoQuad o) {
+    protected TwoDeadWheelLocalizer() {
         super(
             Arrays.asList(
                 new Pose2d(
@@ -104,26 +110,40 @@ public class TwoDeadWheelLocalizer
             )
         );
         drive = null;
-        octoquad = o;
-        octoquad.setSingleEncoderDirection(
-            Setup.OctoQuadPorts.ODOL,
-            OdoDeadWheelConstants.paraReverse
-                ? OctoQuadBase.EncoderDirection.REVERSE
-                : OctoQuadBase.EncoderDirection.FORWARD
-        );
-        octoquad.setSingleEncoderDirection(
-            Setup.OctoQuadPorts.ODOR,
-            OdoDeadWheelConstants.perpReverse
-                ? OctoQuadBase.EncoderDirection.REVERSE
-                : OctoQuadBase.EncoderDirection.FORWARD
-        );
-
         lateralDistance = OdoDeadWheelConstants.LateralDistance;
         forwardOffset = OdoDeadWheelConstants.ForwardOffset;
         encoderOverflow = OdoDeadWheelConstants.EncoderOverflow;
         gearRatio = OdoDeadWheelConstants.GearRatio;
         ticksPerRev = OdoDeadWheelConstants.TicksPerRev;
         wheelRadius = OdoDeadWheelConstants.WheelRadius;
+    }
+
+    public TwoDeadWheelLocalizer(OctoQuad o, int fbPort, int rlPort) {
+        this();
+        octoquad = o;
+        perpPort = fbPort;
+        paraPort = rlPort;
+        octoquad.setSingleEncoderDirection(
+            perpPort,
+            OdoDeadWheelConstants.perpReverse
+                ? OctoQuadBase.EncoderDirection.REVERSE
+                : OctoQuadBase.EncoderDirection.FORWARD
+        );
+        octoquad.setSingleEncoderDirection(
+            paraPort,
+            OdoDeadWheelConstants.paraReverse
+                ? OctoQuadBase.EncoderDirection.REVERSE
+                : OctoQuadBase.EncoderDirection.FORWARD
+        );
+    }
+
+    public TwoDeadWheelLocalizer(MotorEncoder fbEncoder, MotorEncoder rlEncoder) {
+        this();
+        octoquad = null;
+        parallelEncoder = rlEncoder;
+        parallelEncoder.setDirection(OdoDeadWheelConstants.paraReverse ? REVERSE : FORWARD);
+        perpendicularEncoder = fbEncoder;
+        perpendicularEncoder.setDirection(OdoDeadWheelConstants.perpReverse ? REVERSE : FORWARD);
     }
 
     public void setDrivebase(DrivebaseSubsystem sub) {
@@ -137,10 +157,17 @@ public class TwoDeadWheelLocalizer
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        return Arrays.asList(
-            encoderTicksToInches(octoquad.readSinglePosition(Setup.OctoQuadPorts.ODOL)),
-            encoderTicksToInches(octoquad.readSinglePosition(Setup.OctoQuadPorts.ODOR))
-        );
+        if (octoquad == null) {
+            return Arrays.asList(
+                encoderTicksToInches(parallelEncoder.getCurrentPosition()),
+                encoderTicksToInches(perpendicularEncoder.getCurrentPosition())
+            );
+        } else {
+            return Arrays.asList(
+                encoderTicksToInches(octoquad.readSinglePosition(paraPort)),
+                encoderTicksToInches(octoquad.readSinglePosition(perpPort))
+            );
+        }
     }
 
     @NonNull
@@ -149,11 +176,17 @@ public class TwoDeadWheelLocalizer
         // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
         //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
         //  compensation method
-
-        return Arrays.asList(
-            encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOL)),
-            encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOR))
-        );
+        if (octoquad == null) {
+            return Arrays.asList(
+                encoderTicksToInches(parallelEncoder.getCorrectedVelocity()),
+                encoderTicksToInches(perpendicularEncoder.getCorrectedVelocity())
+            );
+        } else {
+            return Arrays.asList(
+                encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOF)),
+                encoderTicksToInches(octoquad.readSingleVelocity(Setup.OctoQuadPorts.ODOR))
+            );
+        }
     }
 
     public double getTicksPerRev() {

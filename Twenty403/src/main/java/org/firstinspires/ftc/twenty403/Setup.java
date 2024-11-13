@@ -46,7 +46,7 @@ public class Setup {
 
         public static int ARMENCODER = 5;
         public static int ODOR = 6; //TODO: verify with robot, r & l may be swapped
-        public static int ODOL = 7;
+        public static int ODOF = 7;
     }
 
     @Config
