@@ -60,7 +60,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public Servo bucketServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0025, 0.0, 0.0);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0, 0.0, 0.0);
     private PIDFController slidePidController;
     public static double FEEDFORWARD_COEFFICIENT = 0.13;
     public int slideResetPos;
@@ -169,21 +169,19 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // the arm's position to score
         setBucketPos(bucketTargetPos + BucketServoIncrement);
     }
-
     public void bucketServoDecrement() {
         // the arm's position to score
         setBucketPos(bucketTargetPos - BucketServoIncrement);
     }
-
     public void armServoIncrement() {
         // the arm's position to score
         setArmPos(armTargetPos + ArmServoIncrement);
     }
-
     public void armServoDecrement() {
         // the arm's position to score
         setArmPos(armTargetPos - ArmServoIncrement);
     }
+
 
     public void bucketServoTransfer() {
         // the intake system's position to score
