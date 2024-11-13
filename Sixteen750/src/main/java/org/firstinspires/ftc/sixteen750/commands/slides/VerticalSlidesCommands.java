@@ -55,9 +55,6 @@ public class VerticalSlidesCommands {
     public static Command ArmScore(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::armServoEmpty, r.verticalSlidesSubsystem);
     }
-    public static Command SlidesUp(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::slidesUp, r.verticalSlidesSubsystem);
-    }
     public static Command SlidesDown(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::slidesDown, r.verticalSlidesSubsystem);
     }
