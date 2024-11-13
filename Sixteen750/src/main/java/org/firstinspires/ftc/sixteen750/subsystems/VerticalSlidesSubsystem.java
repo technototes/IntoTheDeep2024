@@ -185,6 +185,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         setArmPos(armTargetPos - ArmServoIncrement);
     }
 
+
     public void bucketServoTransfer() {
         // the intake system's position to score
         setBucketPos(BucketServoTransfer);
