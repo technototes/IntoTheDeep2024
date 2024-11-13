@@ -37,7 +37,7 @@ public class ObserveAuto extends CommandOpMode {
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                Paths.splineTestCommand(robot),
+                AutoConstants.splineTestCommand(robot),
                 EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),

@@ -7,6 +7,8 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 
 
+import org.firstinspires.ftc.twenty403.AutoConstants;
+
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -174,16 +176,9 @@ public class ObservationAutoConstants {
 
     //gonna comment this stuff out below but idk if i still need it here or somewhere else :DDD
     //kms :)
-    /*
+
+        /*
     .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
-    //.addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
-    // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
-    // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
-    //.addTrajectory(AutoConstants.OBSERVATION_TEST3.get())
-    //.addTrajectory(AutoConstants.OBSERVATION_TEST4.get())
-    //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
-    //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
-    //.addTrajectory(AutoConstants.TANGENT_TEST.get())
             .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
             .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
             .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
@@ -196,5 +191,5 @@ public class ObservationAutoConstants {
             .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
             .build();
 
-     */
+*/
 }

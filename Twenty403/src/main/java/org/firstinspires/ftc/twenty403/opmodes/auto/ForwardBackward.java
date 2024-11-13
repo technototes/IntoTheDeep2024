@@ -10,10 +10,7 @@ import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
-import org.firstinspires.ftc.twenty403.Setup;
-import org.firstinspires.ftc.twenty403.commands.EZCmd;
-import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
-import org.firstinspires.ftc.twenty403.commands.auto.SafetyStartCommand;
+import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardSideCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
@@ -32,12 +29,12 @@ public class ForwardBackward extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Wing);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.BACKWARD.toPose());
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.REST);
         // safety = new SafetyTestController(driverGamepad, robot);
         // robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                new ForwardBackwardCommand(robot),
+                new ForwardBackwardSideCommand(robot),
                 // EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),

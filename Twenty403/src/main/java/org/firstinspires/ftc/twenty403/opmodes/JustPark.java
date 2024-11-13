@@ -11,7 +11,7 @@ import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
-import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardCommand;
+import org.firstinspires.ftc.twenty403.commands.auto.ForwardBackwardSideCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
@@ -35,7 +35,7 @@ public class JustPark extends CommandOpMode {
         // robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                new ForwardBackwardCommand(robot),
+                new ForwardBackwardSideCommand(robot),
                 // EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),
