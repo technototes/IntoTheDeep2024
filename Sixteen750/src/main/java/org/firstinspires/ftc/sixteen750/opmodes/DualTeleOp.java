@@ -53,5 +53,8 @@ public class DualTeleOp extends CommandOpMode {
             robot.horizontalSlidesSubsystem.slidesin();
             robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
         }
+        if (Setup.Connected.VERTICALSLIDESUBSYSTEM){
+        robot.verticalSlidesSubsystem.slidesDown();
+        }
     }
 }
