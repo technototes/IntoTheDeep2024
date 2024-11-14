@@ -3,6 +3,7 @@ package org.firstinspires.ftc.twenty403;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
+import org.firstinspires.ftc.twenty403.helpers.OctoquadEncoder;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 import org.firstinspires.ftc.twenty403.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.DrivebaseSubsystem;
@@ -30,9 +31,8 @@ public class Robot implements Loggable {
         this.initialVoltage = hw.voltage();
         if (Setup.Connected.ODOSUBSYSTEM) {
             this.localizer = new TwoDeadWheelLocalizer(
-                hw.octoquad,
-                Setup.OctoQuadPorts.ODOF,
-                Setup.OctoQuadPorts.ODOR
+                new OctoquadEncoder(hw.octoquad, Setup.OctoQuadPorts.ODOF),
+                new OctoquadEncoder(hw.octoquad, Setup.OctoQuadPorts.ODOR)
             );
         } else {
             this.localizer = null;
