@@ -23,46 +23,42 @@ import { argv } from 'process';
 const { readFile, writeFile } = promises;
 
 type FileList = {
-  name: string;
+  key: string;
   files: string[];
+};
+
+const technoLib: FileList = {
+  key: 'TechnoLibLocal',
+  files: [
+    'LearnBot/build.gradle',
+    'Sixteen750/build.gradle',
+    'Twenty403/build.gradle',
+    'build.dependencies.gradle',
+    'settings.gradle',
+  ],
+};
+const botList: FileList = {
+  key: 'BUILD ALL BOTS',
+  files: ['settings.gradle', 'build.gradle'],
+};
+const meepList: FileList = {
+  key: 'MeepMeepLocal',
+  files: ['MeepMeepTesting/build.gradle', 'settings.gradle'],
 };
 // This is a map of keys (the argument to call flip.js with) to objects that
 // are a name (the tag at the end of the comment) and an array of files to
 // scan & process
 const fileList = new Map<string, FileList>([
-  [
-    'lib',
-    {
-      name: 'TechnoLibLocal',
-      files: [
-        'LearnBot/build.gradle',
-        'Sixteen750/build.gradle',
-        'Twenty403/build.gradle',
-        'build.dependencies.gradle',
-        'settings.gradle',
-      ],
-    },
-  ],
-  [
-    'bot',
-    { name: 'BUILD ALL BOTS', files: ['settings.gradle', 'build.gradle'] },
-  ],
-  [
-    'meepmeep',
-    {
-      name: 'MeepMeepLocal',
-      files: [
-        'MeepMeepTesting/build.gradle',
-        'settings.gradle',
-      ]
-    }
-  ]
+  ['lib', technoLib],
+  ['bot', botList],
+  ['meepmeep', meepList],
+  ['meep', meepList],
 ]);
 
 // For any line that ends with '// FLIP: id',
 // toggle the line comment 'status'
-function toggleLine(lineFull: string, str: string) {
-  const commentMarker = '// FLIP: ' + str;
+function toggleLine(lineFull: string, id: string) {
+  const commentMarker = '// FLIP: ' + id;
   const line = lineFull.trimEnd();
   // If the line doesn't end with the comment marker, don't change it at all
   if (!line.endsWith(commentMarker)) {
@@ -80,11 +76,11 @@ function toggleLine(lineFull: string, str: string) {
 }
 
 // Read the file, flip the comments for lines with markers, the write it back
-async function toggleFile(file: string, str: string) {
+async function toggleFile(file: string, key: string) {
   try {
     const contents = await readFile(file, 'utf-8');
     const resultArray = contents.split('\n');
-    const toggled = resultArray.map((elem) => toggleLine(elem, str));
+    const toggled = resultArray.map((elem) => toggleLine(elem, key));
     await writeFile(file, toggled.join('\n'));
   } catch (e) {
     // Some file access problem :(
@@ -100,9 +96,9 @@ async function toggleLinesWithComments(arg: string) {
       'This script only understands :' + [...fileList.keys()].join(', '),
     );
   }
-  let { name: str, files } = elem;
+  let { key, files } = elem;
   for (let filename of files) {
-    await toggleFile(filename, str);
+    await toggleFile(filename, key);
   }
 }
 

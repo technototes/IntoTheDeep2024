@@ -59,7 +59,7 @@
     "- // i+": "",
     "- // i.": " The '../' before the scripts line is because it's called from MeepMeepTesting directory",
     "meep": "bun run ../scripts/preprocessor.ts",
-    "testmeep": "bun run scripts/preprocessor.ts /Users/freik/src/ftc/CenterStage2023/MeepMeepTesting/build '[/Users/freik/src/ftc/CenterStage2023/Sixteen750/src/main/java/org/firstinspires/ftc/sixteen750/AutoConstants.java, /Users/freik/src/ftc/CenterStage2023/LearnBot/src/main/java/org/firstinspires/ftc/learnbot/opmodes/BasicAuto.java, /Users/freik/src/ftc/CenterStage2023/MeepMeepTesting/src/main/java/com/example/meepmeeptesting/AutoConstantsBlue.java, /Users/freik/src/ftc/CenterStage2023/MeepMeepTesting/src/main/java/com/example/meepmeeptesting/AutoConstantsRed.java, /Users/freik/src/ftc/CenterStage2023/RoadRunnerQuickStart/src/main/java/org/firstinspires/ftc/teamcode/drive/opmode/AutomaticFeedforwardTuner.java, /Users/freik/src/ftc/CenterStage2023/Twenty403/src/main/java/org/firstinspires/ftc/twenty403/AutoConstants.java]'",
+    "testmeep": "bun run scripts/preprocessor.ts ./MeepMeepTesting/build/test TEST_CLASS ./Sixteen750/src/main/java/org/firstinspires/ftc/sixteen750/AutoConstants.java ./Sixteen750/src/main/java/org/firstinspires/ftc/sixteen750/subsystems/DrivebaseSubsystem.java",
     "- // j-": "",
     "- // j ": "This is the script that presents the students with a workflow",
     "work": "bun run scripts/workflow.ts",
