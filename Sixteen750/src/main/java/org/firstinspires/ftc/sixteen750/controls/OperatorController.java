@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.sixteen750.controls;
 
+import android.util.Pair;
+import com.technototes.library.command.ChoiceCommand;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
@@ -15,7 +17,11 @@ public class OperatorController {
 
     public Robot robot;
     public CommandGamepad gamepad;
+
     public CommandButton shiftButton;
+
+    public CommandButton openClaw_bucketLow;
+
 
     //horizontal buttons
     public Stick horislidesLeftStick;
@@ -58,6 +64,9 @@ public class OperatorController {
         shifted = !shifted;
     }
 
+    
+
+
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
         gamepad = g;
@@ -66,7 +75,8 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-        openClaw = gamepad.leftBumper;
+        shiftButton = gamepad.ps_options;
+        openClaw_bucketLow = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
         wristTransfer = gamepad.ps_triangle;
         wristPickup = gamepad.ps_circle;
@@ -99,7 +109,14 @@ public class OperatorController {
     }
 //can we toggle between regular buttons ex:open/close claw as one button - kevin will work on that
     private void bindHorizontalSlidesControls() {
-        openClaw.whenPressed(HorizontalSlidesCommands.clawOpen(robot));
+        shiftButton.whenPressed(this::toggleShift);
+
+        openClaw_bucketLow.whenPressed(
+            new ChoiceCommand(
+                new Pair<>(this::notShifted, HorizontalSlidesCommands.clawOpen(robot)),
+                new Pair<>(this::isShifted, VerticalSlidesCommands.LowBasket(robot))
+            )
+        );
         closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
         wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
         wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
