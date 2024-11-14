@@ -75,16 +75,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         bucketServo = hw.bucketservo;
         isHardware = true;
         slidePidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
-        slidePidController =
-                new PIDFController(
-                        slidePID,
-                        0,
-                        0,
-                        0,
-
-                        (ticks, velocity) ->
-                                FEEDFORWARD_COEFFICIENT
-                );
+        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) ->
+            FEEDFORWARD_COEFFICIENT
+        );
         resetSlideZero();
     }
 
@@ -143,6 +136,12 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         setSlidePos(LOW_BASKET);
     }
 
+    public void slidesUp() {
+        // lowers the bucket system
+        //probably going to do the slide thing with the joysticks (negative of slidesup)
+        setSlidePos(LOW_BASKET);
+    }
+
     public void slideBasketHigh() {
         setSlidePos(HIGH_BASKET);
     }
@@ -165,19 +164,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // the arm's position to score
         setBucketPos(bucketTargetPos + BucketServoIncrement);
     }
+
     public void bucketServoDecrement() {
         // the arm's position to score
         setBucketPos(bucketTargetPos - BucketServoIncrement);
     }
+
     public void armServoIncrement() {
         // the arm's position to score
         setArmPos(armTargetPos + ArmServoIncrement);
     }
+
     public void armServoDecrement() {
         // the arm's position to score
         setArmPos(armTargetPos - ArmServoIncrement);
     }
-
 
     public void bucketServoTransfer() {
         // the intake system's position to score
