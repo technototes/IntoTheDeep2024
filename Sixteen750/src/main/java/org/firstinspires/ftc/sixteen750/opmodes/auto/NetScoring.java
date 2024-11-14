@@ -10,14 +10,13 @@ import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
-import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "Obs_Parking")
+@Autonomous(name = "NetScoring")
 @SuppressWarnings("unused")
-public class Obs_Park extends CommandOpMode {
+public class NetScoring extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;
@@ -28,9 +27,12 @@ public class Obs_Park extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Observation);
-        robot.drivebase.setPoseEstimate(AutoConstants.BACKWARD.toPose());
+        robot.drivebase.setPoseEstimate(AutoConstants.FORWARD.toPose());
         CommandScheduler.scheduleForState(
-            new SequentialCommandGroup(Paths.Obs_Parking(robot), CommandScheduler::terminateOpMode),
+            new SequentialCommandGroup(
+                Paths.SampleScoring(robot),
+                CommandScheduler::terminateOpMode
+            ),
             OpModeState.RUN
         );
     }
