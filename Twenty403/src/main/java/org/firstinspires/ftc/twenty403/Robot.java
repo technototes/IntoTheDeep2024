@@ -38,24 +38,16 @@ public class Robot implements Loggable {
             this.localizer = null;
         }
         if (Setup.Connected.DRIVEBASE) {
-            if (localizer == null) {
-                this.drivebaseSubsystem = new DrivebaseSubsystem(
-                    hw.fl,
-                    hw.fr,
-                    hw.rl,
-                    hw.rr,
-                    hw.imu
-                );
-            } else {
-                this.drivebaseSubsystem = new DrivebaseSubsystem(
-                    hw.fl,
-                    hw.fr,
-                    hw.rl,
-                    hw.rr,
-                    hw.imu,
-                    localizer
-                );
-                // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
+            this.drivebaseSubsystem = new DrivebaseSubsystem(
+                hw.fl,
+                hw.fr,
+                hw.rl,
+                hw.rr,
+                hw.imu,
+                localizer
+            );
+            // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
+            if (localizer != null) {
                 localizer.setDrivebase(this.drivebaseSubsystem);
             }
         }

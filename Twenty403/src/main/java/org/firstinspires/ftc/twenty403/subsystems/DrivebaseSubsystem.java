@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.IGyro;
-import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
@@ -183,28 +182,7 @@ public class DrivebaseSubsystem
         fl.setDirection(DcMotorSimple.Direction.FORWARD);
         rl.setDirection(DcMotorSimple.Direction.FORWARD);
         rr.setDirection(DcMotorSimple.Direction.REVERSE);
-    }
-
-    public DrivebaseSubsystem(
-        EncodedMotor<DcMotorEx> fl,
-        EncodedMotor<DcMotorEx> fr,
-        EncodedMotor<DcMotorEx> rl,
-        EncodedMotor<DcMotorEx> rr,
-        IGyro i
-    ) {
-        super(fl, fr, rl, rr, i, () -> DriveConstants.class);
-        fl2 = fl;
-        fr2 = fr;
-        rl2 = rl;
-        rr2 = rr;
-        speed = DriveConstants.SLOW_MOTOR_SPEED;
-        // This is already handled in the parent class constructor (super)
-        setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-
-        fl.setDirection(DcMotorSimple.Direction.REVERSE);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        rl.setDirection(DcMotorSimple.Direction.REVERSE);
-        rr.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     @Override
@@ -222,9 +200,10 @@ public class DrivebaseSubsystem
             updatePoseEstimate();
             Pose2d pose = getPoseEstimate();
             Pose2d poseVelocity = getPoseVelocity();
-            poseDisplay = pose.toString() +
-            " : " +
-            (poseVelocity != null ? poseVelocity.toString() : "<null>");
+            poseDisplay =
+                pose.toString() +
+                " : " +
+                (poseVelocity != null ? poseVelocity.toString() : "<null>");
         }
         heading = gyro.getHeading();
     }
