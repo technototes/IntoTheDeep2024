@@ -7,8 +7,7 @@ import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
-import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
-import com.qualcomm.hardware.digitalchickenlabs.OctoQuadBase;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.LogConfig;
@@ -88,12 +87,12 @@ public class TwoDeadWheelLocalizer
     public int perpPos;
 
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
-    protected DrivebaseSubsystem drive;
+    protected IGyro gyro;
 
     //1862.5 per inch
     protected boolean encoderOverflow;
 
-    protected TwoDeadWheelLocalizer() {
+    protected TwoDeadWheelLocalizer(IGyro g) {
         super(
             Arrays.asList(
                 new Pose2d(
@@ -108,7 +107,7 @@ public class TwoDeadWheelLocalizer
                 )
             )
         );
-        drive = null;
+        gyro = g;
         lateralDistance = OdoDeadWheelConstants.LateralDistance;
         forwardOffset = OdoDeadWheelConstants.ForwardOffset;
         encoderOverflow = OdoDeadWheelConstants.EncoderOverflow;
@@ -117,14 +116,10 @@ public class TwoDeadWheelLocalizer
         wheelRadius = OdoDeadWheelConstants.WheelRadius;
     }
 
-    public TwoDeadWheelLocalizer(IEncoder fbEncoder, IEncoder rlEncoder) {
-        this();
+    public TwoDeadWheelLocalizer(IEncoder fbEncoder, IEncoder rlEncoder, IGyro g) {
+        this(g);
         fbEncoder.setDirection(OdoDeadWheelConstants.perpReverse);
         rlEncoder.setDirection(OdoDeadWheelConstants.paraReverse);
-    }
-
-    public void setDrivebase(DrivebaseSubsystem sub) {
-        drive = sub;
     }
 
     public double encoderTicksToInches(double ticks) {
@@ -166,11 +161,11 @@ public class TwoDeadWheelLocalizer
 
     @Override
     public double getHeading() {
-        return drive.getRawExternalHeading();
+        return gyro.getHeadingInRadians();
     }
 
     @Override
     public Double getHeadingVelocity() {
-        return drive.getExternalHeadingVelocity();
+        return gyro.getVelocity();
     }
 }

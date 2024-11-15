@@ -32,7 +32,8 @@ public class Robot implements Loggable {
         if (Setup.Connected.ODOSUBSYSTEM) {
             this.localizer = new TwoDeadWheelLocalizer(
                 new OctoquadEncoder(hw.octoquad, Setup.OctoQuadPorts.ODOF),
-                new OctoquadEncoder(hw.octoquad, Setup.OctoQuadPorts.ODOR)
+                new OctoquadEncoder(hw.octoquad, Setup.OctoQuadPorts.ODOR),
+                hw.imu
             );
         } else {
             this.localizer = null;
@@ -46,10 +47,6 @@ public class Robot implements Loggable {
                 hw.imu,
                 localizer
             );
-            // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
-            if (localizer != null) {
-                localizer.setDrivebase(this.drivebaseSubsystem);
-            }
         }
         if (Setup.Connected.SAFETYSUBSYSTEM) {
             this.safetySubsystem = new SafetySubsystem(hw);
