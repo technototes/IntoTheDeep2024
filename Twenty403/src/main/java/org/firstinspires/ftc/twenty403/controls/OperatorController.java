@@ -31,6 +31,8 @@ public class OperatorController {
     public CommandButton armVertical;
     public CommandButton armIncrement;
     public CommandButton armDecrement;
+    public CommandButton dumpWrist;
+    public CommandButton scoopWrist;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -50,13 +52,15 @@ public class OperatorController {
         //temp changing the button below from biteJaw to intake :DD
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
+        dumpWrist = gamepad.ps_share;
+        scoopWrist = gamepad.ps_options;
         // suspend = gamepad.ps_circle;
         //        armIntake = gamepad.ps_square;
         //        armLowNet = gamepad.dpadLeft;
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
-        armHorizontal = gamepad.ps_share;
-        armVertical = gamepad.ps_options;
+        //armHorizontal = gamepad.ps_share;
+        //armVertical = gamepad.ps_options;
         armIncrement = gamepad.ps_circle;
         armDecrement = gamepad.ps_square;
     }
@@ -94,11 +98,17 @@ public class OperatorController {
         spitIntake.whenPressed(
             Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem)
         );
-        slurpIntake.whenReleased(
+        slurpIntake.whenPressed(
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         spitIntake.whenReleased(
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+        );
+        dumpWrist.whenPressed(
+                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+        );
+        scoopWrist.whenPressed(
+                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
     }
 
