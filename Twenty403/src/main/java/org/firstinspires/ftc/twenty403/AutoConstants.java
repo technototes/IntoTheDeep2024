@@ -228,6 +228,52 @@ public class AutoConstants {
             .lineToLinearHeading(REST.toPose())
             .build();
 
+
+
+
+    //New testing constants for this year's game
+    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
+    public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
+    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
+    public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
+    public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
+    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
+
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
+    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
+    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
+    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
+    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, 90);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, -0);
+
+
+
+    // These are 'trajectory pieces' which should be named like this:
+    // {STARTING_POSITION}_TO_{ENDING_POSITION}
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            START_TO_NETSCORING = b ->
+            b.apply(NET_START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_TO_INTAKE1 = b ->
+            b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE1.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            INTAKE1_TO_NETSCORING = b ->
+            b.apply(INTAKE1.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_TO_INTAKE2 = b ->
+            b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE2.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            INTAKE2_TO_NETSCORING = b ->
+            b.apply(INTAKE2.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_TO_INTAKE3 = b ->
+            b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE3.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            INTAKE3_TO_NETSCORING = b ->
+            b.apply(INTAKE3.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+
     //end of forward backward yippee
 
 
