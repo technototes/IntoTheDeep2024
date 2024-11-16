@@ -79,7 +79,7 @@ public class SafetySubsystem implements Subsystem, Loggable {
         if (failedPart == FailedPart.ODOF) {
             return 0;
         } else {
-            return myHw.odoF.getCurrentPosition();
+            return myHw.odoF.getPosition();
         }
     }
 
@@ -87,7 +87,7 @@ public class SafetySubsystem implements Subsystem, Loggable {
         if (failedPart == FailedPart.ODOR) {
             return 0;
         } else {
-            return myHw.odoR.getCurrentPosition();
+            return myHw.odoR.getPosition();
         }
     }
 

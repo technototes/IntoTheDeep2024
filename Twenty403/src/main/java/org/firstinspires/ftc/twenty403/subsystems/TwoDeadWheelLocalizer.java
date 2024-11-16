@@ -1,22 +1,16 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.FORWARD;
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.REVERSE;
-
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
 import com.technototes.library.hardware.sensor.IGyro;
-import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
 import com.technototes.library.logger.Log;
-import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.DeadWheelConstants;
 import java.util.Arrays;
 import java.util.List;
-import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.helpers.IEncoder;
 
 /*
@@ -74,17 +68,15 @@ public class TwoDeadWheelLocalizer
         public static double PERPENDICULAR_Y = 7.6 / 2.54; // Was 3.5 before
     }
 
-    protected IEncoder parallelEncoder, perpendicularEncoder;
+    protected IEncoder rlEnc, fbEnc;
 
     // Parallel moves parallel to the axles of the drive base
-    @LogConfig.Run(duringRun = true, duringInit = true)
-    @Log(name = "parOdo")
-    public int parPos;
+    @Log(name = "rlOdo")
+    public int rlPos;
 
     // Perpendicular moves perpendicular to the axles of the drive base
-    @LogConfig.Run(duringRun = true, duringInit = true)
-    @Log(name = "perpOdo")
-    public int perpPos;
+    @Log(name = "fbOdo")
+    public int fbPos;
 
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
     protected IGyro gyro;
@@ -118,6 +110,8 @@ public class TwoDeadWheelLocalizer
 
     public TwoDeadWheelLocalizer(IEncoder fbEncoder, IEncoder rlEncoder, IGyro g) {
         this(g);
+        fbEnc = fbEncoder;
+        rlEnc = rlEncoder;
         fbEncoder.setDirection(OdoDeadWheelConstants.perpReverse);
         rlEncoder.setDirection(OdoDeadWheelConstants.paraReverse);
     }
@@ -129,10 +123,9 @@ public class TwoDeadWheelLocalizer
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getPosition()),
-            encoderTicksToInches(perpendicularEncoder.getPosition())
-        );
+        fbPos = fbEnc.getPosition();
+        rlPos = rlEnc.getPosition();
+        return Arrays.asList(encoderTicksToInches(rlPos), encoderTicksToInches(fbPos));
     }
 
     @NonNull
@@ -142,8 +135,8 @@ public class TwoDeadWheelLocalizer
         //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
         //  compensation method
         return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getVelocity()),
-            encoderTicksToInches(perpendicularEncoder.getVelocity())
+            encoderTicksToInches(rlEnc.getVelocity()),
+            encoderTicksToInches(fbEnc.getVelocity())
         );
     }
 
