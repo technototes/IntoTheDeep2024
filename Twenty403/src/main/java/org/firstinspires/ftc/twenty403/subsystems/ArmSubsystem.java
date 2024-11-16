@@ -3,7 +3,6 @@ package org.firstinspires.ftc.twenty403.subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
-import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
@@ -11,13 +10,13 @@ import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.twenty403.Hardware;
-import org.firstinspires.ftc.twenty403.Setup;
+import org.firstinspires.ftc.twenty403.helpers.IEncoder;
 
 @Config
 public class ArmSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
-    private OctoQuad octoquad;
+    private IEncoder armEncoder;
     private boolean isHardware;
     public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.3; //0.7
@@ -28,17 +27,25 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double MIN_ARM_MOTOR_SPEED = -0.2;
     public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
-    public static double SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
-    public static double SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
-    public static double SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 700;
-    public static double SLIDES_MOTOR_INTAKE_POSITION = 800;
+    public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
+    public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
+    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 700;
+    public static int SLIDES_MOTOR_INTAKE_POSITION = 800;
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
     public static int INCREMENT_DECREMENT = 120;
 
+    public static double MIN_SLIDE_MOTOR_POWER = -0.3;
+    public static double MAX_SLIDE_MOTOR_POWER = 0.5;
+    public static double FEEDFORWARD_GRAVITY_VALUE = 0.3;
+    public static double FEEDFORWARD_INTAKE_POS = -0.1;
+    // This is "5 degrees" if our numbers are correct:
+    public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
+
     // as of now, we arent having a D
     public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0.000);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0000, 0.0, 0.000);
 
     @Log(name = "armPow")
     public double armPow;
@@ -58,14 +65,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
     @Log(name = "slidePos")
     public int slidePos;
 
-    @Log(name = "wristTarget")
-    public double wristTargetPos;
+    @Log(name = "armFdFwdVal")
+    public double armFeedFwdValue;
 
-    @Log(name = "wristPos")
-    public double wristPos;
-
-    @Log(name = "feedfwdvalue")
-    public double feedForwardValue;
+    @Log(name = "slideFdFwdVal")
+    public double slideFeedFwdValue;
 
     private PIDFController armPidController;
     private PIDFController slidePidController;
@@ -75,13 +79,18 @@ public class ArmSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
+    private void setSlidePos(int e) {
+        slidePidController.setTargetPosition(e);
+        slideTargetPos = e;
+    }
+
     public ArmSubsystem(Hardware hw) {
         rotate1 = hw.rotate1;
         rotate2 = hw.rotate2;
         rotate1.coast();
         rotate2.coast();
         slides = hw.slides;
-        octoquad = hw.octoquad;
+        armEncoder = hw.armEncoder;
         isHardware = true;
         armPidController = new PIDFController(
             armPID,
@@ -111,40 +120,47 @@ public class ArmSubsystem implements Subsystem, Loggable {
              */
 
             (ticks, velocity) -> {
-                feedForwardValue = FEEDFORWARD_COEFFICIENT *
+                armFeedFwdValue = FEEDFORWARD_COEFFICIENT *
                 Math.cos(
                     (Math.PI * (ticks - ARM_HORIZONTAL)) / (2.0 * (ARM_VERTICAL - ARM_HORIZONTAL))
                 );
 
-                if (Math.abs(feedForwardValue) < 0.1) {
-                    feedForwardValue = 0.0;
+                if (Math.abs(armFeedFwdValue) < 0.1) {
+                    armFeedFwdValue = 0.0;
                 }
 
-                return feedForwardValue;
+                return armFeedFwdValue;
             }
         );
         setArmPos(INITIAL_POSITION);
-        slidePidController = new PIDFController(
-                armPID,
-                0,
-                0,
-                0,
-
-
-                (ticks, velocity) ->
-                        FEEDFORWARD_COEFFICIENT
-
-        );
+        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) -> {
+            if (isArmHorizontal()) {
+                slideFeedFwdValue = 0.0;
+            } else if (isArmVertical()) {
+                slideFeedFwdValue = FEEDFORWARD_GRAVITY_VALUE;
+            } else {
+                slideFeedFwdValue = FEEDFORWARD_INTAKE_POS;
+            }
+            return slideFeedFwdValue;
+        });
         resetSlideZero();
+    }
+
+    private boolean isArmHorizontal() {
+        return Math.abs(getArmCurrentPos() - ARM_HORIZONTAL) < ARM_POS_CLOSE_ENOUGH;
+    }
+
+    private boolean isArmVertical() {
+        return Math.abs(getArmCurrentPos() - ARM_VERTICAL) < ARM_POS_CLOSE_ENOUGH;
     }
 
     public ArmSubsystem() {
         armPidController = new PIDFController(armPID, 0, 0, 0, (x, y) -> 0.0);
+        slidePidController = new PIDFController(slidePID, 0, 0, 0, (x, y) -> 0.0);
         isHardware = false;
         slides = null;
         rotate1 = null;
         rotate2 = null;
-        octoquad = null;
     }
 
     public void increment() {
@@ -160,18 +176,24 @@ public class ArmSubsystem implements Subsystem, Loggable {
             setArmPos(0);
         }
     }
+
     public void resetSlideZero() {
-       slideResetPos = getSlideUnmodifiedPosition();
-       slideTargetPos = slideResetPos;
+        slideResetPos = getSlideUnmodifiedPosition();
+        slideTargetPos = slideResetPos;
     }
+
     private int getCurrentSlidePos() {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }
+
     private int getArmCurrentPos() {
-        return -octoquad.readSinglePosition(Setup.OctoQuadPorts.ARMENCODER);
+        if (isHardware)
+            return -armEncoder.getPosition();
+        return 0;
     }
+
     private int getSlideUnmodifiedPosition() {
-        if (isHardware){
+        if (isHardware) {
             return (int) slides.getSensorValue();
         } else {
             return 0;
@@ -184,7 +206,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void lowBasketSlides() {
-        slides.setPosition(SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION);
+        setSlidePos(SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION);
     }
 
     //high basket scoring
@@ -193,7 +215,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void highBasketSlides() {
-        slides.setPosition(SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION);
+        setSlidePos(SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION);
     }
 
     //specimen scoring
@@ -206,7 +228,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void specimenSlides() {
-        slides.setPosition(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
+        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
     }
 
     //intake position
@@ -222,11 +244,16 @@ public class ArmSubsystem implements Subsystem, Loggable {
         slidePos = getCurrentSlidePos();
         slidePow = slidePidController.update(slidePos);
         setSlideMotorPower(slidePow);
-
     }
+
     private void setSlideMotorPower(double speedSlide) {
-        if (isHardware){
-            slides.setSpeed(speedSlide);
+        if (isHardware) {
+            double clippedSpeed = Range.clip(
+                speedSlide,
+                MIN_SLIDE_MOTOR_POWER,
+                MAX_SLIDE_MOTOR_POWER
+            );
+            slides.setPower(clippedSpeed);
         }
     }
 
