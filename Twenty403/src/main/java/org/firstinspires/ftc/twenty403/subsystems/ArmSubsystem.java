@@ -18,6 +18,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     private EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
     private OctoQuad octoquad;
+    private boolean isHardware;
+    public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.3; //0.7
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
@@ -34,6 +36,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
     public static int INCREMENT_DECREMENT = 120;
+
     // as of now, we arent having a D
     public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0.000);
 
@@ -46,6 +49,15 @@ public class ArmSubsystem implements Subsystem, Loggable {
     @Log(name = "armPos")
     public int armPos;
 
+    @Log(name = "slidePow")
+    public double slidePow;
+
+    @Log(name = "slideTarget")
+    public int slideTargetPos;
+
+    @Log(name = "slidePos")
+    public int slidePos;
+
     @Log(name = "wristTarget")
     public double wristTargetPos;
 
@@ -56,6 +68,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public double feedForwardValue;
 
     private PIDFController armPidController;
+    private PIDFController slidePidController;
 
     private void setArmPos(int e) {
         armPidController.setTargetPosition(e);
@@ -69,7 +82,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         rotate2.coast();
         slides = hw.slides;
         octoquad = hw.octoquad;
-
+        isHardware = true;
         armPidController = new PIDFController(
             armPID,
             0,
@@ -111,10 +124,27 @@ public class ArmSubsystem implements Subsystem, Loggable {
             }
         );
         setArmPos(INITIAL_POSITION);
+        slidePidController = new PIDFController(
+                armPID,
+                0,
+                0,
+                0,
+
+
+                (ticks, velocity) ->
+                        FEEDFORWARD_COEFFICIENT
+
+        );
+        resetSlideZero();
     }
 
     public ArmSubsystem() {
         armPidController = new PIDFController(armPID, 0, 0, 0, (x, y) -> 0.0);
+        isHardware = false;
+        slides = null;
+        rotate1 = null;
+        rotate2 = null;
+        octoquad = null;
     }
 
     public void increment() {
@@ -130,9 +160,22 @@ public class ArmSubsystem implements Subsystem, Loggable {
             setArmPos(0);
         }
     }
-
+    public void resetSlideZero() {
+       slideResetPos = getSlideUnmodifiedPosition();
+       slideTargetPos = slideResetPos;
+    }
+    private int getCurrentSlidePos() {
+        return getSlideUnmodifiedPosition() - slideResetPos;
+    }
     private int getArmCurrentPos() {
         return -octoquad.readSinglePosition(Setup.OctoQuadPorts.ARMENCODER);
+    }
+    private int getSlideUnmodifiedPosition() {
+        if (isHardware){
+            return (int) slides.getSensorValue();
+        } else {
+            return 0;
+        }
     }
 
     //low basket scoring
@@ -176,6 +219,15 @@ public class ArmSubsystem implements Subsystem, Loggable {
         armPos = getArmCurrentPos();
         armPow = armPidController.update(armPos);
         setArmMotorPower(armPow);
+        slidePos = getCurrentSlidePos();
+        slidePow = slidePidController.update(slidePos);
+        setSlideMotorPower(slidePow);
+
+    }
+    private void setSlideMotorPower(double speedSlide) {
+        if (isHardware){
+            slides.setSpeed(speedSlide);
+        }
     }
 
     private void setArmMotorPower(double speed) {
