@@ -3,6 +3,7 @@ package org.firstinspires.ftc.twenty403;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuad;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
+import org.firstinspires.ftc.twenty403.helpers.OctoquadEncoder;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 import org.firstinspires.ftc.twenty403.subsystems.ArmSubsystem;
 import org.firstinspires.ftc.twenty403.subsystems.DrivebaseSubsystem;
@@ -28,32 +29,20 @@ public class Robot implements Loggable {
         this.position = pos;
         this.alliance = team;
         this.initialVoltage = hw.voltage();
-        if (Setup.Connected.ODOSUBSYSTEM) {
-            this.localizer = new TwoDeadWheelLocalizer(hw.odoR, hw.odoF);
+        if (Setup.Connected.ODOSUBSYSTEM && Setup.Connected.OCTOQUAD) {
+            this.localizer = new TwoDeadWheelLocalizer(hw.odoF, hw.odoR, hw.imu);
         } else {
             this.localizer = null;
         }
         if (Setup.Connected.DRIVEBASE) {
-            if (localizer == null) {
-                this.drivebaseSubsystem = new DrivebaseSubsystem(
-                    hw.fl,
-                    hw.fr,
-                    hw.rl,
-                    hw.rr,
-                    hw.imu
-                );
-            } else {
-                this.drivebaseSubsystem = new DrivebaseSubsystem(
-                    hw.fl,
-                    hw.fr,
-                    hw.rl,
-                    hw.rr,
-                    hw.imu,
-                    localizer
-                );
-                // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
-                localizer.setDrivebase(this.drivebaseSubsystem);
-            }
+            this.drivebaseSubsystem = new DrivebaseSubsystem(
+                hw.fl,
+                hw.fr,
+                hw.rl,
+                hw.rr,
+                hw.imu,
+                localizer
+            );
         }
         if (Setup.Connected.SAFETYSUBSYSTEM) {
             this.safetySubsystem = new SafetySubsystem(hw);

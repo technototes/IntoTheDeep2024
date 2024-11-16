@@ -13,11 +13,11 @@ import java.util.function.Function;
 public class AutoConstants {
 
     // Stuff for testing:
-    public static ConfigurablePoseD TEST_START = new ConfigurablePoseD(0, 0, 0);
-    public static ConfigurablePoseD TEST_LEFT = new ConfigurablePoseD(48, 0, 0);
-    public static ConfigurablePoseD TEST_FORWARD = new ConfigurablePoseD(0, 48, 0);
-    public static ConfigurablePoseD TEST_SPLINE_1 = new ConfigurablePoseD(24, 48, 0);
-    public static ConfigurablePoseD TEST_SPLINE_2 = new ConfigurablePoseD(24, 48, -90);
+    public static ConfigurablePoseD TEST_START = new ConfigurablePoseD(-50, -50, 0);
+    public static ConfigurablePoseD TEST_LEFT = new ConfigurablePoseD(-2, -50, 0);
+    public static ConfigurablePoseD TEST_FORWARD = new ConfigurablePoseD(-50, -2, 0);
+    public static ConfigurablePoseD TEST_SPLINE_1 = new ConfigurablePoseD(-38, -2, 0);
+    public static ConfigurablePoseD TEST_SPLINE_2 = new ConfigurablePoseD(-38, -2, -90);
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_RIGHT_TO_LEFT =
         func -> func.apply(TEST_START.toPose())
             .lineToLinearHeading(TEST_LEFT.toPose())
@@ -36,13 +36,13 @@ public class AutoConstants {
             .build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_SPLINE_PATH_1 =
         func -> func.apply(TEST_START.toPose())
-            .splineToLinearHeading(TEST_SPLINE_1.toPose(), TEST_FORWARD.getHeading())
-            .splineToLinearHeading(TEST_START.toPose(), TEST_FORWARD.getHeading())
+            .splineToLinearHeading(TEST_SPLINE_1.toPose(), TEST_START.getHeading())
+            .splineToLinearHeading(TEST_START.toPose(), TEST_START.getHeading())
             .build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_SPLINE_PATH_2 =
         func -> func.apply(TEST_START.toPose())
-            .splineToSplineHeading(TEST_SPLINE_2.toPose(), TEST_FORWARD.getHeading())
-            .splineToSplineHeading(TEST_START.toPose(), TEST_SPLINE_2.getHeading())
+            .splineToSplineHeading(TEST_SPLINE_2.toPose(), Math.toRadians(90))
+            .splineToSplineHeading(TEST_START.toPose(), Math.toRadians(-45))
             .build();
 
     public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);

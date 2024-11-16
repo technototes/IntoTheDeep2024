@@ -69,7 +69,6 @@ public class ArmSubsystem implements Subsystem, Loggable {
         rotate2.coast();
         slides = hw.slides;
         octoquad = hw.octoquad;
-        octoquad.resetAllPositions();
 
         armPidController = new PIDFController(
             armPID,

@@ -1,21 +1,17 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.FORWARD;
-import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.REVERSE;
-
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.drive.Drive;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
-import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
+import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.logger.Log;
-import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.DeadWheelConstants;
 import java.util.Arrays;
 import java.util.List;
+import org.firstinspires.ftc.twenty403.helpers.IEncoder;
 
 /*
  * Sample tracking wheel localizer implementation assuming the standard configuration:
@@ -72,23 +68,23 @@ public class TwoDeadWheelLocalizer
         public static double PERPENDICULAR_Y = 7.6 / 2.54; // Was 3.5 before
     }
 
+    protected IEncoder rlEnc, fbEnc;
+
     // Parallel moves parallel to the axles of the drive base
-    @LogConfig.Run(duringRun = true, duringInit = true)
-    @Log(name = "parOdo")
-    public MotorEncoder parallelEncoder;
+    @Log(name = "rlOdo")
+    public int rlPos;
 
     // Perpendicular moves perpendicular to the axles of the drive base
-    @LogConfig.Run(duringRun = true, duringInit = true)
-    @Log(name = "perpOdo")
-    public MotorEncoder perpendicularEncoder;
+    @Log(name = "fbOdo")
+    public int fbPos;
 
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
-    protected DrivebaseSubsystem drive;
+    protected IGyro gyro;
 
     //1862.5 per inch
     protected boolean encoderOverflow;
 
-    public TwoDeadWheelLocalizer(MotorEncoder r, MotorEncoder f) {
+    protected TwoDeadWheelLocalizer(IGyro g) {
         super(
             Arrays.asList(
                 new Pose2d(
@@ -103,13 +99,7 @@ public class TwoDeadWheelLocalizer
                 )
             )
         );
-        drive = null;
-
-        parallelEncoder = r;
-        parallelEncoder.setDirection(OdoDeadWheelConstants.paraReverse ? REVERSE : FORWARD);
-        perpendicularEncoder = f;
-        perpendicularEncoder.setDirection(OdoDeadWheelConstants.perpReverse ? REVERSE : FORWARD);
-
+        gyro = g;
         lateralDistance = OdoDeadWheelConstants.LateralDistance;
         forwardOffset = OdoDeadWheelConstants.ForwardOffset;
         encoderOverflow = OdoDeadWheelConstants.EncoderOverflow;
@@ -118,8 +108,12 @@ public class TwoDeadWheelLocalizer
         wheelRadius = OdoDeadWheelConstants.WheelRadius;
     }
 
-    public void setDrivebase(DrivebaseSubsystem sub) {
-        drive = sub;
+    public TwoDeadWheelLocalizer(IEncoder fbEncoder, IEncoder rlEncoder, IGyro g) {
+        this(g);
+        fbEnc = fbEncoder;
+        rlEnc = rlEncoder;
+        fbEncoder.setDirection(OdoDeadWheelConstants.perpReverse);
+        rlEncoder.setDirection(OdoDeadWheelConstants.paraReverse);
     }
 
     public double encoderTicksToInches(double ticks) {
@@ -129,10 +123,9 @@ public class TwoDeadWheelLocalizer
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getCurrentPosition()),
-            encoderTicksToInches(perpendicularEncoder.getCurrentPosition())
-        );
+        fbPos = fbEnc.getPosition();
+        rlPos = rlEnc.getPosition();
+        return Arrays.asList(encoderTicksToInches(rlPos), encoderTicksToInches(fbPos));
     }
 
     @NonNull
@@ -141,10 +134,9 @@ public class TwoDeadWheelLocalizer
         // TODO: If your encoder velocity can exceed 32767 counts / second (such as the REV Through Bore and other
         //  competing magnetic encoders), change Encoder.getRawVelocity() to Encoder.getCorrectedVelocity() to enable a
         //  compensation method
-
         return Arrays.asList(
-            encoderTicksToInches(parallelEncoder.getCorrectedVelocity()),
-            encoderTicksToInches(perpendicularEncoder.getCorrectedVelocity())
+            encoderTicksToInches(rlEnc.getVelocity()),
+            encoderTicksToInches(fbEnc.getVelocity())
         );
     }
 
@@ -162,11 +154,11 @@ public class TwoDeadWheelLocalizer
 
     @Override
     public double getHeading() {
-        return drive.getRawExternalHeading();
+        return gyro.getHeadingInRadians();
     }
 
     @Override
     public Double getHeadingVelocity() {
-        return drive.getExternalHeadingVelocity();
+        return gyro.getVelocity();
     }
 }

@@ -8,12 +8,13 @@ public class Setup {
     public static class Connected {
 
         public static boolean DRIVEBASE = true;
-        public static boolean ODOSUBSYSTEM = false;
+        public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
         public static boolean KIDSSHAMPOOSUBSYSTEM = false;
         public static boolean HANGSUBSYSTEM = false;
         public static boolean ARMSUBSYSTEM = true;
         public static boolean EXTERNALIMU = true;
+        public static boolean OCTOQUAD = true;
     }
 
     @Config
@@ -43,9 +44,9 @@ public class Setup {
     @Config
     public static class OctoQuadPorts {
 
-        public static int ARMENCODER = 5;
-        public static int ODOR = 6; //TODO: verify with robot, r & l may be swapped
-        public static int ODOL = 7;
+        public static int ARMENCODER = 2;
+        public static int ODOR = 1; //TODO: verify with robot, r & l may be swapped
+        public static int ODOF = 0;
     }
 
     @Config

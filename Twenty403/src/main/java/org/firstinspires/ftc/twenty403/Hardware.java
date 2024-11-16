@@ -21,6 +21,8 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.vision.hardware.Webcam;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
+import org.firstinspires.ftc.twenty403.helpers.IEncoder;
+import org.firstinspires.ftc.twenty403.helpers.OctoquadEncoder;
 
 public class Hardware implements Loggable {
 
@@ -28,7 +30,7 @@ public class Hardware implements Loggable {
 
     public IGyro imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr, armL, armR;
-    public MotorEncoder odoF, odoR;
+    public IEncoder odoF, odoR;
     public Servo retainer, jaw, wrist;
     public CRServo intake;
     public ColorSensor colorSensor;
@@ -56,10 +58,6 @@ public class Hardware implements Loggable {
             rl = new EncodedMotor<>(Setup.HardwareNames.RLMOTOR);
             rr = new EncodedMotor<>(Setup.HardwareNames.RRMOTOR);
         }
-        if (Setup.Connected.ODOSUBSYSTEM) {
-            odoR = new MotorEncoder(Setup.HardwareNames.ODOR);
-            odoF = new MotorEncoder(Setup.HardwareNames.ODOF);
-        }
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             intake = new CRServo(Setup.HardwareNames.INTAKE);
             retainer = new Servo(Setup.HardwareNames.RETAINER);
@@ -75,7 +73,14 @@ public class Hardware implements Loggable {
             rotate1 = new EncodedMotor<>(Setup.HardwareNames.ARML);
             rotate2 = new EncodedMotor<>(Setup.HardwareNames.ARMR);
             slides = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
+        }
+        if (Setup.Connected.OCTOQUAD) {
             octoquad = hwmap.get(OctoQuad.class, Setup.HardwareNames.OCTOQUAD);
+            octoquad.resetAllPositions();
+            if (Setup.Connected.ODOSUBSYSTEM) {
+                odoR = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOR);
+                odoF = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOF);
+            }
         }
     }
 
