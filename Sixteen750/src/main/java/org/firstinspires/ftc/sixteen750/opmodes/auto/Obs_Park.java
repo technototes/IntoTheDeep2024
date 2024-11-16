@@ -34,4 +34,9 @@ public class Obs_Park extends CommandOpMode {
             OpModeState.RUN
         );
     }
+
+    public void uponStart() {
+        robot.horizontalSlidesSubsystem.slidesin();
+        robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+    }
 }

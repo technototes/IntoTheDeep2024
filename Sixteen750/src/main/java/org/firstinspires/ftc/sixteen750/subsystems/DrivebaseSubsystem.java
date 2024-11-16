@@ -64,7 +64,7 @@ public class DrivebaseSubsystem
         public static double TRACK_WIDTH = 13.5; // 2021: 10; // in
 
         @WheelBase
-        public static double WHEEL_BASE = 8.5; // in
+        public static double WHEEL_BASE = 12.75; // in
 
         @KV
         public static double kV =
@@ -99,7 +99,7 @@ public class DrivebaseSubsystem
         public static PIDCoefficients HEADING_PID = new PIDCoefficients(8, 0, 0);
 
         @LateralMult
-        public static double LATERAL_MULTIPLIER = 1.0; // Lateral position is off by 14%
+        public static double LATERAL_MULTIPLIER = 1.14; // Lateral position is off by 14%
 
         @VXWeight
         public static double VX_WEIGHT = 1;
@@ -117,9 +117,9 @@ public class DrivebaseSubsystem
         // FR - 0.8
         // RL - 0.1
         // RR - 0.74
-        public static double AFR_SCALE = 0.9;
-        public static double AFL_SCALE = 0.9;
-        public static double ARR_SCALE = 0.9;
+        public static double AFR_SCALE = 0.85;
+        public static double AFL_SCALE = 0.873;
+        public static double ARR_SCALE = 0.864;
         public static double ARL_SCALE = 0.9;
     }
 

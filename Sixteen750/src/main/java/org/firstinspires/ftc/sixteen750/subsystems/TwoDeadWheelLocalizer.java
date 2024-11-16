@@ -4,7 +4,6 @@ import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direc
 import static com.technototes.library.hardware.sensor.encoder.MotorEncoder.Direction.REVERSE;
 
 import androidx.annotation.NonNull;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.localization.TwoTrackingWheelLocalizer;
@@ -14,7 +13,6 @@ import com.technototes.library.logger.LogConfig;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.path.subsystem.DeadWheelConstants;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -60,17 +58,17 @@ public class TwoDeadWheelLocalizer
         public static double paraAngle = 0;
 
         public static boolean perpReverse = true;
-        public static boolean paraReverse = false;
+        public static boolean paraReverse = true;
 
         // Parallel/Perpendicular to the forward axis
         // Parallel wheel is parallel to the forward axis
         // Perpendicular is perpendicular to the forward axis
 
-        public static double PARALLEL_X = -5.2 / 2.54; // X is the fwd/bkwd direction
-        public static double PARALLEL_Y = -17.8 / 2.54; // Y is the side-to-side/strafe direction
+        public static double PARALLEL_X = -1.3 / 2.54; // X is the fwd/bkwd direction
+        public static double PARALLEL_Y = -6.1 / 2.54; // Y is the side-to-side/strafe direction
 
-        public static double PERPENDICULAR_X = 4.9 / 2.54; // Was 3 before
-        public static double PERPENDICULAR_Y = 7.6 / 2.54; // Was 3.5 before
+        public static double PERPENDICULAR_X = 4.5 / 2.54; // Was 3 before
+        public static double PERPENDICULAR_Y = 4.5 / 2.54; // Was 3.5 before
     }
 
     // Parallel moves parallel to the axles of the drive base
