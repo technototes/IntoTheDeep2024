@@ -40,11 +40,9 @@ public class HorizontalSlidesCommands {
 
     public static SequentialCommandGroup transferring(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(
-                r.horizontalSlidesSubsystem::ClawWristServoTransfer,
-                r.horizontalSlidesSubsystem
-            ),
-            horizontalRetract(r)
+            wristTransfer(r),
+            horizontalRetract(r),
+            VerticalSlidesSequentials.transferVertical(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
