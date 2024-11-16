@@ -51,8 +51,9 @@ public class VertTeleOp extends CommandOpMode {
 
     @Override
     public void uponStart() {
+        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM){
         robot.horizontalSlidesSubsystem.slidesin();
-        robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+        robot.horizontalSlidesSubsystem.ClawWristServoTransfer();}
         robot.verticalSlidesSubsystem.slidesDown();
     }
 }

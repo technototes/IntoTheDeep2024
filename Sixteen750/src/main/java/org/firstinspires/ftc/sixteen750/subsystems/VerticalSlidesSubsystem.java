@@ -19,10 +19,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //arm servo - transfer, pickup, neutral
     //bucket servo - drop, pickup (long and short)
 
-    public static double LOW_BASKET = -950;
-    public static double HIGH_BASKET = -1350;
+    public static int LOW_BASKET = -450;
+    public static int HIGH_BASKET = -850;
     //    public static double HIGH_POS = 1000;
-    public static double SLIDE_ZERO = 0;
+    public static int SLIDE_ZERO = 0;
     public static double SLIDE_POS = 0;
     public static double ARM_POS = 0;
     public static double MIN_SERVO_SPEED = -.5;
@@ -56,13 +56,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "bucketTarget")
     public double bucketTargetPos;
 
-    public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
     public Servo armServo;
     public Servo bucketServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0, 0.0, 0.0);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0001, 0.0, 0.0);
     private PIDFController slidePidController;
+    public static double FEEDFORWARD_COEFFICIENT = 0.13;
     public int slideResetPos;
 
     public VerticalSlidesSubsystem(Hardware hw) {
@@ -73,7 +73,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         armServo = hw.armservo;
         bucketServo = hw.bucketservo;
         isHardware = true;
-        slidePidController = new PIDFController(PID, 0, 0, 0, (x, y) -> 0.1);
+        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) ->
+            FEEDFORWARD_COEFFICIENT
+        );
         resetSlideZero();
     }
 
@@ -124,16 +126,22 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void slidesDown() {
         // lowers the bucket system
         //probably going to do the slide thing with the joysticks (negative of slidesup)
-        setSlideMotorPower(SLIDE_ZERO);
+        setSlidePos(SLIDE_ZERO);
     }
 
     public void slideBasketLow() {
         //takes the arm to the first level
-        setSlideMotorPower(LOW_BASKET);
+        setSlidePos(LOW_BASKET);
+    }
+
+    public void slidesUp() {
+        // lowers the bucket system
+        //probably going to do the slide thing with the joysticks (negative of slidesup)
+        setSlidePos(LOW_BASKET);
     }
 
     public void slideBasketHigh() {
-        setSlideMotorPower(HIGH_BASKET);
+        setSlidePos(HIGH_BASKET);
     }
 
     public void slideChamberLow() {
