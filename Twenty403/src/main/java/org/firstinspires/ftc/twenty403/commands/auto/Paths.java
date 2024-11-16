@@ -8,13 +8,7 @@ import org.firstinspires.ftc.twenty403.Robot;
 public class Paths {
 
     public static Command ObservationScoring(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSERVATION_TEST1)
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1
-                )
-            )
+        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1)
             .andThen(
                 new TrajectorySequenceCommand(
                     r.drivebaseSubsystem,
