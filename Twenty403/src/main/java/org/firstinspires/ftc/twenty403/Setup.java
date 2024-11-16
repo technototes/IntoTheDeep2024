@@ -13,7 +13,7 @@ public class Setup {
         public static boolean KIDSSHAMPOOSUBSYSTEM = false;
         public static boolean HANGSUBSYSTEM = false;
         public static boolean ARMSUBSYSTEM = true;
-        public static boolean EXTERNALIMU = false;
+        public static boolean EXTERNALIMU = true;
     }
 
     @Config

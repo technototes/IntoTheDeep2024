@@ -13,7 +13,7 @@ public class Setup {
         public static boolean BUCKET = false;
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
-        public static boolean EXTERNAL_IMU = false;
+        public static boolean EXTERNAL_IMU = true;
     }
 
     @Config
