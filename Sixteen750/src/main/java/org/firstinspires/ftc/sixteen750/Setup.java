@@ -13,6 +13,7 @@ public class Setup {
         public static boolean BUCKET = false;
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
+        public static boolean EXTERNAL_IMU = true;
     }
 
     @Config
@@ -23,6 +24,7 @@ public class Setup {
         public static String RL_DRIVE_MOTOR = "rl";
         public static String RR_DRIVE_MOTOR = "rr";
         public static String IMU = "imu";
+        public static String EXTERNAL_IMU = "adafruit-imu";
         public static String ODOF = "odof";
         public static String ODOR = "odor";
 
