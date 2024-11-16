@@ -35,7 +35,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
     public static int INCREMENT_DECREMENT = 120;
-
+    public static int SLIDE_INC_DEC = 100;
+    public static int SLIDE_MAX_POS = 3100;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
     public static double MAX_SLIDE_MOTOR_POWER = 0.5;
     public static double FEEDFORWARD_GRAVITY_VALUE = 0.3;
@@ -182,6 +183,19 @@ public class ArmSubsystem implements Subsystem, Loggable {
         slideTargetPos = slideResetPos;
     }
 
+    public void slideIncrement() {
+        setSlidePos(getCurrentSlidePos() + SLIDE_INC_DEC);
+        if (slideTargetPos > SLIDE_MAX_POS) {
+            setSlidePos(SLIDE_MAX_POS);
+        }
+    }
+
+    public void slideDecrement() {
+        setSlidePos(getCurrentSlidePos() - SLIDE_INC_DEC);
+        if (slideTargetPos < 0) {
+            setSlidePos(0);
+        }
+    }
     private int getCurrentSlidePos() {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }

@@ -33,6 +33,8 @@ public class OperatorController {
     public CommandButton armDecrement;
     public CommandButton dumpWrist;
     public CommandButton scoopWrist;
+    public CommandButton slideIn;
+    public CommandButton slideOut;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -59,10 +61,12 @@ public class OperatorController {
         //        armLowNet = gamepad.dpadLeft;
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
-        //armHorizontal = gamepad.ps_share;
-        //armVertical = gamepad.ps_options;
+        armHorizontal = gamepad.leftStickButton;
+        armVertical = gamepad.rightStickButton;
         armIncrement = gamepad.ps_circle;
         armDecrement = gamepad.ps_square;
+        slideIn = gamepad.dpadDown;
+        slideOut = gamepad.dpadLeft;
     }
 
     public void BindControls() {
@@ -123,10 +127,13 @@ public class OperatorController {
         armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));
         armIncrement.whenPressed(Command.create(robot.armSubsystem::increment, robot.armSubsystem));
         armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
+        slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
+        slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
     }
 
     public void bindHangControls() {
         //suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
 
     }
+
 }
