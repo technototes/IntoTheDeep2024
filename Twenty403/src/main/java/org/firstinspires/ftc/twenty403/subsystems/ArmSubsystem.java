@@ -19,7 +19,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     private IEncoder armEncoder;
     private boolean isHardware;
     public int slideResetPos;
-    public static double FEEDFORWARD_COEFFICIENT = 0.3; //0.7
+    public static double FEEDFORWARD_COEFFICIENT = 0.0003; //0.7
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
@@ -37,16 +37,17 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int INCREMENT_DECREMENT = 120;
     public static int SLIDE_INC_DEC = 100;
     public static int SLIDE_MAX_POS = 3100;
+    public static int SLIDE_OFFSET = 2000;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
     public static double MAX_SLIDE_MOTOR_POWER = 0.5;
-    public static double FEEDFORWARD_GRAVITY_VALUE = 0.3;
-    public static double FEEDFORWARD_INTAKE_POS = -0.1;
+    public static double SLIDE_FEEDFORWARD_GRAVITY_VALUE = 0.3;
+    public static double SLIDE_FEEDFORWARD_INTAKE_POS = 0;
     // This is "5 degrees" if our numbers are correct:
     public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
 
     // as of now, we arent having a D
     public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0.000);
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0000, 0.0, 0.000);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.001, 0.0, 0.000);
 
     @Log(name = "armPow")
     public double armPow;
@@ -81,8 +82,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     private void setSlidePos(int e) {
+        e = Range.clip(e,0,SLIDE_MAX_POS);
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
+
     }
 
     public ArmSubsystem(Hardware hw) {
@@ -122,9 +125,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
             (ticks, velocity) -> {
                 armFeedFwdValue = FEEDFORWARD_COEFFICIENT *
-                Math.cos(
-                    (Math.PI * (ticks - ARM_HORIZONTAL)) / (2.0 * (ARM_VERTICAL - ARM_HORIZONTAL))
-                );
+                Math.cos(getArmAngle(ticks)) *
+                getSlideLength();
 
                 if (Math.abs(armFeedFwdValue) < 0.1) {
                     armFeedFwdValue = 0.0;
@@ -138,15 +140,23 @@ public class ArmSubsystem implements Subsystem, Loggable {
             if (isArmHorizontal()) {
                 slideFeedFwdValue = 0.0;
             } else if (isArmVertical()) {
-                slideFeedFwdValue = FEEDFORWARD_GRAVITY_VALUE;
+                slideFeedFwdValue = SLIDE_FEEDFORWARD_GRAVITY_VALUE;
             } else {
-                slideFeedFwdValue = FEEDFORWARD_INTAKE_POS;
+                slideFeedFwdValue = SLIDE_FEEDFORWARD_INTAKE_POS;
             }
             return slideFeedFwdValue;
         });
         resetSlideZero();
     }
 
+    private static double getArmAngle(double ticks) {
+        // our horizontal value starts at ARM_HORIZONTAL, so we need to
+        // subtract it
+        return (Math.PI/2.0) * (ticks - ARM_HORIZONTAL) /(ARM_VERTICAL - ARM_HORIZONTAL);
+    }
+    private double getSlideLength(){
+        return getSlideUnmodifiedPosition() + SLIDE_OFFSET;
+    }
     private boolean isArmHorizontal() {
         return Math.abs(getArmCurrentPos() - ARM_HORIZONTAL) < ARM_POS_CLOSE_ENOUGH;
     }
@@ -184,17 +194,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void slideIncrement() {
-        setSlidePos(getCurrentSlidePos() + SLIDE_INC_DEC);
-        if (slideTargetPos > SLIDE_MAX_POS) {
-            setSlidePos(SLIDE_MAX_POS);
-        }
+        setSlidePos(slideTargetPos + SLIDE_INC_DEC);
     }
 
     public void slideDecrement() {
-        setSlidePos(getCurrentSlidePos() - SLIDE_INC_DEC);
-        if (slideTargetPos < 0) {
-            setSlidePos(0);
-        }
+        setSlidePos(slideTargetPos - SLIDE_INC_DEC);
     }
     private int getCurrentSlidePos() {
         return getSlideUnmodifiedPosition() - slideResetPos;

@@ -46,8 +46,8 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-        openRetainer = gamepad.dpadUp;
-        closeRetainer = gamepad.dpadUp;
+        //openRetainer = gamepad.dpadUp;
+        //closeRetainer = gamepad.dpadUp;
         eatRetainer = gamepad.dpadRight;
         slurpIntake = gamepad.leftBumper;
         spitIntake = gamepad.rightBumper;
@@ -57,7 +57,7 @@ public class OperatorController {
         dumpWrist = gamepad.ps_share;
         scoopWrist = gamepad.ps_options;
         // suspend = gamepad.ps_circle;
-        //        armIntake = gamepad.ps_square;
+        armIntake = gamepad.dpadUp;
         //        armLowNet = gamepad.dpadLeft;
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
@@ -117,7 +117,7 @@ public class OperatorController {
     }
 
     public void bindArmControls() {
-        //        armIntake.whenPressed(Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem));
+        armIntake.whenPressed(Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem));
         //        armLowNet.whenPressed(Command.create(robot.armSubsystem::lowBasket, robot.armSubsystem));
         //        armLowSpecimen.whenPressed(Command.create(robot.armSubsystem::lowSpecimen, robot.armSubsystem));
         //        armHighSpecimen.whenPressed(Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem));
