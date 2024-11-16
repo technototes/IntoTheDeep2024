@@ -7,6 +7,7 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
+
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
@@ -17,9 +18,9 @@ import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
 //TODO: figure out where the other splineTest is coming from (duplicate spline error)
-@Autonomous(name = "ObservationSideAuto")
+@Autonomous(name = "NetSideAuto")
 @SuppressWarnings("unused")
-public class ObserveAuto extends CommandOpMode {
+public class NetAuto extends CommandOpMode {
 
     public Robot robot;
     public DriverController controls;
@@ -31,12 +32,12 @@ public class ObserveAuto extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Observation);
-        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.OBSERVATION_START.toPose());
+        robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.NET_START.toPose());
         //        safety = new SafetyTestController(driverGamepad, robot);
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                Paths.ObservationScoring(robot),
+                Paths.SampleScoring(robot),
                 EZCmd.Drive.RecordHeading(robot.drivebaseSubsystem),
                 CommandScheduler::terminateOpMode
             ),

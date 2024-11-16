@@ -7,7 +7,7 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class Paths {
 
-    public static Command SampleScoring(Robot r) {
+    public static Command ObservationScoring(Robot r) {
         return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBSERVATION_TEST1)
             .andThen(
                 new TrajectorySequenceCommand(
@@ -70,4 +70,28 @@ public class Paths {
                 )
             );
     }
+
+
+    public static Command SampleScoring(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.START_TO_NETSCORING)
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.NETSCORING_TO_INTAKE1)
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.INTAKE1_TO_NETSCORING)
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.NETSCORING_TO_INTAKE2)
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.INTAKE2_TO_NETSCORING)
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.NETSCORING_TO_INTAKE3)
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.INTAKE3_TO_NETSCORING)
+                );
+    }
+
 }
