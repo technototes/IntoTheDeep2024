@@ -33,6 +33,7 @@ public class JustDrivingTeleOp extends CommandOpMode {
         if (Setup.Connected.DRIVEBASE) {
             controlsDriver = new DriverController(driverGamepad, robot);
             robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.OBSERVATION_START.toPose());
+
             CommandScheduler.scheduleForState(
                 EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem),
                 OpModeState.INIT

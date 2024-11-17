@@ -39,9 +39,7 @@ public class OperatorController {
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
         gamepad = g;
-
         AssignNamedControllerButton();
-
         BindControls();
     }
 
@@ -109,15 +107,17 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         dumpWrist.whenPressed(
-                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         scoopWrist.whenPressed(
-                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
     }
 
     public void bindArmControls() {
-        armIntake.whenPressed(Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem));
+        armIntake.whenPressed(
+            Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem)
+        );
         //        armLowNet.whenPressed(Command.create(robot.armSubsystem::lowBasket, robot.armSubsystem));
         //        armLowSpecimen.whenPressed(Command.create(robot.armSubsystem::lowSpecimen, robot.armSubsystem));
         //        armHighSpecimen.whenPressed(Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem));
@@ -128,12 +128,13 @@ public class OperatorController {
         armIncrement.whenPressed(Command.create(robot.armSubsystem::increment, robot.armSubsystem));
         armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
         slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
-        slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
+        slideOut.whenPressed(
+            Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem)
+        );
     }
 
     public void bindHangControls() {
         //suspend.whenPressed(Command.create(robot.hangSubsystem::suspend, robot.hangSubsystem));
 
     }
-
 }
