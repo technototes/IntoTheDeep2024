@@ -15,7 +15,7 @@ import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.controls.OperatorController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@TeleOp(name = "Just Driving")
+@TeleOp(name = "Just Drivingggg")
 @SuppressWarnings("unused")
 public class JustDrivingTeleOp extends CommandOpMode {
 
@@ -33,6 +33,7 @@ public class JustDrivingTeleOp extends CommandOpMode {
         if (Setup.Connected.DRIVEBASE) {
             controlsDriver = new DriverController(driverGamepad, robot);
             robot.drivebaseSubsystem.setPoseEstimate(AutoConstants.OBSERVATION_START.toPose());
+
             CommandScheduler.scheduleForState(
                 EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem),
                 OpModeState.INIT

@@ -37,7 +37,8 @@ public class Hardware implements Loggable {
     public Rev2MDistanceSensor rev2MDistanceSensor;
     public Motor suspend;
     public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
-    public OctoQuad octoquad;
+    public IEncoder armEncoder;
+    private OctoQuad octoquad;
 
     /* Put other hardware here! */
 
@@ -81,6 +82,7 @@ public class Hardware implements Loggable {
                 odoR = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOR);
                 odoF = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOF);
             }
+            armEncoder = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ARMENCODER);
         }
     }
 
