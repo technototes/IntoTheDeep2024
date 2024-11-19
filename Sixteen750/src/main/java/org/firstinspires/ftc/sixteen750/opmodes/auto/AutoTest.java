@@ -10,15 +10,17 @@ import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
-import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
+import org.firstinspires.ftc.sixteen750.commands.auto.AutoTestingCommand;
+import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "NetScoring")
+@Autonomous(name = "Auto_Test")
 @SuppressWarnings("unused")
-public class NetScoring extends CommandOpMode {
+public class AutoTest extends CommandOpMode {
 
     public Robot robot;
+    public DriverController controls;
     public Hardware hardware;
 
     @Override
@@ -29,7 +31,7 @@ public class NetScoring extends CommandOpMode {
         robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                Paths.SampleScoringTest(robot),
+                new AutoTestingCommand(robot),
                 CommandScheduler::terminateOpMode
             ),
             OpModeState.RUN

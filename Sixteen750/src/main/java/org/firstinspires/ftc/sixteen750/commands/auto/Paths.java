@@ -17,6 +17,10 @@ public class Paths {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPLINETEST1_TO_SPLINETEST2);
     }
 
+    public static Command SampleScoringTest(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING);
+    }
+
     public static Command SampleScoring(Robot r) {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             //First Intake and Scoring
