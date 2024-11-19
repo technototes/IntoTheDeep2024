@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.twenty403.commands.auto;
 
 import com.technototes.library.command.Command;
+import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Robot;
@@ -109,5 +110,32 @@ public class Paths {
                     AutoConstants.INTAKE3_TO_NETSCORING
                 )
             );
+    }
+
+
+    public static Command ForwardBackwardSide(Robot r) {
+        return new TrajectorySequenceCommand(
+                r.drivebaseSubsystem,
+                AutoConstants.FORWARD_BACKWARD1
+        )
+                .andThen(
+                        new TrajectorySequenceCommand(
+                                r.drivebaseSubsystem,
+                                AutoConstants.FORWARD_BACKWARD2
+                        )
+                )
+                .andThen()
+                .andThen(
+                        new TrajectorySequenceCommand(
+                                r.drivebaseSubsystem,
+                                AutoConstants.FORWARD_BACKWARD3
+                        )
+                )
+                .andThen(
+                        new TrajectorySequenceCommand(
+                                r.drivebaseSubsystem,
+                                AutoConstants.FORWARD_BACKWARD4
+                        )
+                );
     }
 }
