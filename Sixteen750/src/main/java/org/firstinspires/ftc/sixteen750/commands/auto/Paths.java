@@ -2,7 +2,6 @@ package org.firstinspires.ftc.sixteen750.commands.auto;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.ParallelCommandGroup;
-import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
@@ -18,7 +17,16 @@ public class Paths {
     }
 
     public static Command SampleScoringTest(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING);
+        return new TrajectorySequenceCommand(
+            r.drivebase,
+            AutoConstants.START_TO_NETSCORING
+        )//First Intake and Scoring
+        .andThen(
+            new ParallelCommandGroup(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
+                HorizontalSlidesCommands.intake(r)
+            )
+        );
     }
 
     public static Command SampleScoring(Robot r) {
@@ -109,7 +117,7 @@ public class Paths {
         ).andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.ASCENT_CLEAR_TO_ASCENT));
     }
 
-    public static Command ObservationScoring(Robot r) {
+    public static Command ObservationPushing(Robot r) {
         return new TrajectorySequenceCommand(
             r.drivebase,
             AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1
