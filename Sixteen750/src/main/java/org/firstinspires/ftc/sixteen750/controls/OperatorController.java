@@ -20,7 +20,7 @@ public class OperatorController {
 
     public CommandButton shiftButton;
 
-    public CommandButton openClaw_bucketLow;
+    public CommandButton openClaw_closeClaw;
 
 
     //horizontal buttons
@@ -52,6 +52,9 @@ public class OperatorController {
 
     //choice commands
     public CommandButton horizontalSlides_verticalSlides;
+
+    public CommandButton openClaw_bucketLow;
+
     public boolean shifted = false;
 
     public boolean isShifted() {
@@ -63,9 +66,6 @@ public class OperatorController {
     public void toggleShift() {
         shifted = !shifted;
     }
-
-    
-
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -86,15 +86,22 @@ public class OperatorController {
         horislidesExtend = gamepad.ps_cross;
         horislidesRetract = gamepad.ps_square;
 
-        //choice commands
-        shiftButton = gamepad.ps_share;
-        horizontalSlides_verticalSlides = gamepad.ps_triangle;
+        //vertical commands
+        bucketTransfer = gamepad.ps_circle;
+        bucketScore = gamepad.ps_triangle;
+        armTransfer = gamepad.ps_cross;
+        armScore = gamepad.ps_square;
+        slidesHigh = gamepad.ps_share;
+        slidesLow = gamepad.dpadUp;
+        slidesDown = gamepad.dpadDown;
+        //bucketIncrement = gamepad.dpadDown;
+        //bucketDecrement = gamepad.dpadDown;
 
         //choice commands
         shiftButton = gamepad.ps_share;
         horizontalSlides_verticalSlides = gamepad.ps_triangle;
         slidesHigh = gamepad.dpadUp;
-        slidesLow = gamepad.dpadDown;
+        slidesLow = gamepad.ps_square;
         slidesDown = gamepad.rightStickButton;
         slidesZero = gamepad.ps_options;
     }
@@ -114,11 +121,10 @@ public class OperatorController {
 //can we toggle between regular buttons ex:open/close claw as one button - kevin will work on that
     private void bindHorizontalSlidesControls() {
         shiftButton.whenPressed(this::toggleShift);
-
-        openClaw_bucketLow.whenPressed(
+        horizontalSlides_verticalSlides.whenPressed(
             new ChoiceCommand(
-                new Pair<>(this::notShifted, HorizontalSlidesCommands.clawOpen(robot)),
-                new Pair<>(this::isShifted, VerticalSlidesCommands.LowBasket(robot))
+                new Pair<>(this::notShifted, HorizontalSlidesCommands.horizontalExtend(robot)),
+                new Pair<>(this::isShifted, VerticalSlidesCommands.HighBasket(robot))
             )
         );
         closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
@@ -130,10 +136,10 @@ public class OperatorController {
         horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
     }
     private void bindVerticalSlidesControls() {
-//          bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
-//          bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
-//          armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
-//          armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));
+          bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
+          bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
+          armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
+          armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));
         slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
         slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
         slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));

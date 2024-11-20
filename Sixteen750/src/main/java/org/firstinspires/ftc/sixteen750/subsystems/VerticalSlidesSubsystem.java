@@ -38,7 +38,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double ArmServoInput = 0.545;
     public static double ArmServoEmpty = 1;
     public static double BucketServoIncrement = 0.05;
-    public static double ArmServoIncrement = 0.555;
+    public static double ArmServoIncrement = 0.05;
     public static double ArmServoTransfer = 0;
 
     @Log(name = "slidePos")
@@ -56,7 +56,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "bucketTarget")
     public double bucketTargetPos;
 
-    public static PIDCoefficients PID = new PIDCoefficients(0.0, 0.0, 0.0);
     public Servo armServo;
     public Servo bucketServo;
     public EncodedMotor<DcMotorEx> slideMotor;
@@ -64,6 +63,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static PIDCoefficients slidePID = new PIDCoefficients(0.0, 0.0, 0.0);
     private PIDFController slidePidController;
     public static double FEEDFORWARD_COEFFICIENT = 0.13;
+    public static double FEEDFORWARD_DOWN = 0.02;
+    public static double FEEDFORWARD_UP = 0.13;
     public int slideResetPos;
 
     public VerticalSlidesSubsystem(Hardware hw) {

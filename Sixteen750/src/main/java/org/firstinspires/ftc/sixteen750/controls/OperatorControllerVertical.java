@@ -7,6 +7,7 @@ import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
 public class OperatorControllerVertical {
 
@@ -61,5 +62,8 @@ public class OperatorControllerVertical {
         slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
         slidesDown.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
         //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
+//        slidesHigh.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
+//        slidesLow.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
+//        slidesDown.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
     }
 }
