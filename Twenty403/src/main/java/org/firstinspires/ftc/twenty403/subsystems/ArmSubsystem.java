@@ -19,7 +19,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     private IEncoder armEncoder;
     private boolean isHardware;
     public int slideResetPos;
-    public static double FEEDFORWARD_COEFFICIENT = 0.0003; //0.7
+    public static double FEEDFORWARD_COEFFICIENT = 0.00014; //11-19-24
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
@@ -47,7 +47,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
 
     // as of now, we arent having a D
-    public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0.000);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.0007, 0.0, 0.000);
     public static PIDCoefficients slidePID = new PIDCoefficients(0.001, 0.0, 0.000);
 
     @Log(name = "armPow")
