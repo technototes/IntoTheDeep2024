@@ -124,7 +124,6 @@ public class Paths {
                                 AutoConstants.FORWARD_BACKWARD2
                         )
                 )
-                .andThen()
                 .andThen(
                         new TrajectorySequenceCommand(
                                 r.drivebaseSubsystem,

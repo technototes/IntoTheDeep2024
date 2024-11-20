@@ -81,6 +81,8 @@ public class Hardware implements Loggable {
             if (Setup.Connected.ODOSUBSYSTEM) {
                 odoR = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOR);
                 odoF = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ODOF);
+                odoR.setDirection(Setup.OctoQuadPorts.ODOR_REVERSE);
+                odoF.setDirection(Setup.OctoQuadPorts.ODOF_REVERSE);
             }
             armEncoder = new OctoquadEncoder(octoquad, Setup.OctoQuadPorts.ARMENCODER);
         }
