@@ -35,6 +35,9 @@ public class OperatorController {
     public CommandButton scoopWrist;
     public CommandButton slideIn;
     public CommandButton slideOut;
+    public CommandButton slideMax;
+    public CommandButton slideMin;
+
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -52,8 +55,10 @@ public class OperatorController {
         //temp changing the button below from biteJaw to intake :DD
         biteJaw = gamepad.ps_cross;
         releaseJaw = gamepad.ps_triangle;
-        dumpWrist = gamepad.ps_share;
-        scoopWrist = gamepad.ps_options;
+        //dumpWrist = gamepad.ps_share;
+        //scoopWrist = gamepad.ps_options;
+        slideMax = gamepad.ps_share;
+        slideMin = gamepad.ps_options;
         // suspend = gamepad.ps_circle;
         armIntake = gamepad.dpadUp;
         //        armLowNet = gamepad.dpadLeft;
@@ -112,6 +117,7 @@ public class OperatorController {
         scoopWrist.whenPressed(
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
+
     }
 
     public void bindArmControls() {
@@ -128,9 +134,9 @@ public class OperatorController {
         armIncrement.whenPressed(Command.create(robot.armSubsystem::increment, robot.armSubsystem));
         armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
         slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
-        slideOut.whenPressed(
-            Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem)
-        );
+        slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
+        slideMin.whenPressed(Command.create(robot.armSubsystem::resetSlideZero, robot.armSubsystem));
+        slideMax.whenPressed(Command.create(robot.armSubsystem::specimenSlides, robot.armSubsystem));
     }
 
     public void bindHangControls() {

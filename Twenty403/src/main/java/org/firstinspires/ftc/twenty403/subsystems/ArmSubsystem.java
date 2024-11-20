@@ -29,7 +29,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
     public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
     public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
-    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 700;
+    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 2500;
     public static int SLIDES_MOTOR_INTAKE_POSITION = 800;
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
@@ -200,6 +200,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public void slideDecrement() {
         setSlidePos(slideTargetPos - SLIDE_INC_DEC);
+    }
+    public void slideSpecimen() {
+        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
     }
 
     private int getCurrentSlidePos() {
