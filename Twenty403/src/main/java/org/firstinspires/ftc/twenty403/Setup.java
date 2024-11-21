@@ -47,6 +47,8 @@ public class Setup {
         public static int ARMENCODER = 2;
         public static int ODOR = 1; //TODO: verify with robot, r & l may be swapped
         public static int ODOF = 0;
+        public static boolean ODOR_REVERSE = true;
+        public static boolean ODOF_REVERSE = false;
     }
 
     @Config
