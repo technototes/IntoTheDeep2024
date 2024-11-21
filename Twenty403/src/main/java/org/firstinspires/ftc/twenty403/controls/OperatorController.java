@@ -135,7 +135,7 @@ public class OperatorController {
         armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
         slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
         slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
-        slideMin.whenPressed(Command.create(robot.armSubsystem::resetSlideZero, robot.armSubsystem));
+        slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
         slideMax.whenPressed(Command.create(robot.armSubsystem::specimenSlides, robot.armSubsystem));
     }
 

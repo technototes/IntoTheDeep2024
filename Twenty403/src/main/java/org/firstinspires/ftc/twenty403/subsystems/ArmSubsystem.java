@@ -36,7 +36,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int INITIAL_POSITION = 150;
     public static int INCREMENT_DECREMENT = 120;
     public static int SLIDE_INC_DEC = 100;
-    public static int SLIDE_MAX_POS = 3100;
+    public static int SLIDE_MAX_POS = 850;
+    public static int SLIDE_MIN_POS = -150;
     public static int SLIDE_OFFSET = 2000;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
     public static double MAX_SLIDE_MOTOR_POWER = 0.5;
@@ -189,6 +190,12 @@ public class ArmSubsystem implements Subsystem, Loggable {
         }
     }
 
+    public void setSlideToZero() {
+        setSlidePos(SLIDE_MIN_POS);
+    }
+
+
+
     public void resetSlideZero() {
         slideResetPos = getSlideUnmodifiedPosition();
         slideTargetPos = slideResetPos;
@@ -196,10 +203,16 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public void slideIncrement() {
         setSlidePos(slideTargetPos + SLIDE_INC_DEC);
+        if (slidePos > SLIDE_MAX_POS){
+            setSlidePos(SLIDE_MAX_POS);
+        }
     }
 
     public void slideDecrement() {
         setSlidePos(slideTargetPos - SLIDE_INC_DEC);
+        if (slidePos < SLIDE_MIN_POS){
+            setSlidePos(SLIDE_MIN_POS);
+        }
     }
     public void slideSpecimen() {
         setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);

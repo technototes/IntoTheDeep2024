@@ -26,19 +26,19 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     private ColorSensor colorSensor;
     private Rev2MDistanceSensor rev2MDistanceSensor;
 
-    public static double RETAINER_OPEN_POSITION = -.2;
+    public static double RETAINER_OPEN_POSITION = .78;
 
-    public static double RETAINER_CLOSE_POSITION = .1;
+    public static double RETAINER_CLOSE_POSITION = .52;
 
-    public static double JAW_BITE_POSITION = .1;
+    public static double JAW_BITE_POSITION = .4;
 
-    public static double JAW_RELEASE_POSITION = -.1;
-    public static double INTAKE_SLURP = -.1;
+    public static double JAW_RELEASE_POSITION = .2;
+    public static double INTAKE_SLURP = -.6;
 
-    public static double INTAKE_SPIT = .1;
+    public static double INTAKE_SPIT = .6;
 
-    public static double WRIST_SCOOP = .1;
-    public static double WRIST_DUMP = -.1;
+    public static double WRIST_SCOOP = .25;
+    public static double WRIST_DUMP = 0;
 
     @Log(name = "distance value ")
     public double distance_value;
