@@ -47,15 +47,14 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-        //openRetainer = gamepad.dpadUp;
-        //closeRetainer = gamepad.dpadUp;
-        eatRetainer = gamepad.dpadRight;
-        slurpIntake = gamepad.leftBumper;
-        spitIntake = gamepad.rightBumper;
+       // openRetainer = gamepad.dpadUp;
+      //  closeRetainer = gamepad.dpadRight;
+     //   slurpIntake = gamepad.leftBumper;
+      //  spitIntake = gamepad.rightBumper;
         //temp changing the button below from biteJaw to intake :DD
-        biteJaw = gamepad.ps_cross;
-        releaseJaw = gamepad.ps_triangle;
-        //dumpWrist = gamepad.ps_share;
+        //biteJaw = gamepad.ps_cross;
+       // releaseJaw = gamepad.ps_triangle;
+        ///dumpWrist = gamepad.ps_share;
         //scoopWrist = gamepad.ps_options;
         slideMax = gamepad.ps_share;
         slideMin = gamepad.ps_options;
@@ -74,7 +73,7 @@ public class OperatorController {
 
     public void BindControls() {
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
-            bindKidShampooControls();
+         //   bindKidShampooControls();
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             bindHangControls();
@@ -85,7 +84,7 @@ public class OperatorController {
         }
     }
 
-    public void bindKidShampooControls() {
+    /*public void bindKidShampooControls() {
         openRetainer.whenPressed(
             Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem)
         );
@@ -118,7 +117,7 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
 
-    }
+    }*/
 
     public void bindArmControls() {
         armIntake.whenPressed(
