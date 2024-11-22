@@ -34,9 +34,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
-    public static int INCREMENT_DECREMENT = 120;
-    public static int SLIDE_INC_DEC = 100;
-    public static int SLIDE_MAX_POS = 850;
+    public static int INCREMENT_DECREMENT = 230;
+    public static int SLIDE_INC_DEC = 250;
+    public static int SLIDE_MAX_POS = 1175;
     public static int SLIDE_MIN_POS = -150;
     public static int SLIDE_OFFSET = 2000;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
@@ -49,8 +49,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     // as of now, we arent having a D
     public static PIDCoefficients armPID = new PIDCoefficients(0.0007, 0.0, 0.000);
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.001, 0.0, 0.000);
-
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0018, 0.0, 0.000);
+    //slide PID last updated 11/21/24 :DDD
     @Log(name = "armPow")
     public double armPow;
 
@@ -177,14 +177,14 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void increment() {
-        setArmPos(getArmCurrentPos() + INCREMENT_DECREMENT);
+        setArmPos(armTargetPos+ INCREMENT_DECREMENT);
         if (armTargetPos > 3100) {
             setArmPos(3100);
         }
     }
 
     public void decrement() {
-        setArmPos(getArmCurrentPos() - INCREMENT_DECREMENT);
+        setArmPos(armTargetPos - INCREMENT_DECREMENT);
         if (armTargetPos < 0) {
             setArmPos(0);
         }
