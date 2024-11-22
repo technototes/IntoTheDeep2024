@@ -40,8 +40,8 @@ public class OperatorControllerVertical {
         slidesHigh = gamepad.ps_share;
         slidesLow = gamepad.dpadUp;
         slidesDown = gamepad.dpadDown;
-        bucketIncrement = gamepad.dpadDown;
-        bucketDecrement = gamepad.dpadDown;
+        bucketIncrement = gamepad.rightBumper; //actually functions as decrement
+        bucketDecrement = gamepad.leftBumper; //actually functions as increment
         vertslidesLeftStick = gamepad.leftStick;
     }
 
@@ -57,11 +57,13 @@ public class OperatorControllerVertical {
         bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
         bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
         armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
-        armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));
+        armScore.whenPressed(VerticalSlidesSequentials.ArmScore(robot));
         slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
         slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        slidesDown.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
+        slidesDown.whenPressed(VerticalSlidesSequentials.HighDown(robot));
         //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
+        bucketIncrement.whenPressed(VerticalSlidesCommands.BucketIncrement(robot));
+        bucketDecrement.whenPressed(VerticalSlidesCommands.BucketDecrement(robot));
 //        slidesHigh.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
 //        slidesLow.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
 //        slidesDown.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
