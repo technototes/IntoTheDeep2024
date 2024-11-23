@@ -24,10 +24,18 @@ public class HorizontalSlidesCommands {
     public static Command clawOpen(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::ClawServoBigOpen);
     }
-
+    public static Command clawToggle(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::clawToggle);
+    }
+    public static Command wristToggle(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::wristToggle);
+    }
+    public static Command slideToggle(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::slideToggle);
+    }
     public static Command wristTransfer(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::ClawWristServoTransfer);
-    }
+    }//may need to make a reset pos for wrist because of the skipping
 
     public static Command VertExtendTransfer(Robot r) {
         return Command.create(
@@ -41,8 +49,7 @@ public class HorizontalSlidesCommands {
             wristTransfer(r),
             horizontalRetract(r),
             clawChomp(r),
-            VerticalSlidesSequentials.transferVertical(r)
-            // commands for vertical slide bucket transfer position first, then wrist transferring
+            VerticalSlidesSequentials.SlidesDown(r)
         );
     }
 

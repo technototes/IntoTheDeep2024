@@ -20,22 +20,14 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //bucket servo - drop, pickup (long and short)
 
     public static int LOW_BASKET = -450;
-    public static int HIGH_BASKET = -850;
-    //    public static double HIGH_POS = 1000;
+    public static int HIGH_BASKET = -850; //-1000
     public static int SLIDE_ZERO = 0;
-    public static double SLIDE_POS = 0;
-    public static double ARM_POS = 0;
-    public static double MIN_SERVO_SPEED = -.5;
-    public static double MAX_SERVO_SPEED = .5;
     public static double MIN_MOTOR_SPEED = -0.7;
     public static double MAX_MOTOR_SPEED = 1;
-    //    public static double ScoreServo = 0.5;
-    //    public static double ArmServo = 0.5;
     public static double ClawServoOpenShort = 0.4;
     public static double BucketServoTransfer = 0.85;
     public static double BucketServoEmpty = 0.35;
     public static double BucketServoLift = 0.65; //carry position for scoring
-    public static double ArmServoInput = 0.545;
     public static double ArmServoEmpty = 1;
     public static double BucketServoIncrement = 0.05;
     public static double ArmServoIncrement = 0.05;
@@ -117,6 +109,14 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         }
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
+    }
+    public void slideToggle() {
+        if (slidePos == SLIDE_ZERO){
+            setSlidePos(HIGH_BASKET);
+        }
+        else {
+            setSlidePos(SLIDE_ZERO);
+        }
     }
 
     private void setArmPos(double w) {

@@ -32,7 +32,7 @@ public class VerticalSlidesSequentials {
                 Command.create(r.verticalSlidesSubsystem::slideBasketHigh, r.verticalSlidesSubsystem)
         );
     }
-    public static SequentialCommandGroup HighDown(Robot r) {
+    public static SequentialCommandGroup SlidesDown(Robot r) {
         return new SequentialCommandGroup(
                 Command.create(r.verticalSlidesSubsystem::slideBasketLow, r.verticalSlidesSubsystem),
                 new WaitCommand(.1),

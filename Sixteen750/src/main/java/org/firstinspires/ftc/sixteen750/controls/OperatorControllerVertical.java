@@ -65,7 +65,7 @@ public class OperatorControllerVertical {
         basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
         slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
         slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        slidesDown.whenPressed(VerticalSlidesSequentials.HighDown(robot));
+        slidesDown.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
         //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
         bucketIncrement.whenPressed(VerticalSlidesCommands.BucketIncrement(robot));
         bucketDecrement.whenPressed(VerticalSlidesCommands.BucketDecrement(robot));
