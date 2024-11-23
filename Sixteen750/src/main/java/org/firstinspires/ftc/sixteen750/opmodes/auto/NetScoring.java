@@ -39,5 +39,6 @@ public class NetScoring extends CommandOpMode {
     public void uponStart() {
         robot.horizontalSlidesSubsystem.slidesin();
         robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+        robot.horizontalSlidesSubsystem.ClawServoBigOpen();
     }
 }

@@ -40,5 +40,6 @@ public class Obs_Push extends CommandOpMode {
     public void uponStart() {
         robot.horizontalSlidesSubsystem.slidesin();
         robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+        robot.horizontalSlidesSubsystem.ClawServoChomp();
     }
 }

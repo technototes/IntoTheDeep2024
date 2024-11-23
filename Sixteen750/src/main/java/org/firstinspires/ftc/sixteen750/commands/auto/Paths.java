@@ -6,6 +6,7 @@ import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Robot;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
@@ -17,20 +18,25 @@ public class Paths {
     }
 
     public static Command SampleScoringTest(Robot r) {
-        return new TrajectorySequenceCommand(
-            r.drivebase,
-            AutoConstants.START_TO_NETSCORING
-        )//First Intake and Scoring
-        .andThen(
-            new ParallelCommandGroup(
-                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
-                HorizontalSlidesCommands.intake(r)
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+            .alongWith(VerticalSlidesCommands.ArmScore(r)) //replaced by vertical slides sequential
+            .andThen(VerticalSlidesCommands.BucketEmpty(r)) //replaced by vertical slides sequential
+            .andThen(new WaitCommand(2))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
+                    HorizontalSlidesCommands.intake(r)
+                )
             )
-        );
+            .andThen(HorizontalSlidesCommands.clawChomp(r));
     }
 
     public static Command SampleScoring(Robot r) {
+        // Preload Scoring
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.transferVertical(r))
+            .andThen(new WaitCommand(2))
             //First Intake and Scoring
             .andThen(
                 new ParallelCommandGroup(
@@ -43,8 +49,7 @@ public class Paths {
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
                     HorizontalSlidesCommands.transferring(r),
-                    VerticalSlidesCommands.BucketTransfer(r),
-                    VerticalSlidesCommands.ArmTransfer(r)
+                    VerticalSlidesSequentials.transferVertical(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
@@ -63,8 +68,7 @@ public class Paths {
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
                     HorizontalSlidesCommands.transferring(r),
-                    VerticalSlidesCommands.BucketTransfer(r),
-                    VerticalSlidesCommands.ArmTransfer(r)
+                    VerticalSlidesSequentials.transferVertical(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
@@ -83,14 +87,14 @@ public class Paths {
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
                     HorizontalSlidesCommands.transferring(r),
-                    VerticalSlidesCommands.BucketTransfer(r),
-                    VerticalSlidesCommands.ArmTransfer(r)
+                    VerticalSlidesSequentials.transferVertical(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
             .andThen(new WaitCommand(2))
             .andThen(VerticalSlidesSequentials.transferVertical(r))
+            //Parking and Ascent 1
             .andThen(
                 new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
             )

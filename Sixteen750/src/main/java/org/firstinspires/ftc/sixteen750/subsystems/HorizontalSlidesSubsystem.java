@@ -28,9 +28,9 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double LinkServoRetract = 1;
     public static double ClawServoClose = 0.3;
     public static double ClawServoOpen = 0.6;
-    public static double WristServoTransfer = 0.3;
+    public static double WristServoTransfer = 0.3; // 0.1
     public static double VertExtendTransfer = 0.1;
-    public static double WristServoPickup = .9;
+    public static double WristServoPickup = 0.9;
     public static double WristServoIncrement = 0.15;
 
     @Log(name = "wristTarget")
@@ -122,6 +122,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     private void setWristPos(double w) {
         if (wristServo != null) {
+            Range.clip(w, 0.0, 1.0);
             wristServo.setPosition(w);
             wristTargetPos = w;
         }
