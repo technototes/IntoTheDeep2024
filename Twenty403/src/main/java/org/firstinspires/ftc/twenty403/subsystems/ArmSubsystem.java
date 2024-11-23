@@ -21,7 +21,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.00014; //11-19-24
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
-    public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
+    public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 3100;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
     public static double MIN_ANGULAR_VELOCITY = 0.001;
@@ -31,7 +31,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
     public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
     public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
-    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 2500;
+    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_LOW= 2500;
+    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 2500;
     public static int SLIDES_MOTOR_INTAKE_POSITION = 800; //work on this
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
@@ -189,18 +190,24 @@ public class ArmSubsystem implements Subsystem, Loggable {
         rotate2 = null;
     }
 
-    public void increment() {
-        setArmPos(armTargetPos+ INCREMENT_DECREMENT);
-        if (armTargetPos > 3100) {
-            setArmPos(3100);
+    public void incrementn() {
+        increment(1.0);
+    }
+    public void increment(double value) {
+        int newArmPos = (int)(armTargetPos + value * INCREMENT_DECREMENT);
+        if (newArmPos > 3100){
+            newArmPos = 3100;
         }
+        else if (newArmPos < 0){
+            newArmPos = 0;
+        }
+        setArmPos(newArmPos);
     }
 
+
+
     public void decrement() {
-        setArmPos(armTargetPos - INCREMENT_DECREMENT);
-        if (armTargetPos < 0) {
-            setArmPos(0);
-        }
+        increment(-1.0);
     }
 
     public void setSlideToZero() {
@@ -234,7 +241,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
         setSlidePos(SLIDES_MOTOR_INTAKE_POSITION);
     }
     public void slideSpecimen() {
-        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
+       setSlidePos(SLIDE_MAX_POS_HORIZONTAL);
     }
 
     private int getCurrentSlidePos() {
@@ -283,8 +290,12 @@ public class ArmSubsystem implements Subsystem, Loggable {
         setArmPos(ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH);
     }
 
-    public void specimenSlides() {
-        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
+    public void lowSpecimenSlides() {
+        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_LOW);
+    }
+
+    public void highSpecimenSlides() {
+        setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_HIGH);
     }
 
     //intake position

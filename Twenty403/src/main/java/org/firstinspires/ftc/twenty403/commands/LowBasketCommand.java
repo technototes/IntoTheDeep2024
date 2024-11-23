@@ -15,9 +15,8 @@ public class LowBasketCommand {
             super();
         }
 
-        public ParallelCommandGroup LowBasketPreSlides(Robot r) {
+        public ParallelCommandGroup LowBasketPreArm(Robot r) {
             return new ParallelCommandGroup(
-                    Command.create(r.armSubsystem::lowBasket, r.armSubsystem),
                     Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
@@ -29,9 +28,11 @@ public class LowBasketCommand {
             return new SequentialCommandGroup(
                 Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                 new WaitCommand(0.5),
-                LowBasketPreSlides(r),
+                Command.create(r.armSubsystem::lowBasket, r.armSubsystem),
                 new WaitCommand(0.5),
-                Command.create(r.armSubsystem::slideIntake, r.armSubsystem)
+                Command.create(r.armSubsystem::slideIntake, r.armSubsystem),
+                new WaitCommand(0.5),
+                LowBasketPreArm(r)
             );
         }
 

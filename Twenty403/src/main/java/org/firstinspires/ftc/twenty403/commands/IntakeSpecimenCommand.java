@@ -11,12 +11,11 @@ public class IntakeSpecimenCommand {
 
     public class SpecimenIntake extends ParallelCommandGroup {
 
-        public ParallelCommandGroup IntakeSpecimenPreSlides(Robot r) {
+        public ParallelCommandGroup IntakeSpecimenPreArm(Robot r) {
             return new ParallelCommandGroup(
-                Command.create(r.armSubsystem::horizontal, r.armSubsystem),
                 Command.create(r.kidShampooSubsystem::releaseJaw, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
-                Command.create(r.kidShampooSubsystem::scoopWrist, r.kidShampooSubsystem)
+                Command.create(r.kidShampooSubsystem::straightWrist, r.kidShampooSubsystem)
             );
         }
 
@@ -24,7 +23,10 @@ public class IntakeSpecimenCommand {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
-                    IntakeSpecimenPreSlides(r)
+                    Command.create(r.armSubsystem::horizontal, r.armSubsystem),
+                    new WaitCommand(0.5),
+                    //no slides cause we dont need slides for specimen intake :DD
+                    IntakeSpecimenPreArm(r)
             );
         }
     }

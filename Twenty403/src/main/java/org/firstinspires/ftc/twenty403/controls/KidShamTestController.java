@@ -35,7 +35,7 @@ public class KidShamTestController {
         public CommandButton slideOut;
         public CommandButton slideMax;
         public CommandButton slideMin;
-
+        public CommandButton straightWrist;
 
         public KidShamTestController(CommandGamepad g, Robot r) {
             robot = r;
@@ -54,7 +54,7 @@ public class KidShamTestController {
             releaseJaw = gamepad.dpadDown;
             dumpWrist = gamepad.ps_circle;
             scoopWrist = gamepad.ps_square;
-
+            straightWrist = gamepad.ps_cross;
         }
 
         public void BindControls() {
@@ -93,6 +93,9 @@ public class KidShamTestController {
             );
             scoopWrist.whenPressed(
                     Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
+            );
+            straightWrist.whenPressed(
+                    Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
             );
         }
     }
