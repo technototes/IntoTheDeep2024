@@ -73,7 +73,7 @@ public class OperatorController {
 
     public void BindControls() {
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
-         //   bindKidShampooControls();
+            bindKidShampooControls();
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             bindHangControls();
@@ -84,7 +84,7 @@ public class OperatorController {
         }
     }
 
-    /*public void bindKidShampooControls() {
+    public void bindKidShampooControls() {
         openRetainer.whenPressed(
             Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem)
         );
@@ -111,13 +111,13 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         dumpWrist.whenPressed(
-            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+                Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
         );
         scoopWrist.whenPressed(
-            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+                Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
         );
 
-    }*/
+    }
 
     public void bindArmControls() {
         armIntake.whenPressed(

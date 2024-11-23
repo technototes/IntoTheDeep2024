@@ -30,13 +30,16 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
     public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
     public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION = 2500;
-    public static int SLIDES_MOTOR_INTAKE_POSITION = 800;
+    public static int SLIDES_MOTOR_INTAKE_POSITION = 800; //work on this
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
+
     public static int INCREMENT_DECREMENT = 230;
     public static int SLIDE_INC_DEC = 250;
-    public static int SLIDE_MAX_POS = 1175;
+    public static int SLIDE_MAX_POS_HORIZONTAL = 1175;
+    public static int SLIDE_MAX_POS = SLIDE_MAX_POS_HORIZONTAL;
+    public static int SLIDE_MAX_POS_VERTICAL = 1250;
     public static int SLIDE_MIN_POS = -150;
     public static int SLIDE_OFFSET = 2000;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
@@ -75,6 +78,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     @Log(name = "slideFdFwdVal")
     public double slideFeedFwdValue;
 
+
     private PIDFController armPidController;
     private PIDFController slidePidController;
 
@@ -84,7 +88,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     private void setSlidePos(int e) {
-        e = Range.clip(e, 0, SLIDE_MAX_POS);
+        e = Range.clip(e, SLIDE_MIN_POS, SLIDE_MAX_POS);
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
     }
@@ -128,13 +132,20 @@ public class ArmSubsystem implements Subsystem, Loggable {
                 armFeedFwdValue =
                     FEEDFORWARD_COEFFICIENT * Math.cos(getArmAngle(ticks)) * getSlideLength();
 
+                if (velocity < MIN_ANGULAR_VELOCITY) {
+                    //increase armFeedFwdValue to avoid slamming or increase D in PID
+                    armFeedFwdValue + ARM_SLAM_PREVENTION;
+                }
                 if (Math.abs(armFeedFwdValue) < 0.1) {
                     armFeedFwdValue = 0.0;
                 }
 
+
                 return armFeedFwdValue;
             }
         );
+
+
         setArmPos(INITIAL_POSITION);
         slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) -> {
             if (isArmHorizontal()) {
@@ -203,9 +214,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public void slideIncrement() {
         setSlidePos(slideTargetPos + SLIDE_INC_DEC);
+
         if (slidePos > SLIDE_MAX_POS){
             setSlidePos(SLIDE_MAX_POS);
         }
+
     }
 
     public void slideDecrement() {
@@ -213,6 +226,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
         if (slidePos < SLIDE_MIN_POS){
             setSlidePos(SLIDE_MIN_POS);
         }
+    }
+
+    public void slideIntake() {
+        setSlidePos(SLIDES_MOTOR_INTAKE_POSITION);
     }
     public void slideSpecimen() {
         setSlidePos(SLIDES_MOTOR_SPECIMEN_SCORING_POSITION);
@@ -273,14 +290,27 @@ public class ArmSubsystem implements Subsystem, Loggable {
         setArmPos(INITIAL_POSITION);
     }
 
+
     @Override
     public void periodic() {
         armPos = getArmCurrentPos();
+        SLIDE_MAX_POS = calculateMaxSlide(armPos);
         armPow = armPidController.update(armPos);
         setArmMotorPower(armPow);
         slidePos = getCurrentSlidePos();
         slidePow = slidePidController.update(slidePos);
         setSlideMotorPower(slidePow);
+
+    }
+
+    private int calculateMaxSlide(int armPos) {
+        double angle = getArmAngle(armPos);
+        if (angle > Math.PI/3) {
+            return SLIDE_MAX_POS_VERTICAL;
+        }
+        else {
+            return SLIDE_MAX_POS_HORIZONTAL;
+        }
     }
 
     private void setSlideMotorPower(double speedSlide) {
