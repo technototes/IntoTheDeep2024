@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
@@ -51,9 +50,11 @@ public class VertTeleOp extends CommandOpMode {
 
     @Override
     public void uponStart() {
-        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM){
-        robot.horizontalSlidesSubsystem.slidesin();
-        robot.horizontalSlidesSubsystem.ClawWristServoTransfer();}
+        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
+            robot.horizontalSlidesSubsystem.slidesin();
+            robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+            robot.horizontalSlidesSubsystem.ClawServoChomp();
+        }
         robot.verticalSlidesSubsystem.slidesDown();
     }
 }

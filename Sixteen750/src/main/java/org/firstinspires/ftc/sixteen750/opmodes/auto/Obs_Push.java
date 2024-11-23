@@ -27,10 +27,10 @@ public class Obs_Push extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Observation);
-        robot.drivebase.setPoseEstimate(AutoConstants.FORWARD.toPose());
+        robot.drivebase.setPoseEstimate(AutoConstants.OBS_START.toPose());
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
-                Paths.ObservationScoring(robot),
+                Paths.ObservationPushing(robot),
                 CommandScheduler::terminateOpMode
             ),
             OpModeState.RUN
@@ -40,5 +40,6 @@ public class Obs_Push extends CommandOpMode {
     public void uponStart() {
         robot.horizontalSlidesSubsystem.slidesin();
         robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+        robot.horizontalSlidesSubsystem.ClawServoChomp();
     }
 }

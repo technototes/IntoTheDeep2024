@@ -3,7 +3,6 @@ package org.firstinspires.ftc.sixteen750.controls;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
@@ -25,6 +24,7 @@ public class OperatorControllerVertical {
     public CommandButton slidesDown;
     public CommandButton transferVertical;
     public CommandButton basketScore;
+
     //public CommandButton wristDecrement;
 
     public OperatorControllerVertical(CommandGamepad g, Robot r) {
@@ -42,8 +42,8 @@ public class OperatorControllerVertical {
         slidesHigh = gamepad.ps_share;
         slidesLow = gamepad.dpadUp;
         slidesDown = gamepad.dpadDown;
-        bucketIncrement = gamepad.rightBumper; //actually functions as decrement
-        bucketDecrement = gamepad.leftBumper; //actually functions as increment
+        bucketIncrement = gamepad.dpadLeft;
+        bucketDecrement = gamepad.dpadRight;
         vertslidesLeftStick = gamepad.leftStick;
         transferVertical = gamepad.ps_cross;
         basketScore = gamepad.ps_square;
@@ -55,7 +55,6 @@ public class OperatorControllerVertical {
             bindVerticalSlidesControls();
         }
     }
-
 
     private void bindVerticalSlidesControls() {
         transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));

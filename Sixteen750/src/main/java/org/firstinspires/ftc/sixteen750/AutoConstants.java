@@ -44,13 +44,13 @@ public class AutoConstants {
     public static ConfigurablePoseD OBSERVATION_PUSH_HALF = new ConfigurablePoseD(-47, 40, (90));
 
 
-    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
-    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(51, 51, -135);
+    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 180);
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
-    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 40, 90);
-    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(60, 35, 90);
-    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, 90);
-    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, -0);
+    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 48, -90);
+    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 45, -90);
+    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, -90);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 180);
     public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(59, 10, 90);
 
     //These are testing constants for last year's game

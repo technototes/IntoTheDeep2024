@@ -10,32 +10,23 @@ public class HorizontalSlidesCommands {
     //command.create(something something)
     //low basket, high basket, low specimen, high specimen, bucket transfer, clawwrist transfer, inc/dec, pickup, claw
     public static Command horizontalExtend(Robot r) {
-        return Command.create(r.horizontalSlidesSubsystem::slidesout, r.horizontalSlidesSubsystem);
+        return Command.create(r.horizontalSlidesSubsystem::slidesout);
     }
 
     public static Command horizontalRetract(Robot r) {
-        return Command.create(r.horizontalSlidesSubsystem::slidesin, r.horizontalSlidesSubsystem);
+        return Command.create(r.horizontalSlidesSubsystem::slidesin);
     }
 
     public static Command clawChomp(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawServoChomp,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawServoChomp);
     }
 
     public static Command clawOpen(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawServoBigOpen,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawServoBigOpen);
     }
 
     public static Command wristTransfer(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawWristServoTransfer,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawWristServoTransfer);
     }
     public static Command VertExtendTransfer(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::VertExtendTransfer, r.horizontalSlidesSubsystem);
@@ -51,42 +42,24 @@ public class HorizontalSlidesCommands {
     }
 
     public static Command wristPickup(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawWristServoPickup,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawWristServoPickup);
     }
 
     public static Command wristIncrement(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawWristServoIncrement,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawWristServoIncrement);
     }
 
     public static Command wristDecrement(Robot r) {
-        return Command.create(
-            r.horizontalSlidesSubsystem::ClawWristServoDecrement,
-            r.horizontalSlidesSubsystem
-        );
+        return Command.create(r.horizontalSlidesSubsystem::ClawWristServoDecrement);
     }
 
     public static SequentialCommandGroup intake(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(
-                r.horizontalSlidesSubsystem::ClawWristServoTransfer,
-                r.horizontalSlidesSubsystem
-            ),
+            wristTransfer(r),
+            Command.create(r.horizontalSlidesSubsystem::ClawServoBigOpen),
             horizontalExtend(r),
             new WaitCommand(1),
-            Command.create(
-                r.horizontalSlidesSubsystem::ClawWristServoPickup,
-                r.horizontalSlidesSubsystem
-            ),
-            Command.create(
-                r.horizontalSlidesSubsystem::ClawServoBigOpen,
-                r.horizontalSlidesSubsystem
-            )
+            Command.create(r.horizontalSlidesSubsystem::ClawWristServoPickup)
         );
     }
 }
