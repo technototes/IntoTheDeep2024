@@ -7,7 +7,6 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Log;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.driving.JoystickDriveCommand;
@@ -23,7 +22,6 @@ public class OperatorController {
     public CommandButton shiftButton;
 
     public CommandButton openClaw_closeClaw;
-
 
     //horizontal buttons
     public Stick horislidesLeftStick;
@@ -62,9 +60,11 @@ public class OperatorController {
     public boolean isShifted() {
         return shifted;
     }
+
     public boolean notShifted() {
         return !shifted;
     }
+
     public void toggleShift() {
         shifted = !shifted;
     }
@@ -79,7 +79,7 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         openClaw_bucketLow = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
-        wristTransfer = gamepad.dpadLeft;
+        wristTransfer = gamepad.ps_triangle;
         wristPickup = gamepad.ps_circle;
         wristIncrement = gamepad.dpadRight;
         wristDecrement = gamepad.dpadLeft;
@@ -90,7 +90,6 @@ public class OperatorController {
         //vertical commands
         bucketTransfer = gamepad.ps_circle;
         bucketScore = gamepad.ps_triangle;
-
 
         //bucketIncrement = gamepad.dpadDown;
         //bucketDecrement = gamepad.dpadDown;
@@ -116,7 +115,8 @@ public class OperatorController {
         }
         shiftButton.whenPressed(this::toggleShift);
     }
-//can we toggle between regular buttons ex:open/close claw as one button - kevin will work on that
+
+    //can we toggle between regular buttons ex:open/close claw as one button - kevin will work on that
     private void bindHorizontalSlidesControls() {
         shiftButton.whenPressed(this::toggleShift);
         horizontalSlides_verticalSlides.whenPressed(
@@ -128,13 +128,14 @@ public class OperatorController {
         closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
         wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
         wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
-        //wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
-        //wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
+        wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
+        wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
         horislidesExtend.whenPressed(HorizontalSlidesCommands.intake(robot));
         horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
     }
+
     private void bindVerticalSlidesControls() {
-          /*bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
+        /*bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
           bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
           armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
           armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));*/
@@ -143,8 +144,8 @@ public class OperatorController {
         slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
         slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
         //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
-//        slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));
-//        slidesDownTesting.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
+        //        slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));
+        //        slidesDownTesting.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
     }
 
     public void bindHorizontalAnalogControls() {

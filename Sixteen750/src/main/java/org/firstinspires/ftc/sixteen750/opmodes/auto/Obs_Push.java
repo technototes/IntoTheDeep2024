@@ -11,6 +11,7 @@ import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
@@ -38,8 +39,6 @@ public class Obs_Push extends CommandOpMode {
     }
 
     public void uponStart() {
-        robot.horizontalSlidesSubsystem.slidesin();
-        robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
-        robot.horizontalSlidesSubsystem.ClawServoChomp();
+        HorizontalSlidesCommands.transferring(robot);
     }
 }

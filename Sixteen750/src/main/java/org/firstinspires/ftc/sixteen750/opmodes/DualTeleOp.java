@@ -12,6 +12,7 @@ import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.driving.DrivingCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlideNeutralCommand;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
@@ -50,10 +51,7 @@ public class DualTeleOp extends CommandOpMode {
     @Override
     public void uponStart() {
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
-            robot.horizontalSlidesSubsystem.ClawServoChomp();
-            robot.horizontalSlidesSubsystem.slidesin();
-            robot.horizontalSlidesSubsystem.ClawServoChomp();
-            robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
+            HorizontalSlidesCommands.transferring(robot);
         }
         if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
             robot.verticalSlidesSubsystem.slidesDown();
