@@ -28,14 +28,19 @@ public class HorizontalSlidesCommands {
     public static Command wristTransfer(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::ClawWristServoTransfer);
     }
+
     public static Command VertExtendTransfer(Robot r) {
-        return Command.create(r.horizontalSlidesSubsystem::VertExtendTransfer, r.horizontalSlidesSubsystem);
+        return Command.create(
+            r.horizontalSlidesSubsystem::VertExtendTransfer,
+            r.horizontalSlidesSubsystem
+        );
     }
 
     public static SequentialCommandGroup transferring(Robot r) {
         return new SequentialCommandGroup(
             wristTransfer(r),
             horizontalRetract(r),
+            clawChomp(r),
             VerticalSlidesSequentials.transferVertical(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );

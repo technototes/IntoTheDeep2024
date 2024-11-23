@@ -16,7 +16,7 @@ public class HorizontalSlideNeutralCommand implements Command {
     @Override
     public void execute() {
         subsystem.slidesin();
-        subsystem.ClawServoBigOpen();
+        subsystem.ClawServoChomp();
         subsystem.ClawWristServoTransfer();
     }
 }
