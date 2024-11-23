@@ -222,19 +222,23 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     public void slideIncrement() {
-        setSlidePos(slideTargetPos + SLIDE_INC_DEC);
-
-        if (slidePos > SLIDE_MAX_POS){
-            setSlidePos(SLIDE_MAX_POS);
-        }
+        slideincrement(1.0);
 
     }
 
-    public void slideDecrement() {
-        setSlidePos(slideTargetPos - SLIDE_INC_DEC);
-        if (slidePos < SLIDE_MIN_POS){
-            setSlidePos(SLIDE_MIN_POS);
+    public void slideincrement(double v) {
+        int newSlidePos = (int)(slideTargetPos + v * SLIDE_INC_DEC);
+        if (newSlidePos > SLIDE_MAX_POS){
+            newSlidePos = SLIDE_MAX_POS;
         }
+        else if (newSlidePos < SLIDE_MIN_POS){
+            newSlidePos = SLIDE_MIN_POS;
+        }
+        setSlidePos(newSlidePos);
+    }
+
+    public void slideDecrement() {
+        slideincrement(-1.0);
     }
 
     public void slideIntake() {

@@ -11,6 +11,7 @@ import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.HangCmd;
 import org.firstinspires.ftc.twenty403.commands.JoystickIncDecCommand;
+import org.firstinspires.ftc.twenty403.commands.JoystickSlideIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.KidShampooCmds;
 import org.firstinspires.ftc.twenty403.commands.driving.JoystickDriveCommand;
 
@@ -42,6 +43,7 @@ public class OperatorController {
     public CommandButton slideMax;
     public CommandButton slideMin;
     public Stick armStick;
+    public Stick slideStick;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -73,6 +75,7 @@ public class OperatorController {
         slideOut = gamepad.dpadLeft;
         straightWrist = gamepad.ps_share;
         armStick = gamepad.rightStick;
+        slideStick = gamepad.leftStick;
     }
 
     public void BindControls() {
@@ -146,6 +149,12 @@ public class OperatorController {
                 new JoystickIncDecCommand(
                         robot.armSubsystem,
                         armStick
+                ));
+
+        CommandScheduler.scheduleJoystick(
+                new JoystickSlideIncDecCommand(
+                        robot.armSubsystem,
+                        slideStick
                 ));
     }
 
