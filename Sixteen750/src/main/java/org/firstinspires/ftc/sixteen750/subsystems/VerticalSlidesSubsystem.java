@@ -32,13 +32,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //    public static double ScoreServo = 0.5;
     //    public static double ArmServo = 0.5;
     public static double ClawServoOpenShort = 0.4;
-    public static double BucketServoTransfer = 0.55;
-    public static double BucketServoEmpty = 0.05;
-    public static double BucketServoLift = 0;
+    public static double BucketServoTransfer = 0.85;
+    public static double BucketServoEmpty = 0.35;
+    public static double BucketServoLift = 0.65; //carry position for scoring
     public static double ArmServoInput = 0.545;
     public static double ArmServoEmpty = 1;
     public static double BucketServoIncrement = 0.05;
-    public static double ArmServoIncrement = 0.555;
+    public static double ArmServoIncrement = 0.05;
     public static double ArmServoTransfer = 0;
 
     @Log(name = "slidePos")
@@ -60,9 +60,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public Servo bucketServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0001, 0.0, 0.0);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0015, 0.0, 0.0);
     private PIDFController slidePidController;
-    public static double FEEDFORWARD_COEFFICIENT = 0.13;
+    public static double FEEDFORWARD_COEFFICIENT = -0.13;
+    public static double FEEDFORWARD_DOWN = 0.07;
+    public static double FEEDFORWARD_UP = -0.13;
     public int slideResetPos;
 
     public VerticalSlidesSubsystem(Hardware hw) {
@@ -73,9 +75,16 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         armServo = hw.armservo;
         bucketServo = hw.bucketservo;
         isHardware = true;
-        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) ->
-            FEEDFORWARD_COEFFICIENT
-        );
+        slidePidController =
+                new PIDFController(
+                        slidePID,
+                        0,
+                        0,
+                        0,
+
+                        (ticks, velocity) ->
+                                FEEDFORWARD_COEFFICIENT
+                );
         resetSlideZero();
     }
 
@@ -100,6 +109,12 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     private void setSlidePos(int e) {
+        if (getSlideCurrentPos() < e){
+            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
+        }
+        else {
+            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
+        }
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
     }
@@ -134,19 +149,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         setSlidePos(LOW_BASKET);
     }
 
-    public void slidesUp() {
-        // lowers the bucket system
-        //probably going to do the slide thing with the joysticks (negative of slidesup)
-        setSlidePos(LOW_BASKET);
-    }
-
     public void slideBasketHigh() {
         setSlidePos(HIGH_BASKET);
     }
 
     public void slideChamberLow() {
         //takes the arm to the first level
-        slidePidController.setTargetPosition(LOW_BASKET);
+        setSlidePos(LOW_BASKET);
     }
 
     public void slideChamberHigh() {

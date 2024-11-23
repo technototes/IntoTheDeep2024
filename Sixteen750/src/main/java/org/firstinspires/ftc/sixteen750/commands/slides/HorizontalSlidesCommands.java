@@ -37,6 +37,9 @@ public class HorizontalSlidesCommands {
             r.horizontalSlidesSubsystem
         );
     }
+    public static Command VertExtendTransfer(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::VertExtendTransfer, r.horizontalSlidesSubsystem);
+    }
 
     public static SequentialCommandGroup transferring(Robot r) {
         return new SequentialCommandGroup(

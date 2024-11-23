@@ -49,7 +49,8 @@ public class DualTeleOp extends CommandOpMode {
 
     @Override
     public void uponStart() {
-        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM == true) {
+        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
+            robot.horizontalSlidesSubsystem.ClawServoChomp();
             robot.horizontalSlidesSubsystem.slidesin();
             robot.horizontalSlidesSubsystem.ClawWristServoTransfer();
         }

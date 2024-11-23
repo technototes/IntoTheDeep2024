@@ -37,6 +37,18 @@ public class VerticalSlidesCommands {
             r.verticalSlidesSubsystem
         );
     }
+    public static Command BucketDecrement(Robot r) {
+        return Command.create(
+                r.verticalSlidesSubsystem::bucketServoDecrement,
+                r.verticalSlidesSubsystem
+        );
+    }
+    public static Command BucketIncrement(Robot r) {
+        return Command.create(
+                r.verticalSlidesSubsystem::bucketServoIncrement,
+                r.verticalSlidesSubsystem
+        );
+    }
 
     public static Command BucketEmpty(Robot r) {
         return Command.create(
@@ -55,15 +67,13 @@ public class VerticalSlidesCommands {
     public static Command ArmScore(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::armServoEmpty, r.verticalSlidesSubsystem);
     }
-    public static Command SlidesUp(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::slidesUp, r.verticalSlidesSubsystem);
-    }
     public static Command SlidesDown(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::slidesDown, r.verticalSlidesSubsystem);
     }
     public static Command SlidesZero(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::resetSlideZero, r.verticalSlidesSubsystem);
     }
+
 
     //transfer
     //inc/dec
