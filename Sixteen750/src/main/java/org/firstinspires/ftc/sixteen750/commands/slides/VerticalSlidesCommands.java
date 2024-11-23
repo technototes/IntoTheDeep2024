@@ -8,70 +8,52 @@ public class VerticalSlidesCommands {
 
     public static Command HighBasket(Robot r) {
         return Command.create(
-            r.verticalSlidesSubsystem::slideBasketHigh,
-            r.verticalSlidesSubsystem
-        );
+            r.verticalSlidesSubsystem::slideBasketHigh);
     }
 
     public static Command LowBasket(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::slideBasketLow, r.verticalSlidesSubsystem);
+        return Command.create(r.verticalSlidesSubsystem::slideBasketLow);
+    }
+    public static Command slideToggle(Robot r) {
+        return Command.create(r.verticalSlidesSubsystem::slideToggle);
     }
 
     public static Command HighChamber(Robot r) {
         return Command.create(
-            r.verticalSlidesSubsystem::slideChamberHigh,
-            r.verticalSlidesSubsystem
-        );
+            r.verticalSlidesSubsystem::slideChamberHigh);
     }
 
     public static Command LowChamber(Robot r) {
         return Command.create(
-            r.verticalSlidesSubsystem::slideChamberLow,
-            r.verticalSlidesSubsystem
-        );
+            r.verticalSlidesSubsystem::slideChamberLow);
     }
 
     public static Command BucketTransfer(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::bucketServoTransfer,
-            r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::bucketServoTransfer);
     }
     public static Command BucketDecrement(Robot r) {
-        return Command.create(
-                r.verticalSlidesSubsystem::bucketServoDecrement,
-                r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::bucketServoDecrement);
     }
     public static Command BucketIncrement(Robot r) {
-        return Command.create(
-                r.verticalSlidesSubsystem::bucketServoIncrement,
-                r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::bucketServoIncrement);
     }
 
     public static Command BucketEmpty(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::bucketServoEmpty,
-            r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::bucketServoEmpty);
     }
 
     public static Command ArmTransfer(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::armServoTransfer,
-            r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::armServoTransfer);
     }
 
     public static Command ArmScore(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::armServoEmpty, r.verticalSlidesSubsystem);
+        return Command.create(r.verticalSlidesSubsystem::armServoEmpty);
     }
     public static Command SlidesDown(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::slidesDown, r.verticalSlidesSubsystem);
+        return Command.create(r.verticalSlidesSubsystem::slidesDown);
     }
     public static Command SlidesZero(Robot r) {
-        return Command.create(r.verticalSlidesSubsystem::resetSlideZero, r.verticalSlidesSubsystem);
+        return Command.create(r.verticalSlidesSubsystem::resetSlideZero);
     }
 
 

@@ -29,12 +29,14 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double ClawServoClose = 0.3;
     public static double ClawServoOpen = 0.6;
     public static double WristServoTransfer = 0.3; // 0.1
-    public static double VertExtendTransfer = 0.1;
+    public static double VertExtendTransfer = 0.1;//may need to make a reset pos for wrist because of the skipping
     public static double WristServoPickup = 0.9;
     public static double WristServoIncrement = 0.15;
 
     @Log(name = "wristTarget")
     public double wristTargetPos;
+    @Log(name = "clawTarget")
+    public double clawTargetPos;
 
     @Log(name = "horizontalSlide")
     public double currentPos;
@@ -64,6 +66,14 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     //these are methods, needed to be called in a command
+    public void slideToggle() {
+        if (currentPos < 1){
+            setSlides(LinkServoRetract);
+        }
+        else {
+            setSlides(LinkServoExtend);
+        }
+    }
     public void slidesout() {
         setSlides(LinkServoExtend);
     }
@@ -88,13 +98,36 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         setSlide(currentPos + SMALLADJUSTMENT);
     }
 
+    public void clawToggle() {
+        if (clawTargetPos == ClawServoClose){
+            setClawPos(ClawServoOpen);
+        }
+        else {
+            setClawPos(ClawServoClose);
+        }
+    }
+    private void setClawPos(double w) {
+        if (clawServo != null) {
+            Range.clip(w, 0.0, 1.0);
+            clawServo.setPosition(w);
+            clawTargetPos = w;
+        }
+    }
     public void ClawServoChomp() {
         // the intake system's position
-        clawServo.setPosition(ClawServoClose);
+        setClawPos(ClawServoClose);
     }
 
     public void ClawServoBigOpen() {
-        clawServo.setPosition(ClawServoOpen); //opens claw for intake and release
+        setClawPos(ClawServoOpen); //opens claw for intake and release
+    }
+    public void wristToggle() {
+        if (wristTargetPos == WristServoPickup){
+            setWristPos(WristServoTransfer);
+        }
+        else {
+            setWristPos(WristServoPickup);
+        }
     }
 
     public void ClawWristServoPickup() {
@@ -120,7 +153,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         setWristPos(wristTargetPos - WristServoIncrement);
     }
 
-    private void setWristPos(double w) {
+    private void setWristPos(double w) { //may need to make a reset pos for wrist because of the skipping
         if (wristServo != null) {
             Range.clip(w, 0.0, 1.0);
             wristServo.setPosition(w);
