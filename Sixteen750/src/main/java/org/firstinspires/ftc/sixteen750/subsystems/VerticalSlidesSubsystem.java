@@ -33,7 +33,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //    public static double ArmServo = 0.5;
     public static double ClawServoOpenShort = 0.4;
     public static double BucketServoTransfer = 0.85;
-    public static double BucketServoEmpty = 0.55;
+    public static double BucketServoEmpty = 0.35;
     public static double BucketServoLift = 0.65; //carry position for scoring
     public static double ArmServoInput = 0.545;
     public static double ArmServoEmpty = 1;

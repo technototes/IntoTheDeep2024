@@ -6,6 +6,8 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
+import com.technototes.library.logger.Log;
+
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.driving.JoystickDriveCommand;
@@ -75,7 +77,6 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-        shiftButton = gamepad.ps_options;
         openClaw_bucketLow = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
         wristTransfer = gamepad.dpadLeft;
@@ -83,17 +84,14 @@ public class OperatorController {
         wristIncrement = gamepad.dpadRight;
         wristDecrement = gamepad.dpadLeft;
         horislidesLeftStick = gamepad.leftStick;
-        //horislidesExtend = gamepad.ps_cross;
-        //horislidesRetract = gamepad.ps_square;
+        horislidesExtend = gamepad.ps_cross;
+        horislidesRetract = gamepad.ps_square;
 
         //vertical commands
         bucketTransfer = gamepad.ps_circle;
         bucketScore = gamepad.ps_triangle;
-        armTransfer = gamepad.ps_cross;
-        armScore = gamepad.ps_square;
-        slidesHigh = gamepad.ps_share;
-        slidesLow = gamepad.dpadUp;
-        slidesDown = gamepad.dpadDown;
+
+
         //bucketIncrement = gamepad.dpadDown;
         //bucketDecrement = gamepad.dpadDown;
 
@@ -123,7 +121,7 @@ public class OperatorController {
         shiftButton.whenPressed(this::toggleShift);
         horizontalSlides_verticalSlides.whenPressed(
             new ChoiceCommand(
-                new Pair<>(this::notShifted, HorizontalSlidesCommands.horizontalExtend(robot)),
+                new Pair<>(this::notShifted, HorizontalSlidesCommands.intake(robot)),
                 new Pair<>(this::isShifted, VerticalSlidesCommands.HighBasket(robot))
             )
         );
@@ -132,8 +130,8 @@ public class OperatorController {
         wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
         //wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
         //wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
-        //horislidesExtend.whenPressed(HorizontalSlidesCommands.intake(robot));
-        //horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
+        horislidesExtend.whenPressed(HorizontalSlidesCommands.intake(robot));
+        horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
     }
     private void bindVerticalSlidesControls() {
           /*bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));

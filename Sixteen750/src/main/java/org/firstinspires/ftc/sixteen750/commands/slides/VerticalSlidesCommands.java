@@ -74,6 +74,7 @@ public class VerticalSlidesCommands {
         return Command.create(r.verticalSlidesSubsystem::resetSlideZero, r.verticalSlidesSubsystem);
     }
 
+
     //transfer
     //inc/dec
 
