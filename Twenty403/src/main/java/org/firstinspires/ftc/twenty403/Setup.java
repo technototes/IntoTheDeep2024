@@ -10,7 +10,7 @@ public class Setup {
         public static boolean DRIVEBASE = true;
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
-        public static boolean KIDSSHAMPOOSUBSYSTEM = false;
+        public static boolean KIDSSHAMPOOSUBSYSTEM = true;
         public static boolean HANGSUBSYSTEM = false;
         public static boolean ARMSUBSYSTEM = true;
         public static boolean EXTERNALIMU = true;

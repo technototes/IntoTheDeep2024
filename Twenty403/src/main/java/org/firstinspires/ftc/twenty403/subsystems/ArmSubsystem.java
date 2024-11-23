@@ -24,6 +24,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
+    public static double MIN_ANGULAR_VELOCITY = 0.001;
+    public static double ARM_SLAM_PREVENTION = 0.001;
     public static double MIN_ARM_MOTOR_SPEED = -0.2;
     public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
@@ -39,7 +41,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int SLIDE_INC_DEC = 250;
     public static int SLIDE_MAX_POS_HORIZONTAL = 1175;
     public static int SLIDE_MAX_POS = SLIDE_MAX_POS_HORIZONTAL;
-    public static int SLIDE_MAX_POS_VERTICAL = 1250;
+    public static int SLIDE_MAX_POS_VERTICAL = 1675;
     public static int SLIDE_MIN_POS = -150;
     public static int SLIDE_OFFSET = 2000;
     public static double MIN_SLIDE_MOTOR_POWER = -0.3;
@@ -51,7 +53,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
 
     // as of now, we arent having a D
-    public static PIDCoefficients armPID = new PIDCoefficients(0.0007, 0.0, 0.000);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.0005, 0.0, 0.0001);
     public static PIDCoefficients slidePID = new PIDCoefficients(0.0018, 0.0, 0.000);
     //slide PID last updated 11/21/24 :DDD
     @Log(name = "armPow")
@@ -132,10 +134,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
                 armFeedFwdValue =
                     FEEDFORWARD_COEFFICIENT * Math.cos(getArmAngle(ticks)) * getSlideLength();
 
-                if (velocity < MIN_ANGULAR_VELOCITY) {
-                    //increase armFeedFwdValue to avoid slamming or increase D in PID
-                    armFeedFwdValue + ARM_SLAM_PREVENTION;
-                }
+//                if (velocity > MIN_ANGULAR_VELOCITY) {
+//                    //increase armFeedFwdValue to avoid slamming or increase D in PID
+//                    armFeedFwdValue += ARM_SLAM_PREVENTION;
+//                }
                 if (Math.abs(armFeedFwdValue) < 0.1) {
                     armFeedFwdValue = 0.0;
                 }

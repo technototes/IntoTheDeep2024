@@ -33,9 +33,9 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double JAW_BITE_POSITION = .4;
 
     public static double JAW_RELEASE_POSITION = .2;
-    public static double INTAKE_SLURP = -.6;
+    public static double INTAKE_SLURP = .6;
 
-    public static double INTAKE_SPIT = .6;
+    public static double INTAKE_SPIT = -.6;
 
     public static double WRIST_SCOOP = .25;
     public static double WRIST_DUMP = 0;
@@ -45,7 +45,8 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     @Log(name = "color value ")
     public double color_value;
-
+    @Log(name = "intakePos")
+    public double intakePos;
     public KidShampooSubsystem(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
@@ -82,6 +83,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     public void slurpIntake() {
+        intakePos = INTAKE_SLURP;
         intake.setPower(INTAKE_SLURP);
     }
 
@@ -99,10 +101,12 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     public void spitIntake() {
+        intakePos = INTAKE_SPIT;
         intake.setPower(INTAKE_SPIT);
     }
 
     public void stopIntake() {
+        intakePos = 0;
         intake.setPower(0);
     }
 }

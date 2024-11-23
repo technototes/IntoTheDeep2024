@@ -47,17 +47,17 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-       // openRetainer = gamepad.dpadUp;
-      //  closeRetainer = gamepad.dpadRight;
-     //   slurpIntake = gamepad.leftBumper;
-      //  spitIntake = gamepad.rightBumper;
+       openRetainer = gamepad.dpadRight;
+       closeRetainer = gamepad.dpadLeft;
+       slurpIntake = gamepad.leftBumper;
+       spitIntake = gamepad.ps_options;
         //temp changing the button below from biteJaw to intake :DD
-        //biteJaw = gamepad.ps_cross;
+       // biteJaw = gamepad.ps_cross;
        // releaseJaw = gamepad.ps_triangle;
-        ///dumpWrist = gamepad.ps_share;
-        //scoopWrist = gamepad.ps_options;
+        dumpWrist = gamepad.dpadDown;
+        scoopWrist = gamepad.rightBumper;
         slideMax = gamepad.ps_share;
-        slideMin = gamepad.ps_options;
+        //slideMin = gamepad.ps_options;
         // suspend = gamepad.ps_circle;
         armIntake = gamepad.dpadUp;
         //        armLowNet = gamepad.dpadLeft;
@@ -67,8 +67,8 @@ public class OperatorController {
         armVertical = gamepad.rightStickButton;
         armIncrement = gamepad.ps_circle;
         armDecrement = gamepad.ps_square;
-        slideIn = gamepad.dpadDown;
-        slideOut = gamepad.dpadLeft;
+        slideIn = gamepad.ps_cross;
+        slideOut = gamepad.ps_triangle;
     }
 
     public void BindControls() {
@@ -92,21 +92,22 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem)
         );
         // eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
-        biteJaw.whenPressed(
+        /*biteJaw.whenPressed(
             Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem)
         );
         releaseJaw.whenPressed(
             Command.create(robot.kidShampooSubsystem::releaseJaw, robot.kidShampooSubsystem)
-        );
+        );*/
         slurpIntake.whenPressed(
             Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem)
+        );
+        slurpIntake.whenReleased(
+                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         spitIntake.whenPressed(
             Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem)
         );
-        slurpIntake.whenPressed(
-            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
-        );
+
         spitIntake.whenReleased(
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
@@ -134,7 +135,7 @@ public class OperatorController {
         armDecrement.whenPressed(Command.create(robot.armSubsystem::decrement, robot.armSubsystem));
         slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
         slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
-        slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
+       // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
         slideMax.whenPressed(Command.create(robot.armSubsystem::specimenSlides, robot.armSubsystem));
     }
 
