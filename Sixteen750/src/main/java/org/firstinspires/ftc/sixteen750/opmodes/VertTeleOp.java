@@ -11,6 +11,9 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.driving.DrivingCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
+import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorControllerVertical;
@@ -51,10 +54,10 @@ public class VertTeleOp extends CommandOpMode {
     @Override
     public void uponStart() {
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
-            robot.horizontalSlidesSubsystem.slidesin();
-            robot.horizontalSlidesSubsystem.WristServoTransfer();
-            robot.horizontalSlidesSubsystem.ClawChomp();
+            HorizontalSlidesSequentials.transferring(robot);
         }
-        robot.verticalSlidesSubsystem.slidesDown();
+        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
+            VerticalSlidesSequentials.SlidesDown(robot);
+        }
     }
 }

@@ -5,44 +5,44 @@ import com.technototes.library.command.Command;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
 
-import java.util.function.DoubleSupplier;
+import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
 
-import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
+import java.util.function.IntSupplier;
 
 @Config
-public class HorizontalAnalogCommand implements Command, Loggable {
+public class VerticalAnalogCommand implements Command, Loggable { //needs testing
 
-    public static double BIGEXTEND = 0.9;
-    public static double SMALLEXTEND = 0.4;
-    public static double BIGRETRACT = -0.9;
-    public static double SMALLRETRACT = -0.4;
+    //need to change to ints and get motor values
+    public static int BIG_EXTEND = 0; //test
+    public static int SMALL_EXTEND = 0; //test
+    public static int BIG_RETRACT = 0; //test
+    public static int SMALL_RETRACT = 0; //test
 
-    public HorizontalSlidesSubsystem subsystem;
-    public DoubleSupplier x, y;
+    public VerticalSlidesSubsystem subsystem;
 
-    public HorizontalAnalogCommand(HorizontalSlidesSubsystem sub, Stick xyStick) {
+    public IntSupplier x, y;
+
+    public VerticalAnalogCommand(VerticalSlidesSubsystem sub, Stick xyStick) {
         addRequirements(sub);
         subsystem = sub;
-        y = xyStick.getYSupplier();
+        y = (IntSupplier) xyStick.getYSupplier();
     }
 
     @Override
     public void execute() {
-        // If subsystem is busy it is running a trajectory.
-        // The math & signs looks wonky, because this makes things field-relative
         // (Remember that "3 O'Clock" is zero degrees)
-        double yvalue = -y.getAsDouble();
-        //command that changes the horislides position?
-        if (yvalue > BIGEXTEND) {
+        double yvalue = -y.getAsInt(); //IMPORTANT: this line was servo specific -> make sure it is correct
+        //command that changes the vertslides position?
+        if (yvalue > BIG_EXTEND) {
             subsystem.manualBigExtend();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigExtending, subsystem));
-        } else if (yvalue > SMALLEXTEND) {
+        } else if (yvalue > SMALL_EXTEND) {
             subsystem.manualSmallExtend();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallExtending, subsystem));
-        } else if (yvalue < BIGRETRACT) {
+        } else if (yvalue < BIG_RETRACT) {
             subsystem.manualBigRetract();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigRetracting, subsystem));
-        } else if (yvalue < SMALLRETRACT) {
+        } else if (yvalue < SMALL_RETRACT) {
             subsystem.manualSmallRetract();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallRetracting, subsystem));
         }

@@ -14,6 +14,7 @@ import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
@@ -41,6 +42,6 @@ public class ForwardBackward extends CommandOpMode {
     }
 
     public void uponStart() {
-        HorizontalSlidesCommands.transferring(robot);
+        HorizontalSlidesSequentials.transferring(robot);
     }
 }

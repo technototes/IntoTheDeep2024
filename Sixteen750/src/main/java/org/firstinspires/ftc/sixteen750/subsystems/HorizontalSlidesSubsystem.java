@@ -11,12 +11,17 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 @Config
 public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
+    // Comments from CenterStage but may still be relevant for hang...
     //slide servo (link servo) - extend, retract, transfer
     //wrist servo - transfer, pickup, lift, wall pickup for specimen (no specimen yet)
     //claw servo - open, chomp (close)
 
-    public static double BIGADJUSTMENT = 0.01;
-    public static double SMALLADJUSTMENT = 0.0001;
+    // We need to configure the liftMotor to work like a servo.
+    // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
+        /*public void LiftHeightMedium() {
+        //takes the arm to the third level
+        leftPidController.setTargetPosition(HIGH_BUCKET);
+    }*/
 
     public static double LinkServoExtend = 0.6;
     public static double LinkServoRetract = 1;
@@ -26,8 +31,10 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double WristVertTransfer = 0.1;
     public static double WristServoPickup = 0.9;
     public static double WristServoIncrement = 0.15;
-    public double wristResetPos;
+    public static double BIG_ADJUSTMENT = 0.01;
+    public static double SMALL_ADJUSTMENT = 0.0001;
 
+    public double wristResetPos; //test me!!
     @Log(name = "wristTarget")
     public double wristTargetPos;
     @Log(name = "clawTarget")
@@ -39,17 +46,14 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public Servo wristServo;
     public Servo clawServo;
     public Servo linkServo;
-
-    private boolean isHardware;
+    private final boolean isHardware; //not currently used, is there a use for it or should we delete?
 
     public HorizontalSlidesSubsystem(Hardware hw) {
         wristServo = hw.wristservo;
         clawServo = hw.clawservo;
         linkServo = hw.linkservo;
 
-        // We need to configure the liftMotor to work like a servo.
-        // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
-        // Comment from CenterStage but may still be relevant? for hang
+
         isHardware = true;
     }
 
@@ -58,45 +62,48 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         linkServo = null;
         wristServo = null;
         clawServo = null;
-    }
+    } //should be unused unless the subsystem is disconnected in setup
 
-    //these are methods, needed to be called in a command
+    //methods -> always call these in commands
+
+    //setter and getter methods
+    private void setClawPos(double w) {
+        if (clawServo != null) {
+            w = Range.clip(w, 0.0, 1.0);
+            clawServo.setPosition(w);
+            clawTargetPos = w;
+        }
+    }
+    private void setWristPos(double w) {
+        if (wristServo != null) {
+            w = Range.clip(w, 0.0, 1.0);
+            wristServo.setPosition(w);
+            wristTargetPos = w;
+        }
+    }
+    private void setSlidePos(double pos) {
+        linkServo.setPosition(pos);
+        slidePos = pos;
+    }
+    private void setManualSlidePos(double pos) {
+        pos = Range.clip(pos, 0.5, 1.0);
+        linkServo.setPosition(pos);
+        slidePos = pos;
+    } //manual
+
+    //toggle methods
     public void slideToggle() {
         if (slidePos < 1){
-            setSlides(LinkServoRetract);
+            setSlidePos(LinkServoRetract);
             setWristPos(WristServoTransfer);
             setClawPos(ClawServoClose);
         }
         else {
-            setSlides(LinkServoExtend);
+            setSlidePos(LinkServoExtend);
             setWristPos(WristServoPickup);
             setClawPos(ClawServoOpen);
         }
     }
-    public void slidesout() {
-        setSlides(LinkServoExtend);
-    }
-
-    public void slidesin() {
-        setSlides(LinkServoRetract);
-    }
-
-    public void BigExtending() {
-        setSlide(slidePos - BIGADJUSTMENT);
-    }
-
-    public void SmallExtending() {
-        setSlide(slidePos - SMALLADJUSTMENT);
-    }
-
-    public void BigRetracting() {
-        setSlide(slidePos + BIGADJUSTMENT);
-    }
-
-    public void SmallRetracting() {
-        setSlide(slidePos + SMALLADJUSTMENT);
-    }
-
     public void clawToggle() {
         if (clawTargetPos == ClawServoClose){
             setClawPos(ClawServoOpen);
@@ -104,21 +111,6 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         else {
             setClawPos(ClawServoClose);
         }
-    }
-    private void setClawPos(double w) {
-        if (clawServo != null) {
-            Range.clip(w, 0.0, 1.0);
-            clawServo.setPosition(w);
-            clawTargetPos = w;
-        }
-    }
-    public void ClawChomp() {
-        // the intake system's position
-        setClawPos(ClawServoClose);
-    }
-
-    public void ClawOpen() {
-        setClawPos(ClawServoOpen); //opens claw for intake and release
     }
     public void wristToggle() {
         if (wristTargetPos == WristServoPickup){
@@ -129,45 +121,57 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         }
     }
 
-    public void WristServoPickup() {
-        setWristPos(WristServoPickup); //lowers claw to intake
-    }
-
-    public void WristServoTransfer() {
-        setWristPos(WristServoTransfer);
-    }
-    public void WristVertTransfer() { //gets claw out of the way to lift bucket
-        setWristPos(WristVertTransfer);
-    }
-
-    public void WristServoIncrement() {
-        setWristPos(wristTargetPos + WristServoIncrement);
-    }
-
-    public void ClawWristServoDecrement() {
-        setWristPos(wristTargetPos - WristServoIncrement);
-    }
+    //reset
     public void resetWristZero() { //resets wrist position to zero - helpful for when the wrist skips
         wristResetPos = wristServo.getPosition();//may need to adjust since wrist pickup is 1 not 0
         wristTargetPos = wristResetPos;
     }
 
-    private void setWristPos(double w) {
-        if (wristServo != null) {
-            Range.clip(w, 0.0, 1.0);
-            wristServo.setPosition(w);
-            wristTargetPos = w;
-        }
+    //intake methods
+    public void slidesExtend() {
+        setSlidePos(LinkServoExtend);
+    }
+    public void slidesRetract() {
+        setSlidePos(LinkServoRetract);
     }
 
-    private void setSlide(double pos) {
-        Range.clip(pos, 0.5, 1.0);
-        linkServo.setPosition(pos);
-        slidePos = pos;
+    public void ClawOpen() {
+        setClawPos(ClawServoOpen); //opens claw for intake and release
+    }
+    public void ClawChomp() {
+        // the intake system's position
+        setClawPos(ClawServoClose);
     }
 
-    private void setSlides(double pos) {
-        linkServo.setPosition(pos);
-        slidePos = pos;
+    public void WristServoTransfer() {
+        setWristPos(WristServoTransfer);
+    }
+    public void WristServoPickup() {
+        setWristPos(WristServoPickup); //lowers claw to intake
+    }
+    public void WristVertTransfer() { //gets claw out of the way to lift bucket
+        setWristPos(WristVertTransfer);
+    } //wrist pos when scoring
+
+    //inc/dec methods
+    public void WristServoIncrement() {
+        setWristPos(wristTargetPos - WristServoIncrement);
+    }
+    public void WristServoDecrement() {
+        setWristPos(wristTargetPos + WristServoIncrement);
+    }
+
+    //manual methods
+    public void manualBigExtend() {
+        setManualSlidePos(slidePos - BIG_ADJUSTMENT);
+    }
+    public void manualSmallExtend() {
+        setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
+    }
+    public void manualBigRetract() {
+        setManualSlidePos(slidePos + BIG_ADJUSTMENT);
+    }
+    public void manualSmallRetract() {
+        setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
     }
 }
