@@ -7,8 +7,7 @@ import org.firstinspires.ftc.sixteen750.Robot;
 public class VerticalSlidesCommands {
 
     public static Command HighBasket(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::slideBasketHigh);
+        return Command.create(r.verticalSlidesSubsystem::slideBasketHigh);
     }
 
     public static Command LowBasket(Robot r) {
@@ -19,13 +18,11 @@ public class VerticalSlidesCommands {
     }
 
     public static Command HighChamber(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::slideChamberHigh);
+        return Command.create(r.verticalSlidesSubsystem::slideChamberHigh);
     }
 
     public static Command LowChamber(Robot r) {
-        return Command.create(
-            r.verticalSlidesSubsystem::slideChamberLow);
+        return Command.create(r.verticalSlidesSubsystem::slideChamberLow);
     }
 
     public static Command BucketTransfer(Robot r) {

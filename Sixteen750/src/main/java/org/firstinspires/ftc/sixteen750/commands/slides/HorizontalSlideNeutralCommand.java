@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.sixteen750.commands.slides;
 
 import com.technototes.library.command.Command;
-import org.firstinspires.ftc.sixteen750.Robot;
+
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
 
 public class HorizontalSlideNeutralCommand implements Command {
@@ -16,7 +16,7 @@ public class HorizontalSlideNeutralCommand implements Command {
     @Override
     public void execute() {
         subsystem.slidesin();
-        subsystem.ClawServoChomp();
-        subsystem.ClawWristServoTransfer();
+        subsystem.ClawChomp();
+        subsystem.WristServoTransfer();
     }
 }

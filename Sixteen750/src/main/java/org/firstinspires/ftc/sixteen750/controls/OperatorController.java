@@ -29,6 +29,7 @@ public class OperatorController {
     public CommandButton wristTransfer;
     public CommandButton wristDecrement;
     public CommandButton wristIncrement;
+    public CommandButton wristZero;
     public CommandButton horislidesExtend;
     public CommandButton horislidesRetract;
     //vertical buttons
@@ -84,6 +85,7 @@ public class OperatorController {
         //closeClaw = gamepad.rightBumper;
         wristTransfer = gamepad.ps_square;
         wristPickup = gamepad.ps_circle;
+        wristZero = gamepad.ps_options;
         //wristDecrement = gamepad.dpadRight;
         //wristIncrement = gamepad.dpadLeft;
         horislidesLeftStick = gamepad.leftStick;
@@ -98,19 +100,18 @@ public class OperatorController {
         //bucketDecrement = gamepad.dpadDown;
 
         //choice commands
-        shiftButton = gamepad.ps_share;
+        /*shiftButton = gamepad.ps_share; - need to change button location and set up choice commands*/
         horizontalSlides_verticalSlides = gamepad.ps_triangle;
         //slidesHigh = gamepad.dpadUp;
         slidesLow = gamepad.dpadDown;
         //slidesDown = gamepad.dpadDown;
-        slidesZero = gamepad.ps_options;
+        slidesZero = gamepad.ps_share;
         extend_retract = gamepad.ps_cross;
         down_high = gamepad.dpadUp;
     }
 
-    //can we toggle between regular buttons ex:open/close claw as one button - kevin will work on that
     private void bindSlidesControls() {
-        shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode
+        /*shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode*/
         openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
         wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
         extend_retract.whenPressed(HorizontalSlidesCommands.slideToggle(robot));
@@ -123,7 +124,7 @@ public class OperatorController {
         //wristIncrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
         //horislidesExtend.whenPressed(HorizontalSlidesCommands.intake(robot));
         //horislidesRetract.whenPressed(HorizontalSlidesCommands.transferring(robot));
-
+        wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot));
         CommandScheduler.scheduleJoystick(
                 new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horislidesLeftStick)
         );
