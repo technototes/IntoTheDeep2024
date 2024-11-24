@@ -6,8 +6,8 @@ import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Robot;
-import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
@@ -19,13 +19,13 @@ public class Paths {
 
     public static Command SampleScoringTest(Robot r) {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
-            .alongWith(VerticalSlidesCommands.ArmScore(r)) //replaced by vertical slides sequential
+            .alongWith(VerticalSlidesCommands.ArmEmpty(r)) //replaced by vertical slides sequential
             .andThen(VerticalSlidesCommands.BucketEmpty(r)) //replaced by vertical slides sequential
             .andThen(new WaitCommand(2))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
-                    HorizontalSlidesCommands.intake(r)
+                    HorizontalSlidesSequentials.intake(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawChomp(r));
@@ -41,14 +41,14 @@ public class Paths {
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
-                    HorizontalSlidesCommands.intake(r)
+                    HorizontalSlidesSequentials.intake(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawChomp(r))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
-                    HorizontalSlidesCommands.transferring(r),
+                    HorizontalSlidesSequentials.transferring(r),
                     VerticalSlidesSequentials.transferVertical(r)
                 )
             )
@@ -60,14 +60,14 @@ public class Paths {
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
-                    HorizontalSlidesCommands.intake(r)
+                    HorizontalSlidesSequentials.intake(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawChomp(r))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
-                    HorizontalSlidesCommands.transferring(r),
+                    HorizontalSlidesSequentials.transferring(r),
                     VerticalSlidesSequentials.transferVertical(r)
                 )
             )
@@ -79,14 +79,14 @@ public class Paths {
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3),
-                    HorizontalSlidesCommands.intake(r)
+                    HorizontalSlidesSequentials.intake(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawChomp(r))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
-                    HorizontalSlidesCommands.transferring(r),
+                    HorizontalSlidesSequentials.transferring(r),
                     VerticalSlidesSequentials.transferVertical(r)
                 )
             )
@@ -104,7 +104,7 @@ public class Paths {
                         r.drivebase,
                         AutoConstants.ASCENT_CLEAR_TO_ASCENT
                     ),
-                    VerticalSlidesCommands.ArmScore(r),
+                    VerticalSlidesCommands.ArmEmpty(r),
                     VerticalSlidesCommands.BucketEmpty(r)
                 )
             );

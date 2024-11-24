@@ -8,6 +8,28 @@ import org.firstinspires.ftc.sixteen750.Robot;
 
 public class VerticalSlidesSequentials {
 
+    //complete sequentials
+    public static SequentialCommandGroup HighBasket(Robot r) { //need to change armScore
+        return new SequentialCommandGroup(
+                BasketScore(r),
+                Command.create(r.verticalSlidesSubsystem::slideBasketHigh)
+        );
+    }
+    public static SequentialCommandGroup LowBasket(Robot r) {
+        return new SequentialCommandGroup(
+                BasketScore(r),
+                Command.create(r.verticalSlidesSubsystem::slideBasketLow)
+        );
+    }
+    public static SequentialCommandGroup SlidesDown(Robot r) {
+        return new SequentialCommandGroup(
+                Command.create(r.verticalSlidesSubsystem::slideBasketLow),
+                new WaitCommand(.1),
+                Command.create(r.verticalSlidesSubsystem::slidesDown)
+        );
+    }
+
+    //partial sequentials
     public static SequentialCommandGroup transferVertical(Robot r) {
         return new SequentialCommandGroup(
         Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
@@ -17,26 +39,6 @@ public class VerticalSlidesSequentials {
                 new WaitCommand(.3),
                 Command.create(r.verticalSlidesSubsystem::bucketServoTransfer)
                 // commands for vertical slide bucket transfer position first, then wrist transferring
-        );
-    }
-    public static SequentialCommandGroup LowBasket(Robot r) {
-        return new SequentialCommandGroup(
-                BasketScore(r),
-                Command.create(r.verticalSlidesSubsystem::slideBasketLow)
-        );
-    }
-
-    public static SequentialCommandGroup HighBasket(Robot r) { //need to change armScore
-        return new SequentialCommandGroup(
-                BasketScore(r),
-                Command.create(r.verticalSlidesSubsystem::slideBasketHigh)
-        );
-    }
-    public static SequentialCommandGroup SlidesDown(Robot r) {
-        return new SequentialCommandGroup(
-                Command.create(r.verticalSlidesSubsystem::slideBasketLow),
-                new WaitCommand(.1),
-                Command.create(r.verticalSlidesSubsystem::slidesDown)
         );
     }
     public static SequentialCommandGroup BasketScore(Robot r) {
@@ -49,7 +51,5 @@ public class VerticalSlidesSequentials {
         );
     }
 
-    //transfer
-    //inc/dec
 
 }

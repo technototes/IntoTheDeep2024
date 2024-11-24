@@ -39,7 +39,7 @@ public class AutoTest extends CommandOpMode {
     }
 
     public void uponStart() {
-        robot.horizontalSlidesSubsystem.slidesin();
+        robot.horizontalSlidesSubsystem.slidesRetract();
         robot.horizontalSlidesSubsystem.WristServoTransfer();
     }
 }
