@@ -32,7 +32,7 @@ public class DrivebaseSubsystem
         public static double SLOW_MOTOR_SPEED = 0.4;
         public static double SLOW_ROTATION_SCALE = 0.5;
         public static double NORMAL_MOTOR_SPEED = 1.5;
-        public static double NORMAL_ROTATION_SCALE = 0.3;
+        public static double NORMAL_ROTATION_SCALE = 0.3; //too big, make it smaller to slow down rotation
         public static double TRIGGER_THRESHOLD = 0.7;
 
         @TicksPerRev
@@ -138,16 +138,16 @@ public class DrivebaseSubsystem
     @Log(name = "Pose2d: ")
     public String poseDisplay = ENABLE_POSE_DIAGNOSTICS ? "" : null;
 
-    @Log.Number(name = "FL")
+    //@Log.Number(name = "FL")
     public EncodedMotor<DcMotorEx> fl2;
 
-    @Log.Number(name = "FR")
+    //@Log.Number(name = "FR")
     public EncodedMotor<DcMotorEx> fr2;
 
-    @Log.Number(name = "RL")
+    //@Log.Number(name = "RL")
     public EncodedMotor<DcMotorEx> rl2;
 
-    @Log.Number(name = "RR")
+    //@Log.Number(name = "RR")
     public EncodedMotor<DcMotorEx> rr2;
 
     //    @Log(name = "Turbo")

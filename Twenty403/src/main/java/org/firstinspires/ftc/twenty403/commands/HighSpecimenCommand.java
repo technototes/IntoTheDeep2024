@@ -7,11 +7,11 @@ import com.technototes.library.command.WaitCommand;
 
 import org.firstinspires.ftc.twenty403.Robot;
 
-public class LowSpecimenCommand {
+public class HighSpecimenCommand {
 
-    public class LowSpecimen extends ParallelCommandGroup {
+    public class HighSpecimen extends ParallelCommandGroup {
 
-        public ParallelCommandGroup LowSpecimenPreArm(Robot r) {
+        public ParallelCommandGroup HighSpecimenPreArm(Robot r) {
             return new ParallelCommandGroup(
                     Command.create(r.kidShampooSubsystem::releaseJaw, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
@@ -23,11 +23,11 @@ public class LowSpecimenCommand {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
-                    Command.create(r.armSubsystem::lowSpecimen, r.armSubsystem),
+                    Command.create(r.armSubsystem::highSpecimen, r.armSubsystem),
                     new WaitCommand(0.5),
-                    Command.create(r.armSubsystem::lowSpecimenSlides, r.armSubsystem),
+                    Command.create(r.armSubsystem::highSpecimenSlides, r.armSubsystem),
                     new WaitCommand(0.5),
-                    LowSpecimenPreArm(r)
+                    HighSpecimenPreArm(r)
             );
         }
     }
