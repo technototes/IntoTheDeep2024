@@ -1,31 +1,39 @@
 package org.firstinspires.ftc.sixteen750.controls;
 
+import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.VerticalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
 public class OperatorControllerVertical {
 
     public Robot robot;
-    public Stick vertslidesLeftStick;
+    public Stick vertSlidesManual;
     public CommandGamepad gamepad;
     public CommandButton bucketTransfer;
-    public CommandButton bucketScore;
+    public CommandButton bucketEmpty;
     public CommandButton bucketIncrement;
     public CommandButton bucketDecrement;
     public CommandButton armTransfer;
-    public CommandButton armScore;
-    public CommandButton slidesLow;
+    public CommandButton armEmpty;
+    public CommandButton armIncrement;
+    public CommandButton armDecrement;
     public CommandButton slidesHigh;
+    public CommandButton slidesLow;
     public CommandButton slidesDown;
+    public CommandButton slidesHighSequential;
+    public CommandButton slidesLowSequential;
+    public CommandButton slidesDownSequential;
     public CommandButton transferVertical;
     public CommandButton basketScore;
-
-    //public CommandButton wristDecrement;
+    public CommandButton bucketTransfer_bucketEmpty;
+    public CommandButton armTransfer_armEmpty;
 
     public OperatorControllerVertical(CommandGamepad g, Robot r) {
         robot = r;
@@ -35,18 +43,26 @@ public class OperatorControllerVertical {
     }
 
     private void AssignNamedControllerButton() {
-        bucketTransfer = gamepad.ps_circle;
-        bucketScore = gamepad.ps_triangle;
-        //armTransfer = gamepad.ps_cross;
-        //armScore = gamepad.ps_square;
+        bucketTransfer_bucketEmpty = gamepad.ps_circle;
+        armTransfer_armEmpty = gamepad.ps_circle;
+
+        //bucketTransfer = gamepad.ps_circle;
+        //bucketEmpty = gamepad.ps_triangle;
+        bucketIncrement = gamepad.dpadLeft;
+        bucketDecrement = gamepad.dpadRight;
+        //armTransfer = gamepad.ps_cross;//
+        //armEmpty = gamepad.ps_square;
+        armIncrement = gamepad.dpadLeft;
+        armDecrement = gamepad.dpadRight;
         slidesHigh = gamepad.ps_share;
         slidesLow = gamepad.dpadUp;
         slidesDown = gamepad.dpadDown;
-        bucketIncrement = gamepad.dpadLeft;
-        bucketDecrement = gamepad.dpadRight;
-        vertslidesLeftStick = gamepad.leftStick;
-        transferVertical = gamepad.ps_cross;
-        basketScore = gamepad.ps_square;
+        slidesHighSequential = gamepad.ps_options;
+        slidesLowSequential = gamepad.ps_triangle;
+        slidesDownSequential = gamepad.ps_cross;
+        vertSlidesManual = gamepad.leftStick;
+        transferVertical = gamepad.ps_cross; //change
+        basketScore = gamepad.ps_square; //change
     }
 
     private void BindButtons() {
@@ -57,20 +73,27 @@ public class OperatorControllerVertical {
     }
 
     private void bindVerticalSlidesControls() {
-        transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
-        bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
-        bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
-        //armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
-        //armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));
-        basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
-        slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
-        slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        slidesDown.whenPressed(VerticalSlidesSequentials.HighDown(robot));
-        //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
+        bucketTransfer_bucketEmpty.whenPressed(VerticalSlidesCommands.bucketToggle(robot));
+        //bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
+        //bucketEmpty.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
         bucketIncrement.whenPressed(VerticalSlidesCommands.BucketIncrement(robot));
         bucketDecrement.whenPressed(VerticalSlidesCommands.BucketDecrement(robot));
-//        slidesHigh.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
-//        slidesLow.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
-//        slidesDown.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
+        armTransfer_armEmpty.whenPressed(VerticalSlidesCommands.armToggle(robot));
+        //armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
+        //armEmpty.whenPressed(VerticalSlidesCommands.ArmEmpty(robot));
+        armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
+        armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
+        slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
+        slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
+        slidesDown.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
+        basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
+        transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
+
+        slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
+        slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
+        slidesDownSequential.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
+        CommandScheduler.scheduleJoystick(
+                new VerticalAnalogCommand(robot.verticalSlidesSubsystem, vertSlidesManual)
+        );
     }
 }

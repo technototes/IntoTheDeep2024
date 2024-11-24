@@ -12,6 +12,7 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
@@ -38,6 +39,6 @@ public class NetScoring extends CommandOpMode {
     }
 
     public void uponStart() {
-        HorizontalSlidesCommands.transferring(robot);
+        HorizontalSlidesSequentials.transferring(robot);
     }
 }

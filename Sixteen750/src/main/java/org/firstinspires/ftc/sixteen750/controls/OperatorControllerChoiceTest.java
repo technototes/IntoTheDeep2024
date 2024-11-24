@@ -3,6 +3,9 @@ package org.firstinspires.ftc.sixteen750.controls;
 import static org.firstinspires.ftc.sixteen750.Setup.Connected.HORIZONTALSLIDESUBSYSTEM;
 import static org.firstinspires.ftc.sixteen750.Setup.Connected.VERTICALSLIDESUBSYSTEM;
 
+import android.util.Pair;
+
+import com.technototes.library.command.ChoiceCommand;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
@@ -15,7 +18,7 @@ import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequenti
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
-public class OperatorController {
+public class OperatorControllerChoiceTest {
 
     public Robot robot;
     public CommandGamepad gamepad;
@@ -73,7 +76,7 @@ public class OperatorController {
         shifted = !shifted;
     }
 
-    public OperatorController(CommandGamepad g, Robot r) {
+    public OperatorControllerChoiceTest(CommandGamepad g, Robot r) {
         robot = r;
         gamepad = g;
         AssignNamedControllerButton();
@@ -117,31 +120,20 @@ public class OperatorController {
         wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
         extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
         down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
-        if (HORIZONTALSLIDESUBSYSTEM){
-        //closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
-//        wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
-//        wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
-        //wristDecrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));//flipped but haven't flipped it in code
-        //wristIncrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
-        //horislidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
-        //horislidesRetract.whenPressed(HorizontalSlidesSequentials.transferring(robot));
-        wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot));
-        CommandScheduler.scheduleJoystick(
-                new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horislidesLeftStick)
-        );
-        }
-        if (VERTICALSLIDESUBSYSTEM) {
-        /*bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
-          bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
-          armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
-          armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));*/
-            //slidesHigh.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
-            slidesLow.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
-            //slidesDown.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
-            slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
-            //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
-            //        slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));
-            //        slidesDownTesting.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
+
+        if (HORIZONTALSLIDESUBSYSTEM && VERTICALSLIDESUBSYSTEM) {
+            horizontalSlides_verticalSlides.whenPressed(
+                    new ChoiceCommand(
+                            new Pair<>(this::notShifted, HorizontalSlidesSequentials.intake(robot)),
+                            new Pair<>(this::isShifted, VerticalSlidesSequentials.HighBasket(robot))
+                    )
+            );
+            horizontalSlides_verticalSlidesRetract.whenPressed(
+                    new ChoiceCommand(
+                            new Pair<>(this::notShifted, HorizontalSlidesSequentials.transferring(robot)),
+                            new Pair<>(this::isShifted, VerticalSlidesSequentials.SlidesDown(robot))
+                    )
+            );
         }
     }
 }
