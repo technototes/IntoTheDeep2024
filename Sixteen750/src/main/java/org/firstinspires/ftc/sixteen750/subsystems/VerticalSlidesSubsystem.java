@@ -113,9 +113,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void slideToggle() {
         if (slidePos == SLIDE_ZERO){
             setSlidePos(HIGH_BASKET);
+            setArmPos(ArmServoEmpty);
+            setBucketPos(BucketServoLift);
         }
         else {
             setSlidePos(SLIDE_ZERO);
+            setArmPos(ArmServoTransfer);
+            setBucketPos(BucketServoTransfer);
         }
     }
 
@@ -145,7 +149,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void slideBasketLow() {
-        //takes the arm to the first level
         setSlidePos(LOW_BASKET);
     }
 
@@ -154,7 +157,6 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void slideChamberLow() {
-        //takes the arm to the first level
         setSlidePos(LOW_BASKET);
     }
 
