@@ -40,6 +40,6 @@ public class Sideways extends CommandOpMode {
     }
 
     public void uponStart() {
-        HorizontalSlidesCommands.transferring(robot);
+        robot.prepForStart();
     }
 }

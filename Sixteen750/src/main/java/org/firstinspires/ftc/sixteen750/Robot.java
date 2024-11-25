@@ -2,12 +2,14 @@ package org.firstinspires.ftc.sixteen750;
 
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
+import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
-import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.SafetySubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.TwoDeadWheelLocalizer;
+import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
 
 public class Robot implements Loggable {
 
@@ -48,9 +50,19 @@ public class Robot implements Loggable {
             }
         }
 
-        if (Setup.Connected.SAFETYSUBSYSTEM){
+        if (Setup.Connected.SAFETYSUBSYSTEM) {
             this.safetySubsystem = new SafetySubsystem(hw);
         }
+    }
 
+    public void prepForStart() {
+        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
+            horizontalSlidesSubsystem.WristServoTransfer();
+            horizontalSlidesSubsystem.slidesRetract();
+            horizontalSlidesSubsystem.ClawChomp();
+        }
+        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
+            verticalSlidesSubsystem.slidesDown();
+        }
     }
 }

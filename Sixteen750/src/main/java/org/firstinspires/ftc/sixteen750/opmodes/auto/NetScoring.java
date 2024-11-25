@@ -39,6 +39,6 @@ public class NetScoring extends CommandOpMode {
     }
 
     public void uponStart() {
-        HorizontalSlidesSequentials.transferring(robot);
+        robot.prepForStart();
     }
 }
