@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
@@ -52,11 +51,6 @@ public class ChoiceTeleOp extends CommandOpMode {
 
     @Override
     public void uponStart() {
-        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
-            HorizontalSlidesSequentials.transferring(robot);
-        }
-        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
-            VerticalSlidesSequentials.SlidesDown(robot);
-        }
+        robot.prepForStart();
     }
 }

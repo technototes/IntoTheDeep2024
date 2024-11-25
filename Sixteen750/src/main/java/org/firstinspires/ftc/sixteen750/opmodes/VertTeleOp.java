@@ -53,11 +53,6 @@ public class VertTeleOp extends CommandOpMode {
 
     @Override
     public void uponStart() {
-        if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
-            HorizontalSlidesSequentials.transferring(robot);
-        }
-        if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
-            VerticalSlidesSequentials.SlidesDown(robot);
-        }
+        robot.prepForStart();
     }
 }

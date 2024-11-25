@@ -39,6 +39,6 @@ public class Obs_Push extends CommandOpMode {
     }
 
     public void uponStart() {
-        HorizontalSlidesCommands.transferring(robot);
+        robot.prepForStart();
     }
 }
