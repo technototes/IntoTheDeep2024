@@ -54,8 +54,8 @@ public class TwoDeadWheelLocalizer
         public static double perpAngle = 90;
         public static double paraAngle = 0;
 
-        public static boolean perpReverse = false;
-        public static boolean paraReverse = false;
+        public static boolean perpReverse = true;
+        public static boolean paraReverse = true;
 
         // Parallel/Perpendicular to the forward axis
         // Parallel wheel is parallel to the forward axis
@@ -71,12 +71,12 @@ public class TwoDeadWheelLocalizer
     protected IEncoder rlEnc, fbEnc;
 
     // Parallel moves parallel to the axles of the drive base
-    @Log(name = "rlOdo")
-    public int rlPos;
+    @Log(name = "STRAFE_ODO")
+    public double strafePos;
 
     // Perpendicular moves perpendicular to the axles of the drive base
-    @Log(name = "fbOdo")
-    public int fbPos;
+    @Log(name = "FB_ODO")
+    public double fbPos;
 
     protected double lateralDistance, forwardOffset, gearRatio, wheelRadius, ticksPerRev;
     protected IGyro gyro;
@@ -123,9 +123,9 @@ public class TwoDeadWheelLocalizer
     @NonNull
     @Override
     public List<Double> getWheelPositions() {
-        fbPos = fbEnc.getPosition();
-        rlPos = rlEnc.getPosition();
-        return Arrays.asList(encoderTicksToInches(rlPos), encoderTicksToInches(fbPos));
+        fbPos = encoderTicksToInches(fbEnc.getPosition());
+        strafePos = encoderTicksToInches(rlEnc.getPosition());
+        return Arrays.asList(strafePos, fbPos);
     }
 
     @NonNull
