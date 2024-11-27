@@ -6,6 +6,7 @@ import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequenti
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.HangSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.SafetySubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.TwoDeadWheelLocalizer;
@@ -23,6 +24,7 @@ public class Robot implements Loggable {
     public HorizontalSlidesSubsystem horizontalSlidesSubsystem;
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
+    public HangSubsystem hangSubsystem;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -52,6 +54,9 @@ public class Robot implements Loggable {
 
         if (Setup.Connected.SAFETYSUBSYSTEM) {
             this.safetySubsystem = new SafetySubsystem(hw);
+        }
+        if (Setup.Connected.HANGSUBSYSTEM) {
+            this.hangSubsystem = new HangSubsystem(hw);
         }
     }
 

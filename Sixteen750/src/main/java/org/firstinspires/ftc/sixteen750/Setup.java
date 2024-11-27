@@ -14,6 +14,7 @@ public class Setup {
         public static boolean ODOSUBSYSTEM = true;
         public static boolean SAFETYSUBSYSTEM = false;
         public static boolean EXTERNAL_IMU = true;
+        public static boolean HANGSUBSYSTEM = false;
     }
 
     @Config
@@ -27,6 +28,9 @@ public class Setup {
         public static String EXTERNAL_IMU = "adafruit-imu";
         public static String ODOF = "odof";
         public static String ODOR = "odor";
+
+        public static String SUSPEND = "suspend";
+        public static String SUSPEND2 = "suspend2";
 
         public static String CAMERA = "webcam";
         public static String BUCKETSERVO = "bucketservo";
