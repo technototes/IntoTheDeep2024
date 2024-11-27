@@ -54,18 +54,18 @@ public class TwoDeadWheelLocalizer
         public static double perpAngle = 90;
         public static double paraAngle = 0;
 
-        public static boolean perpReverse = true;
+        public static boolean perpReverse = false;
         public static boolean paraReverse = false;
 
         // Parallel/Perpendicular to the forward axis
         // Parallel wheel is parallel to the forward axis
         // Perpendicular is perpendicular to the forward axis
 
-        public static double PARALLEL_X = -5.2 / 2.54; // X is the fwd/bkwd direction
-        public static double PARALLEL_Y = -17.8 / 2.54; // Y is the side-to-side/strafe direction
+        public static double PARALLEL_X = 14.5 / 2.54; // X is the fwd/bkwd direction
+        public static double PARALLEL_Y = -6.5 / 2.54; // Y is the side-to-side/strafe direction
 
-        public static double PERPENDICULAR_X = 4.9 / 2.54; // Was 3 before
-        public static double PERPENDICULAR_Y = 7.6 / 2.54; // Was 3.5 before
+        public static double PERPENDICULAR_X = -7.5 / 2.54; // X is the fwd/bkwd direction
+        public static double PERPENDICULAR_Y = 16.5 / 2.54; // Y is the side-to-side/strafe direction
     }
 
     protected IEncoder rlEnc, fbEnc;
