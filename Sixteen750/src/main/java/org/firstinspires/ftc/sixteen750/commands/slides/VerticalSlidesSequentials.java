@@ -11,8 +11,8 @@ public class VerticalSlidesSequentials {
     //complete sequentials
     public static SequentialCommandGroup HighBasket(Robot r) { //need to change armScore
         return new SequentialCommandGroup(
-                BasketScore(r),
-                Command.create(r.verticalSlidesSubsystem::slideBasketHigh)
+                Command.create(r.verticalSlidesSubsystem::slideBasketHigh),
+                BasketScore(r)
         );
     }
     public static SequentialCommandGroup LowBasket(Robot r) {
