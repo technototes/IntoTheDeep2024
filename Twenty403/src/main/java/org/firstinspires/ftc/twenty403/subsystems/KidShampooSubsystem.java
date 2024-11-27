@@ -23,8 +23,6 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public double jawTarget = 0;
 
     private CRServo intake;
-    private ColorSensor colorSensor;
-    private Rev2MDistanceSensor rev2MDistanceSensor;
 
     public static double RETAINER_OPEN_POSITION = .78;
 
@@ -41,20 +39,14 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double WRIST_DUMP = 0;
     public static double WRIST_STRAIGHT = .35;
 
-    @Log(name = "distance value ")
-    public double distance_value;
-
-    @Log(name = "color value ")
-    public double color_value;
     @Log(name = "intakePos")
     public double intakePos;
+
     public KidShampooSubsystem(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
         wrist = hw.wrist;
         jaw = hw.jaw;
-        colorSensor = hw.colorSensor;
-        rev2MDistanceSensor = hw.rev2MDistanceSensor;
     }
 
     public void openRetainer() {
@@ -81,6 +73,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public void straightWrist() {
         wrist.setPosition(WRIST_STRAIGHT);
     }
+
     public void releaseJaw() {
         jawTarget = JAW_RELEASE_POSITION;
         jaw.setPosition(JAW_RELEASE_POSITION);
@@ -99,8 +92,6 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     @Override
     public void periodic() {
-        distance_value = rev2MDistanceSensor.getDistance(DistanceUnit.CM);
-        color_value = colorSensor.rgb();
         jawPosition = jaw.getPosition();
     }
 
