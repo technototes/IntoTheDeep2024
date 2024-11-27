@@ -20,6 +20,8 @@ public class Hardware implements Loggable {
 
     public IGyro imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
+    public EncodedMotor suspend;
+    public EncodedMotor suspend2;
     public Servo clawservo;
     public Servo wristservo;
     public Servo linkservo;
@@ -60,6 +62,10 @@ public class Hardware implements Loggable {
         if (Setup.Connected.ODOSUBSYSTEM) {
             odoR = new MotorEncoder(Setup.HardwareNames.ODOR);
             odoF = new MotorEncoder(Setup.HardwareNames.ODOF);
+        }
+        if (Setup.Connected.HANGSUBSYSTEM) {
+            suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
+            suspend2 = new EncodedMotor(Setup.HardwareNames.SUSPEND2);
         }
     }
 

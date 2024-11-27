@@ -31,12 +31,25 @@ public class Paths {
             .andThen(HorizontalSlidesCommands.clawChomp(r));
     }
 
+    public static Command SampleScoringTest2(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+            .alongWith(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(new WaitCommand(2))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
+                    HorizontalSlidesSequentials.intake(r)
+                )
+            )
+            .andThen(HorizontalSlidesCommands.clawChomp(r));
+    }
+
     public static Command SampleScoring(Robot r) {
         // Preload Scoring
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(VerticalSlidesSequentials.transferVertical(r))
             .andThen(new WaitCommand(2))
+            .andThen(VerticalSlidesSequentials.transferVertical(r))
             //First Intake and Scoring
             .andThen(
                 new ParallelCommandGroup(
