@@ -33,8 +33,6 @@ public class Hardware implements Loggable {
     public IEncoder odoF, odoR;
     public Servo retainer, jaw, wrist;
     public CRServo intake;
-    public ColorSensor colorSensor;
-    public Rev2MDistanceSensor rev2MDistanceSensor;
     public Motor suspend;
     public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
     public IEncoder armEncoder;
@@ -64,8 +62,6 @@ public class Hardware implements Loggable {
             retainer = new Servo(Setup.HardwareNames.RETAINER);
             wrist = new Servo(Setup.HardwareNames.WRIST);
             jaw = new Servo(Setup.HardwareNames.JAW);
-            colorSensor = new ColorSensor(Setup.HardwareNames.COLOR1);
-            rev2MDistanceSensor = new Rev2MDistanceSensor(Setup.HardwareNames.DIST1);
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             suspend = new Motor(Setup.HardwareNames.SUSPEND);
