@@ -137,4 +137,17 @@ public class Paths {
                         )
                 );
     }
+    public static Command ForwardBackward(Robot r) {
+        return new TrajectorySequenceCommand(
+                r.drivebaseSubsystem,
+                AutoConstants.FORWARD_BACKWARD1
+        )
+                .andThen(
+                        new TrajectorySequenceCommand(
+                                r.drivebaseSubsystem,
+                                AutoConstants.FORWARD_BACKWARD2
+                        )
+                );
+
+    }
 }

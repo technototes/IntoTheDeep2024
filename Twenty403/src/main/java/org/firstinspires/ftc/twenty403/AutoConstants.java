@@ -68,9 +68,9 @@ public class AutoConstants {
 
     //forward backward constants
 
-    public static ConfigurablePoseD FORWARD = new ConfigurablePoseD(0, 48, (0));
-    public static ConfigurablePoseD REST = new ConfigurablePoseD(0, 0, (0));
-    public static ConfigurablePoseD SIDE = new ConfigurablePoseD(48, 0, (0));
+    public static ConfigurablePoseD FORWARD = new ConfigurablePoseD(0, 18, 90);
+    public static ConfigurablePoseD REST = new ConfigurablePoseD(0, 0, 90);
+    public static ConfigurablePoseD SIDE = new ConfigurablePoseD(18, 0, 90);
 
     //public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-60, 55, (135));
 
