@@ -30,8 +30,8 @@ public class DrivebaseSubsystem
     public abstract static class DriveConstants implements MecanumConstants {
 
         public static double SLOW_MOTOR_SPEED = 0.4;
-        public static double SLOW_ROTATION_SCALE = 0.5;
-        public static double NORMAL_MOTOR_SPEED = 1.5;
+        public static double SLOW_ROTATION_SCALE = 0.2;
+        public static double NORMAL_MOTOR_SPEED = 1.0;
         public static double NORMAL_ROTATION_SCALE = 0.3; //too big, make it smaller to slow down rotation
         public static double TRIGGER_THRESHOLD = 0.7;
 
@@ -79,19 +79,19 @@ public class DrivebaseSubsystem
 
         // This was 60, which was too fast. Things slid around a lot.
         @MaxVelo
-        public static double MAX_VEL = 64; // LRR says 73.17330064499293
+        public static double MAX_VEL = 64;
 
         // This was 35, which also felt a bit too fast. The bot controls more smoothly now
         @MaxAccel
-        public static double MAX_ACCEL = 20; // LRR says 73.17330064499293
+        public static double MAX_ACCEL = 20;
 
         // This was 180 degrees
         @MaxAngleVelo
-        public static double MAX_ANG_VEL = Math.toRadians(180); // LRR says 299.4658071428571
+        public static double MAX_ANG_VEL = Math.toRadians(90); // was 180, LRR says 299.4658071428571
 
         // This was 90 degrees
         @MaxAngleAccel
-        public static double MAX_ANG_ACCEL = Math.toRadians(90); // LRR says 299.4658071428571
+        public static double MAX_ANG_ACCEL = Math.toRadians(30); // wa 90, LRR says 299.4658071428571
 
         @TransPID
         public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(8, 0, 0);
@@ -114,10 +114,10 @@ public class DrivebaseSubsystem
         @PoseLimit
         public static int POSE_HISTORY_LIMIT = 100;
 
-        public static double AFR_SCALE = 0.95;
+        public static double AFR_SCALE = 1;
         public static double AFL_SCALE = 1;
-        public static double ARR_SCALE = 0.95;
-        public static double ARL_SCALE = 0.95;
+        public static double ARR_SCALE = 1;
+        public static double ARL_SCALE = 1;
 
         public static double encoderTicksToInches(double ticks) {
             return (WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks) / TICKS_PER_REV;
