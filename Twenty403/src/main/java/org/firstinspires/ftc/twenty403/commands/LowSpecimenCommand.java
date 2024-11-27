@@ -9,9 +9,8 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class LowSpecimenCommand {
 
-    public class LowSpecimen extends ParallelCommandGroup {
 
-        public ParallelCommandGroup LowSpecimenPreArm(Robot r) {
+        public static ParallelCommandGroup LowSpecimenPreArm(Robot r) {
             return new ParallelCommandGroup(
                     Command.create(r.kidShampooSubsystem::releaseJaw, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
@@ -19,7 +18,7 @@ public class LowSpecimenCommand {
             );
         }
 
-        public SequentialCommandGroup LowSpecimen(Robot r) {
+        public static SequentialCommandGroup LowSpecimen(Robot r) {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
@@ -30,5 +29,5 @@ public class LowSpecimenCommand {
                     LowSpecimenPreArm(r)
             );
         }
-    }
 }
+

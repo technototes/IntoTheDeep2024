@@ -9,32 +9,26 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class LowBasketCommand {
 
-    public static class LowBasket extends SequentialCommandGroup {
+    public static ParallelCommandGroup LowBasketPreArm(Robot r) {
+        return new ParallelCommandGroup(
+                Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
+                Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
+                Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
 
-        public LowBasket(Robot robot) {
-            super();
-        }
+        );
+    }
 
-        public ParallelCommandGroup LowBasketPreArm(Robot r) {
-            return new ParallelCommandGroup(
-                    Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
-                    Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
-                    Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
-
-            );
-        }
-
-        public SequentialCommandGroup LowBasket(Robot r) {
-            return new SequentialCommandGroup(
-                Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
+    public static SequentialCommandGroup LowBasket(Robot r) {
+        return new SequentialCommandGroup(
+                Command.create(r.armSubsystem::setSlideToZero),
                 new WaitCommand(0.5),
                 Command.create(r.armSubsystem::lowBasket, r.armSubsystem),
                 new WaitCommand(0.5),
                 Command.create(r.armSubsystem::slideIntake, r.armSubsystem),
                 new WaitCommand(0.5),
                 LowBasketPreArm(r)
-            );
-        }
-
+        );
     }
+
 }
+

@@ -10,9 +10,15 @@ import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.HangCmd;
+import org.firstinspires.ftc.twenty403.commands.HighBasketCommand;
+import org.firstinspires.ftc.twenty403.commands.HighSpecimenCommand;
+import org.firstinspires.ftc.twenty403.commands.IntakeSampleCommand;
+import org.firstinspires.ftc.twenty403.commands.IntakeSpecimenCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickSlideIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.KidShampooCmds;
+import org.firstinspires.ftc.twenty403.commands.LowBasketCommand;
+import org.firstinspires.ftc.twenty403.commands.LowSpecimenCommand;
 import org.firstinspires.ftc.twenty403.commands.driving.JoystickDriveCommand;
 
 public class OperatorController {
@@ -29,7 +35,6 @@ public class OperatorController {
     public CommandButton stopIntake;
     public CommandButton suspend;
     public CommandButton SuspendReverse;
-    public CommandButton armIntake;
     public CommandButton armLowNet;
     public CommandButton armLowSpecimen;
     public CommandButton armHighSpecimen;
@@ -44,6 +49,9 @@ public class OperatorController {
     public CommandButton slideMin;
     public Stick armStick;
     public Stick slideStick;
+    public CommandButton HighBasket;
+    public CommandButton IntakeSample;
+    public CommandButton IntakeSpecimen;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -55,7 +63,7 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
        //openRetainer = gamepad.dpadRight;
       // closeRetainer = gamepad.dpadLeft;
-       slurpIntake = gamepad.leftBumper;
+       /*slurpIntake = gamepad.leftBumper;
        spitIntake = gamepad.ps_options;
         //temp changing the button below from biteJaw to intake :DD
        biteJaw = gamepad.ps_cross;
@@ -73,9 +81,15 @@ public class OperatorController {
         armVertical = gamepad.rightStickButton;
         slideIn = gamepad.dpadRight;
         slideOut = gamepad.dpadLeft;
-        straightWrist = gamepad.ps_share;
+        straightWrist = gamepad.ps_share;*/
         armStick = gamepad.rightStick;
         slideStick = gamepad.leftStick;
+        HighBasket = gamepad.ps_circle;
+        armHighSpecimen = gamepad.ps_triangle;
+        armLowSpecimen = gamepad.ps_square;
+        armLowNet = gamepad.ps_cross;
+        IntakeSample = gamepad.ps_share;
+        IntakeSpecimen = gamepad.ps_options;
     }
 
     public void BindControls() {
@@ -83,7 +97,7 @@ public class OperatorController {
             bindKidShampooControls();
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
-            bindHangControls();
+            //bindHangControls();
         }
 
         if (Setup.Connected.ARMSUBSYSTEM) {
@@ -97,7 +111,7 @@ public class OperatorController {
         );
         closeRetainer.whenPressed(
             Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem)
-        );*/
+        );
         // eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
         biteJaw.whenPressed(
             Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem)
@@ -127,24 +141,26 @@ public class OperatorController {
         straightWrist.whenPressed(
                 Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
         );
-
+*/
     }
 
     public void bindArmControls() {
-        armIntake.whenPressed(
-            Command.create(robot.armSubsystem::setArmToIntake, robot.armSubsystem)
-        );
-        //        armLowNet.whenPressed(Command.create(robot.armSubsystem::lowBasket, robot.armSubsystem));
-        //        armLowSpecimen.whenPressed(Command.create(robot.armSubsystem::lowSpecimen, robot.armSubsystem));
-        //        armHighSpecimen.whenPressed(Command.create(robot.armSubsystem::highSpecimen, robot.armSubsystem));
-        armHorizontal.whenPressed(
+
+        armLowNet.whenPressed(LowBasketCommand.LowBasket(robot));
+        armLowSpecimen.whenPressed(LowSpecimenCommand.LowSpecimen(robot));
+        armHighSpecimen.whenPressed(HighSpecimenCommand.HighSpecimen(robot));
+        HighBasket.whenPressed(HighBasketCommand.HighBasket(robot));
+        IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
+        IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));
+
+      /*  armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );
-        armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));
-        slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
-        slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
+        armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*?
+       // slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
+       // slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
        // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
-        //slideMax.whenPressed(Command.create(robot.armSubsystem::slideSpecimen, robot.armSubsystem));
+        //slideMax.whenPressed(Command.create(robot.armSubsystem::slideSpecimen, robot.armSubsystem));*/
         CommandScheduler.scheduleJoystick(
                 new JoystickIncDecCommand(
                         robot.armSubsystem,

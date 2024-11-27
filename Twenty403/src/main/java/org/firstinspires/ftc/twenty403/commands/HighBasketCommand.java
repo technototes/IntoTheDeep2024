@@ -9,9 +9,9 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class HighBasketCommand {
 
-    public class HighBasket extends SequentialCommandGroup {
 
-        public ParallelCommandGroup HighBasketPreArm(Robot r) {
+
+        public static ParallelCommandGroup HighBasketPreArm(Robot r) {
             return new ParallelCommandGroup(
                 Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
@@ -19,7 +19,7 @@ public class HighBasketCommand {
             );
         }
 
-        public SequentialCommandGroup HighBasket(Robot r) {
+        public static SequentialCommandGroup HighBasket(Robot r) {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
@@ -33,4 +33,4 @@ public class HighBasketCommand {
 
     }
 
-}
+

@@ -9,9 +9,9 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class IntakeSpecimenCommand {
 
-    public class SpecimenIntake extends ParallelCommandGroup {
 
-        public ParallelCommandGroup IntakeSpecimenPreArm(Robot r) {
+
+        public static ParallelCommandGroup IntakeSpecimenPreArm(Robot r) {
             return new ParallelCommandGroup(
                 Command.create(r.kidShampooSubsystem::releaseJaw, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
@@ -19,7 +19,7 @@ public class IntakeSpecimenCommand {
             );
         }
 
-        public SequentialCommandGroup IntakeSpecimen(Robot r) {
+        public static SequentialCommandGroup IntakeSpecimen(Robot r) {
             return new SequentialCommandGroup(
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
@@ -30,4 +30,4 @@ public class IntakeSpecimenCommand {
             );
         }
     }
-}
+
