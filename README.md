@@ -3,7 +3,7 @@ This is the IntoTheDeep project for technototes
 
 ## Getting started
 1. Clone the project
-2. Install Android Studio
+2. Install Android Studio KOALA (**No**t Ladybug or later!)
 3. Install Java 17 if you haven't already
 4. Install Gradle (or ensure that you have Gradle 7.2)
 5. Install Bun using `powershell -c "irm bun.sh/install.ps1 | iex"`
