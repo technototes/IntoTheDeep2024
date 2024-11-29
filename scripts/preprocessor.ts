@@ -11,9 +11,25 @@ const packageDir = ['com', 'robotcode', 'shared'];
 /*** END CONFIGURATION STUFF ***/
 
 // The first two command line arguments are the bun binary and this script
-const [, , outDir, className, ...filesAsString] = process.argv;
+const [, , outDir, className, ...maybeFiles] = process.argv;
 const outputLocation = path.join(outDir, ...packageDir);
 
+// Linux doesn't appear to generate quite the same list of files :/
+let filesAsString: string[] = [];
+if (maybeFiles.length === 1) {
+  const theStr = maybeFiles[0];
+  const len = theStr.length;
+  if (
+    theStr.length > 5 &&
+    theStr.charAt(0) === '"' &&
+    theStr.charAt(len - 1) === '"' &&
+    theStr.indexOf('" "') >= 0
+  ) {
+    filesAsString.push(...theStr.substring(1, len - 1).split('" "'));
+  } else {
+    filesAsString.push(theStr);
+  }
+}
 // We're only finding files that include "auto" and "const" in their paths.
 const constantsFiles = filesAsString.filter(
   (val) =>
