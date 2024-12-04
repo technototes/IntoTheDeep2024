@@ -85,15 +85,15 @@ public class OperatorControllerVertical {
         armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
         slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
         slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        slidesDown.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
+        slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
         basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
         transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
 
         slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
         slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
-        slidesDownSequential.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
-        CommandScheduler.scheduleJoystick(
+        slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
+        /*CommandScheduler.scheduleJoystick(
                 new VerticalAnalogCommand(robot.verticalSlidesSubsystem, vertSlidesManual)
-        );
+        );*/
     }
 }

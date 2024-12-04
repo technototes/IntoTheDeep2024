@@ -33,7 +33,7 @@ public class VerticalAnalogCommand implements Command, Loggable { //needs testin
         // (Remember that "3 O'Clock" is zero degrees)
         double yvalue = -y.getAsInt(); //IMPORTANT: this line was servo specific -> make sure it is correct
         //command that changes the vertslides position?
-        if (yvalue > BIG_EXTEND) {
+        /*if (yvalue > BIG_EXTEND) {
             subsystem.manualBigExtend();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigExtending, subsystem));
         } else if (yvalue > SMALL_EXTEND) {
@@ -45,7 +45,7 @@ public class VerticalAnalogCommand implements Command, Loggable { //needs testin
         } else if (yvalue < SMALL_RETRACT) {
             subsystem.manualSmallRetract();
             //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallRetracting, subsystem));
-        }
+        }*/
     }
 
     @Override

@@ -19,8 +19,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //arm servo - transfer, empty
     //bucket servo - transfer, lift, empty
 
-    public static int HIGH_BASKET = -850; //-1000
-    public static int LOW_BASKET = -450;
+    public static int HIGH_BASKET = -1150; //-1000
+    public static int LOW_BASKET = -650;
     public static int SLIDE_ZERO = 0;
     public static double BucketServoTransfer = 0.85;
     public static double BucketServoLift = 0.65; //carry position for scoring
@@ -48,7 +48,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public Servo bucketServo;
     public Servo armServo;
     public EncodedMotor<DcMotorEx> slideMotor;
-    private final boolean isHardware;
+    private boolean isHardware;
     public static PIDCoefficients slidePID = new PIDCoefficients(0.0015, 0.0, 0.0);
     private PIDFController slidePidController;
     public static double FEEDFORWARD_COEFFICIENT = -0.13;
@@ -118,17 +118,17 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
     }
-    private void setManualSlidePos(int e) {
-        e = Range.clip(e, -900,0);
-        if (getSlideCurrentPos() < e){
-            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
-        }
-        else {
-            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
-        }
-        slidePidController.setTargetPosition(e);
-        slideTargetPos = e;
-    } //manual
+//    private void setManualSlidePos(int f) {
+//        f = Range.clip(f, -900,0);
+////        if (getSlideCurrentPos() < f){
+////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
+////        }
+////        else {
+////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
+////        }
+//        slidePidController.setTargetPosition(f);
+//        slideTargetPos = f;
+//    } //manual
     private void setSlideMotorPower(double speed) {
         if (isHardware) {
             slideMotor.setSpeed(speed);
@@ -249,19 +249,19 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     //slides manual methods
-    public void manualBigExtend() {
-        setManualSlidePos(slidePos - BIG_ADJUSTMENT);
-    }
-
-    public void manualSmallExtend() {
-        setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
-    }
-
-    public void manualBigRetract() {
-        setManualSlidePos(slidePos + BIG_ADJUSTMENT);
-    }
-
-    public void manualSmallRetract() {
-        setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
-    }
+//    public void manualBigExtend() {
+//        setManualSlidePos(slidePos - BIG_ADJUSTMENT);
+//    }
+//
+//    public void manualSmallExtend() {
+//        setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
+//    }
+//
+//    public void manualBigRetract() {
+//        setManualSlidePos(slidePos + BIG_ADJUSTMENT);
+//    }
+//
+//    public void manualSmallRetract() {
+//        setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
+//    }
 }
