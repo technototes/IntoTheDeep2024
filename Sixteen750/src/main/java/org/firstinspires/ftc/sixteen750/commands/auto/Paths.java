@@ -131,7 +131,9 @@ public class Paths {
         return new TrajectorySequenceCommand(
             r.drivebase,
             AutoConstants.NET_START_TO_ASCENT_CLEAR
-        ).andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.ASCENT_CLEAR_TO_ASCENT));
+        ).andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.ASCENT_CLEAR_TO_ASCENT)
+                .andThen(VerticalSlidesCommands.ArmEmpty(r))
+                .alongWith(VerticalSlidesCommands.BucketEmpty(r)));
     }
 
     public static Command ObservationPushing(Robot r) {

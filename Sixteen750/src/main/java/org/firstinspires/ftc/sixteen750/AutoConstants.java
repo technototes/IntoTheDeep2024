@@ -50,8 +50,8 @@ public class AutoConstants {
     public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 48, -90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 45, -90);
     public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(64, 37, -90);
-    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 180);
-    public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(59, 10, 90);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, -180);
+    public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(59, 10, -180);
 
     //These are testing constants for last year's game
     public static ConfigurablePoseD START1 = new ConfigurablePoseD(35, 60, -90);
