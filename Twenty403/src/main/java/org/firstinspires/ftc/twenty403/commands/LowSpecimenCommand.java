@@ -10,8 +10,8 @@ import org.firstinspires.ftc.twenty403.Robot;
 public class LowSpecimenCommand {
 
 
-        public static ParallelCommandGroup LowSpecimenPreArm(Robot r) {
-            return new ParallelCommandGroup(
+        public static SequentialCommandGroup LowSpecimenPreArm(Robot r) {
+            return new SequentialCommandGroup(
                     Command.create(r.kidShampooSubsystem::releaseJaw, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
                     Command.create(r.kidShampooSubsystem::straightWrist, r.kidShampooSubsystem)
@@ -20,6 +20,7 @@ public class LowSpecimenCommand {
 
         public static SequentialCommandGroup LowSpecimen(Robot r) {
             return new SequentialCommandGroup(
+                    Command.create(r.kidShampooSubsystem::stopIntake),
                     Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
                     new WaitCommand(0.5),
                     Command.create(r.armSubsystem::lowSpecimen, r.armSubsystem),

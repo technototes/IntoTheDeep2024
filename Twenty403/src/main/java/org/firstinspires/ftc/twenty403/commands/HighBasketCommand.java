@@ -11,9 +11,9 @@ public class HighBasketCommand {
 
 
 
-        public static ParallelCommandGroup HighBasketPreArm(Robot r) {
-            return new ParallelCommandGroup(
-                Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
+        public static SequentialCommandGroup HighBasketPreArm(Robot r) {
+            return new SequentialCommandGroup(
+                Command.create(r.kidShampooSubsystem::closeRetainer, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
             );
@@ -21,11 +21,11 @@ public class HighBasketCommand {
 
         public static SequentialCommandGroup HighBasket(Robot r) {
             return new SequentialCommandGroup(
-                    Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
-                    new WaitCommand(0.5),
+                    Command.create(r.kidShampooSubsystem::stopIntake, r.kidShampooSubsystem),
+                    new MoveSlidesCommand(r.armSubsystem, r.armSubsystem::setSlideToZero),
                     Command.create(r.armSubsystem::highBasket, r.armSubsystem),
                     new WaitCommand(0.5),
-                    Command.create(r.armSubsystem::highBasketSlides, r.armSubsystem),
+                    new MoveSlidesCommand(r.armSubsystem, r.armSubsystem::highBasketSlides),
                     new WaitCommand(0.5),
                     HighBasketPreArm(r)
             );
