@@ -1,13 +1,18 @@
 package org.firstinspires.ftc.twenty403;
 
+import static java.lang.Math.toRadians;
+
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
+import com.acmerobotics.roadrunner.trajectory.TrajectoryBuilder;
 import com.technototes.path.geometry.ConfigurablePoseD;
 import com.technototes.path.trajectorysequence.TrajectorySequence;
 import com.technototes.path.trajectorysequence.TrajectorySequenceBuilder;
 
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Config
 public class AutoConstants {
@@ -18,6 +23,54 @@ public class AutoConstants {
     public static ConfigurablePoseD TEST_FORWARD = new ConfigurablePoseD(-50, -2, 0);
     public static ConfigurablePoseD TEST_SPLINE_1 = new ConfigurablePoseD(-38, -2, 0);
     public static ConfigurablePoseD TEST_SPLINE_2 = new ConfigurablePoseD(-38, -2, -90);
+
+    //preston positions
+    public static Function<Pose2d, TrajectoryBuilder> func;
+    public static Pose2d FIRST = new Pose2d(0, 65, toRadians(90));
+    public static Pose2d SECOND = new Pose2d(0, 38, toRadians(90));
+    public static Pose2d THIRD = new Pose2d(0, 35, toRadians(180));
+    public static Pose2d FOURTH = new Pose2d(-32, 35, toRadians(180));
+    public static Pose2d FIFTH = new Pose2d(-42, 10, toRadians(180));
+    public static Pose2d SIXTH = new Pose2d(-45, 10, toRadians(90));
+    public static Pose2d SEVENTH = new Pose2d(-45, 47, toRadians(90));
+    public static Pose2d SEVENTH1 = new Pose2d(0, 35, toRadians(-90));
+    public static Pose2d SEVENTH2 = new Pose2d(0, 35.1, toRadians(180));
+    public static Pose2d SEVENTH3 = new Pose2d(-32, 35, toRadians(180));
+    public static Pose2d SEVENTH4 = new Pose2d(-45, 10, toRadians(180));
+    public static Pose2d EIGHTH = new Pose2d(-52, 47, toRadians(90));
+    public static Pose2d EIGHTH1 = new Pose2d(0, 35, toRadians(-90));
+    public static Pose2d EIGHTH2 = new Pose2d(0, 35.1, toRadians(180));
+    public static Pose2d EIGHTH3 = new Pose2d(-32, 35, toRadians(180));
+    public static Pose2d EIGHTH4 = new Pose2d(-42, 10, toRadians(180));
+    public static Pose2d NINTH = new Pose2d(-56, 13, toRadians(90));
+    public static Pose2d TENTH = new Pose2d(-56, 48, toRadians(90));
+    public static Pose2d ELEVENTH = new Pose2d(-56, 13, toRadians(90));
+    public static Pose2d TWELFTH= new Pose2d(-61, 13, toRadians(90));
+    public static Pose2d THIRTEENTH= new Pose2d(-61, 48, toRadians(90));
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIRST_TO_SECOND = func -> func.apply(FIRST).splineToLinearHeading(SECOND,SECOND.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SECOND_TO_THIRD = func -> func.apply(SECOND).splineToLinearHeading(THIRD,THIRD.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> THIRD_TO_FOURTH =func -> func.apply(THIRD).splineToLinearHeading(FOURTH,FOURTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FOURTH_TO_FIFTH =func -> func.apply(FOURTH).splineToLinearHeading(FIFTH,FIFTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIFTH_TO_SIXTH =func -> func.apply(FIFTH).splineToLinearHeading(SIXTH,SIXTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SIXTH_TO_SEVENTH =func -> func.apply(SIXTH).splineToLinearHeading(SEVENTH,SEVENTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH_TO_SEVENTH1 =func -> func.apply(SEVENTH).splineToLinearHeading(SEVENTH1,SEVENTH1.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH1_TO_SEVENTH2 =func -> func.apply(SEVENTH1).splineToLinearHeading(SEVENTH2,SEVENTH2.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH2_TO_SEVENTH3 =func -> func.apply(SEVENTH2).splineToLinearHeading(SEVENTH3,SEVENTH3.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH3_TO_SEVENTH4 =func -> func.apply(SEVENTH3).splineToLinearHeading(SEVENTH4,SEVENTH4.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH4_TO_EIGHTH =func -> func.apply(SEVENTH4).splineToLinearHeading(EIGHTH,EIGHTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH_TO_EIGHTH1 =func -> func.apply(EIGHTH).splineToLinearHeading(EIGHTH1,EIGHTH1.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH1_TO_EIGHTH2 =func -> func.apply(EIGHTH1).splineToLinearHeading(EIGHTH2,EIGHTH2.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH2_TO_EIGHTH3 =func -> func.apply(EIGHTH2).splineToLinearHeading(EIGHTH3,EIGHTH3.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH3_TO_EIGHTH4 =func -> func.apply(EIGHTH3).splineToLinearHeading(EIGHTH4,EIGHTH4.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH4_TO_NINTH =func -> func.apply(EIGHTH4).splineToLinearHeading(NINTH,NINTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> NINTH_TO_TENTH =func -> func.apply(NINTH).splineToLinearHeading(TENTH,TENTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TENTH_TO_ELEVENTH =func -> func.apply(TENTH).splineToLinearHeading(ELEVENTH,ELEVENTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> ELEVENTH_TO_TWELFTH =func -> func.apply(ELEVENTH).splineToLinearHeading(TWELFTH,TWELFTH.getHeading()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TWELFTH_TO_THIRTEENTH =func -> func.apply(TWELFTH).splineToLinearHeading(THIRTEENTH,THIRTEENTH.getHeading()).build();
+
+
+
+
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_RIGHT_TO_LEFT =
         func -> func.apply(TEST_START.toPose())
             .lineToLinearHeading(TEST_LEFT.toPose())
@@ -272,7 +325,7 @@ public class AutoConstants {
             b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE3.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             INTAKE3_TO_NETSCORING = b ->
-            b.apply(INTAKE3.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+            b.apply(INTAKE3.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();}
 
     //end of forward backward yippee
 
@@ -280,7 +333,6 @@ public class AutoConstants {
 //Do i need the meep-meep stuff down below?
 
     //gonna comment this stuff out below but idk if i still need it here or somewhere else :DDD
-    //kms :)
 
         /*
     .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
@@ -297,4 +349,3 @@ public class AutoConstants {
                 .build();
 
 */
-}
