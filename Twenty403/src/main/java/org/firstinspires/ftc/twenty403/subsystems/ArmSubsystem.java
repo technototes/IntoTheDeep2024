@@ -20,7 +20,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     private boolean isHardware;
     public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.00014; //11-19-24
-    public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 100;
+    public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 3180;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 3100;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
@@ -29,11 +29,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double MIN_ARM_MOTOR_SPEED = -0.2;
     public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
-    public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 500;
-    public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 600;
-    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_LOW= 2500;
+    public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 113;
+    public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 1675;
+    public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 2500;
     public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 2500;
-    public static int SLIDES_MOTOR_INTAKE_POSITION = 800; //work on this
+    public static int SLIDES_MOTOR_INTAKE_POSITION = 600; //work on this
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
@@ -49,7 +49,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double MAX_SLIDE_MOTOR_POWER = 0.5;
     public static double SLIDE_FEEDFORWARD_GRAVITY_VALUE = 0.3;
     public static double SLIDE_FEEDFORWARD_INTAKE_POS = 0;
-
+    public static int SLIDE_TARGET_IN_RANGE = 100;
     // This is "5 degrees" if our numbers are correct:
     public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
 
@@ -225,7 +225,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
         slideincrement(1.0);
 
     }
-
+    public boolean isSlidesAtTarget() {
+        return Math.abs(getCurrentSlidePos() - slideTargetPos) < SLIDE_TARGET_IN_RANGE;
+    }
     public void slideincrement(double v) {
         int newSlidePos = (int)(slideTargetPos + v * SLIDE_INC_DEC);
         if (newSlidePos > SLIDE_MAX_POS){

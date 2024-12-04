@@ -9,9 +9,9 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class LowBasketCommand {
 
-    public static ParallelCommandGroup LowBasketPreArm(Robot r) {
-        return new ParallelCommandGroup(
-                Command.create(r.kidShampooSubsystem::openRetainer, r.kidShampooSubsystem),
+    public static SequentialCommandGroup LowBasketPreArm(Robot r) {
+        return new SequentialCommandGroup(
+                Command.create(r.kidShampooSubsystem::closeRetainer, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
 
@@ -20,11 +20,12 @@ public class LowBasketCommand {
 
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
-                Command.create(r.armSubsystem::setSlideToZero),
+                Command.create(r.kidShampooSubsystem::stopIntake),
+                new MoveSlidesCommand(r.armSubsystem, r.armSubsystem::setSlideToZero),
                 new WaitCommand(0.5),
                 Command.create(r.armSubsystem::lowBasket, r.armSubsystem),
                 new WaitCommand(0.5),
-                Command.create(r.armSubsystem::slideIntake, r.armSubsystem),
+                new MoveSlidesCommand(r.armSubsystem,r.armSubsystem::lowBasketSlides),
                 new WaitCommand(0.5),
                 LowBasketPreArm(r)
         );

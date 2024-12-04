@@ -11,8 +11,8 @@ public class IntakeSampleCommand {
 
 
 
-        public static ParallelCommandGroup IntakeSamplePreArm(Robot r) {
-            return new ParallelCommandGroup(
+        public static SequentialCommandGroup IntakeSamplePreArm(Robot r) {
+            return new SequentialCommandGroup(
                 Command.create(r.kidShampooSubsystem::slurpIntake, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::closeRetainer, r.kidShampooSubsystem),
                 Command.create(r.kidShampooSubsystem::scoopWrist, r.kidShampooSubsystem)
@@ -21,11 +21,12 @@ public class IntakeSampleCommand {
 
         public static SequentialCommandGroup IntakeSample(Robot r) {
             return new SequentialCommandGroup(
-                    Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem),
+                    Command.create(r.kidShampooSubsystem::stopIntake),
+                    new MoveSlidesCommand(r.armSubsystem,r.armSubsystem::setSlideToZero),
                     new WaitCommand(0.5),
                     Command.create(r.armSubsystem::setArmToIntake, r.armSubsystem),
                     new WaitCommand(0.5),
-                    Command.create(r.armSubsystem::slideIntake, r.armSubsystem),
+                    new MoveSlidesCommand(r.armSubsystem,r.armSubsystem::slideIntake),
                     new WaitCommand(0.5),
                     IntakeSamplePreArm(r)
             );
