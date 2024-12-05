@@ -5,7 +5,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
@@ -61,9 +60,9 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-       //openRetainer = gamepad.dpadRight;
-      // closeRetainer = gamepad.dpadLeft;
-       /*slurpIntake = gamepad.leftBumper;
+        //openRetainer = gamepad.dpadRight;
+        // closeRetainer = gamepad.dpadLeft;
+        /*slurpIntake = gamepad.leftBumper;
        spitIntake = gamepad.ps_options;
         //temp changing the button below from biteJaw to intake :DD
        biteJaw = gamepad.ps_cross;
@@ -145,7 +144,6 @@ public class OperatorController {
     }
 
     public void bindArmControls() {
-
         armLowNet.whenPressed(LowBasketCommand.LowBasket(robot));
         armLowSpecimen.whenPressed(LowSpecimenCommand.LowSpecimen(robot));
         armHighSpecimen.whenPressed(HighSpecimenCommand.HighSpecimen(robot));
@@ -153,7 +151,7 @@ public class OperatorController {
         IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));
 
-      /*  armHorizontal.whenPressed(
+        /*  armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );
         armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*?
@@ -161,17 +159,11 @@ public class OperatorController {
        // slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
        // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
         //slideMax.whenPressed(Command.create(robot.armSubsystem::slideSpecimen, robot.armSubsystem));*/
-        CommandScheduler.scheduleJoystick(
-                new JoystickIncDecCommand(
-                        robot.armSubsystem,
-                        armStick
-                ));
+        CommandScheduler.scheduleJoystick(new JoystickIncDecCommand(robot.armSubsystem, armStick));
 
         CommandScheduler.scheduleJoystick(
-                new JoystickSlideIncDecCommand(
-                        robot.armSubsystem,
-                        slideStick
-                ));
+            new JoystickSlideIncDecCommand(robot.armSubsystem, slideStick)
+        );
     }
 
     public void bindHangControls() {
