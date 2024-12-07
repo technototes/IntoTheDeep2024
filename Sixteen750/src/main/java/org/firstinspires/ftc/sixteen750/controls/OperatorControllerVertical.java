@@ -34,6 +34,7 @@ public class OperatorControllerVertical {
     public CommandButton basketScore;
     public CommandButton bucketTransfer_bucketEmpty;
     public CommandButton armTransfer_armEmpty;
+    public CommandButton down_high;
 
     public OperatorControllerVertical(CommandGamepad g, Robot r) {
         robot = r;
@@ -43,26 +44,27 @@ public class OperatorControllerVertical {
     }
 
     private void AssignNamedControllerButton() {
-        bucketTransfer_bucketEmpty = gamepad.ps_circle;
+        bucketTransfer_bucketEmpty = gamepad.ps_triangle;
         armTransfer_armEmpty = gamepad.ps_circle;
 
         //bucketTransfer = gamepad.ps_circle;
         //bucketEmpty = gamepad.ps_triangle;
-        bucketIncrement = gamepad.dpadLeft;
-        bucketDecrement = gamepad.dpadRight;
+        bucketIncrement = gamepad.ps_cross;
+        bucketDecrement = gamepad.ps_square;
         //armTransfer = gamepad.ps_cross;//
         //armEmpty = gamepad.ps_square;
-        armIncrement = gamepad.dpadLeft;
-        armDecrement = gamepad.dpadRight;
-        slidesHigh = gamepad.ps_share;
-        slidesLow = gamepad.dpadUp;
-        slidesDown = gamepad.dpadDown;
-        slidesHighSequential = gamepad.ps_options;
-        slidesLowSequential = gamepad.ps_triangle;
-        slidesDownSequential = gamepad.ps_cross;
-        vertSlidesManual = gamepad.leftStick;
-        transferVertical = gamepad.ps_cross; //change
-        basketScore = gamepad.ps_square; //change
+        armIncrement = gamepad.leftBumper;
+        armDecrement = gamepad.rightBumper;
+        //slidesHigh = gamepad.ps_share;
+        //slidesLow = gamepad.dpadUp;
+        //slidesDown = gamepad.dpadDown;
+        slidesHighSequential = gamepad.ps_share;
+        slidesLowSequential = gamepad.dpadUp;
+        slidesDownSequential = gamepad.dpadDown;
+        //vertSlidesManual = gamepad.leftStick;
+        //transferVertical = gamepad.ps_cross; //change
+        //basketScore = gamepad.ps_square; //change
+        down_high = gamepad.dpadLeft;
     }
 
     private void BindButtons() {
@@ -83,12 +85,12 @@ public class OperatorControllerVertical {
         //armEmpty.whenPressed(VerticalSlidesCommands.ArmEmpty(robot));
         armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
         armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
-        slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
-        slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
-        basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
-        transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
-
+        //slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
+        //slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
+        //slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
+        //basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
+        //transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
+        down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
         slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
         slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
         slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
