@@ -96,11 +96,12 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         //horizontal
         openClaw_closeClaw = gamepad.rightBumper;
-        wristTransfer_wristPickup = gamepad.ps_circle;
-        pickup = gamepad.ps_square;
+        //wristTransfer_wristPickup = gamepad.ps_circle;
         horiSlidesExtend = gamepad.ps_triangle;
+        horiSlidesSmallExtend = gamepad.ps_square;
         horiSlidesManual = gamepad.rightStick;
-        extend_retract = gamepad.ps_cross;
+        //extend_retract = gamepad.ps_cross;
+        horislidesRetract = gamepad.ps_cross;
         //vertical
         bucketTransfer_bucketEmpty = gamepad.leftBumper;
         armTransfer_armEmpty = gamepad.leftStickButton;
@@ -115,11 +116,12 @@ public class OperatorController {
         /*shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode*/
 
         if (HORIZONTALSLIDESUBSYSTEM){
-            extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
+            //extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
             horiSlidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
+            horislidesRetract.whenPressed(HorizontalSlidesSequentials.retract(robot));
             openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
-            wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
-            pickup.whenPressed(HorizontalSlidesSequentials.intakeSmall(robot));
+            //wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
+            horiSlidesSmallExtend.whenPressed(HorizontalSlidesSequentials.intakeSmall(robot));
             CommandScheduler.scheduleJoystick(
                 new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horiSlidesManual)
             );
