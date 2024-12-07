@@ -11,6 +11,7 @@ import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
+import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
@@ -30,7 +31,8 @@ public class OperatorController {
     public CommandButton wristDecrement;
     public CommandButton wristIncrement;
     public CommandButton wristZero;
-    public CommandButton horislidesExtend;
+    public CommandButton horiSlidesExtend;
+    public CommandButton horiSlidesSmallExtend;
     public CommandButton horislidesRetract;
     //vertical buttons
     public CommandButton bucketTransfer;
@@ -64,7 +66,7 @@ public class OperatorController {
     //toggle commands
     public CommandButton openClaw_closeClaw;
     public CommandButton wristTransfer_wristPickup;
-    public CommandButton extend_retract;
+    public CommandButton extendSmall_retract;
     public CommandButton down_high;
 
     public boolean shifted = false;
@@ -89,16 +91,17 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
+        //horizontal
         openClaw_closeClaw = gamepad.rightBumper;
         wristTransfer_wristPickup = gamepad.ps_square;
-        bucketTransfer_bucketEmpty = gamepad.leftBumper;
-        armTransfer_armEmpty = gamepad.dpadLeft;
+        horiSlidesExtend = gamepad.ps_triangle;
         horiSlidesManual = gamepad.rightStick;
-
-
+        extendSmall_retract = gamepad.ps_cross;
+        //vertical
+        bucketTransfer_bucketEmpty = gamepad.leftBumper;
+        armTransfer_armEmpty = gamepad.leftStickButton;
         slidesLowSequential = gamepad.dpadUp;
         slidesZero = gamepad.ps_share;
-        extend_retract = gamepad.ps_cross;
         down_high = gamepad.dpadDown;
     }
 
@@ -106,7 +109,8 @@ public class OperatorController {
         /*shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode*/
 
         if (HORIZONTALSLIDESUBSYSTEM){
-            extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
+            extendSmall_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
+            horiSlidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
             openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
             wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
             CommandScheduler.scheduleJoystick(

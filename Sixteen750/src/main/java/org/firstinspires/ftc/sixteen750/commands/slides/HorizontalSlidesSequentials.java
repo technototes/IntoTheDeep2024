@@ -1,9 +1,13 @@
 package org.firstinspires.ftc.sixteen750.commands.slides;
 
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.clawChomp;
+import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.clawOpen;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalExtend;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalRetract;
+import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalSmallExtend;
+import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristPickup;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristTransfer;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials.SlidesDown;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
@@ -16,9 +20,18 @@ public class HorizontalSlidesSequentials {
         return new SequentialCommandGroup(
             horizontalExtend(r),
             wristTransfer(r),
-            HorizontalSlidesCommands.clawOpen(r),
+            clawOpen(r),
             new WaitCommand(1),
-            HorizontalSlidesCommands.wristPickup(r)
+            wristPickup(r)
+        );
+    }
+    public static SequentialCommandGroup intakeSmall(Robot r) {
+        return new SequentialCommandGroup(
+                horizontalSmallExtend(r),
+                wristTransfer(r),
+                clawOpen(r),
+                new WaitCommand(1),
+                wristPickup(r)
         );
     }
 
@@ -27,7 +40,7 @@ public class HorizontalSlidesSequentials {
             wristTransfer(r),
             horizontalRetract(r),
             clawChomp(r),
-            VerticalSlidesSequentials.SlidesDown(r)
+            SlidesDown(r)
         );
     }
 }
