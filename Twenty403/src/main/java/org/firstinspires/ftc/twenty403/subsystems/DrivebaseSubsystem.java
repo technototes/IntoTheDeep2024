@@ -33,7 +33,7 @@ public class DrivebaseSubsystem
         public static double SLOW_ROTATION_SCALE = 0.2;
         public static double NORMAL_MOTOR_SPEED = 1.0;
         public static double NORMAL_ROTATION_SCALE = 0.3; //too big, make it smaller to slow down rotation
-        public static double TRIGGER_THRESHOLD = 0.7;
+        public static double TRIGGER_THRESHOLD = 0.6;
 
         @TicksPerRev
         public static final double TICKS_PER_REV = 384.5; // From Gobilda Specs

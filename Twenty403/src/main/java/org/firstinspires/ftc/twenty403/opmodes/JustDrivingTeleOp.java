@@ -16,7 +16,7 @@ import org.firstinspires.ftc.twenty403.controls.KidShamTestController;
 import org.firstinspires.ftc.twenty403.controls.OperatorController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@TeleOp(name = "Just Drivingggg")
+@TeleOp(name = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class JustDrivingTeleOp extends CommandOpMode {
 

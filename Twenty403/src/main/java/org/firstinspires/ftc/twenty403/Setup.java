@@ -53,6 +53,6 @@ public class Setup {
     public static class OtherSettings {
 
         public static int AUTOTIME = 25;
-        public static double STRAIGHTEN_DEAD_ZONE = 0.015;
+        public static double STRAIGHTEN_DEAD_ZONE = 0.01;
     }
 }

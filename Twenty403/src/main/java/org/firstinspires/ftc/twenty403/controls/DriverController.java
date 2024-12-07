@@ -53,8 +53,8 @@ public class DriverController {
             )
         );
 
-        //turboButton.whenPressed(new TurboModeCommand(robot.drivebaseSubsystem));
-        //turboButton.whenReleased(new NormalModeCommand(robot.drivebaseSubsystem));
+        turboButton.whenPressed(EZCmd.Drive.TurboMode(robot.drivebaseSubsystem));
+        turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
 
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
         snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
