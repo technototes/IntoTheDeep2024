@@ -12,7 +12,6 @@ import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCom
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 
 public class VerticalSlidesSequentials {
@@ -26,6 +25,7 @@ public class VerticalSlidesSequentials {
             BasketScore(r)
         );
     }
+
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
             transferScore(r),
@@ -34,6 +34,7 @@ public class VerticalSlidesSequentials {
             BasketScore(r)
         );
     }
+
     public static SequentialCommandGroup SlidesDown(Robot r) {
         return new SequentialCommandGroup(
             LowBasketCommand(r),
@@ -46,15 +47,6 @@ public class VerticalSlidesSequentials {
     //partial sequentials
     public static SequentialCommandGroup transferVertical(Robot r) {
         return new SequentialCommandGroup(
-                Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
-                new WaitCommand(.3),
-                Command.create(r.verticalSlidesSubsystem::bucketServoLift),
-                Command.create(r.verticalSlidesSubsystem::armServoTransfer),
-                new WaitCommand(.3),
-                Command.create(r.verticalSlidesSubsystem::slidesDown),
-                new WaitCommand(.3),
-                Command.create(r.verticalSlidesSubsystem::bucketServoTransfer)
-                // commands for vertical slide bucket transfer position first, then wrist transferring
             Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
             new WaitCommand(.3),
             BucketLift(r),
@@ -78,6 +70,7 @@ public class VerticalSlidesSequentials {
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
+
     public static SequentialCommandGroup BasketScore(Robot r) {
         return new SequentialCommandGroup(
             BucketLift(r),
@@ -89,7 +82,4 @@ public class VerticalSlidesSequentials {
             BucketLift(r)
         );
     }
-
-
 }
-
