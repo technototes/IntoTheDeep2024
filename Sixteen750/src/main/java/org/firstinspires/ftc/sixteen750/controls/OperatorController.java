@@ -24,6 +24,9 @@ public class OperatorController {
 
     //horizontal buttons
     public Stick horiSlidesManual;
+
+    public CommandButton pickup;
+
     public CommandButton openClaw;
     public CommandButton closeClaw;
     public CommandButton wristPickup;
@@ -66,7 +69,7 @@ public class OperatorController {
     //toggle commands
     public CommandButton openClaw_closeClaw;
     public CommandButton wristTransfer_wristPickup;
-    public CommandButton extendSmall_retract;
+    public CommandButton extend_retract;
     public CommandButton down_high;
 
     public boolean shifted = false;
@@ -93,36 +96,42 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         //horizontal
         openClaw_closeClaw = gamepad.rightBumper;
-        wristTransfer_wristPickup = gamepad.ps_square;
+        wristTransfer_wristPickup = gamepad.ps_circle;
+        pickup = gamepad.ps_square;
         horiSlidesExtend = gamepad.ps_triangle;
         horiSlidesManual = gamepad.rightStick;
-        extendSmall_retract = gamepad.ps_cross;
+        extend_retract = gamepad.ps_cross;
         //vertical
         bucketTransfer_bucketEmpty = gamepad.leftBumper;
         armTransfer_armEmpty = gamepad.leftStickButton;
-        slidesLowSequential = gamepad.dpadUp;
+        slidesHighSequential = gamepad.dpadUp;
+        slidesLowSequential = gamepad.dpadLeft;
+        slidesDownSequential = gamepad.dpadDown;
         slidesZero = gamepad.ps_share;
-        down_high = gamepad.dpadDown;
+        //down_high = gamepad.dpadDown;
     }
 
     private void bindSlidesControls() {
         /*shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode*/
 
         if (HORIZONTALSLIDESUBSYSTEM){
-            extendSmall_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
+            extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
             horiSlidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
             openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
             wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
+            pickup.whenPressed(HorizontalSlidesSequentials.intakeSmall(robot));
             CommandScheduler.scheduleJoystick(
                 new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horiSlidesManual)
             );
         }
         if (VERTICALSLIDESUBSYSTEM) {
-            down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
+            //down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
+            slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
             bucketTransfer_bucketEmpty.whenPressed(VerticalSlidesCommands.bucketToggle(robot));
             armTransfer_armEmpty.whenPressed(VerticalSlidesCommands.armToggle(robot));
             //armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
             //armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
+            slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
             slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
             slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
             //slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));

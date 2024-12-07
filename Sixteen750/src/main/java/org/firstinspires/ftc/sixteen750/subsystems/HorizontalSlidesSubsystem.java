@@ -101,8 +101,6 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         }
         else {
             setSlidePos(LinkServoSmallExtend);
-            setWristPos(WristServoPickup);
-            setClawPos(ClawServoOpen);
         }
     }
     public void clawToggle() {

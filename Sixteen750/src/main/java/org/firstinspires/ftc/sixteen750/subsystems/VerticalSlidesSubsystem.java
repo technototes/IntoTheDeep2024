@@ -21,7 +21,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //bucket servo - transfer, lift, empty
 
     public static int HIGH_BASKET = -1150;
-    public static int LOW_BASKET = -550;
+    public static int LOW_BASKET = -450;
     public static int SLIDE_ZERO = 0;
     public static double BucketServoTransfer = 0.85;
     public static double BucketServoLift = 0.65; //carry position for scoring
