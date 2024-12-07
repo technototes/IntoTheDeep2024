@@ -18,15 +18,15 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     // We need to configure the liftMotor to work like a servo.
     // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
-        /*public void LiftHeightMedium() {
+    /*public void LiftHeightMedium() {
         //takes the arm to the third level
         leftPidController.setTargetPosition(HIGH_BUCKET);
     }*/
 
     public static double LinkServoExtend = 0.6;
     public static double LinkServoRetract = 1;
-    public static double ClawServoClose = 0.3;
-    public static double ClawServoOpen = 0.6;
+    public static double ClawServoClose = 0.1;
+    public static double ClawServoOpen = 0.5;
     public static double WristServoTransfer = 0.3;
     public static double WristVertTransfer = 0.1;
     public static double WristServoPickup = 1;
@@ -35,8 +35,10 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double SMALL_ADJUSTMENT = 0.0001;
 
     public double wristResetPos; //test me!!
+
     @Log(name = "wristTarget")
     public double wristTargetPos;
+
     @Log(name = "clawTarget")
     public double clawTargetPos;
 
@@ -52,7 +54,6 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
         wristServo = hw.wristservo;
         clawServo = hw.clawservo;
         linkServo = hw.linkservo;
-
 
         isHardware = true;
     }
@@ -74,6 +75,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
             clawTargetPos = w;
         }
     }
+
     private void setWristPos(double w) {
         if (wristServo != null) {
             w = Range.clip(w, 0.0, 1.0);
@@ -81,10 +83,12 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
             wristTargetPos = w;
         }
     }
+
     private void setSlidePos(double pos) {
         linkServo.setPosition(pos);
         slidePos = pos;
     }
+
     private void setManualSlidePos(double pos) {
         pos = Range.clip(pos, 0.5, 1.0);
         linkServo.setPosition(pos);
@@ -93,37 +97,36 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     //toggle methods
     public void slideToggle() {
-        if (slidePos < 1){
+        if (slidePos < 1) {
             setSlidePos(LinkServoRetract);
             setWristPos(WristServoTransfer);
             setClawPos(ClawServoClose);
-        }
-        else {
+        } else {
             setSlidePos(LinkServoExtend);
             setWristPos(WristServoPickup);
             setClawPos(ClawServoOpen);
         }
     }
+
     public void clawToggle() {
-        if (clawTargetPos == ClawServoClose){
+        if (clawTargetPos == ClawServoClose) {
             setClawPos(ClawServoOpen);
-        }
-        else {
+        } else {
             setClawPos(ClawServoClose);
         }
     }
+
     public void wristToggle() {
-        if (wristTargetPos == WristServoPickup){
+        if (wristTargetPos == WristServoPickup) {
             setWristPos(WristServoTransfer);
-        }
-        else {
+        } else {
             setWristPos(WristServoPickup);
         }
     }
 
     //reset
     public void resetWristZero() { //resets wrist position to zero - helpful for when the wrist skips
-        wristResetPos = wristServo.getPosition();//may need to adjust since wrist pickup is 1 not 0
+        wristResetPos = wristServo.getPosition(); //may need to adjust since wrist pickup is 1 not 0
         wristTargetPos = wristResetPos;
     }
 
@@ -131,6 +134,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public void slidesExtend() {
         setSlidePos(LinkServoExtend);
     }
+
     public void slidesRetract() {
         setSlidePos(LinkServoRetract);
     }
@@ -138,6 +142,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public void ClawOpen() {
         setClawPos(ClawServoOpen); //opens claw for intake and release
     }
+
     public void ClawChomp() {
         // the intake system's position
         setClawPos(ClawServoClose);
@@ -146,9 +151,11 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public void WristServoTransfer() {
         setWristPos(WristServoTransfer);
     }
+
     public void WristServoPickup() {
         setWristPos(WristServoPickup); //lowers claw to intake
     }
+
     public void WristVertTransfer() { //gets claw out of the way to lift bucket
         setWristPos(WristVertTransfer);
     } //wrist pos when scoring
@@ -157,6 +164,7 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public void WristServoIncrement() {
         setWristPos(wristTargetPos - WristServoIncrement);
     }
+
     public void WristServoDecrement() {
         setWristPos(wristTargetPos + WristServoIncrement);
     }
@@ -165,12 +173,15 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public void manualBigExtend() {
         setManualSlidePos(slidePos - BIG_ADJUSTMENT);
     }
+
     public void manualSmallExtend() {
         setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
     }
+
     public void manualBigRetract() {
         setManualSlidePos(slidePos + BIG_ADJUSTMENT);
     }
+
     public void manualSmallRetract() {
         setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
     }

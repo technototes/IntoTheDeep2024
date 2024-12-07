@@ -48,7 +48,7 @@ public class Sixteen750Testing {
             new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(14, 17)
-            .followTrajectorySequence(Sixteen750Testing::getParkingTrajectory);
+            .followTrajectorySequence(Sixteen750Testing::getRedTrajectory);
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));
@@ -70,6 +70,8 @@ public class Sixteen750Testing {
             .addTrajectory(AutoConstants.INTAKE2_TO_NETSCORING.get())
             .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
             .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get())
+            .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT_CLEAR.get())
+            .addTrajectory(AutoConstants.ASCENT_CLEAR_TO_ASCENT.get())
             /* 
             splines
             .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
