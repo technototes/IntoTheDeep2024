@@ -63,7 +63,17 @@ public class Paths {
             .andThen(new WaitCommand(0.3))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
             .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.SlidesDown(r));
+            .andThen(VerticalSlidesSequentials.SlidesDown(r))
+            .andThen(
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
+                    .andThen(
+                        new TrajectorySequenceCommand(
+                            r.drivebase,
+                            AutoConstants.ASCENT_CLEAR_TO_ASCENT
+                        )
+                    )
+                    .alongWith(VerticalSlidesSequentials.BasketScore(r))
+            );
     }
 
     public static Command SampleScoringTest2(Robot r) {
