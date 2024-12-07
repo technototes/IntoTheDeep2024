@@ -11,7 +11,6 @@ import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
-import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials;
 
@@ -23,7 +22,7 @@ public class OperatorController {
     public CommandButton shiftButton;
 
     //horizontal buttons
-    public Stick horislidesLeftStick;
+    public Stick horiSlidesManual;
     public CommandButton openClaw;
     public CommandButton closeClaw;
     public CommandButton wristPickup;
@@ -34,17 +33,25 @@ public class OperatorController {
     public CommandButton horislidesExtend;
     public CommandButton horislidesRetract;
     //vertical buttons
-    public Stick vertslidesLeftStick;
     public CommandButton bucketTransfer;
-    public CommandButton bucketScore;
+    public CommandButton bucketEmpty;
     public CommandButton bucketIncrement;
     public CommandButton bucketDecrement;
     public CommandButton armTransfer;
-    public CommandButton armScore;
-    public CommandButton slidesLow;
+    public CommandButton armEmpty;
+    public CommandButton armIncrement;
+    public CommandButton armDecrement;
     public CommandButton slidesHigh;
-    public CommandButton slidesZero;
+    public CommandButton slidesLow;
     public CommandButton slidesDown;
+    public CommandButton slidesZero;
+    public CommandButton slidesHighSequential;
+    public CommandButton slidesLowSequential;
+    public CommandButton slidesDownSequential;
+    public CommandButton transferVertical;
+    public CommandButton basketScore;
+    public CommandButton bucketTransfer_bucketEmpty;
+    public CommandButton armTransfer_armEmpty;
     //public CommandButton wristDecrement;
 
     //can we make a command happen when we switch modes? like horizontal retract when vertical is active vice versa
@@ -54,6 +61,7 @@ public class OperatorController {
     public CommandButton horizontalSlides_verticalSlides;
     public CommandButton horizontalSlides_verticalSlidesRetract;
 
+    //toggle commands
     public CommandButton openClaw_closeClaw;
     public CommandButton wristTransfer_wristPickup;
     public CommandButton extend_retract;
@@ -82,14 +90,17 @@ public class OperatorController {
 
     private void AssignNamedControllerButton() {
         openClaw_closeClaw = gamepad.rightBumper;
-        wristTransfer_wristPickup = gamepad.dpadLeft;
+        wristTransfer_wristPickup = gamepad.ps_square;
+        bucketTransfer_bucketEmpty = gamepad.leftBumper;
+        //armTransfer_armEmpty = gamepad.dpadLeft;
         //closeClaw = gamepad.rightBumper;
-        wristTransfer = gamepad.ps_square;
-        wristPickup = gamepad.ps_circle;
-        wristZero = gamepad.ps_options;
+        //wristTransfer = gamepad.ps_square;
+        //wristPickup = gamepad.ps_circle;
+        //wristZero = gamepad.ps_options;
         //wristDecrement = gamepad.dpadRight;
         //wristIncrement = gamepad.dpadLeft;
-        horislidesLeftStick = gamepad.leftStick;
+
+        horiSlidesManual = gamepad.rightStick;
         //horislidesExtend = gamepad.ps_cross;
         //horislidesRetract = gamepad.ps_square;
 
@@ -102,13 +113,13 @@ public class OperatorController {
 
         //choice commands
         /*shiftButton = gamepad.ps_share; - need to change button location and set up choice commands*/
-        horizontalSlides_verticalSlides = gamepad.ps_triangle;
+        //horizontalSlides_verticalSlides = gamepad.ps_triangle;
         //slidesHigh = gamepad.dpadUp;
-        slidesLow = gamepad.dpadDown;
+        slidesLowSequential = gamepad.dpadUp;
         //slidesDown = gamepad.dpadDown;
         slidesZero = gamepad.ps_share;
         extend_retract = gamepad.ps_cross;
-        down_high = gamepad.dpadUp;
+        down_high = gamepad.dpadDown;
     }
 
     private void bindSlidesControls() {
@@ -125,18 +136,24 @@ public class OperatorController {
         //wristIncrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
         //horislidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
         //horislidesRetract.whenPressed(HorizontalSlidesSequentials.transferring(robot));
-        wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot));
+        //wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot));
         CommandScheduler.scheduleJoystick(
-                new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horislidesLeftStick)
+                new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horiSlidesManual)
         );
         }
         if (VERTICALSLIDESUBSYSTEM) {
-        /*bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
-          bucketScore.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
-          armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
-          armScore.whenPressed(VerticalSlidesCommands.ArmScore(robot));*/
+            bucketTransfer_bucketEmpty.whenPressed(VerticalSlidesCommands.bucketToggle(robot));
+            //bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
+            //bucketEmpty.whenPressed(VerticalSlidesCommands.BucketEmpty(robot));
+            //bucketIncrement.whenPressed(VerticalSlidesCommands.BucketIncrement(robot));
+            //bucketDecrement.whenPressed(VerticalSlidesCommands.BucketDecrement(robot));
+            armTransfer_armEmpty.whenPressed(VerticalSlidesCommands.armToggle(robot));
+            //armTransfer.whenPressed(VerticalSlidesCommands.ArmTransfer(robot));
+            //armEmpty.whenPressed(VerticalSlidesCommands.ArmEmpty(robot));
+//            armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
+//            armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
             //slidesHigh.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
-            slidesLow.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
+            slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
             //slidesDown.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
             slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
             //wristDecrement.whenPressed(SlidesCommands.wristDecrement(robot));
