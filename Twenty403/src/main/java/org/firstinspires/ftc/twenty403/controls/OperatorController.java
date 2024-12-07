@@ -77,7 +77,7 @@ public class OperatorController {
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
 
-        straightWrist = gamepad.dpadUp;
+        armHorizontal = gamepad.dpadUp;
         armStick = gamepad.rightStick;
         slideStick = gamepad.leftStick;
         /*HighBasket = gamepad.ps_circle;
@@ -134,9 +134,9 @@ public class OperatorController {
         scoopWrist.whenPressed(
             Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
         );
-        straightWrist.whenPressed(
+        /*straightWrist.whenPressed(
             Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
-        );
+        );*/
     }
 
     public void bindArmControls() {
@@ -147,10 +147,10 @@ public class OperatorController {
         IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
 
-        /*armHorizontal.whenPressed(
+        armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );
-        armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*/
+        /*armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*/
         // slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
         // slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
         // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));

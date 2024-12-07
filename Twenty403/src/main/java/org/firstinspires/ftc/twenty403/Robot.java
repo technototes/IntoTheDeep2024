@@ -57,4 +57,15 @@ public class Robot implements Loggable {
             this.armSubsystem = new ArmSubsystem(hw);
         }
     }
+
+    public void atStart() {
+        if (Setup.Connected.ARMSUBSYSTEM) {
+            armSubsystem.setSlideToZero();
+        }
+        if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
+            kidShampooSubsystem.dumpWrist();
+            kidShampooSubsystem.closeRetainer();
+            kidShampooSubsystem.releaseJaw();
+        }
+    }
 }

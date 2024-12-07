@@ -35,4 +35,9 @@ public class SingleDriverTeleOp extends CommandOpMode {
             OpModeState.INIT
         );
     }
+
+    @Override
+    public void uponStart() {
+        robot.atStart();
+    }
 }

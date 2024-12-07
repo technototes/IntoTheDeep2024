@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
@@ -32,11 +31,15 @@ public class KidShamTest extends CommandOpMode {
         robot = new Robot(hardware, Alliance.BLUE, StartingPosition.Unspecified);
         kidShamTestController = new KidShamTestController(codriverGamepad, robot);
         if (Setup.Connected.DRIVEBASE) {
-
             CommandScheduler.scheduleForState(
                 EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem),
                 OpModeState.INIT
             );
         }
+    }
+
+    @Override
+    public void uponStart() {
+        robot.atStart();
     }
 }

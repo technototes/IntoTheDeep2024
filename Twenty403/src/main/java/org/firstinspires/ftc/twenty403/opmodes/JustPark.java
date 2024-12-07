@@ -46,4 +46,9 @@ public class JustPark extends CommandOpMode {
         //            OpModeState.RUN
         //        );
     }
+
+    @Override
+    public void uponStart() {
+        robot.atStart();
+    }
 }
