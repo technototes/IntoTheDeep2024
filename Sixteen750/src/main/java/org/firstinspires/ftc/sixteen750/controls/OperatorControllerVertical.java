@@ -46,7 +46,6 @@ public class OperatorControllerVertical {
     private void AssignNamedControllerButton() {
         bucketTransfer_bucketEmpty = gamepad.ps_triangle;
         armTransfer_armEmpty = gamepad.ps_circle;
-
         //bucketTransfer = gamepad.ps_circle;
         //bucketEmpty = gamepad.ps_triangle;
         bucketIncrement = gamepad.ps_cross;
