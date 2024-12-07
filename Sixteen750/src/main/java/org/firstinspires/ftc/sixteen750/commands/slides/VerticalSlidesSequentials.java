@@ -37,7 +37,7 @@ public class VerticalSlidesSequentials {
     //partial sequentials
     public static SequentialCommandGroup transferVertical(Robot r) {
         return new SequentialCommandGroup(
-        Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
+                Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
                 new WaitCommand(.3),
                 Command.create(r.verticalSlidesSubsystem::bucketServoLift),
                 Command.create(r.verticalSlidesSubsystem::armServoTransfer),
