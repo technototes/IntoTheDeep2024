@@ -7,6 +7,7 @@ import { invoke } from './helpers/invoke.js';
 import { hasGithubAccess, anyRobotConnection } from './helpers/connectivity.js';
 import { ResumeWork, StartWork } from './helpers/beginWork.js';
 import { FinishWork, StopWork } from './helpers/endWork.js';
+import { $ } from 'bun';
 
 async function workflow() {
   console.clear();
@@ -15,12 +16,19 @@ async function workflow() {
     ResumeWork,
     FinishWork,
     StopWork,
-    // ['Configure stuff', configureStuff],
     ['Connect to the control hub', connect],
     ['Disconnect from control hub', disconnect],
     ['Launch the dashboard', launchDash],
+    [
+      "Setup .gitconfig file so Kevin isn't constantly frustrated",
+      configureStuff,
+    ],
     ['Quit', () => Promise.resolve(true)],
   ]);
+}
+
+async function addAlias(alias: string, command: string): Promise<void> {
+  await $`git config --global alias.${alias} ${command}`;
 }
 
 // Nothing in here yet...
@@ -28,8 +36,21 @@ async function configureStuff(): Promise<boolean> {
   // This should:
   // Add my silly things to .gitconfig
   console.log('Configuring stuff');
-  await hasGithubAccess();
-  return Promise.resolve(false);
+  await addAlias('st', 'status');
+  await addAlias(
+    'sl',
+    "log --graph --oneline --decorate --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --since='365 days ago'",
+  );
+  await addAlias(
+    'gr',
+    "log --graph --oneline --decorate --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --since='365 days ago' -n 5000",
+  );
+  await addAlias('co', 'checkout');
+  await addAlias('unstage', 'reset HEAD --');
+  await addAlias('amend', 'commit --amend');
+  await addAlias('branches', 'branch --list --all');
+  await addAlias('tags', 'tag --list');
+  return false;
 }
 
 async function connect(): Promise<boolean> {
