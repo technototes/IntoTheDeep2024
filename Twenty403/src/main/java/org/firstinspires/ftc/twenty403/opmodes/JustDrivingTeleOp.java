@@ -41,4 +41,9 @@ public class JustDrivingTeleOp extends CommandOpMode {
             );
         }
     }
+
+    @Override
+    public void uponStart() {
+        robot.atStart();
+    }
 }
