@@ -19,8 +19,8 @@ public class PrestonTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d FIRST = new Pose2d(0, 65, toRadians(-90));
-        public static Pose2d SECOND = new Pose2d(0, 38, toRadians(-90));
+        public static Pose2d FIRST = new Pose2d(0, 65, toRadians(90));
+        public static Pose2d SECOND = new Pose2d(0, 38, toRadians(90));
         public static Pose2d THIRD = new Pose2d(0, 35, toRadians(180));
         public static Pose2d FOURTH = new Pose2d(-32, 35, toRadians(180));
         public static Pose2d FIFTH = new Pose2d(-42, 10, toRadians(180));
@@ -40,26 +40,26 @@ public class PrestonTesting {
         public static Pose2d ELEVENTH = new Pose2d(-56, 13, toRadians(90));
         public static Pose2d TWELFTH= new Pose2d(-61, 13, toRadians(90));
         public static Pose2d THIRTEENTH= new Pose2d(-61, 48, toRadians(90));
-        public static final Supplier<Trajectory> FIRST_TO_SECOND = () -> func.apply(FIRST).splineToLinearHeading(SECOND,SECOND.getHeading()).build();
-        public static final Supplier<Trajectory> SECOND_TO_THIRD = () -> func.apply(SECOND).splineToLinearHeading(THIRD,THIRD.getHeading()).build();
-        public static final Supplier<Trajectory> THIRD_TO_FOURTH = () -> func.apply(THIRD).splineToLinearHeading(FOURTH,FOURTH.getHeading()).build();
-        public static final Supplier<Trajectory> FOURTH_TO_FIFTH = () -> func.apply(FOURTH).splineToLinearHeading(FIFTH,FIFTH.getHeading()).build();
-        public static final Supplier<Trajectory> FIFTH_TO_SIXTH = () -> func.apply(FIFTH).splineToLinearHeading(SIXTH,SIXTH.getHeading()).build();
-        public static final Supplier<Trajectory> SIXTH_TO_SEVENTH = () -> func.apply(SIXTH).splineToLinearHeading(SEVENTH,SEVENTH.getHeading()).build();
-        public static final Supplier<Trajectory> SEVENTH_TO_SEVENTH1 = () -> func.apply(SEVENTH).splineToLinearHeading(SEVENTH1,SEVENTH1.getHeading()).build();
-        public static final Supplier<Trajectory> SEVENTH1_TO_SEVENTH2 = () -> func.apply(SEVENTH1).splineToLinearHeading(SEVENTH2,SEVENTH2.getHeading()).build();
-        public static final Supplier<Trajectory> SEVENTH2_TO_SEVENTH3 = () -> func.apply(SEVENTH2).splineToLinearHeading(SEVENTH3,SEVENTH3.getHeading()).build();
-        public static final Supplier<Trajectory> SEVENTH3_TO_SEVENTH4 = () -> func.apply(SEVENTH3).splineToLinearHeading(SEVENTH4,SEVENTH4.getHeading()).build();
-        public static final Supplier<Trajectory> SEVENTH4_TO_EIGHTH = () -> func.apply(SEVENTH4).splineToLinearHeading(EIGHTH,EIGHTH.getHeading()).build();
-        public static final Supplier<Trajectory> EIGHTH_TO_EIGHTH1 = () -> func.apply(EIGHTH).splineToLinearHeading(EIGHTH1,EIGHTH1.getHeading()).build();
-        public static final Supplier<Trajectory> EIGHTH1_TO_EIGHTH2 = () -> func.apply(EIGHTH1).splineToLinearHeading(EIGHTH2,EIGHTH2.getHeading()).build();
-        public static final Supplier<Trajectory> EIGHTH2_TO_EIGHTH3 = () -> func.apply(EIGHTH2).splineToLinearHeading(EIGHTH3,EIGHTH3.getHeading()).build();
-        public static final Supplier<Trajectory> EIGHTH3_TO_EIGHTH4 = () -> func.apply(EIGHTH3).splineToLinearHeading(EIGHTH4,EIGHTH4.getHeading()).build();
-        public static final Supplier<Trajectory> EIGHTH4_TO_NINTH = () -> func.apply(EIGHTH4).splineToLinearHeading(NINTH,NINTH.getHeading()).build();
-        public static final Supplier<Trajectory> NINTH_TO_TENTH = () -> func.apply(NINTH).splineToLinearHeading(TENTH,TENTH.getHeading()).build();
-        public static final Supplier<Trajectory> TENTH_TO_ELEVENTH = () -> func.apply(TENTH).splineToLinearHeading(ELEVENTH,ELEVENTH.getHeading()).build();
-        public static final Supplier<Trajectory> ELEVENTH_TO_TWELFTH = () -> func.apply(ELEVENTH).splineToLinearHeading(TWELFTH,TWELFTH.getHeading()).build();
-        public static final Supplier<Trajectory> TWELFTH_TO_THIRTEENTH = () -> func.apply(TWELFTH).splineToLinearHeading(THIRTEENTH,THIRTEENTH.getHeading()).build();
+        public static final Supplier<Trajectory> FIRST_TO_SECOND = () -> func.apply(FIRST).lineToLinearHeading(SECOND).build();
+        public static final Supplier<Trajectory> SECOND_TO_THIRD = () -> func.apply(SECOND).lineToLinearHeading(THIRD).build();
+        public static final Supplier<Trajectory> THIRD_TO_FOURTH = () -> func.apply(THIRD).lineToLinearHeading(FOURTH).build();
+        public static final Supplier<Trajectory> FOURTH_TO_FIFTH = () -> func.apply(FOURTH).lineToLinearHeading(FIFTH).build();
+        public static final Supplier<Trajectory> FIFTH_TO_SIXTH = () -> func.apply(FIFTH).lineToLinearHeading(SIXTH).build();
+        public static final Supplier<Trajectory> SIXTH_TO_SEVENTH = () -> func.apply(SIXTH).lineToLinearHeading(SEVENTH).build();
+        public static final Supplier<Trajectory> SEVENTH_TO_SEVENTH1 = () -> func.apply(SEVENTH).lineToLinearHeading(SEVENTH1).build();
+        public static final Supplier<Trajectory> SEVENTH1_TO_SEVENTH2 = () -> func.apply(SEVENTH1).lineToLinearHeading(SEVENTH2).build();
+        public static final Supplier<Trajectory> SEVENTH2_TO_SEVENTH3 = () -> func.apply(SEVENTH2).lineToLinearHeading(SEVENTH3).build();
+        public static final Supplier<Trajectory> SEVENTH3_TO_SEVENTH4 = () -> func.apply(SEVENTH3).lineToLinearHeading(SEVENTH4).build();
+        public static final Supplier<Trajectory> SEVENTH4_TO_EIGHTH = () -> func.apply(SEVENTH4).lineToLinearHeading(EIGHTH).build();
+        public static final Supplier<Trajectory> EIGHTH_TO_EIGHTH1 = () -> func.apply(EIGHTH).lineToLinearHeading(EIGHTH1).build();
+        public static final Supplier<Trajectory> EIGHTH1_TO_EIGHTH2 = () -> func.apply(EIGHTH1).lineToLinearHeading(EIGHTH2).build();
+        public static final Supplier<Trajectory> EIGHTH2_TO_EIGHTH3 = () -> func.apply(EIGHTH2).lineToLinearHeading(EIGHTH3).build();
+        public static final Supplier<Trajectory> EIGHTH3_TO_EIGHTH4 = () -> func.apply(EIGHTH3).lineToLinearHeading(EIGHTH4).build();
+        public static final Supplier<Trajectory> EIGHTH4_TO_NINTH = () -> func.apply(EIGHTH4).lineToLinearHeading(NINTH).build();
+        public static final Supplier<Trajectory> NINTH_TO_TENTH = () -> func.apply(NINTH).lineToLinearHeading(TENTH).build();
+        public static final Supplier<Trajectory> TENTH_TO_ELEVENTH = () -> func.apply(TENTH).lineToLinearHeading(ELEVENTH).build();
+        public static final Supplier<Trajectory> ELEVENTH_TO_TWELFTH = () -> func.apply(ELEVENTH).lineToLinearHeading(TWELFTH).build();
+        public static final Supplier<Trajectory> TWELFTH_TO_THIRTEENTH = () -> func.apply(TWELFTH).lineToLinearHeading(THIRTEENTH).build();
 
     }
 

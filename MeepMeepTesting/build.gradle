@@ -76,15 +76,15 @@ task cleanMeepMeep {
 }
 
 compileJava {
-    dependsOn makeMeepMeep16750Java, makeMeepMeep20403Java
+    dependsOn makeMeepMeep20403Java, makeMeepMeep16750Java
 }
 
 clean {
     dependsOn cleanMeepMeep
 }
 
-makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
 makeMeepMeep20403Java.mustRunAfter cleanMeepMeep
+makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
 
 dependencies {
     implementation 'com.github.NoahBres:MeepMeep:2.0.3' // FLIP: MeepMeepLocal
