@@ -1,5 +1,13 @@
 package org.firstinspires.ftc.sixteen750.commands.slides;
 
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmEmpty;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmTransfer;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketEmpty;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketTransfer;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.HighBasketCommand;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.LowBasketCommand;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.SlidesDownCommand;
+
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
@@ -11,26 +19,26 @@ public class VerticalSlidesSequentials {
     //complete sequentials
     public static SequentialCommandGroup HighBasket(Robot r) { //need to change armScore
         return new SequentialCommandGroup(
-            transferVertical(r),
+            transferScore(r),
             new WaitCommand(.3),
-            Command.create(r.verticalSlidesSubsystem::slideBasketHigh),
+            HighBasketCommand(r),
             BasketScore(r)
         );
     }
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
-            transferVertical(r),
+            transferScore(r),
             new WaitCommand(.3),
-            Command.create(r.verticalSlidesSubsystem::slideBasketLow),
+            LowBasketCommand(r),
             BasketScore(r)
         );
     }
     public static SequentialCommandGroup SlidesDown(Robot r) {
         return new SequentialCommandGroup(
-            transferVertical(r),
-            Command.create(r.verticalSlidesSubsystem::slideBasketLow),
+            LowBasketCommand(r),
             new WaitCommand(.1),
-            Command.create(r.verticalSlidesSubsystem::slidesDown)
+            SlidesDownCommand(r),
+            transferVertical(r)
         );
     }
 
@@ -49,11 +57,23 @@ public class VerticalSlidesSequentials {
             Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
             new WaitCommand(.3),
             Command.create(r.verticalSlidesSubsystem::bucketServoLift),
-            Command.create(r.verticalSlidesSubsystem::armServoTransfer),
-            //                new WaitCommand(.3),
-            //                Command.create(r.verticalSlidesSubsystem::slidesDown),
+            ArmTransfer(r),
             new WaitCommand(.3),
-            Command.create(r.verticalSlidesSubsystem::bucketServoTransfer)
+            SlidesDownCommand(r),
+            new WaitCommand(.3),
+            BucketTransfer(r)
+            // commands for vertical slide bucket transfer position first, then wrist transferring
+        );
+    }
+
+    public static SequentialCommandGroup transferScore(Robot r) {
+        return new SequentialCommandGroup(
+            Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
+            new WaitCommand(.3),
+            Command.create(r.verticalSlidesSubsystem::bucketServoLift),
+            ArmTransfer(r),
+            new WaitCommand(.3),
+            SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
@@ -61,9 +81,9 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
             Command.create(r.verticalSlidesSubsystem::bucketServoLift),
             new WaitCommand(0.3),
-            Command.create(r.verticalSlidesSubsystem::armServoEmpty),
+            ArmEmpty(r),
             new WaitCommand(0.7),
-            Command.create(r.verticalSlidesSubsystem::bucketServoEmpty)
+            BucketEmpty(r)
         );
     }
 
