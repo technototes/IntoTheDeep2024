@@ -20,6 +20,7 @@ public class DriverController {
     public CommandButton turboButton;
     public CommandButton snailButton;
     public CommandAxis straightTrigger;
+    public CommandAxis angleTrigger;
 
     public DriverController(CommandGamepad g, Robot r) {
         this.robot = r;
@@ -38,6 +39,7 @@ public class DriverController {
         turboButton = gamepad.rightBumper;
         snailButton = gamepad.leftBumper;
         straightTrigger = gamepad.rightTrigger;
+        angleTrigger = gamepad.leftTrigger;
     }
 
     public void bindDriveControls() {
@@ -46,7 +48,8 @@ public class DriverController {
                 robot.drivebaseSubsystem,
                 driveLeftStick,
                 driveRightStick,
-                straightTrigger
+                straightTrigger,
+                angleTrigger
             )
         );
 
