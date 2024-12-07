@@ -48,20 +48,16 @@ public class JoystickDriveCommand implements Command, Loggable {
     private double getRotation(double headingInRads) {
         // Check to see if we're trying to straighten the robot
         double normalized = 0.0;
-        if (
-            (driveStraighten == null ||
-                driveStraighten.getAsDouble() <
-                DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD) &&
-            (drive45 == null ||
-                drive45.getAsDouble() < DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD)
-        ) {
+        boolean straightTrigger;
+        boolean fortyfiveTrigger;
+        straightTrigger = isTriggered(driveStraighten);
+        fortyfiveTrigger = isTriggered(drive45);
+        if (!straightTrigger && !fortyfiveTrigger) {
             // No straighten override: return the stick value
             // (with some adjustment...)
             return -Math.pow(r.getAsDouble(), 3) * subsystem.speed;
-        } else if (
-            driveStraighten != null &&
-            driveStraighten.getAsDouble() >= DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD
-        ) {
+        }
+        if (straightTrigger) {
             // headingInRads is [0-2pi]
             double heading = -Math.toDegrees(headingInRads);
             // Snap to the closest 90 or 270 degree angle (for going through the depot)
@@ -90,6 +86,13 @@ public class JoystickDriveCommand implements Command, Loggable {
         // .9 (about 40 degrees off) provides .96 power => .288
         // .1 (about 5 degrees off) provides .46 power => .14
         return Math.cbrt(normalized) * 0.3;
+    }
+
+    public static boolean isTriggered(DoubleSupplier ds) {
+        if (ds == null || ds.getAsDouble() < DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD) {
+            return false;
+        }
+        return true;
     }
 
     @Override
