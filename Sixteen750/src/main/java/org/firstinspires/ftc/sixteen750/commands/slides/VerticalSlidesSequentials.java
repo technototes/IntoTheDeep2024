@@ -3,6 +3,7 @@ package org.firstinspires.ftc.sixteen750.commands.slides;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmEmpty;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmTransfer;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketEmpty;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketLift;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketTransfer;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.HighBasketCommand;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.LowBasketCommand;
@@ -48,7 +49,7 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
                 Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
                 new WaitCommand(.3),
-                Command.create(r.verticalSlidesSubsystem::bucketServoLift),
+                BucketLift(r),
                 ArmTransfer(r),
                 new WaitCommand(.3),
                 SlidesDownCommand(r),
@@ -61,7 +62,7 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
                 Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
                 new WaitCommand(.3),
-                Command.create(r.verticalSlidesSubsystem::bucketServoLift),
+                BucketLift(r),
                 ArmTransfer(r),
                 new WaitCommand(.3),
                 SlidesDownCommand(r)
@@ -71,11 +72,13 @@ public class VerticalSlidesSequentials {
 
     public static SequentialCommandGroup BasketScore(Robot r) {
         return new SequentialCommandGroup(
-                Command.create(r.verticalSlidesSubsystem::bucketServoLift),
+                BucketLift(r),
                 new WaitCommand(0.3),
                 ArmEmpty(r),
                 new WaitCommand(0.7),
-                BucketEmpty(r)
+                BucketEmpty(r),
+                new WaitCommand(.3),
+                BucketLift(r)
         );
     }
 }
