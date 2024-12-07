@@ -163,7 +163,7 @@ public class AutoConstants {
             NETSCORING_TO_ASCENT = b ->
             b.apply(NETSCORING_TEST.toPose())
 //                        .splineToLinearHeading(NETCLEAR.toPose(), NETCLEAR.getHeading())
-                   // .splineToSplineHeading(NETSCORING_CLEAR.toPose(), NETSCORING_CLEAR.getHeading())
+                    // .splineToSplineHeading(NETSCORING_CLEAR.toPose(), NETSCORING_CLEAR.getHeading())
                     .splineToLinearHeading(ASCENT.toPose(), ASCENT.getHeading())
                     //.setReversed(true)
                     .build();
@@ -181,11 +181,11 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             SPLINETEST1_TO_SPLINETEST2 = b ->
             b.apply(SPLINETEST1.toPose())
-                    .splineToConstantHeading(SPLINETEST2.toPose().vec(),SPLINETEST2.getHeading())
+                    .splineToConstantHeading(SPLINETEST2.toPose().vec(), SPLINETEST2.getHeading())
                     .build();
 
 
-        //testing trajectories from last year
+    //testing trajectories from last year
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             START_TO_RIGHT_SPIKE = b ->
             b.apply(START1.toPose())
