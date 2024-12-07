@@ -19,17 +19,48 @@ public class PrestonTesting {
     public static class AutoConstants {
 
         public static Function<Pose2d, TrajectoryBuilder> func;
-        public static Pose2d FIRST = new Pose2d(0, 65, toRadians(-90));
-        public static Pose2d SECOND = new Pose2d(0, 34, toRadians(-90));
+        public static Pose2d FIRST = new Pose2d(0, 65, toRadians(90));
+        public static Pose2d SECOND = new Pose2d(0, 38, toRadians(90));
         public static Pose2d THIRD = new Pose2d(0, 35, toRadians(180));
-        public static Pose2d FOURTH = new Pose2d(-24, 35, toRadians(180));
-        public static Pose2d FIFTH = new Pose2d(-34, 15, toRadians(-90));
-        public static Pose2d SIXTH = new Pose2d(-48, 15, toRadians(90));
-        public static final Supplier<Trajectory> FIRST_TO_SECOND = () -> func.apply(FIRST).splineToLinearHeading(SECOND,SECOND.getHeading()).build();
-        public static final Supplier<Trajectory> SECOND_TO_THIRD = () -> func.apply(SECOND).splineToLinearHeading(THIRD,THIRD.getHeading()).build();
-        public static final Supplier<Trajectory> THIRD_TO_FOURTH = () -> func.apply(THIRD).splineToLinearHeading(FOURTH,FOURTH.getHeading()).build();
-        public static final Supplier<Trajectory> FOURTH_TO_FIFTH = () -> func.apply(FOURTH).splineToLinearHeading(FIFTH,FIFTH.getHeading()).build();
-        public static final Supplier<Trajectory> FIFTH_TO_SIXTH = () -> func.apply(FIFTH).splineToLinearHeading(SIXTH,SIXTH.getHeading()).build();
+        public static Pose2d FOURTH = new Pose2d(-32, 35, toRadians(180));
+        public static Pose2d FIFTH = new Pose2d(-42, 10, toRadians(180));
+        public static Pose2d SIXTH = new Pose2d(-45, 10, toRadians(90));
+        public static Pose2d SEVENTH = new Pose2d(-45, 47, toRadians(90));
+        public static Pose2d SEVENTH1 = new Pose2d(0, 35, toRadians(-90));
+        public static Pose2d SEVENTH2 = new Pose2d(0, 35.1, toRadians(180));
+        public static Pose2d SEVENTH3 = new Pose2d(-32, 35, toRadians(180));
+        public static Pose2d SEVENTH4 = new Pose2d(-45, 10, toRadians(180));
+        public static Pose2d EIGHTH = new Pose2d(-45, 47, toRadians(90));
+        public static Pose2d EIGHTH1 = new Pose2d(0, 35, toRadians(-90));
+        public static Pose2d EIGHTH2 = new Pose2d(0, 35.1, toRadians(180));
+        public static Pose2d EIGHTH3 = new Pose2d(-32, 35, toRadians(180));
+        public static Pose2d EIGHTH4 = new Pose2d(-42, 10, toRadians(180));
+        public static Pose2d NINTH = new Pose2d(-56, 13, toRadians(90));
+        public static Pose2d TENTH = new Pose2d(-56, 48, toRadians(90));
+        public static Pose2d ELEVENTH = new Pose2d(-56, 13, toRadians(90));
+        public static Pose2d TWELFTH= new Pose2d(-61, 13, toRadians(90));
+        public static Pose2d THIRTEENTH= new Pose2d(-61, 48, toRadians(90));
+        public static final Supplier<Trajectory> FIRST_TO_SECOND = () -> func.apply(FIRST).lineToLinearHeading(SECOND).build();
+        public static final Supplier<Trajectory> SECOND_TO_THIRD = () -> func.apply(SECOND).lineToLinearHeading(THIRD).build();
+        public static final Supplier<Trajectory> THIRD_TO_FOURTH = () -> func.apply(THIRD).lineToLinearHeading(FOURTH).build();
+        public static final Supplier<Trajectory> FOURTH_TO_FIFTH = () -> func.apply(FOURTH).lineToLinearHeading(FIFTH).build();
+        public static final Supplier<Trajectory> FIFTH_TO_SIXTH = () -> func.apply(FIFTH).lineToLinearHeading(SIXTH).build();
+        public static final Supplier<Trajectory> SIXTH_TO_SEVENTH = () -> func.apply(SIXTH).lineToLinearHeading(SEVENTH).build();
+        public static final Supplier<Trajectory> SEVENTH_TO_SEVENTH1 = () -> func.apply(SEVENTH).lineToLinearHeading(SEVENTH1).build();
+        public static final Supplier<Trajectory> SEVENTH1_TO_SEVENTH2 = () -> func.apply(SEVENTH1).lineToLinearHeading(SEVENTH2).build();
+        public static final Supplier<Trajectory> SEVENTH2_TO_SEVENTH3 = () -> func.apply(SEVENTH2).lineToLinearHeading(SEVENTH3).build();
+        public static final Supplier<Trajectory> SEVENTH3_TO_SEVENTH4 = () -> func.apply(SEVENTH3).lineToLinearHeading(SEVENTH4).build();
+        public static final Supplier<Trajectory> SEVENTH4_TO_EIGHTH = () -> func.apply(SEVENTH4).lineToLinearHeading(EIGHTH).build();
+        public static final Supplier<Trajectory> EIGHTH_TO_EIGHTH1 = () -> func.apply(EIGHTH).lineToLinearHeading(EIGHTH1).build();
+        public static final Supplier<Trajectory> EIGHTH1_TO_EIGHTH2 = () -> func.apply(EIGHTH1).lineToLinearHeading(EIGHTH2).build();
+        public static final Supplier<Trajectory> EIGHTH2_TO_EIGHTH3 = () -> func.apply(EIGHTH2).lineToLinearHeading(EIGHTH3).build();
+        public static final Supplier<Trajectory> EIGHTH3_TO_EIGHTH4 = () -> func.apply(EIGHTH3).lineToLinearHeading(EIGHTH4).build();
+        public static final Supplier<Trajectory> EIGHTH4_TO_NINTH = () -> func.apply(EIGHTH4).lineToLinearHeading(NINTH).build();
+        public static final Supplier<Trajectory> NINTH_TO_TENTH = () -> func.apply(NINTH).lineToLinearHeading(TENTH).build();
+        public static final Supplier<Trajectory> TENTH_TO_ELEVENTH = () -> func.apply(TENTH).lineToLinearHeading(ELEVENTH).build();
+        public static final Supplier<Trajectory> ELEVENTH_TO_TWELFTH = () -> func.apply(ELEVENTH).lineToLinearHeading(TWELFTH).build();
+        public static final Supplier<Trajectory> TWELFTH_TO_THIRTEENTH = () -> func.apply(TWELFTH).lineToLinearHeading(THIRTEENTH).build();
+
     }
 
     public static void main(String[] args) {
@@ -60,7 +91,7 @@ public class PrestonTesting {
         AutoConstants.func = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
-            .setDimensions(17.5, 16.5)
+            .setDimensions(17.5, 17)
             .followTrajectorySequence(drive -> getTestTrajectory(drive));
         meepMeep.setBackgroundAlpha(0.75f).addEntity(myBot).start();
     }
@@ -73,6 +104,21 @@ public class PrestonTesting {
                 .addTrajectory(AutoConstants.THIRD_TO_FOURTH.get())
                 .addTrajectory(AutoConstants.FOURTH_TO_FIFTH.get())
                 .addTrajectory(AutoConstants.FIFTH_TO_SIXTH.get())
+                .addTrajectory(AutoConstants.SIXTH_TO_SEVENTH.get())
+                .addTrajectory(AutoConstants.SEVENTH_TO_SEVENTH1.get())
+                .addTrajectory(AutoConstants.SEVENTH1_TO_SEVENTH2.get())
+                .addTrajectory(AutoConstants.SEVENTH2_TO_SEVENTH3.get())
+                .addTrajectory(AutoConstants.SEVENTH3_TO_SEVENTH4.get())
+                .addTrajectory(AutoConstants.SEVENTH4_TO_EIGHTH.get())
+                .addTrajectory(AutoConstants.EIGHTH_TO_EIGHTH1.get())
+                .addTrajectory(AutoConstants.EIGHTH1_TO_EIGHTH2.get())
+                .addTrajectory(AutoConstants.EIGHTH2_TO_EIGHTH3.get())
+                .addTrajectory(AutoConstants.EIGHTH3_TO_EIGHTH4.get())
+                .addTrajectory(AutoConstants.EIGHTH4_TO_NINTH.get())
+                .addTrajectory(AutoConstants.NINTH_TO_TENTH.get())
+                .addTrajectory(AutoConstants.TENTH_TO_ELEVENTH.get())
+                .addTrajectory(AutoConstants.ELEVENTH_TO_TWELFTH.get())
+                .addTrajectory(AutoConstants.TWELFTH_TO_THIRTEENTH.get())
                 .build();
     }
 }
