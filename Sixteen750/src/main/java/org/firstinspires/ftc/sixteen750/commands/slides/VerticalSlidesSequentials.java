@@ -11,21 +11,26 @@ public class VerticalSlidesSequentials {
     //complete sequentials
     public static SequentialCommandGroup HighBasket(Robot r) { //need to change armScore
         return new SequentialCommandGroup(
+                transferVertical(r),
+                new WaitCommand(.3),
                 Command.create(r.verticalSlidesSubsystem::slideBasketHigh),
                 BasketScore(r)
         );
     }
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
-                BasketScore(r),
-                Command.create(r.verticalSlidesSubsystem::slideBasketLow)
+                transferVertical(r),
+                new WaitCommand(.3),
+                Command.create(r.verticalSlidesSubsystem::slideBasketLow),
+                BasketScore(r)
         );
     }
     public static SequentialCommandGroup SlidesDown(Robot r) {
         return new SequentialCommandGroup(
                 Command.create(r.verticalSlidesSubsystem::slideBasketLow),
                 new WaitCommand(.1),
-                Command.create(r.verticalSlidesSubsystem::slidesDown)
+                Command.create(r.verticalSlidesSubsystem::slidesDown),
+                transferVertical(r)
         );
     }
 
@@ -33,7 +38,8 @@ public class VerticalSlidesSequentials {
     public static SequentialCommandGroup transferVertical(Robot r) {
         return new SequentialCommandGroup(
         Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
-        Command.create(r.verticalSlidesSubsystem::armServoTransfer),
+                Command.create(r.verticalSlidesSubsystem::bucketServoLift),
+                Command.create(r.verticalSlidesSubsystem::armServoTransfer),
                 new WaitCommand(.3),
                 Command.create(r.verticalSlidesSubsystem::slidesDown),
                 new WaitCommand(.3),

@@ -5,6 +5,7 @@ import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
+import com.technototes.library.command.WaitCommand;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
@@ -19,12 +20,12 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //arm servo - transfer, empty
     //bucket servo - transfer, lift, empty
 
-    public static int HIGH_BASKET = -1150; //-1000
-    public static int LOW_BASKET = -650;
+    public static int HIGH_BASKET = -1150;
+    public static int LOW_BASKET = -550;
     public static int SLIDE_ZERO = 0;
     public static double BucketServoTransfer = 0.85;
     public static double BucketServoLift = 0.65; //carry position for scoring
-    public static double BucketServoEmpty = 0.35;
+    public static double BucketServoEmpty = 0.25;
     public static double ArmServoEmpty = 1;
     public static double ArmServoTransfer = 0;
     public static double BucketServoIncrement = 0.05;
@@ -171,7 +172,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         else if (bucketTargetPos == BucketServoTransfer) {
             setBucketPos(BucketServoLift);
         }
-        else {
+        else {//need to make this do the thing if we want to toggle bucket
+            setBucketPos(BucketServoLift);
+            new WaitCommand(.5);
             setBucketPos(BucketServoTransfer);
         }
     }
