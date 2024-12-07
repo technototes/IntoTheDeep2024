@@ -154,10 +154,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     //toggle methods
     public void slideToggle() {
-        if (slidePos == SLIDE_ZERO){
+        if (slidePos > -5){
             setSlidePos(HIGH_BASKET);
-            setArmPos(ArmServoEmpty);
             setBucketPos(BucketServoLift);
+            setArmPos(ArmServoEmpty);
         }
         else {
             setSlidePos(SLIDE_ZERO);
@@ -191,7 +191,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void resetSlideZero() {
         slideResetPos = getSlideUnmodifiedPosition();
         // We don't want the destination to go nuts, so update the target with the new zero
-        slideTargetPos = slideResetPos;
+        setSlideTargetPosition(slideResetPos);
     }
 
     //scoring methods

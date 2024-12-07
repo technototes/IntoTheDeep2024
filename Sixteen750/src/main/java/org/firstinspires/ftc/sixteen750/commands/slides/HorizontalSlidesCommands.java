@@ -11,6 +11,9 @@ public class HorizontalSlidesCommands {
     public static Command horizontalExtend(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::slidesExtend);
     }
+    public static Command horizontalSmallExtend(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::slidesSmallExtend);
+    }
 
     public static Command horizontalRetract(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::slidesRetract);
