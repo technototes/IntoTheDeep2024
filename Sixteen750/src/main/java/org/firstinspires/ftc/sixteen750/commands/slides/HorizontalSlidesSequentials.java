@@ -35,6 +35,13 @@ public class HorizontalSlidesSequentials {
         );
     }
 
+    public static SequentialCommandGroup retract(Robot r) {
+        return new SequentialCommandGroup(
+                wristTransfer(r),
+                horizontalRetract(r),
+                clawChomp(r)
+        );
+    }
     public static SequentialCommandGroup transferring(Robot r) {
         return new SequentialCommandGroup(
             wristTransfer(r),
