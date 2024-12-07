@@ -22,6 +22,13 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     @Log(name = "jawTarget")
     public double jawTarget = 0;
 
+    @Log(name = "wristPosition")
+    public double wristPosition = 0;
+
+    @Log(name = "wristTarget")
+    public double wristTarget = 0;
+
+    @Log
     private CRServo intake;
 
     public static double RETAINER_OPEN_POSITION = .78;
@@ -36,6 +43,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double INTAKE_SPIT = -.6;
 
     public static double WRIST_SCOOP = .30;
+    public static double WRIST_INC_DEC = .5;
     public static double WRIST_DUMP = 0;
     public static double WRIST_STRAIGHT = .35;
 
@@ -60,6 +68,19 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public void biteJaw() {
         jawTarget = JAW_BITE_POSITION;
         jaw.setPosition(JAW_BITE_POSITION);
+    }
+
+    public void wristincrement(double v) {
+        int newSlidePos = (int) (wristTarget + v * WRIST_INC_DEC);
+        wrist.setPosition(newSlidePos);
+    }
+
+    public void wdecrement() {
+        wristincrement(-1.0);
+    }
+
+    public void wincrement() {
+        wristincrement(1.0);
     }
 
     public void dumpWrist() {

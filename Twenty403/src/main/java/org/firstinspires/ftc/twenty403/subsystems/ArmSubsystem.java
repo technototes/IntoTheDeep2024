@@ -132,8 +132,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
              */
 
             (ticks, velocity) -> {
-                armFeedFwdValue =
-                    FEEDFORWARD_COEFFICIENT * Math.cos(getArmAngle(ticks)) * getSlideLength();
+                armFeedFwdValue = FEEDFORWARD_COEFFICIENT *
+                Math.cos(getArmAngle(ticks)) *
+                getSlideLength();
 
                 //                if (velocity > MIN_ANGULAR_VELOCITY) {
                 //                    //increase armFeedFwdValue to avoid slamming or increase D in PID
@@ -194,8 +195,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public void increment(double value) {
         int newArmPos = (int) (armTargetPos + value * INCREMENT_DECREMENT);
-        if (newArmPos > 3100) {
-            newArmPos = 3100;
+        if (newArmPos > 3150) {
+            newArmPos = 3150;
         } else if (newArmPos < 0) {
             newArmPos = 0;
         }

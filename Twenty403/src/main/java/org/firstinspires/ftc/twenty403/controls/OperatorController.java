@@ -5,6 +5,7 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
+import java.security.PublicKey;
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
@@ -51,6 +52,8 @@ public class OperatorController {
     public CommandButton HighBasket;
     public CommandButton IntakeSample;
     public CommandButton IntakeSpecimen;
+    public CommandButton WristInc;
+    public CommandButton WristDec;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -86,6 +89,8 @@ public class OperatorController {
         armLowNet = gamepad.ps_cross;
         IntakeSample = gamepad.ps_share;
         IntakeSpecimen = gamepad.ps_options;*/
+        WristDec = gamepad.ps_circle;
+        WristInc = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -159,6 +164,12 @@ public class OperatorController {
 
         CommandScheduler.scheduleJoystick(
             new JoystickSlideIncDecCommand(robot.armSubsystem, slideStick)
+        );
+        WristInc.whenPressed(
+            Command.create(robot.kidShampooSubsystem::wincrement, robot.kidShampooSubsystem)
+        );
+        WristDec.whenPressed(
+            Command.create(robot.kidShampooSubsystem::wdecrement, robot.kidShampooSubsystem)
         );
     }
 
