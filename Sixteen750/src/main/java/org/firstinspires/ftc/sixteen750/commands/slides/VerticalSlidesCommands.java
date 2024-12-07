@@ -13,14 +13,14 @@ public class VerticalSlidesCommands {
     public static Command SlidesZero(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::resetSlideZero, r.verticalSlidesSubsystem);
     }
-    public static Command HighBasket(Robot r) {
+    public static Command HighBasketCommand(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::slideBasketHigh, r.verticalSlidesSubsystem);
     }
-    public static Command LowBasket(Robot r) {
+    public static Command LowBasketCommand(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::slideBasketLow, r.verticalSlidesSubsystem);
     }
     //unused
-    public static Command SlidesDown(Robot r) {
+    public static Command SlidesDownCommand(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::slidesDown, r.verticalSlidesSubsystem);
     }
     public static Command HighChamber(Robot r) {
