@@ -7,10 +7,8 @@ import com.technototes.library.command.Command;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.MathUtils;
-
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
 
@@ -24,11 +22,11 @@ public class JoystickDriveCommand implements Command, Loggable {
     public DoubleSupplier drive45;
 
     public JoystickDriveCommand(
-            DrivebaseSubsystem sub,
-            Stick xyStick,
-            Stick rotStick,
-            DoubleSupplier strtDrive,
-            DoubleSupplier angleDrive
+        DrivebaseSubsystem sub,
+        Stick xyStick,
+        Stick rotStick,
+        DoubleSupplier strtDrive,
+        DoubleSupplier angleDrive
     ) {
         addRequirements(sub);
         subsystem = sub;
@@ -51,14 +49,19 @@ public class JoystickDriveCommand implements Command, Loggable {
         // Check to see if we're trying to straighten the robot
         double normalized = 0.0;
         if (
-                (driveStraighten == null ||
-                        driveStraighten.getAsDouble() < DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD) &&
-                        (drive45 == null || drive45.getAsDouble() < DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD)
+            (driveStraighten == null ||
+                driveStraighten.getAsDouble() <
+                DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD) &&
+            (drive45 == null ||
+                drive45.getAsDouble() < DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD)
         ) {
             // No straighten override: return the stick value
             // (with some adjustment...)
             return -Math.pow(r.getAsDouble(), 3) * subsystem.speed;
-        } else if (driveStraighten != null && driveStraighten.getAsDouble() >= DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD) {
+        } else if (
+            driveStraighten != null &&
+            driveStraighten.getAsDouble() >= DrivebaseSubsystem.DriveConstants.TRIGGER_THRESHOLD
+        ) {
             // headingInRads is [0-2pi]
             double heading = -Math.toDegrees(headingInRads);
             // Snap to the closest 90 or 270 degree angle (for going through the depot)
@@ -69,24 +72,24 @@ public class JoystickDriveCommand implements Command, Loggable {
             // Dead zone of 5 degreesLiftHighJunctionCommand(liftSubsystem)
             if (Math.abs(normalized) < Setup.OtherSettings.STRAIGHTEN_DEAD_ZONE) {
                 return 0.0;
-            } else {
-                // headingInRads is [0-2pi]
-                double heading45 = -Math.toDegrees(headingInRads);
-                // Snap to the closest 90 or 270 degree angle (for going through the depot)
-                double close45 = MathUtils.closestTo(heading45, 45, 135, 225, 315);
-                double offBy45 = close45 - heading45;
-                // Normalize the error to -1 to 1
-                normalized = Math.max(Math.min(offBy45 / 45, 1.), -1.);
-                // Dead zone of 5 degreesLiftHighJunctionCommand(liftSubsystem)
-                if (Math.abs(normalized) < Setup.OtherSettings.STRAIGHTEN_DEAD_ZONE) {
-                    return 0.0;
-                }
             }
-            // Scale it by the cube root, the scale that down by 30%
-            // .9 (about 40 degrees off) provides .96 power => .288
-            // .1 (about 5 degrees off) provides .46 power => .14
-            return Math.cbrt(normalized) * 0.3;
+        } else {
+            // headingInRads is [0-2pi]
+            double heading45 = -Math.toDegrees(headingInRads);
+            // Snap to the closest 90 or 270 degree angle (for going through the depot)
+            double close45 = MathUtils.closestTo(heading45, 45, 135, 225, 315);
+            double offBy45 = close45 - heading45;
+            // Normalize the error to -1 to 1
+            normalized = Math.max(Math.min(offBy45 / 45, 1.), -1.);
+            // Dead zone of 5 degreesLiftHighJunctionCommand(liftSubsystem)
+            if (Math.abs(normalized) < Setup.OtherSettings.STRAIGHTEN_DEAD_ZONE) {
+                return 0.0;
+            }
         }
+        // Scale it by the cube root, the scale that down by 30%
+        // .9 (about 40 degrees off) provides .96 power => .288
+        // .1 (about 5 degrees off) provides .46 power => .14
+        return Math.cbrt(normalized) * 0.3;
     }
 
     @Override
@@ -106,12 +109,12 @@ public class JoystickDriveCommand implements Command, Loggable {
                 }
             }
             Vector2d input = new Vector2d(
-                    yvalue * subsystem.speed,
-                    xvalue * subsystem.speed
+                yvalue * subsystem.speed,
+                xvalue * subsystem.speed
             ).rotated(curHeading);
 
             subsystem.setWeightedDrivePower(
-                    new Pose2d(input.getX(), input.getY(), getRotation(curHeading))
+                new Pose2d(input.getX(), input.getY(), getRotation(curHeading))
             );
         }
         subsystem.update();
