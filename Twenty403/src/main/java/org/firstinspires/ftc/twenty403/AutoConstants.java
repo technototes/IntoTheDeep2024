@@ -46,26 +46,26 @@ public class AutoConstants {
     public static ConfigurablePoseD ELEVENTH = new ConfigurablePoseD(-56, 13,90);
     public static ConfigurablePoseD TWELFTH= new ConfigurablePoseD(-61, 13,90);
     public static ConfigurablePoseD THIRTEENTH= new ConfigurablePoseD(-61, 48,90);
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIRST_TO_SECOND = func -> func.apply(FIRST).lineToLinearHeading(SECOND).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SECOND_TO_THIRD = func -> func.apply(SECOND).lineToLinearHeading(THIRD).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> THIRD_TO_FOURTH =func -> func.apply(THIRD).lineToLinearHeading(FOURTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FOURTH_TO_FIFTH =func -> func.apply(FOURTH).lineToLinearHeading(FIFTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIFTH_TO_SIXTH =func -> func.apply(FIFTH).lineToLinearHeading(SIXTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SIXTH_TO_SEVENTH =func -> func.apply(SIXTH).lineToLinearHeading(SEVENTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH_TO_SEVENTH1 =func -> func.apply(SEVENTH).lineToLinearHeading(SEVENTH1).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH1_TO_SEVENTH2 =func -> func.apply(SEVENTH1).lineToLinearHeading(SEVENTH2).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH2_TO_SEVENTH3 =func -> func.apply(SEVENTH2).lineToLinearHeading(SEVENTH3).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH3_TO_SEVENTH4 =func -> func.apply(SEVENTH3).lineToLinearHeading(SEVENTH4).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH4_TO_EIGHTH =func -> func.apply(SEVENTH4).lineToLinearHeading(EIGHTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH_TO_EIGHTH1 =func -> func.apply(EIGHTH).lineToLinearHeading(EIGHTH1).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH1_TO_EIGHTH2 =func -> func.apply(EIGHTH1).lineToLinearHeading(EIGHTH2).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH2_TO_EIGHTH3 =func -> func.apply(EIGHTH2).lineToLinearHeading(EIGHTH3).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH3_TO_EIGHTH4 =func -> func.apply(EIGHTH3).lineToLinearHeading(EIGHTH4).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH4_TO_NINTH =func -> func.apply(EIGHTH4).lineToLinearHeading(NINTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> NINTH_TO_TENTH =func -> func.apply(NINTH).lineToLinearHeading(TENTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TENTH_TO_ELEVENTH =func -> func.apply(TENTH).lineToLinearHeading(ELEVENTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> ELEVENTH_TO_TWELFTH =func -> func.apply(ELEVENTH).lineToLinearHeading(TWELFTH).build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TWELFTH_TO_THIRTEENTH =func -> func.apply(TWELFTH).lineToLinearHeading(THIRTEENTH).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIRST_TO_SECOND = func -> func.apply(FIRST.toPose()).lineToLinearHeading(SECOND.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SECOND_TO_THIRD = func -> func.apply(SECOND.toPose()).lineToLinearHeading(THIRD.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> THIRD_TO_FOURTH =func -> func.apply(THIRD.toPose()).lineToLinearHeading(FOURTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FOURTH_TO_FIFTH =func -> func.apply(FOURTH.toPose()).lineToLinearHeading(FIFTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIFTH_TO_SIXTH =func -> func.apply(FIFTH.toPose()).lineToLinearHeading(SIXTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SIXTH_TO_SEVENTH =func -> func.apply(SIXTH.toPose()).lineToLinearHeading(SEVENTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH_TO_SEVENTH1 =func -> func.apply(SEVENTH.toPose()).lineToLinearHeading(SEVENTH1.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH1_TO_SEVENTH2 =func -> func.apply(SEVENTH1.toPose()).lineToLinearHeading(SEVENTH2.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH2_TO_SEVENTH3 =func -> func.apply(SEVENTH2.toPose()).lineToLinearHeading(SEVENTH3.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH3_TO_SEVENTH4 =func -> func.apply(SEVENTH3.toPose()).lineToLinearHeading(SEVENTH4.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SEVENTH4_TO_EIGHTH =func -> func.apply(SEVENTH4.toPose()).lineToLinearHeading(EIGHTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH_TO_EIGHTH1 =func -> func.apply(EIGHTH.toPose()).lineToLinearHeading(EIGHTH1.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH1_TO_EIGHTH2 =func -> func.apply(EIGHTH1.toPose()).lineToLinearHeading(EIGHTH2.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH2_TO_EIGHTH3 =func -> func.apply(EIGHTH2.toPose()).lineToLinearHeading(EIGHTH3.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH3_TO_EIGHTH4 =func -> func.apply(EIGHTH3.toPose()).lineToLinearHeading(EIGHTH4.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> EIGHTH4_TO_NINTH =func -> func.apply(EIGHTH4.toPose()).lineToLinearHeading(NINTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> NINTH_TO_TENTH =func -> func.apply(NINTH.toPose()).lineToLinearHeading(TENTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TENTH_TO_ELEVENTH =func -> func.apply(TENTH.toPose()).lineToLinearHeading(ELEVENTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> ELEVENTH_TO_TWELFTH =func -> func.apply(ELEVENTH.toPose()).lineToLinearHeading(TWELFTH.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TWELFTH_TO_THIRTEENTH =func -> func.apply(TWELFTH.toPose()).lineToLinearHeading(THIRTEENTH.toPose()).build();
 
 
 
