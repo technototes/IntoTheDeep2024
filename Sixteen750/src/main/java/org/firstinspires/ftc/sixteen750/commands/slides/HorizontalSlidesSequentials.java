@@ -43,4 +43,10 @@ public class HorizontalSlidesSequentials {
             SlidesDown(r)
         );
     }
+    public static SequentialCommandGroup open(Robot r) {
+        return new SequentialCommandGroup(
+                wristPickup(r),
+                clawOpen(r)
+        );
+    }
 }
