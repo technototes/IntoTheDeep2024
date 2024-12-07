@@ -5,7 +5,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.EZCmd;
@@ -61,12 +60,12 @@ public class OperatorController {
     }
 
     private void AssignNamedControllerButton() {
-       openRetainer = gamepad.dpadRight;
-      closeRetainer = gamepad.dpadLeft;
-       slurpIntake = gamepad.leftBumper;
-       spitIntake = gamepad.rightBumper;
+        openRetainer = gamepad.dpadRight;
+        closeRetainer = gamepad.dpadLeft;
+        slurpIntake = gamepad.leftBumper;
+        spitIntake = gamepad.rightBumper;
         //temp changing the button below from biteJaw to intake :DD
-       /*biteJaw = gamepad.ps_cross;
+        /*biteJaw = gamepad.ps_cross;
        releaseJaw = gamepad.ps_triangle;*/
         dumpWrist = gamepad.ps_triangle;
         scoopWrist = gamepad.ps_cross;
@@ -120,7 +119,7 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem)
         );
         slurpIntake.whenReleased(
-                Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         spitIntake.whenPressed(
             Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem)
@@ -130,19 +129,17 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         dumpWrist.whenPressed(
-                Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
         );
         scoopWrist.whenPressed(
-                Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
         );
         straightWrist.whenPressed(
-                Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
+            Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
         );
-
     }
 
     public void bindArmControls() {
-
         /*armLowNet.whenPressed(LowBasketCommand.LowBasket(robot));
         armLowSpecimen.whenPressed(LowSpecimenCommand.LowSpecimen(robot));
         armHighSpecimen.whenPressed(HighSpecimenCommand.HighSpecimen(robot));
@@ -150,25 +147,19 @@ public class OperatorController {
         IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
 
-       /*armHorizontal.whenPressed(
+        /*armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );
         armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*/
-       // slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
-       // slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
-       // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
+        // slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
+        // slideOut.whenPressed(Command.create(robot.armSubsystem::slideIncrement, robot.armSubsystem));
+        // slideMin.whenPressed(Command.create(robot.armSubsystem::setSlideToZero, robot.armSubsystem));
         //slideMax.whenPressed(Command.create(robot.armSubsystem::slideSpecimen, robot.armSubsystem));*/
-        CommandScheduler.scheduleJoystick(
-                new JoystickIncDecCommand(
-                        robot.armSubsystem,
-                        armStick
-                ));
+        CommandScheduler.scheduleJoystick(new JoystickIncDecCommand(robot.armSubsystem, armStick));
 
         CommandScheduler.scheduleJoystick(
-                new JoystickSlideIncDecCommand(
-                        robot.armSubsystem,
-                        slideStick
-                ));
+            new JoystickSlideIncDecCommand(robot.armSubsystem, slideStick)
+        );
     }
 
     public void bindHangControls() {
