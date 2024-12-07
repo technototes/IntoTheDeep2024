@@ -61,13 +61,13 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.TEST_START)
-            .addTrajectory(AutoConstants.TEST_RIGHT_TO_LEFT.get())
-            .addTrajectory(AutoConstants.TEST_LEFT_TO_RIGHT.get())
-            .addTrajectory(AutoConstants.TEST_FORWARD_PATH.get())
-            .addTrajectory(AutoConstants.TEST_BACKWARD_PATH.get())
-            .addTrajectory(AutoConstants.TEST_SPLINE_PATH_1.get())
-            .addTrajectory(AutoConstants.TEST_SPLINE_PATH_2.get())
+            .trajectorySequenceBuilder(AutoConstants.FIRST)
+            .addTrajectory(AutoConstants.FIRST_TO_SECOND.get())
+            .addTrajectory(AutoConstants.SECOND_TO_THIRD.get())
+            .addTrajectory(AutoConstants.THIRD_TO_FOURTH.get())
+            .addTrajectory(AutoConstants.FOURTH_TO_FIFTH.get())
+            .addTrajectory(AutoConstants.FIFTH_TO_SIXTH.get())
+            .addTrajectory(AutoConstants.SIXTH_TO_SEVENTH.get())
             .build();
     }
 }
