@@ -35,8 +35,8 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public static double INTAKE_SPIT = -.6;
 
-    public static double WRIST_SCOOP = .25;
-    public static double WRIST_DUMP = 0;
+    public static double WRIST_SCOOP = .45;
+    public static double WRIST_DUMP = .15;
     public static double WRIST_STRAIGHT = .35;
 
     @Log(name = "intakePos")
