@@ -14,9 +14,9 @@ public class HorizontalSlidesSequentials {
 
     public static SequentialCommandGroup intake(Robot r) {
         return new SequentialCommandGroup(
+            horizontalExtend(r),
             wristTransfer(r),
             HorizontalSlidesCommands.clawOpen(r),
-            horizontalExtend(r),
             new WaitCommand(1),
             HorizontalSlidesCommands.wristPickup(r)
         );
