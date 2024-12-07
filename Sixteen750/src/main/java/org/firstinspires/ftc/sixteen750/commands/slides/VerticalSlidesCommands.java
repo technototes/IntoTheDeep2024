@@ -37,6 +37,9 @@ public class VerticalSlidesCommands {
     public static Command BucketTransfer(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::bucketServoTransfer, r.verticalSlidesSubsystem);
     }
+    public static Command BucketLift(Robot r) {
+        return Command.create(r.verticalSlidesSubsystem::bucketServoLift, r.verticalSlidesSubsystem);
+    }
     public static Command BucketEmpty(Robot r) {
         return Command.create(r.verticalSlidesSubsystem::bucketServoEmpty, r.verticalSlidesSubsystem);
     }
