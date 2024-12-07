@@ -32,19 +32,15 @@ public class HorizontalAnalogCommand implements Command, Loggable {
         // The math & signs looks wonky, because this makes things field-relative
         // (Remember that "3 O'Clock" is zero degrees)
         double yvalue = -y.getAsDouble();
-        //command that changes the horislides position?
+        //command that changes the horislides position
         if (yvalue > BIGEXTEND) {
             subsystem.manualBigExtend();
-            //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigExtending, subsystem));
         } else if (yvalue > SMALLEXTEND) {
             subsystem.manualSmallExtend();
-            //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallExtending, subsystem));
         } else if (yvalue < BIGRETRACT) {
             subsystem.manualBigRetract();
-            //            CommandScheduler.scheduleOnce(Command.create(subsystem::BigRetracting, subsystem));
         } else if (yvalue < SMALLRETRACT) {
             subsystem.manualSmallRetract();
-            //            CommandScheduler.scheduleOnce(Command.create(subsystem::SmallRetracting, subsystem));
         }
     }
 
