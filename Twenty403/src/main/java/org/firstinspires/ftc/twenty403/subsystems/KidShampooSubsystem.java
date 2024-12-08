@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.CRServo;
 import com.technototes.library.hardware.sensor.ColorSensor;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
@@ -42,9 +43,9 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public static double INTAKE_SPIT = -.6;
 
-    public static double WRIST_SCOOP = .30;
+    public static double WRIST_SCOOP = 0;
     public static double WRIST_INC_DEC = .5;
-    public static double WRIST_DUMP = 0;
+    public static double WRIST_DUMP = -.7;
     public static double WRIST_STRAIGHT = .35;
 
     @Log(name = "intakePos")
@@ -72,7 +73,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public void wristincrement(double v) {
         int newSlidePos = (int) (wristTarget + v * WRIST_INC_DEC);
-        wrist.setPosition(newSlidePos);
+        setWristPos(newSlidePos);
     }
 
     public void wdecrement() {
@@ -84,15 +85,17 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     public void dumpWrist() {
-        wrist.setPosition(WRIST_DUMP);
+        //wristTarget = WRIST_DUMP;
+        setWristPos(WRIST_DUMP);;
     }
 
     public void scoopWrist() {
-        wrist.setPosition(WRIST_SCOOP);
+        //MwristTarget = WRIST_SCOOP;
+        setWristPos(WRIST_SCOOP);
     }
 
     public void straightWrist() {
-        wrist.setPosition(WRIST_STRAIGHT);
+        setWristPos(WRIST_STRAIGHT);
     }
 
     public void releaseJaw() {
@@ -114,6 +117,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     @Override
     public void periodic() {
         jawPosition = jaw.getPosition();
+        wristPosition = wrist.getPosition();
     }
 
     public void spitIntake() {
@@ -124,5 +128,12 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public void stopIntake() {
         intakePos = 0;
         intake.setPower(0);
+    }
+    private void setWristPos(double w) {
+        if (wrist != null) {
+            //w = Range.clip(w, 0.0, 1.0);
+            wrist.setPosition(w);
+            wristTarget = w;
+        }
     }
 }
