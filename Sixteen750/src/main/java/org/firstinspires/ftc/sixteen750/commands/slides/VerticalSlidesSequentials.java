@@ -74,6 +74,17 @@ public class VerticalSlidesSequentials {
             // commands for vertical slide bucket transfer position first, then wrist transferring
         );
     }
+    public static SequentialCommandGroup transferBucket(Robot r) {
+        return new SequentialCommandGroup(
+                Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
+                new WaitCommand(.3),
+                BucketTransfer(r),
+                ArmTransfer(r),
+                new WaitCommand(.3),
+                SlidesDownCommand(r)
+                // commands for vertical slide bucket transfer position first, then wrist transferring
+        );
+    }
 
     public static SequentialCommandGroup BasketScore(Robot r) {
         return new SequentialCommandGroup(
@@ -82,7 +93,7 @@ public class VerticalSlidesSequentials {
             ArmEmpty(r),
             new WaitCommand(0.7),
             BucketEmpty(r),
-            new WaitCommand(.3),
+            new WaitCommand(.5),
             BucketLift(r)
         );
     }

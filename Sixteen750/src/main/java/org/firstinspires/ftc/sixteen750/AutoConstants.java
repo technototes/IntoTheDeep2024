@@ -44,12 +44,14 @@ public class AutoConstants {
     public static ConfigurablePoseD OBSERVATION_PUSH_HALF = new ConfigurablePoseD(-47, 40, (90));
 
 
-    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(56, 56, -135);
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 57, -135);
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 180);
+    public static ConfigurablePoseD NET_AGAINST_THE_WALL = new ConfigurablePoseD(35, 63, -90);
+
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
     public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 50, -90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 50, -90);
-    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(53, 40, -45);
+    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(53, 40, -30);
     public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 0);
     public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(35, 10, 0);
 
@@ -153,6 +155,9 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             NETSCORING_TO_ASCENT_CLEAR = b ->
             b.apply(NETSCORING.toPose()).lineToLinearHeading(ASCENT_CLEAR.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_TO_AGAINST_THE_WALL = b ->
+            b.apply(NETSCORING.toPose()).lineToLinearHeading(NET_AGAINST_THE_WALL.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             ASCENT_CLEAR_TO_ASCENT = b ->
             b.apply(ASCENT_CLEAR.toPose()).lineToLinearHeading(ASCENT.toPose()).build();
