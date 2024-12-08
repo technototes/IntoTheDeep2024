@@ -16,7 +16,9 @@ import java.util.function.Supplier;
 
 @Config
 public class AutoConstants {
-
+//Park positions
+public static ConfigurablePoseD PARK_START = new ConfigurablePoseD(-40, -52, 90);
+public static ConfigurablePoseD PARK_END = new ConfigurablePoseD(-70, -34, 90);
     // Stuff for testing:
     public static ConfigurablePoseD TEST_START = new ConfigurablePoseD(-50, -50, 0);
     public static ConfigurablePoseD TEST_LEFT = new ConfigurablePoseD(-2, -50, 0);
@@ -66,10 +68,19 @@ public class AutoConstants {
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TENTH_TO_ELEVENTH =func -> func.apply(TENTH.toPose()).lineToLinearHeading(ELEVENTH.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> ELEVENTH_TO_TWELFTH =func -> func.apply(ELEVENTH.toPose()).lineToLinearHeading(TWELFTH.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TWELFTH_TO_THIRTEENTH =func -> func.apply(TWELFTH.toPose()).lineToLinearHeading(THIRTEENTH.toPose()).build();
+//Park trajectory
+public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PARK_START_TO_END =func -> func.apply(PARK_START.toPose()).lineToLinearHeading(PARK_END.toPose()).build();
 
+    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
+    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
+    public static ConfigurablePoseD OBS_PUSH1 = new ConfigurablePoseD(62, -6, 90);
+    public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
+    public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));
+    public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-46, 55, (90));
 
-
-
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            OBS_START_TO_OBS_PARK = b ->
+            b.apply(OBS_START.toPose()).lineToLinearHeading(OBS_PARK.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> TEST_RIGHT_TO_LEFT =
         func -> func.apply(TEST_START.toPose())
             .lineToLinearHeading(TEST_LEFT.toPose())
@@ -97,9 +108,9 @@ public class AutoConstants {
             .splineToSplineHeading(TEST_START.toPose(), Math.toRadians(-45))
             .build();
 
-    public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
-    public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));
-    public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-46, 55, (90));
+//    public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
+//    public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));
+//    public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-46, 55, (90));
     public static ConfigurablePoseD SUBMARINE2 = new ConfigurablePoseD(0, 36, (90));
     public static ConfigurablePoseD SUBMARINE3 = new ConfigurablePoseD(5, 36, (-90));
     public static ConfigurablePoseD MINI_LINE = new ConfigurablePoseD(-3, 36, (90));
@@ -284,13 +295,13 @@ public class AutoConstants {
 
 
     //New testing constants for this year's game
-    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
-    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
-    public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
-    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
-    public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
-    public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
-    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
+//    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+//    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
+//    public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
+//    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
+//    public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
+//    public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
+//    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
 
     public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);

@@ -238,4 +238,17 @@ public class Paths {
 
         );
     }
+
+    public static Command ParkPath(Robot r) {
+        return new SequentialCommandGroup(
+                new TrajectorySequenceCommand(
+                        r.drivebaseSubsystem,
+                        AutoConstants.PARK_START_TO_END)
+        );
+
+    }
+
+    public static Command Obs_Parking(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.OBS_START_TO_OBS_PARK);
+    }
 }
