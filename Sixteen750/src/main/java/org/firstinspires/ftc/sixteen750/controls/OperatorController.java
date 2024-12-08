@@ -7,7 +7,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
@@ -115,7 +114,7 @@ public class OperatorController {
     private void bindSlidesControls() {
         /*shiftButton.whenPressed(this::toggleShift); // might use to have a manual and non manual mode*/
 
-        if (HORIZONTALSLIDESUBSYSTEM){
+        if (HORIZONTALSLIDESUBSYSTEM) {
             //extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
             horiSlidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
             horislidesRetract.whenPressed(HorizontalSlidesSequentials.retract(robot));
