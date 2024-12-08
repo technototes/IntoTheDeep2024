@@ -22,7 +22,9 @@ public class VerticalSlidesSequentials {
             transferScore(r),
             new WaitCommand(.3),
             HighBasketCommand(r),
-            BasketScore(r)
+            BasketScore(r),
+            new WaitCommand(.5),
+            SlidesDown(r)
         );
     }
 
@@ -31,7 +33,9 @@ public class VerticalSlidesSequentials {
             transferScore(r),
             new WaitCommand(.3),
             LowBasketCommand(r),
-            BasketScore(r)
+            BasketScore(r),
+            new WaitCommand(.5),
+            SlidesDown(r)
         );
     }
 
@@ -80,6 +84,15 @@ public class VerticalSlidesSequentials {
             BucketEmpty(r),
             new WaitCommand(.3),
             BucketLift(r)
+        );
+    }
+    public static SequentialCommandGroup BasketAscent(Robot r) {
+        return new SequentialCommandGroup(
+                BucketLift(r),
+                new WaitCommand(0.3),
+                ArmEmpty(r),
+                new WaitCommand(0.7),
+                BucketEmpty(r)
         );
     }
 }

@@ -20,7 +20,7 @@ public class AutoConstants {
     public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
 
     public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
-    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
+    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -65, 90);
     public static ConfigurablePoseD OBS_PUSH1 = new ConfigurablePoseD(62, -6, 90);
     public static ConfigurablePoseD OBSERVATION_START = new ConfigurablePoseD(0, 60, -90);
     public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));

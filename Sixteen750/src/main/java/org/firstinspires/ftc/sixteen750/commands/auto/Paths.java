@@ -2,6 +2,7 @@ package org.firstinspires.ftc.sixteen750.commands.auto;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.ParallelCommandGroup;
+import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
@@ -42,7 +43,7 @@ public class Paths {
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.3))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.5))
             .andThen(VerticalSlidesSequentials.SlidesDown(r))
             .andThen(
                 new ParallelCommandGroup(
@@ -62,7 +63,7 @@ public class Paths {
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.3))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.5))
             .andThen(VerticalSlidesSequentials.SlidesDown(r))
             .andThen(
                 new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
@@ -72,8 +73,18 @@ public class Paths {
                             AutoConstants.ASCENT_CLEAR_TO_ASCENT
                         )
                     )
-                    .alongWith(VerticalSlidesSequentials.BasketScore(r))
+                    .andThen(VerticalSlidesSequentials.transferVertical(r))
+                    .andThen(new WaitCommand(0.3))
+                    .andThen(VerticalSlidesSequentials.BasketAscent(r))
+                    .andThen(new WaitCommand(2))
             );
+    }
+    public static Command AscentOnly(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+                .andThen(VerticalSlidesSequentials.transferScore(r))
+                .andThen(VerticalSlidesSequentials.BasketAscent(r))
+                .andThen(new WaitCommand(1))
+        ;
     }
 
     public static Command SampleScoringTest2(Robot r) {
