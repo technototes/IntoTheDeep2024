@@ -55,8 +55,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double FEEDFORWARD_COEFFICIENT = -0.13;
     public static double FEEDFORWARD_DOWN = 0.07;
     public static double FEEDFORWARD_UP = -0.13;
-    public static int BIG_ADJUSTMENT = 0;//need to test
-    public static int SMALL_ADJUSTMENT = 0;//need to test
+    public static int BIG_ADJUSTMENT = 0; //need to test
+    public static int SMALL_ADJUSTMENT = 0; //need to test
     public int slideResetPos;
 
     public VerticalSlidesSubsystem(Hardware hw) {
@@ -67,16 +67,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         armServo = hw.armservo;
         bucketServo = hw.bucketservo;
         isHardware = true;
-        slidePidController =
-                new PIDFController(
-                        slidePID,
-                        0,
-                        0,
-                        0,
-
-                        (ticks, velocity) ->
-                                FEEDFORWARD_COEFFICIENT
-                );
+        slidePidController = new PIDFController(slidePID, 0, 0, 0, (ticks, velocity) ->
+            FEEDFORWARD_COEFFICIENT
+        );
         resetSlideZero();
     }
 
@@ -103,47 +96,53 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             bucketTargetPos = w;
         }
     }
+
     private void setArmPos(double w) {
         if (armServo != null) {
             armServo.setPosition(w);
             armTargetPos = w;
         }
     }
+
     private void setSlidePos(int e) {
-        if (getSlideCurrentPos() < e){
+        if (getSlideCurrentPos() < e) {
             FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
-        }
-        else {
+        } else {
             FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
         }
         slidePidController.setTargetPosition(e);
         slideTargetPos = e;
     }
-//    private void setManualSlidePos(int f) {
-//        f = Range.clip(f, -900,0);
-////        if (getSlideCurrentPos() < f){
-////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
-////        }
-////        else {
-////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
-////        }
-//        slidePidController.setTargetPosition(f);
-//        slideTargetPos = f;
-//    } //manual
+
+    //    private void setManualSlidePos(int f) {
+    //        f = Range.clip(f, -900,0);
+    ////        if (getSlideCurrentPos() < f){
+    ////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_DOWN;
+    ////        }
+    ////        else {
+    ////            FEEDFORWARD_COEFFICIENT = FEEDFORWARD_UP;
+    ////        }
+    //        slidePidController.setTargetPosition(f);
+    //        slideTargetPos = f;
+    //    } //manual
     private void setSlideMotorPower(double speed) {
         if (isHardware) {
             slideMotor.setSpeed(speed);
         }
     }
+
     private void setSlideTargetPosition(int p) {
         slidePidController.setTargetPosition(p);
     } //do we need this?
+
     private int getSlideTargetPosition() {
         return (int) slidePidController.getTargetPosition();
     } //do we need this?
+
     private int getSlideCurrentPos() {
         return getSlideUnmodifiedPosition() - slideResetPos;
     }
+
     private int getSlideUnmodifiedPosition() {
         if (isHardware) {
             return (int) slideMotor.getSensorValue();
@@ -154,35 +153,33 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     //toggle methods
     public void slideToggle() {
-        if (slidePos > -5){
+        if (slidePos > -5) {
             setSlidePos(HIGH_BASKET);
             setBucketPos(BucketServoLift);
             setArmPos(ArmServoEmpty);
-        }
-        else {
+        } else {
             setSlidePos(SLIDE_ZERO);
             setArmPos(ArmServoTransfer);
             setBucketPos(BucketServoTransfer);
         }
     }
+
     public void bucketToggle() {
-        if (bucketTargetPos == BucketServoLift){
+        if (bucketTargetPos == BucketServoLift) {
             setBucketPos(BucketServoEmpty);
-        }
-        else if (bucketTargetPos == BucketServoTransfer) {
+        } else if (bucketTargetPos == BucketServoTransfer) {
             setBucketPos(BucketServoLift);
-        }
-        else {//need to make this do the thing if we want to toggle bucket
+        } else { //need to make this do the thing if we want to toggle bucket
             setBucketPos(BucketServoLift);
             new WaitCommand(.5);
             setBucketPos(BucketServoTransfer);
         }
     }
+
     public void armToggle() {
-        if (armTargetPos == ArmServoTransfer){
+        if (armTargetPos == ArmServoTransfer) {
             setArmPos(ArmServoEmpty);
-        }
-        else {
+        } else {
             setArmPos(ArmServoTransfer);
         }
     }
@@ -198,17 +195,21 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public void slideBasketHigh() {
         setSlidePos(HIGH_BASKET);
     }
+
     public void slideBasketLow() {
         setSlidePos(LOW_BASKET);
     }
+
     public void slidesDown() {
         // lowers the bucket system
         //probably going to do the slide thing with the joysticks (negative of slidesup)
         setSlidePos(SLIDE_ZERO);
     }
+
     public void slideChamberLow() {
         setSlidePos(LOW_BASKET);
     }
+
     public void slideChamberHigh() {
         slidePidController.setTargetPosition(HIGH_BASKET);
     }
@@ -217,9 +218,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // the intake system's position to score
         setBucketPos(BucketServoTransfer);
     }
+
     public void bucketServoLift() {
         bucketServo.setPosition(BucketServoLift);
     } //use if we need a position for lifting vertical slides
+
     public void bucketServoEmpty() {
         // positions for the arm of the bot
         setBucketPos(BucketServoEmpty);
@@ -229,6 +232,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // positions for the arm of the bot
         setArmPos(ArmServoTransfer);
     }
+
     public void armServoEmpty() {
         armServo.setPosition(ArmServoEmpty);
     }
@@ -238,33 +242,35 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // the arm's position to score
         setBucketPos(bucketTargetPos + BucketServoIncrement);
     }
+
     public void bucketServoDecrement() {
         // the arm's position to score
         setBucketPos(bucketTargetPos - BucketServoIncrement);
     }
+
     public void armServoIncrement() {
         // the arm's position to score
         setArmPos(armTargetPos + ArmServoIncrement);
     }
+
     public void armServoDecrement() {
         // the arm's position to score
         setArmPos(armTargetPos - ArmServoIncrement);
     }
-
     //slides manual methods
-//    public void manualBigExtend() {
-//        setManualSlidePos(slidePos - BIG_ADJUSTMENT);
-//    }
-//
-//    public void manualSmallExtend() {
-//        setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
-//    }
-//
-//    public void manualBigRetract() {
-//        setManualSlidePos(slidePos + BIG_ADJUSTMENT);
-//    }
-//
-//    public void manualSmallRetract() {
-//        setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
-//    }
+    //    public void manualBigExtend() {
+    //        setManualSlidePos(slidePos - BIG_ADJUSTMENT);
+    //    }
+    //
+    //    public void manualSmallExtend() {
+    //        setManualSlidePos(slidePos - SMALL_ADJUSTMENT);
+    //    }
+    //
+    //    public void manualBigRetract() {
+    //        setManualSlidePos(slidePos + BIG_ADJUSTMENT);
+    //    }
+    //
+    //    public void manualSmallRetract() {
+    //        setManualSlidePos(slidePos + SMALL_ADJUSTMENT);
+    //    }
 }

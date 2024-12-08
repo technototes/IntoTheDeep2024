@@ -25,23 +25,21 @@ public class HorizontalSlidesSequentials {
             wristPickup(r)
         );
     }
+
     public static SequentialCommandGroup intakeSmall(Robot r) {
         return new SequentialCommandGroup(
-                horizontalSmallExtend(r),
-                wristTransfer(r),
-                clawOpen(r),
-                new WaitCommand(1),
-                wristPickup(r)
+            horizontalSmallExtend(r),
+            wristTransfer(r),
+            clawOpen(r),
+            new WaitCommand(1),
+            wristPickup(r)
         );
     }
 
     public static SequentialCommandGroup retract(Robot r) {
-        return new SequentialCommandGroup(
-                wristTransfer(r),
-                horizontalRetract(r),
-                clawChomp(r)
-        );
+        return new SequentialCommandGroup(wristTransfer(r), horizontalRetract(r), clawChomp(r));
     }
+
     public static SequentialCommandGroup transferring(Robot r) {
         return new SequentialCommandGroup(
             wristTransfer(r),
@@ -50,10 +48,8 @@ public class HorizontalSlidesSequentials {
             SlidesDown(r)
         );
     }
+
     public static SequentialCommandGroup open(Robot r) {
-        return new SequentialCommandGroup(
-                wristPickup(r),
-                clawOpen(r)
-        );
+        return new SequentialCommandGroup(wristPickup(r), clawOpen(r));
     }
 }
