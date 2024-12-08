@@ -28,6 +28,9 @@ public class HorizontalSlidesCommands {
     public static Command clawChomp(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::ClawChomp);
     }
+    public static Command smallClose(Robot r) {
+        return Command.create(r.horizontalSlidesSubsystem::SmallChomp);
+    }
 
     public static Command clawOpen(Robot r) {
         return Command.create(r.horizontalSlidesSubsystem::ClawOpen);

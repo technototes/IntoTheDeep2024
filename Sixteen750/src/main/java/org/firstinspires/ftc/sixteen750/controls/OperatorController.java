@@ -28,6 +28,7 @@ public class OperatorController {
 
     public CommandButton openClaw;
     public CommandButton closeClaw;
+    public CommandButton smallClose;
     public CommandButton wristPickup;
     public CommandButton wristTransfer;
     public CommandButton wristDecrement;
@@ -95,14 +96,15 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         //horizontal
         openClaw_closeClaw = gamepad.rightBumper;
-        //wristTransfer_wristPickup = gamepad.ps_circle;
+        smallClose = gamepad.leftBumper;
+        wristTransfer_wristPickup = gamepad.ps_options;
         horiSlidesExtend = gamepad.ps_triangle;
         horiSlidesSmallExtend = gamepad.ps_square;
         horiSlidesManual = gamepad.rightStick;
         //extend_retract = gamepad.ps_cross;
         horislidesRetract = gamepad.ps_cross;
         //vertical
-        bucketTransfer_bucketEmpty = gamepad.leftBumper;
+        bucketTransfer_bucketEmpty = gamepad.ps_circle;
         armTransfer_armEmpty = gamepad.leftStickButton;
         slidesHighSequential = gamepad.dpadUp;
         slidesLowSequential = gamepad.dpadLeft;
@@ -119,7 +121,8 @@ public class OperatorController {
             horiSlidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
             horislidesRetract.whenPressed(HorizontalSlidesSequentials.retract(robot));
             openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
-            //wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
+            smallClose.whenPressed(HorizontalSlidesCommands.smallClose(robot));
+            wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
             horiSlidesSmallExtend.whenPressed(HorizontalSlidesSequentials.intakeSmall(robot));
             CommandScheduler.scheduleJoystick(
                 new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horiSlidesManual)
