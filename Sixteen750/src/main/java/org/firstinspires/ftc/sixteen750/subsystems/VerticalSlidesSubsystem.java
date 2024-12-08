@@ -24,9 +24,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static int LOW_BASKET = -450;
     public static int SLIDE_ZERO = 0;
     public static double BucketServoTransfer = 0.8;
-    public static double BucketServoLift = 0.65; //carry position for scoring
+    public static double BucketServoLift = 0.6; //carry position for scoring
+    public static double BucketSecondLift = 0.4;
     public static double BucketServoEmpty = 0.25;
     public static double ArmServoEmpty = 1;
+    public static double ArmServoLift = 0.5;
     public static double ArmServoTransfer = 0.05;
     public static double BucketServoIncrement = 0.05;
     public static double ArmServoIncrement = 0.05;
@@ -217,10 +219,18 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         // positions for the arm of the bot
         setBucketPos(BucketServoEmpty);
     }
+    public void BucketSecondLift() {
+        // positions for the arm of the bot
+        setBucketPos(BucketSecondLift);
+    }
 
     public void armServoTransfer() {
         // positions for the arm of the bot
         setArmPos(ArmServoTransfer);
+    }
+    public void armServoLift() {
+        // positions for the arm of the bot
+        setArmPos(ArmServoLift);
     }
     public void armServoEmpty() {
         armServo.setPosition(ArmServoEmpty);
