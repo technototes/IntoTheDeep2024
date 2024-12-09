@@ -62,10 +62,11 @@ public class VerticalSlidesCommands {
             r.verticalSlidesSubsystem
         );
     }
+
     public static Command BucketSecondLift(Robot r) {
         return Command.create(
-                r.verticalSlidesSubsystem::BucketSecondLift,
-                r.verticalSlidesSubsystem
+            r.verticalSlidesSubsystem::BucketSecondLift,
+            r.verticalSlidesSubsystem
         );
     }
 
@@ -101,11 +102,9 @@ public class VerticalSlidesCommands {
             r.verticalSlidesSubsystem
         );
     }
+
     public static Command ArmLift(Robot r) {
-        return Command.create(
-                r.verticalSlidesSubsystem::armServoLift,
-                r.verticalSlidesSubsystem
-        );
+        return Command.create(r.verticalSlidesSubsystem::armServoLift, r.verticalSlidesSubsystem);
     }
 
     public static Command ArmEmpty(Robot r) {

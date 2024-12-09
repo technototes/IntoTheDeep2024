@@ -7,7 +7,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
@@ -27,9 +26,7 @@ public class NetScoringTest extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
         robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
-        CommandScheduler.register(
-                robot.verticalSlidesSubsystem
-        );
+        CommandScheduler.register(robot.verticalSlidesSubsystem);
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                 Paths.SampleScoringTest2(robot),
