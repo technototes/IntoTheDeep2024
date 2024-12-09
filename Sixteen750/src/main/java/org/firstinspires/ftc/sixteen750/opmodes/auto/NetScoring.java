@@ -29,9 +29,7 @@ public class NetScoring extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
         robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
-        CommandScheduler.register(
-                robot.verticalSlidesSubsystem
-        );
+        CommandScheduler.register(robot.verticalSlidesSubsystem);
         CommandScheduler.scheduleForState(
             new SequentialCommandGroup(
                 Paths.SampleScoringTest(robot),

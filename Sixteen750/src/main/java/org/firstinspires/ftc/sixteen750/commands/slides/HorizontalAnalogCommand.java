@@ -4,9 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.command.Command;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
-
 import java.util.function.DoubleSupplier;
-
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
 
 @Config

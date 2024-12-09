@@ -6,7 +6,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
@@ -53,33 +52,27 @@ public class OperatorControllerHorizontal {
         extend_retract = gamepad.ps_options;
         openClaw_closeClaw = gamepad.dpadUp;
         wristTransfer_wristPickup = gamepad.dpadDown;
-
     }
 
     private void bindSlidesControls() {
-        if (HORIZONTALSLIDESUBSYSTEM){
-        openClaw.whenPressed(HorizontalSlidesCommands.clawOpen(robot));
-        closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
-        wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot)); //test this
-        wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
-        wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
-        wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
-        wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
-        horislidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
-        horislidesRetract.whenPressed(HorizontalSlidesSequentials.transferring(robot));
-        //toggle command
-        extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
-        openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
-        wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
-        //manual extend/retract
-        CommandScheduler.scheduleJoystick(
+        if (HORIZONTALSLIDESUBSYSTEM) {
+            openClaw.whenPressed(HorizontalSlidesCommands.clawOpen(robot));
+            closeClaw.whenPressed(HorizontalSlidesCommands.clawChomp(robot));
+            wristZero.whenPressed(HorizontalSlidesCommands.resetWristZero(robot)); //test this
+            wristPickup.whenPressed(HorizontalSlidesCommands.wristPickup(robot));
+            wristTransfer.whenPressed(HorizontalSlidesCommands.wristTransfer(robot));
+            wristDecrement.whenPressed(HorizontalSlidesCommands.wristDecrement(robot));
+            wristIncrement.whenPressed(HorizontalSlidesCommands.wristIncrement(robot));
+            horislidesExtend.whenPressed(HorizontalSlidesSequentials.intake(robot));
+            horislidesRetract.whenPressed(HorizontalSlidesSequentials.transferring(robot));
+            //toggle command
+            extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
+            openClaw_closeClaw.whenPressed(HorizontalSlidesCommands.clawToggle(robot));
+            wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
+            //manual extend/retract
+            CommandScheduler.scheduleJoystick(
                 new HorizontalAnalogCommand(robot.horizontalSlidesSubsystem, horiSlidesManual)
-        );
+            );
         }
-
     }
-
-
-
-
 }

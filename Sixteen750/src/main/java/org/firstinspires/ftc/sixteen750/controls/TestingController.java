@@ -17,8 +17,7 @@ public class TestingController {
         BindButtons();
     }
 
-    private void AssignNamedControllerButton() {
-    }
-    private void BindButtons(){
-    }
+    private void AssignNamedControllerButton() {}
+
+    private void BindButtons() {}
 }

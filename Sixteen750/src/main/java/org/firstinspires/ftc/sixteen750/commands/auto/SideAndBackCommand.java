@@ -13,10 +13,7 @@ public class SideAndBackCommand extends SequentialCommandGroup {
                 r.drivebase,
                 AutoConstants.SIDE_LEFT_TO_SIDE_RIGHT
             ).andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.SIDE_RIGHT_TO_SIDE_LEFT
-                )
+                new TrajectorySequenceCommand(r.drivebase, AutoConstants.SIDE_RIGHT_TO_SIDE_LEFT)
             )
         );
     }
