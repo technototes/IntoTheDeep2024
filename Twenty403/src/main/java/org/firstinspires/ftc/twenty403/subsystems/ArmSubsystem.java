@@ -40,7 +40,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     public static int INCREMENT_DECREMENT = 230;
     public static int SLIDE_INC_DEC = 250;
-    public static int SLIDE_MAX_POS_HORIZONTAL = 950;//new tick position
+    public static int SLIDE_MAX_POS_HORIZONTAL = 950; //new tick position
     public static int SLIDE_MAX_POS = SLIDE_MAX_POS_HORIZONTAL;
     public static int SLIDE_MAX_POS_VERTICAL = 1675;
     public static int SLIDE_MIN_POS = -75;
@@ -132,9 +132,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
              */
 
             (ticks, velocity) -> {
-                armFeedFwdValue = FEEDFORWARD_COEFFICIENT *
-                Math.cos(getArmAngle(ticks)) *
-                getSlideLength();
+                armFeedFwdValue =
+                    FEEDFORWARD_COEFFICIENT * Math.cos(getArmAngle(ticks)) * getSlideLength();
 
                 //                if (velocity > MIN_ANGULAR_VELOCITY) {
                 //                    //increase armFeedFwdValue to avoid slamming or increase D in PID

@@ -86,7 +86,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public void dumpWrist() {
         //wristTarget = WRIST_DUMP;
-        setWristPos(WRIST_DUMP);;
+        setWristPos(WRIST_DUMP);
     }
 
     public void scoopWrist() {
@@ -129,6 +129,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
         intakePos = 0;
         intake.setPower(0);
     }
+
     private void setWristPos(double w) {
         if (wrist != null) {
             //w = Range.clip(w, 0.0, 1.0);
