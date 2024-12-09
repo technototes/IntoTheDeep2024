@@ -4,13 +4,11 @@ import static org.firstinspires.ftc.sixteen750.Setup.Connected.HORIZONTALSLIDESU
 import static org.firstinspires.ftc.sixteen750.Setup.Connected.VERTICALSLIDESUBSYSTEM;
 
 import android.util.Pair;
-
 import com.technototes.library.command.ChoiceCommand;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
-
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
@@ -123,16 +121,16 @@ public class OperatorControllerChoiceTest {
 
         if (HORIZONTALSLIDESUBSYSTEM && VERTICALSLIDESUBSYSTEM) {
             horizontalSlides_verticalSlides.whenPressed(
-                    new ChoiceCommand(
-                            new Pair<>(this::notShifted, HorizontalSlidesSequentials.intake(robot)),
-                            new Pair<>(this::isShifted, VerticalSlidesSequentials.HighBasket(robot))
-                    )
+                new ChoiceCommand(
+                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.intake(robot)),
+                    new Pair<>(this::isShifted, VerticalSlidesSequentials.HighBasket(robot))
+                )
             );
             horizontalSlides_verticalSlidesRetract.whenPressed(
-                    new ChoiceCommand(
-                            new Pair<>(this::notShifted, HorizontalSlidesSequentials.transferring(robot)),
-                            new Pair<>(this::isShifted, VerticalSlidesSequentials.SlidesDown(robot))
-                    )
+                new ChoiceCommand(
+                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.transferring(robot)),
+                    new Pair<>(this::isShifted, VerticalSlidesSequentials.SlidesDown(robot))
+                )
             );
         }
     }

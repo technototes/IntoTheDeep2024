@@ -4,10 +4,8 @@ import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.command.Command;
 import com.technototes.library.control.Stick;
 import com.technototes.library.logger.Loggable;
-
-import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
-
 import java.util.function.IntSupplier;
+import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
 
 @Config
 public class VerticalAnalogCommand implements Command, Loggable { //needs testing

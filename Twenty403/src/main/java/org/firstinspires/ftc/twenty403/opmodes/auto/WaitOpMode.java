@@ -8,7 +8,6 @@ import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Hardware;
 import org.firstinspires.ftc.twenty403.Robot;
@@ -37,12 +36,8 @@ public class WaitOpMode extends CommandOpMode {
         //        safety = new SafetyTestController(driverGamepad, robot);
         //robot.safetySubsystem.startMonitoring();
         CommandScheduler.scheduleForState(
-                new SequentialCommandGroup(
-
-                        new WaitCommand(30),
-                        CommandScheduler::terminateOpMode
-                ),
-                OpModeState.RUN
+            new SequentialCommandGroup(new WaitCommand(30), CommandScheduler::terminateOpMode),
+            OpModeState.RUN
         );
         //        CommandScheduler.scheduleForState(
         //            new SafetyStartCommand(robot.safetySubsystem),

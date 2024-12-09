@@ -7,7 +7,6 @@ import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
-
 import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
@@ -28,10 +27,7 @@ public class NetPark extends CommandOpMode {
         robot = new Robot(hardware, Alliance.RED, StartingPosition.Net);
         robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
         CommandScheduler.scheduleForState(
-            new SequentialCommandGroup(
-                Paths.Net_Parking(robot),
-                CommandScheduler::terminateOpMode
-            ),
+            new SequentialCommandGroup(Paths.Net_Parking(robot), CommandScheduler::terminateOpMode),
             OpModeState.RUN
         );
     }

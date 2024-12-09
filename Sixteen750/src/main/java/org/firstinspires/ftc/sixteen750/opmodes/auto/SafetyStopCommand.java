@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.sixteen750.opmodes.auto;
 
 import com.technototes.library.command.Command;
-
 import org.firstinspires.ftc.sixteen750.subsystems.SafetySubsystem;
 
 public class SafetyStopCommand implements Command {
