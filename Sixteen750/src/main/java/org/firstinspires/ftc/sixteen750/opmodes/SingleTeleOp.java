@@ -14,6 +14,7 @@ import org.firstinspires.ftc.sixteen750.commands.driving.DrivingCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
 import org.firstinspires.ftc.sixteen750.controls.SingleController;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
 @TeleOp(name = "Single Control")
@@ -30,7 +31,7 @@ public class SingleTeleOp extends CommandOpMode {
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware, Alliance.NONE, StartingPosition.Unspecified);
         controls = new SingleController(driverGamepad, robot, setup);
-        robot.drivebase.setPoseEstimate(AutoConstants.TELESTART.toPose());
+        robot.drivebase.setPoseEstimate(HeadingHelper.getSavedPose());
         //CommandScheduler.scheduleInit(HorizontalSlidesCommands.transferring(robot));
         CommandScheduler.scheduleForState(
             DrivingCommands.ResetGyro(robot.drivebase),

@@ -13,6 +13,7 @@ import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.Setup;
 import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
 @Autonomous(name = "Forward_Backward_Side")
@@ -36,5 +37,9 @@ public class ForwardBackwardSide extends CommandOpMode {
             ),
             OpModeState.RUN
         );
+    }
+
+    public void end() {
+        HeadingHelper.savePose(robot.drivebase.getPoseEstimate());
     }
 }

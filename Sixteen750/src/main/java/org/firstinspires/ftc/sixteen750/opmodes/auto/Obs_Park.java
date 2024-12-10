@@ -14,6 +14,7 @@ import org.firstinspires.ftc.sixteen750.commands.auto.ForwardBackwardCommand;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
 @Autonomous(name = "Obs_Parking")
@@ -38,5 +39,9 @@ public class Obs_Park extends CommandOpMode {
 
     public void uponStart() {
         robot.prepForStart();
+    }
+
+    public void end() {
+        HeadingHelper.savePose(robot.drivebase.getPoseEstimate());
     }
 }

@@ -18,6 +18,7 @@ import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorController;
 import org.firstinspires.ftc.sixteen750.controls.OperatorControllerHorizontal;
 import org.firstinspires.ftc.sixteen750.controls.OperatorControllerVertical;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
 @TeleOp(name = "HorizTest")
@@ -38,7 +39,7 @@ public class HorizTeleOp extends CommandOpMode {
         if (Setup.Connected.DRIVEBASE) {
             controlsDriver = new DriverController(driverGamepad, robot);
             // Just pick a starting point
-            robot.drivebase.setPoseEstimate(AutoConstants.NET_START.toPose());
+            robot.drivebase.setPoseEstimate(HeadingHelper.getSavedPose());
             CommandScheduler.scheduleForState(
                 DrivingCommands.ResetGyro(robot.drivebase),
                 OpModeState.INIT

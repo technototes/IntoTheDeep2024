@@ -12,6 +12,7 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 import org.firstinspires.ftc.sixteen750.Robot;
 import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.controls.DriverController;
+import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
 @Autonomous(name = "SplineTest1")
@@ -35,5 +36,9 @@ public class SplineTest1 extends CommandOpMode {
             ),
             OpModeState.RUN
         );
+    }
+
+    public void end() {
+        HeadingHelper.savePose(robot.drivebase.getPoseEstimate());
     }
 }

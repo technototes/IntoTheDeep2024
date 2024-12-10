@@ -1,8 +1,16 @@
 package org.firstinspires.ftc.sixteen750.helpers;
 
+import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import org.firstinspires.ftc.robotcontroller.internal.FtcRobotControllerActivity;
 
+@Config
 public class HeadingHelper {
+
+    public static double DEFAULT_START_HEADING = 180;
+    public static double DEFAULT_START_X = 53;
+    public static double DEFAULT_START_Y = 63;
+    public static int EXPIRATION_TIME = 20;
 
     public double headingUpdateTime;
     public double lastHeading;
@@ -20,6 +28,10 @@ public class HeadingHelper {
         FtcRobotControllerActivity.SaveBetweenRuns = new HeadingHelper(x, y, h);
     }
 
+    public static void savePose(Pose2d p) {
+        saveHeading(p.getX(), p.getY(), p.getHeading());
+    }
+
     public static void clearSavedInfo() {
         FtcRobotControllerActivity.SaveBetweenRuns = null;
     }
@@ -30,7 +42,11 @@ public class HeadingHelper {
             return false;
         }
         double now = System.currentTimeMillis() / 1000.0;
-        return now < hh.headingUpdateTime + 45;
+        return now < hh.headingUpdateTime + EXPIRATION_TIME;
+    }
+
+    public static Pose2d getSavedPose() {
+        return new Pose2d(getSavedX(), getSavedY(), getSavedHeading());
     }
 
     public static double getSavedHeading() {
@@ -38,7 +54,7 @@ public class HeadingHelper {
         if (hh != null) {
             return hh.lastHeading;
         }
-        return 0.0;
+        return DEFAULT_START_HEADING;
     }
 
     public static double getSavedX() {
@@ -46,7 +62,7 @@ public class HeadingHelper {
         if (hh != null) {
             return hh.lastXPosition;
         }
-        return 0.0;
+        return DEFAULT_START_X;
     }
 
     public static double getSavedY() {
@@ -54,6 +70,6 @@ public class HeadingHelper {
         if (hh != null) {
             return hh.lastYPosition;
         }
-        return 0.0;
+        return DEFAULT_START_Y;
     }
 }
