@@ -6,24 +6,23 @@ import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import org.firstinspires.ftc.twenty403.Robot;
 
+
 public class LowBasketCommand {
 
     public static SequentialCommandGroup LowBasketPreArm(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(r.kidShampooSubsystem::closeRetainer, r.kidShampooSubsystem),
-            Command.create(r.kidShampooSubsystem::spitIntake, r.kidShampooSubsystem),
-            Command.create(r.kidShampooSubsystem::dumpWrist, r.kidShampooSubsystem)
+            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem)
         );
     }
 
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(r.kidShampooSubsystem::stopIntake),
-            new MoveSlidesCommand(r.armSubsystem, r.armSubsystem::setSlideToZero),
-            new WaitCommand(0.5),
-            Command.create(r.armSubsystem::lowBasket, r.armSubsystem),
-            new WaitCommand(0.5),
-            new MoveSlidesCommand(r.armSubsystem, r.armSubsystem::lowBasketSlides),
+            KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
+            ArmSubCmds.cmds.slideZero(r.armSubsystem),
+            ArmSubCmds.cmds.lowbasketArm(r.armSubsystem),
             new WaitCommand(0.5),
             LowBasketPreArm(r)
         );

@@ -37,5 +37,11 @@ public class KidShampooCmds {
         public static Command StopIntake(KidShampooSubsystem KS) {
             return Command.create(KS::stopIntake);
         }
+        public static Command DumpWrist(KidShampooSubsystem KS) {
+            return Command.create(KS::dumpWrist);
+        }
+        public static Command ScoopWrist(KidShampooSubsystem KS) {
+            return Command.create(KS::scoopWrist);
+        }
     }
 }

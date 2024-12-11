@@ -20,7 +20,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     private boolean isHardware;
     public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.00014; //11-19-24
-    public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 3180;
+    public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 3100;
     public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 3100;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
@@ -30,7 +30,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double MAX_ARM_MOTOR_SPEED = 0.7;
     public static int ROTATE_MOTOR_INTAKE_POSITION = 400;
     public static int SLIDES_MOTOR_LOW_BASKET_SCORING_POSITION = 113;
-    public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 1675;
+    public static int SLIDES_MOTOR_HIGH_BASKET_SCORING_POSITION = 1800;
     public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 2500;
     public static int SLIDES_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 2500;
     public static int SLIDES_MOTOR_INTAKE_POSITION = 600; //work on this
