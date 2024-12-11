@@ -17,6 +17,7 @@ import org.firstinspires.ftc.twenty403.commands.IntakeSpecimenCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickSlideIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.KidShampooCmds;
+import org.firstinspires.ftc.twenty403.commands.ArmSubCmds;
 import org.firstinspires.ftc.twenty403.commands.LowBasketCommand;
 import org.firstinspires.ftc.twenty403.commands.LowSpecimenCommand;
 import org.firstinspires.ftc.twenty403.commands.driving.JoystickDriveCommand;
@@ -83,14 +84,14 @@ public class OperatorController {
         armHorizontal = gamepad.dpadUp;
         armStick = gamepad.rightStick;
         slideStick = gamepad.leftStick;
-        /*HighBasket = gamepad.ps_circle;
-        armHighSpecimen = gamepad.ps_triangle;
-        armLowSpecimen = gamepad.ps_square;
-        armLowNet = gamepad.ps_cross;
-        IntakeSample = gamepad.ps_share;
+        HighBasket = gamepad.ps_circle;
+       // armHighSpecimen = gamepad.ps_triangle;
+        //armLowSpecimen = gamepad.ps_square;
+        armLowNet = gamepad.ps_square;
+        /*IntakeSample = gamepad.ps_share;
         IntakeSpecimen = gamepad.ps_options;*/
-        WristDec = gamepad.ps_circle;
-        WristInc = gamepad.ps_square;
+        //WristDec = gamepad.ps_circle;
+        //WristInc = gamepad.ps_square;
     }
 
     public void BindControls() {
@@ -108,30 +109,30 @@ public class OperatorController {
 
     public void bindKidShampooControls() {
         openRetainer.whenPressed(
-            Command.create(robot.kidShampooSubsystem::openRetainer, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.OpenRetainer(robot.kidShampooSubsystem)
         );
         closeRetainer.whenPressed(
-            Command.create(robot.kidShampooSubsystem::closeRetainer, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.CloseRetainer(robot.kidShampooSubsystem)
         );
-        // eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
-        /*biteJaw.whenPressed(
-            Command.create(robot.kidShampooSubsystem::biteJaw, robot.kidShampooSubsystem)
+        /* eatRetainer.whenPressed(Command.create(robot.kidShampooSubsystem::eatRetainer, robot.kidShampooSubsystem));
+        biteJaw.whenPressed(
+            KidShampooCmds.cmds.BiteJaw(robot.kidShampooSubsystem)
         );
         releaseJaw.whenPressed(
-            Command.create(robot.kidShampooSubsystem::releaseJaw, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.ReleaseJaw(robot.kidShampooSubsystem)
         );*/
         slurpIntake.whenPressed(
-            Command.create(robot.kidShampooSubsystem::slurpIntake, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.SlurpIntake(robot.kidShampooSubsystem)
         );
         slurpIntake.whenReleased(
-            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.StopIntake(robot.kidShampooSubsystem)
         );
         spitIntake.whenPressed(
-            Command.create(robot.kidShampooSubsystem::spitIntake, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.SpitIntake(robot.kidShampooSubsystem)
         );
 
         spitIntake.whenReleased(
-            Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.StopIntake(robot.kidShampooSubsystem)
         );
         dumpWrist.whenPressed(
             //Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
@@ -144,15 +145,21 @@ public class OperatorController {
         /*straightWrist.whenPressed(
             Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
         );*/
+        /*WristInc.whenPressed(
+                Command.create(robot.kidShampooSubsystem::wincrement, robot.kidShampooSubsystem)
+        );
+        WristDec.whenPressed(
+                Command.create(robot.kidShampooSubsystem::wdecrement, robot.kidShampooSubsystem)
+        );*/
     }
 
     public void bindArmControls() {
-        /*armLowNet.whenPressed(LowBasketCommand.LowBasket(robot));
-        armLowSpecimen.whenPressed(LowSpecimenCommand.LowSpecimen(robot));
-        armHighSpecimen.whenPressed(HighSpecimenCommand.HighSpecimen(robot));
+        armLowNet.whenPressed(LowBasketCommand.LowBasket(robot));
+        //armLowSpecimen.whenPressed(LowSpecimenCommand.LowSpecimen(robot));
+       // armHighSpecimen.whenPressed(HighSpecimenCommand.HighSpecimen(robot));
         HighBasket.whenPressed(HighBasketCommand.HighBasket(robot));
-        IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
-        IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
+        //IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
+       // IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
 
         armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
@@ -167,12 +174,7 @@ public class OperatorController {
         CommandScheduler.scheduleJoystick(
             new JoystickSlideIncDecCommand(robot.armSubsystem, slideStick)
         );
-        WristInc.whenPressed(
-            Command.create(robot.kidShampooSubsystem::wincrement, robot.kidShampooSubsystem)
-        );
-        WristDec.whenPressed(
-            Command.create(robot.kidShampooSubsystem::wdecrement, robot.kidShampooSubsystem)
-        );
+
     }
 
     public void bindHangControls() {
