@@ -134,10 +134,12 @@ public class OperatorController {
             Command.create(robot.kidShampooSubsystem::stopIntake, robot.kidShampooSubsystem)
         );
         dumpWrist.whenPressed(
-            Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
+            //Command.create(robot.kidShampooSubsystem::dumpWrist, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.DumpWrist(robot.kidShampooSubsystem)
         );
         scoopWrist.whenPressed(
-            Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
+            //Command.create(robot.kidShampooSubsystem::scoopWrist, robot.kidShampooSubsystem)
+                KidShampooCmds.cmds.ScoopWrist(robot.kidShampooSubsystem)
         );
         /*straightWrist.whenPressed(
             Command.create(robot.kidShampooSubsystem::straightWrist, robot.kidShampooSubsystem)
