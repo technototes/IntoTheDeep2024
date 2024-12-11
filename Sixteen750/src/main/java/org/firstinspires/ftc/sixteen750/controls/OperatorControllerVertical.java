@@ -27,6 +27,7 @@ public class OperatorControllerVertical {
     public CommandButton slidesHigh;
     public CommandButton slidesLow;
     public CommandButton slidesDown;
+    public CommandButton slidesZero;
     public CommandButton slidesHighSequential;
     public CommandButton slidesLowSequential;
     public CommandButton slidesDownSequential;
@@ -54,12 +55,13 @@ public class OperatorControllerVertical {
         //armEmpty = gamepad.ps_square;
         armIncrement = gamepad.leftBumper;
         armDecrement = gamepad.rightBumper;
-        //slidesHigh = gamepad.ps_share;
-        //slidesLow = gamepad.dpadUp;
-        //slidesDown = gamepad.dpadDown;
-        slidesHighSequential = gamepad.ps_share;
-        slidesLowSequential = gamepad.dpadUp;
-        slidesDownSequential = gamepad.dpadDown;
+        slidesHigh = gamepad.ps_share;
+        slidesLow = gamepad.dpadUp;
+        slidesDown = gamepad.dpadDown;
+        slidesZero = gamepad.ps_options;
+        //slidesHighSequential = gamepad.ps_share;
+        //slidesLowSequential = gamepad.dpadUp;
+        //slidesDownSequential = gamepad.dpadDown;
         //vertSlidesManual = gamepad.leftStick;
         //transferVertical = gamepad.ps_cross; //change
         //basketScore = gamepad.ps_square; //change
@@ -84,15 +86,16 @@ public class OperatorControllerVertical {
         //armEmpty.whenPressed(VerticalSlidesCommands.ArmEmpty(robot));
         armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
         armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
-        //slidesHigh.whenPressed(VerticalSlidesCommands.HighBasket(robot));
-        //slidesLow.whenPressed(VerticalSlidesCommands.LowBasket(robot));
-        //slidesDown.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
+        slidesHigh.whenPressed(VerticalSlidesCommands.HighBasketCommand(robot));
+        slidesLow.whenPressed(VerticalSlidesCommands.LowBasketCommand(robot));
+        slidesDown.whenPressed(VerticalSlidesCommands.SlidesDownCommand(robot));
+        slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
         //basketScore.whenPressed(VerticalSlidesSequentials.BasketScore(robot));
         //transferVertical.whenPressed(VerticalSlidesSequentials.transferVertical(robot));
         down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
-        slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
-        slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
-        slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
+        //slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
+        //slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
+        //slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
         /*CommandScheduler.scheduleJoystick(
                 new VerticalAnalogCommand(robot.verticalSlidesSubsystem, vertSlidesManual)
         );*/
