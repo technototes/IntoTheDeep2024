@@ -85,7 +85,7 @@ public class OperatorControllerChoiceTest {
         openClaw_closeClaw = gamepad.rightBumper;
         wristTransfer_wristPickup = gamepad.dpadLeft;
         //closeClaw = gamepad.rightBumper;
-        wristTransfer = gamepad.ps_square;
+        //wristTransfer = gamepad.ps_square;
         wristPickup = gamepad.ps_circle;
         wristZero = gamepad.ps_options;
         //wristDecrement = gamepad.dpadRight;
@@ -95,15 +95,15 @@ public class OperatorControllerChoiceTest {
         //horislidesRetract = gamepad.ps_square;
 
         //vertical commands
-        //bucketTransfer = gamepad.ps_circle;
-        //bucketScore = gamepad.ps_triangle;
+        bucketTransfer = gamepad.ps_square;
+        bucketScore = gamepad.ps_triangle;
 
         //bucketIncrement = gamepad.dpadDown;
         //bucketDecrement = gamepad.dpadDown;
 
         //choice commands
         /*shiftButton = gamepad.ps_share; - need to change button location and set up choice commands*/
-        horizontalSlides_verticalSlides = gamepad.ps_triangle;
+        //horizontalSlides_verticalSlides = gamepad.ps_triangle;
         //slidesHigh = gamepad.dpadUp;
         slidesLow = gamepad.dpadDown;
         //slidesDown = gamepad.dpadDown;
@@ -118,20 +118,20 @@ public class OperatorControllerChoiceTest {
         wristTransfer_wristPickup.whenPressed(HorizontalSlidesCommands.wristToggle(robot));
         extend_retract.whenPressed(HorizontalSlidesCommands.horiSlideToggle(robot));
         down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
-
-        if (HORIZONTALSLIDESUBSYSTEM && VERTICALSLIDESUBSYSTEM) {
-            horizontalSlides_verticalSlides.whenPressed(
-                new ChoiceCommand(
-                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.intake(robot)),
-                    new Pair<>(this::isShifted, VerticalSlidesSequentials.HighBasket(robot))
-                )
-            );
-            horizontalSlides_verticalSlidesRetract.whenPressed(
-                new ChoiceCommand(
-                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.transferring(robot)),
-                    new Pair<>(this::isShifted, VerticalSlidesSequentials.SlidesDown(robot))
-                )
-            );
-        }
+        bucketTransfer.whenPressed(VerticalSlidesCommands.BucketTransfer(robot));
+        bucketScore.whenPressed(VerticalSlidesCommands.BucketLift(robot));
+        //        if (HORIZONTALSLIDESUBSYSTEM && VERTICALSLIDESUBSYSTEM) {
+        //            horizontalSlides_verticalSlides.whenPressed(
+        //                new ChoiceCommand(
+        //                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.intake(robot)),
+        //                    new Pair<>(this::isShifted, VerticalSlidesSequentials.HighBasket(robot))
+        //                )
+        //            );
+        //            horizontalSlides_verticalSlidesRetract.whenPressed(
+        //                new ChoiceCommand(
+        //                    new Pair<>(this::notShifted, HorizontalSlidesSequentials.transferring(robot)),
+        //                    new Pair<>(this::isShifted, VerticalSlidesSequentials.SlidesDown(robot))
+        //                )
+        //            );
     }
 }

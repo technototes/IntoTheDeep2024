@@ -10,7 +10,7 @@ import org.firstinspires.ftc.sixteen750.Hardware;
 public class HangSubsystem implements Subsystem, Loggable {
 
     private Motor suspend;
-    private Motor suspend2; // idk what it does and idk what to name it
+    private Motor suspend2;
 
     public static double SUSPEND_POSITION = .4;
 
