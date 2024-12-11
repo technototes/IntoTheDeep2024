@@ -20,8 +20,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //arm servo - transfer, empty
     //bucket servo - transfer, lift, empty
 
-    public static int HIGH_BASKET = -1150;
-    public static int LOW_BASKET = -450;
+    public static int HIGH_BASKET = -800;
+    public static int LOW_BASKET = -200;
     public static int SLIDE_ZERO = 0;
     public static double BucketServoTransfer = 0.8;
     public static double BucketServoLift = 0.6; //carry position for scoring
@@ -52,11 +52,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public Servo armServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0015, 0.0, 0.0);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0047, 0.0, 0.00002);
     private PIDFController slidePidController;
-    public static double FEEDFORWARD_COEFFICIENT = -0.13;
-    public static double FEEDFORWARD_DOWN = 0.07;
-    public static double FEEDFORWARD_UP = -0.13;
+    public static double FEEDFORWARD_COEFFICIENT = -0.32;
+    public static double FEEDFORWARD_DOWN = -0.26;
+    public static double FEEDFORWARD_UP = -0.32;
     public static int BIG_ADJUSTMENT = 0; //need to test
     public static int SMALL_ADJUSTMENT = 0; //need to test
     public int slideResetPos;
