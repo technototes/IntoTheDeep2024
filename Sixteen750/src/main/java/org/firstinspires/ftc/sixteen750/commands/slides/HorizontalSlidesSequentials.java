@@ -45,7 +45,9 @@ public class HorizontalSlidesSequentials {
             wristTransfer(r),
             horizontalRetract(r),
             clawChomp(r),
-            SlidesDown(r)
+            SlidesDown(r),
+            new WaitCommand(0.2),
+            clawOpen(r)
         );
     }
 

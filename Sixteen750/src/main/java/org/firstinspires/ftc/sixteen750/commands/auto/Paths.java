@@ -2,7 +2,6 @@ package org.firstinspires.ftc.sixteen750.commands.auto;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.ParallelCommandGroup;
-import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.sixteen750.AutoConstants;
@@ -18,7 +17,7 @@ public class Paths {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPLINETEST1_TO_SPLINETEST2);
     }
 
-    public static Command SampleScoringTest(Robot r) {
+    public static Command SampleScoring(Robot r) {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             .alongWith(VerticalSlidesSequentials.HighBasket(r))
             .andThen(
@@ -169,7 +168,7 @@ public class Paths {
         //     .andThen(new WaitCommand(2))
     }
 
-    public static Command SampleScoring(Robot r) {
+    public static Command SampleScoringTest1(Robot r) {
         // Preload Scoring
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             .andThen(VerticalSlidesSequentials.HighBasket(r))

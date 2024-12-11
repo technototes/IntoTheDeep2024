@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.library.hardware.motor.EncodedMotor;
@@ -33,16 +34,16 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double BucketServoIncrement = 0.05;
     public static double ArmServoIncrement = 0.05;
 
-    @Log(name = "slidePos")
+    // @Log(name = "slidePos")
     public int slidePos;
 
-    @Log(name = "slidePow")
+    //@Log(name = "slidePow")
     public double slidePow;
 
-    @Log(name = "slideTarget")
+    //@Log(name = "slideTarget")
     public int slideTargetPos; //should call this one for the slide toggle instead
 
-    @Log(name = "armTarget")
+    //@Log(name = "armTarget")
     public double armTargetPos;
 
     @Log(name = "bucketTarget")
@@ -61,6 +62,19 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static int SMALL_ADJUSTMENT = 0; //need to test
     public int slideResetPos;
 
+    //this is for smoother servo movement
+    public ElapsedTime timer;
+    public double startPos;
+    public double endPos;
+    public double totalTime;
+    public boolean smoothServoRunning;
+
+    @Log(name = "dumbCounter1")
+    public int dumbCounter;
+
+    @Log(name = "dumbCounter2")
+    public int dumbCounter2;
+
     public VerticalSlidesSubsystem(Hardware hw) {
         // We need to configure the liftMotor to work like a servo.
         // This entails switching to "RunMode.RUN_TO_POSITION" and then tuning PID(F) constants
@@ -73,6 +87,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             FEEDFORWARD_COEFFICIENT
         );
         resetSlideZero();
+
+        timer = new ElapsedTime();
+        smoothServoRunning = false;
     }
 
     public VerticalSlidesSubsystem() {
@@ -84,12 +101,34 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     @Override
     public void periodic() {
+        dumbCounter++;
         slidePos = getSlideCurrentPos();
         slidePow = slidePidController.update(slidePos);
         setSlideMotorPower(slidePow);
+
+        if (smoothServoRunning) {
+            dumbCounter2++;
+            double calcPower = getTimer() * ((endPos - startPos) / totalTime) + startPos;
+            double clippedPower = Range.clip(
+                calcPower,
+                Math.min(startPos, endPos),
+                Math.max(startPos, endPos)
+            );
+            setBucketPos(clippedPower);
+            smoothServoRunning = calcPower != clippedPower;
+        }
     }
 
     //methods -> always call these in commands
+
+    //timer methods
+    private void startTimer() {
+        timer.reset();
+    }
+
+    private double getTimer() {
+        return timer.seconds();
+    }
 
     //setter and getter methods
     private void setBucketPos(double w) {
@@ -97,6 +136,14 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             bucketServo.setPosition(w);
             bucketTargetPos = w;
         }
+    }
+
+    private void setBucketPosUsingTimer(double seconds, double startPos, double endPos) {
+        this.startPos = startPos;
+        this.endPos = endPos;
+        totalTime = seconds;
+        startTimer();
+        smoothServoRunning = true;
     }
 
     private void setArmPos(double w) {
@@ -218,7 +265,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void bucketServoTransfer() {
         // the intake system's position to score
-        setBucketPos(BucketServoTransfer);
+        setBucketPosUsingTimer(5, bucketTargetPos, BucketServoTransfer);
     }
 
     public void bucketServoLift() {
