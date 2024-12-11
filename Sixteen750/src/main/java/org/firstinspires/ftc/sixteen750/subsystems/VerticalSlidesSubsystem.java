@@ -108,14 +108,17 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
         if (smoothServoRunning) {
             dumbCounter2++;
-            double calcPower = getTimer() * ((endPos - startPos) / totalTime) + startPos;
+            double curTime = getTimer();
+            double calcPower = curTime * ((endPos - startPos) / totalTime) + startPos;
             double clippedPower = Range.clip(
                 calcPower,
                 Math.min(startPos, endPos),
                 Math.max(startPos, endPos)
             );
             setBucketPos(clippedPower);
-            smoothServoRunning = calcPower != clippedPower;
+            // This is backward, but instead, let's just use the elapsed time
+            // smoothServoRunning = calcPower != clippedPower;
+            smoothServoRunning = curTime <= totalTime;
         }
     }
 
@@ -135,6 +138,9 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         if (bucketServo != null) {
             bucketServo.setPosition(w);
             bucketTargetPos = w;
+            // Let's cancel any smooth-servo running code just to be safe
+            // The periodic function will restore it if it's updating
+            smoothServoRunning = false;
         }
     }
 
@@ -263,13 +269,17 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slidePidController.setTargetPosition(HIGH_BASKET);
     }
 
+    public void bucketServoTransferAtStart() {
+        setBucketPos(BucketServoTransfer);
+    }
+
     public void bucketServoTransfer() {
         // the intake system's position to score
-        setBucketPosUsingTimer(5, bucketTargetPos, BucketServoTransfer);
+        setBucketPosUsingTimer(5.0, bucketTargetPos, BucketServoTransfer);
     }
 
     public void bucketServoLift() {
-        bucketServo.setPosition(BucketServoLift);
+        setBucketPos(BucketServoLift);
     } //use if we need a position for lifting vertical slides
 
     public void bucketServoEmpty() {
@@ -293,7 +303,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void armServoEmpty() {
-        armServo.setPosition(ArmServoEmpty);
+        setArmPos(ArmServoEmpty);
     }
 
     //inc/dec methods
