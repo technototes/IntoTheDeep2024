@@ -110,7 +110,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     private void setRetainerPosition(double d) {
         if (retainer != null) {
-            retainer.setPosition(RETAINER_OPEN_POSITION);
+            retainer.setPosition(d);
             retainerPos = d;
         }
     }
