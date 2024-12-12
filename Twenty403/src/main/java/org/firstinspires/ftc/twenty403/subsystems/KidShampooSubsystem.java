@@ -1,36 +1,30 @@
 package org.firstinspires.ftc.twenty403.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.CRServo;
-import com.technototes.library.hardware.sensor.ColorSensor;
-import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.twenty403.Hardware;
 
 @Config
 public class KidShampooSubsystem implements Subsystem, Loggable {
 
     private Servo retainer, jaw, wrist;
+    private CRServo intake;
 
     @Log(name = "jawPosition")
     public double jawPosition = 0;
 
-    @Log(name = "jawTarget")
-    public double jawTarget = 0;
-
     @Log(name = "wristPosition")
     public double wristPosition = 0;
 
-    @Log(name = "wristTarget")
-    public double wristTarget = 0;
+    @Log(name = "intakePow")
+    public double intakePow;
 
-    @Log
-    private CRServo intake;
+    @Log(name = "retainerPos")
+    public double retainerPos;
 
     public static double RETAINER_OPEN_POSITION = .78;
 
@@ -48,9 +42,6 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double WRIST_DUMP = 0.05;
     public static double WRIST_STRAIGHT = .35;
 
-    @Log(name = "intakePos")
-    public double intakePos;
-
     public KidShampooSubsystem(Hardware hw) {
         intake = hw.intake;
         retainer = hw.retainer;
@@ -59,38 +50,35 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     public void openRetainer() {
-        retainer.setPosition(RETAINER_OPEN_POSITION);
+        setRetainerPosition(RETAINER_OPEN_POSITION);
     }
 
     public void closeRetainer() {
-        retainer.setPosition(RETAINER_CLOSE_POSITION);
+        setRetainerPosition(RETAINER_CLOSE_POSITION);
     }
 
     public void biteJaw() {
-        jawTarget = JAW_BITE_POSITION;
-        jaw.setPosition(JAW_BITE_POSITION);
+        setJawPosition(JAW_BITE_POSITION);
     }
 
-    public void wristincrement(double v) {
-        int newSlidePos = (int) (wristTarget + v * WRIST_INC_DEC);
+    private void wristMoveRelative(double v) {
+        int newSlidePos = (int) (wristPosition + v * WRIST_INC_DEC);
         setWristPos(newSlidePos);
     }
 
-    public void wdecrement() {
-        wristincrement(-1.0);
+    public void wristDecrement() {
+        wristMoveRelative(-1.0);
     }
 
-    public void wincrement() {
-        wristincrement(1.0);
+    public void wristIncrement() {
+        wristMoveRelative(1.0);
     }
 
     public void dumpWrist() {
-        //wristTarget = WRIST_DUMP;
         setWristPos(WRIST_DUMP);
     }
 
     public void scoopWrist() {
-        //MwristTarget = WRIST_SCOOP;
         setWristPos(WRIST_SCOOP);
     }
 
@@ -99,13 +87,11 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     public void releaseJaw() {
-        jawTarget = JAW_RELEASE_POSITION;
-        jaw.setPosition(JAW_RELEASE_POSITION);
+        setJawPosition(JAW_RELEASE_POSITION);
     }
 
     public void slurpIntake() {
-        intakePos = INTAKE_SLURP;
-        intake.setPower(INTAKE_SLURP);
+        setIntakePower(INTAKE_SLURP);
     }
 
     public void collectHorizontalSample() {
@@ -114,27 +100,40 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     }
 
-    @Override
-    public void periodic() {
-        jawPosition = jaw.getPosition();
-        wristPosition = wrist.getPosition();
-    }
-
     public void spitIntake() {
-        intakePos = INTAKE_SPIT;
-        intake.setPower(INTAKE_SPIT);
+        setIntakePower(INTAKE_SPIT);
     }
 
     public void stopIntake() {
-        intakePos = 0;
-        intake.setPower(0);
+        setIntakePower(0);
+    }
+
+    private void setRetainerPosition(double d) {
+        if (retainer != null) {
+            retainer.setPosition(RETAINER_OPEN_POSITION);
+            retainerPos = d;
+        }
+    }
+
+    private void setJawPosition(double d) {
+        if (jaw != null) {
+            jaw.setPosition(d);
+            jawPosition = d;
+        }
+    }
+
+    private void setIntakePower(double d) {
+        if (intake != null) {
+            intake.setPower(d);
+            intakePow = d;
+        }
     }
 
     private void setWristPos(double w) {
         if (wrist != null) {
             //w = Range.clip(w, 0.0, 1.0);
             wrist.setPosition(w);
-            wristTarget = w;
+            wristPosition = w;
         }
     }
 }
