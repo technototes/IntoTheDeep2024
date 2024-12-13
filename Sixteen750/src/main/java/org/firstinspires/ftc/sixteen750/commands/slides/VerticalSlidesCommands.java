@@ -111,6 +111,13 @@ public class VerticalSlidesCommands {
         return Command.create(r.verticalSlidesSubsystem::armServoEmpty, r.verticalSlidesSubsystem);
     }
 
+    public static Command ArmEmptyAuto(Robot r) {
+        return Command.create(
+            r.verticalSlidesSubsystem::armServoEmptyAuto,
+            r.verticalSlidesSubsystem
+        );
+    }
+
     public static Command ArmIncrement(Robot r) {
         return Command.create(
             r.verticalSlidesSubsystem::armServoIncrement,

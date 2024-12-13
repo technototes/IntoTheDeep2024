@@ -26,9 +26,10 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     public static double LinkServoExtend = 0.6;
     public static double LinkServoSmallExtend = 0.8;
     public static double LinkServoRetract = 0.9;
-    public static double ClawServoClose = 0.2; //.15/.3
-    public static double ClawSmallClose = 0.4; //.35/.4
-    public static double ClawServoOpen = 0.65; //.5/.65
+    public static double LinkServoForTransfer = 0.87;
+    public static double ClawServoClose = 0.6;
+    public static double ClawSmallClose = 0.4;
+    public static double ClawServoOpen = 0.9;
     public static double WristServoTransfer = 0.3;
     public static double WristVertTransfer = 0.1;
     public static double WristServoPickup = 1;
@@ -141,6 +142,10 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
 
     public void slidesRetract() {
         setSlidePos(LinkServoRetract);
+    }
+
+    public void slidesTransfer() {
+        setSlidePos(LinkServoForTransfer);
     }
 
     public void ClawOpen() {
