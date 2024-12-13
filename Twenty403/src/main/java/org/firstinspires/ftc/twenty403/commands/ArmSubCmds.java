@@ -11,8 +11,8 @@ public class ArmSubCmds {
             return Command.create(AS::setSlideToZero);
         }
 
-        public static Command armIntake(ArmSubsystem AS) {
-            return Command.create(AS::setArmToIntake);
+        public static Command resetSlides(ArmSubsystem AS) {
+            return Command.create(AS::resetSlideZero);
         }
 
         public static Command highbasketSlide(ArmSubsystem AS) {
