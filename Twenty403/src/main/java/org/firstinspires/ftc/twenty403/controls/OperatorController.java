@@ -51,6 +51,7 @@ public class OperatorController {
     public CommandButton WristInc;
     public CommandButton WristDec;
     public CommandButton IntakePos;
+    public CommandButton resetslidePos;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -77,7 +78,7 @@ public class OperatorController {
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
 
-        armHorizontal = gamepad.dpadUp;
+        resetslidePos = gamepad.dpadUp;
         armStick = gamepad.rightStick;
         slideStick = gamepad.leftStick;
         HighBasket = gamepad.ps_circle;
@@ -145,8 +146,11 @@ public class OperatorController {
         //IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         // IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
         IntakePos.whenPressed(IntakePositionCommand.Intakepos(robot));
-        armHorizontal.whenPressed(
+        /*armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
+        );*/
+        resetslidePos.whenPressed(
+            Command.create(robot.armSubsystem::resetSlideZero, robot.armSubsystem)
         );
         /*armVertical.whenPressed(Command.create(robot.armSubsystem::vertical, robot.armSubsystem));*/
         // slideIn.whenPressed(Command.create(robot.armSubsystem::slideDecrement, robot.armSubsystem));
