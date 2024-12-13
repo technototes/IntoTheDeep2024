@@ -47,8 +47,22 @@ public class HarshiniTesting {
         public static Pose2d REST = new Pose2d(0,0, toRadians(90));
         public static Pose2d SIDE = new Pose2d(48,0, toRadians(90));
 
+        //sample side auto "borrowed" from 16750
+        public static Pose2d NETSCORING = new Pose2d(55, 57, -135);
+        public static Pose2d NET_START = new Pose2d(35, 63, 180);
+        public static Pose2d NET_AGAINST_THE_WALL = new Pose2d(35, 63, -90);
+        public static Pose2d NETCLEAR = new Pose2d(52, 52, 45);
+        public static Pose2d INTAKE1 = new Pose2d(47, 50, -90);
+        public static Pose2d INTAKE2 = new Pose2d(57, 50, -90);
+        public static Pose2d INTAKE3 = new Pose2d(53, 40, -30);
+        public static Pose2d ASCENT = new Pose2d(23, 12, 0);
+        public static Pose2d ASCENT_CLEAR = new Pose2d(35, 10, 0);
+        // end of "borrowed" constants
+
+
         //public static Pose2d OBSERVATION_ZONE = new Pose2d(-60, 55, toRadians(135));
 
+        //sample side auto
         //Lines for Into the Deeeeeeeep
 
         public static final Supplier<Trajectory> FORWARD_BACKWARD1 = () ->

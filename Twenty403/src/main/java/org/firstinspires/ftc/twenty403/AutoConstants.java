@@ -78,6 +78,19 @@ public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, Trajec
     public static ConfigurablePoseD SUBMARINE = new ConfigurablePoseD(-5, 36, (90));
     public static ConfigurablePoseD OBSERVATION_ZONE = new ConfigurablePoseD(-46, 55, (90));
 
+
+    //stolen constants from 16750 heehee
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 57, -135);
+    public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 180);
+    public static ConfigurablePoseD NET_AGAINST_THE_WALL = new ConfigurablePoseD(35, 63, -90);
+    public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
+    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 50, -90);
+    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 50, -90);
+    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(53, 40, -30);
+    public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 0);
+    public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(35, 10, 0);
+    //end of the crimes
+
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
             OBS_START_TO_OBS_PARK = b ->
             b.apply(OBS_START.toPose()).lineToLinearHeading(OBS_PARK.toPose()).build();
@@ -291,17 +304,27 @@ public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, Trajec
             .lineToLinearHeading(REST.toPose())
             .build();
 
+// "borrowed" from 16750 sample side auto
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+        START_TO_NETSCORING = b ->
+        b.apply(NET_START.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            NETSCORING_TO_INTAKE1 = b ->
+            b.apply(NETSCORING.toPose()).lineToLinearHeading(INTAKE1.toPose()).build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
+            INTAKE1_TO_NETSCORING = b ->
+            b.apply(INTAKE1.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
 
-
+    //end of borrowing
 
     //New testing constants for this year's game
-//    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
-//    public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
-//    public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
-//    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
-//    public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
-//    public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
-//    public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
+    public static ConfigurablePoseD START = new ConfigurablePoseD(35, 63, 0);
+    //public static ConfigurablePoseD OBS_START = new ConfigurablePoseD(22, -65, 90);
+    public static ConfigurablePoseD NETSCORING_TEST = new ConfigurablePoseD(55, 55, 45);
+    public static ConfigurablePoseD NETSCORING_CLEAR = new ConfigurablePoseD(45, 35, -45);
+    public static ConfigurablePoseD SPLINETEST1 = new ConfigurablePoseD(0, -55, 0);
+    public static ConfigurablePoseD SPLINETEST2 = new ConfigurablePoseD(55, 0, 0);
+    //public static ConfigurablePoseD OBS_PARK = new ConfigurablePoseD(62, -6, 90);
 
     public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 55, 45);
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 0);
