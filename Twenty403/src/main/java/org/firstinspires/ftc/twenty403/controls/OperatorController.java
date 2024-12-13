@@ -9,6 +9,7 @@ import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.Setup;
 import org.firstinspires.ftc.twenty403.commands.ArmSubCmds;
 import org.firstinspires.ftc.twenty403.commands.HighBasketCommand;
+import org.firstinspires.ftc.twenty403.commands.IntakePositionCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.JoystickSlideIncDecCommand;
 import org.firstinspires.ftc.twenty403.commands.KidShampooCmds;
@@ -49,6 +50,7 @@ public class OperatorController {
     public CommandButton IntakeSpecimen;
     public CommandButton WristInc;
     public CommandButton WristDec;
+    public CommandButton IntakePos;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -70,7 +72,7 @@ public class OperatorController {
         slideMax = gamepad.ps_share;
         slideMin = gamepad.ps_options;
         // suspend = gamepad.ps_circle;
-
+        IntakePos = gamepad.dpadDown;
         //        armLowNet = gamepad.dpadLeft;
         //        armLowSpecimen = gamepad.leftStickButton;
         //        armHighSpecimen = gamepad.rightStickButton;
@@ -142,7 +144,7 @@ public class OperatorController {
         HighBasket.whenPressed(HighBasketCommand.HighBasket(robot));
         //IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         // IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
-
+        IntakePos.whenPressed(IntakePositionCommand.Intakepos(robot));
         armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );

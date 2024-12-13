@@ -37,6 +37,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
+    public static int INTAKE_POS;
 
     public static int INCREMENT_DECREMENT = 230;
     public static int SLIDE_INC_DEC = 250;
@@ -132,8 +133,9 @@ public class ArmSubsystem implements Subsystem, Loggable {
              */
 
             (ticks, velocity) -> {
-                armFeedFwdValue =
-                    FEEDFORWARD_COEFFICIENT * Math.cos(getArmAngle(ticks)) * getSlideLength();
+                armFeedFwdValue = FEEDFORWARD_COEFFICIENT *
+                Math.cos(getArmAngle(ticks)) *
+                getSlideLength();
 
                 //                if (velocity > MIN_ANGULAR_VELOCITY) {
                 //                    //increase armFeedFwdValue to avoid slamming or increase D in PID
@@ -301,7 +303,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     //intake position
     public void setArmToIntake() {
-        setArmPos(INITIAL_POSITION);
+        setArmPos(INTAKE_POS);
     }
 
     @Override

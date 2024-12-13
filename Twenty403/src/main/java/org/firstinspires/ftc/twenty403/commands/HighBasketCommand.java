@@ -22,7 +22,7 @@ public class HighBasketCommand {
             KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
             ArmSubCmds.cmds.highbasketArm(r.armSubsystem),
-            new WaitCommand(0.5),
+            new WaitCommand(1),
             ArmSubCmds.cmds.highbasketSlide(r.armSubsystem),
             new WaitCommand(1.2),
             HighBasketPreArm(r)
