@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.sixteen750.commands.slides;
 
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmEmpty;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmEmptyAuto;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmTransfer;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketEmpty;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketLift;
@@ -48,13 +49,23 @@ public class VerticalSlidesSequentials {
         );
     }
 
+    public static SequentialCommandGroup HighBasketAuto(Robot r) { //need to change armScore
+        return new SequentialCommandGroup(
+            transferScoreAuto(r),
+            new WaitCommand(.3),
+            HighBasketCommand(r),
+            BasketScoreAuto(r),
+            new WaitCommand(.5),
+            SlidesDown(r)
+        );
+    }
+
     //partial sequentials
     public static SequentialCommandGroup transferVertical(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
+            Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
             new WaitCommand(.3),
-            BucketLift(r),
-            ArmTransfer(r),
+            BucketLift(r).alongWith(ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r),
             new WaitCommand(.3),
@@ -65,10 +76,20 @@ public class VerticalSlidesSequentials {
 
     public static SequentialCommandGroup transferScore(Robot r) {
         return new SequentialCommandGroup(
+            Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
+            new WaitCommand(.3),
+            BucketLift(r).alongWith(ArmTransfer(r)),
+            new WaitCommand(.3),
+            SlidesDownCommand(r)
+            // commands for vertical slide bucket transfer position first, then wrist transferring
+        );
+    }
+
+    public static SequentialCommandGroup transferScoreAuto(Robot r) {
+        return new SequentialCommandGroup(
             Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
             new WaitCommand(.3),
-            BucketLift(r),
-            ArmTransfer(r),
+            BucketLift(r).alongWith(ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
@@ -77,10 +98,9 @@ public class VerticalSlidesSequentials {
 
     public static SequentialCommandGroup transferBucket(Robot r) {
         return new SequentialCommandGroup(
-            Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
+            Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
             new WaitCommand(.3),
-            BucketTransfer(r),
-            ArmTransfer(r),
+            BucketTransfer(r).alongWith(ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
@@ -95,7 +115,21 @@ public class VerticalSlidesSequentials {
             new WaitCommand(0.7),
             BucketEmpty(r),
             new WaitCommand(.5),
-            BucketLift(r)
+            BucketLift(r),
+            new WaitCommand(0.2)
+        );
+    }
+
+    public static SequentialCommandGroup BasketScoreAuto(Robot r) {
+        return new SequentialCommandGroup(
+            BucketLift(r),
+            new WaitCommand(0.3),
+            ArmEmptyAuto(r),
+            new WaitCommand(0.7),
+            BucketEmpty(r),
+            new WaitCommand(.5),
+            BucketLift(r),
+            new WaitCommand(0.2)
         );
     }
 

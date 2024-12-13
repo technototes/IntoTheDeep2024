@@ -19,15 +19,17 @@ public class Paths {
 
     public static Command SampleScoring(Robot r) {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
-            .alongWith(VerticalSlidesSequentials.HighBasket(r))
+            .alongWith(VerticalSlidesSequentials.HighBasketAuto(r))
+            //   .alongWith(HorizontalSlidesSequentials.intake(r))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
                     HorizontalSlidesSequentials.intake(r)
                 )
             )
+            .andThen(new WaitCommand(0.3))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.5))
+            .andThen(new WaitCommand(0.55))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
@@ -39,27 +41,29 @@ public class Paths {
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
+            //   .alongWith(HorizontalSlidesSequentials.intake(r))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
                     HorizontalSlidesSequentials.intake(r)
                 )
             )
+            .andThen(new WaitCommand(0.3))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.5))
+            .andThen(new WaitCommand(0.55))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
-                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
-                    HorizontalSlidesCommands.horizontalRetract(r),
                     VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r)
+                    VerticalSlidesCommands.BucketTransfer(r),
+                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+                    HorizontalSlidesCommands.horizontalRetract(r)
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
             .andThen(
                 new TrajectorySequenceCommand(
                     r.drivebase,

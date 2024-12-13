@@ -24,10 +24,10 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static int HIGH_BASKET = -1150;
     public static int LOW_BASKET = -450;
     public static int SLIDE_ZERO = 0;
-    public static double BucketServoTransfer = 0.8;
-    public static double BucketServoLift = 0.6; //carry position for scoring
+    public static double BucketServoTransfer = 0.9;
+    public static double BucketServoLift = 0.75; //carry position for scoring
     public static double BucketSecondLift = 0.4;
-    public static double BucketServoEmpty = 0.25;
+    public static double BucketServoEmpty = 0.35;
     public static double ArmServoEmpty = 1;
     public static double ArmServoLift = 0.5;
     public static double ArmServoTransfer = 0.05;
@@ -64,10 +64,13 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     //this is for smoother servo movement
     public ElapsedTime timer;
-    public double startPos;
-    public double endPos;
+    public double BucketStartPos;
+    public double BucketEndPos;
     public double totalTime;
-    public boolean smoothServoRunning;
+    public double ArmStartPos;
+    public double ArmEndPos;
+    public boolean smoothBucketRunning;
+    public boolean smoothArmRunning;
 
     @Log(name = "dumbCounter1")
     public int dumbCounter;
@@ -89,7 +92,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         resetSlideZero();
 
         timer = new ElapsedTime();
-        smoothServoRunning = false;
+        smoothBucketRunning = false;
+        smoothArmRunning = false;
     }
 
     public VerticalSlidesSubsystem() {
@@ -106,19 +110,33 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
         slidePow = slidePidController.update(slidePos);
         setSlideMotorPower(slidePow);
 
-        if (smoothServoRunning) {
+        if (smoothBucketRunning) {
             dumbCounter2++;
             double curTime = getTimer();
-            double calcPower = curTime * ((endPos - startPos) / totalTime) + startPos;
+            double calcPower =
+                curTime * ((BucketEndPos - BucketStartPos) / totalTime) + BucketStartPos;
             double clippedPower = Range.clip(
                 calcPower,
-                Math.min(startPos, endPos),
-                Math.max(startPos, endPos)
+                Math.min(BucketStartPos, BucketEndPos),
+                Math.max(BucketStartPos, BucketEndPos)
             );
             setBucketPos(clippedPower);
             // This is backward, but instead, let's just use the elapsed time
             // smoothServoRunning = calcPower != clippedPower;
-            smoothServoRunning = curTime <= totalTime;
+            smoothBucketRunning = curTime <= totalTime;
+        }
+        if (smoothArmRunning) {
+            double curTime = getTimer();
+            double calcPower = curTime * ((ArmEndPos - ArmStartPos) / totalTime) + ArmStartPos;
+            double clippedPower = Range.clip(
+                calcPower,
+                Math.min(ArmStartPos, ArmEndPos),
+                Math.max(ArmStartPos, ArmEndPos)
+            );
+            setArmPos(clippedPower);
+            // This is backward, but instead, let's just use the elapsed time
+            // smoothServoRunning = calcPower != clippedPower;
+            smoothArmRunning = curTime <= totalTime;
         }
     }
 
@@ -140,22 +158,31 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
             bucketTargetPos = w;
             // Let's cancel any smooth-servo running code just to be safe
             // The periodic function will restore it if it's updating
-            smoothServoRunning = false;
+            smoothBucketRunning = false;
         }
     }
 
     private void setBucketPosUsingTimer(double seconds, double startPos, double endPos) {
-        this.startPos = startPos;
-        this.endPos = endPos;
+        this.BucketStartPos = startPos;
+        this.BucketEndPos = endPos;
         totalTime = seconds;
         startTimer();
-        smoothServoRunning = true;
+        smoothBucketRunning = true;
+    }
+
+    private void setArmPosUsingTimer(double seconds, double startPos, double endPos) {
+        this.ArmStartPos = startPos;
+        this.ArmEndPos = endPos;
+        totalTime = seconds;
+        startTimer();
+        smoothArmRunning = true;
     }
 
     private void setArmPos(double w) {
         if (armServo != null) {
             armServo.setPosition(w);
             armTargetPos = w;
+            smoothArmRunning = false;
         }
     }
 
@@ -275,11 +302,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
 
     public void bucketServoTransfer() {
         // the intake system's position to score
-        setBucketPosUsingTimer(5.0, bucketTargetPos, BucketServoTransfer);
+        setBucketPos(BucketServoTransfer);
     }
 
     public void bucketServoLift() {
-        setBucketPos(BucketServoLift);
+        setBucketPosUsingTimer(0.4, bucketTargetPos, BucketServoLift);
     } //use if we need a position for lifting vertical slides
 
     public void bucketServoEmpty() {
@@ -303,7 +330,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     }
 
     public void armServoEmpty() {
-        setArmPos(ArmServoEmpty);
+        setArmPosUsingTimer(0.5, armTargetPos, ArmServoEmpty);
+    }
+
+    public void armServoEmptyAuto() {
+        setArmPosUsingTimer(1, armTargetPos, ArmServoEmpty);
     }
 
     //inc/dec methods

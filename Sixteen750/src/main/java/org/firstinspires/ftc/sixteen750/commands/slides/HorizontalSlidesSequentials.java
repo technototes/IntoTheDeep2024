@@ -7,7 +7,10 @@ import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesC
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalSmallExtend;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristPickup;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristTransfer;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmTransfer;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.BucketTransfer;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials.SlidesDown;
+import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesSequentials.transferBucket;
 
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
@@ -37,7 +40,15 @@ public class HorizontalSlidesSequentials {
     }
 
     public static SequentialCommandGroup retract(Robot r) {
-        return new SequentialCommandGroup(wristTransfer(r), horizontalRetract(r), clawChomp(r));
+        return new SequentialCommandGroup(
+            wristTransfer(r),
+            horizontalRetract(r),
+            clawChomp(r),
+            BucketTransfer(r),
+            ArmTransfer(r),
+            new WaitCommand(0.2),
+            clawOpen(r)
+        );
     }
 
     public static SequentialCommandGroup transferring(Robot r) {
