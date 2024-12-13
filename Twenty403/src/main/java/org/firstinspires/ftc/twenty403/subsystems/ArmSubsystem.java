@@ -37,8 +37,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
-    public static int INTAKE_POS;
-
+    public static int INTAKE_POS = 301;
+    public static int INTAKE_POS_SLIDES = 950;
     public static int INCREMENT_DECREMENT = 230;
     public static int SLIDE_INC_DEC = 250;
     public static int SLIDE_MAX_POS_HORIZONTAL = 950; //new tick position
@@ -51,6 +51,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static double SLIDE_FEEDFORWARD_GRAVITY_VALUE = 0.3;
     public static double SLIDE_FEEDFORWARD_INTAKE_POS = 0;
     public static int SLIDE_TARGET_IN_RANGE = 100;
+    public static int ARM_TARGET_IN_RANGE = 50;
     // This is "5 degrees" if our numbers are correct:
     public static int ARM_POS_CLOSE_ENOUGH = Math.abs(ARM_HORIZONTAL - ARM_VERTICAL) / 18;
 
@@ -225,6 +226,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
         return Math.abs(getCurrentSlidePos() - slideTargetPos) < SLIDE_TARGET_IN_RANGE;
     }
 
+    public boolean isArmAtTarget() {
+        return Math.abs(getArmCurrentPos() - armTargetPos) < ARM_TARGET_IN_RANGE;
+    }
+
     public void slideincrement(double v) {
         int newSlidePos = (int) (slideTargetPos + v * SLIDE_INC_DEC);
         if (newSlidePos > SLIDE_MAX_POS) {
@@ -304,6 +309,10 @@ public class ArmSubsystem implements Subsystem, Loggable {
     //intake position
     public void setArmToIntake() {
         setArmPos(INTAKE_POS);
+    }
+
+    public void setSlidesToIntake() {
+        setArmPos(INTAKE_POS_SLIDES);
     }
 
     @Override

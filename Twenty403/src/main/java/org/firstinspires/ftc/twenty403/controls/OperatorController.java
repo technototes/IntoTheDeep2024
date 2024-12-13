@@ -145,7 +145,7 @@ public class OperatorController {
         HighBasket.whenPressed(HighBasketCommand.HighBasket(robot));
         //IntakeSample.whenPressed(IntakeSampleCommand.IntakeSample(robot));
         // IntakeSpecimen.whenPressed(IntakeSpecimenCommand.IntakeSpecimen(robot));*/
-        IntakePos.whenPressed(IntakePositionCommand.Intakepos(robot));
+        IntakePos.whenPressed(IntakePositionCommand.IntakePos(robot));
         /*armHorizontal.whenPressed(
             Command.create(robot.armSubsystem::horizontal, robot.armSubsystem)
         );*/

@@ -21,8 +21,8 @@ public class HighBasketCommand {
             KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
             KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
-            ArmSubCmds.cmds.highbasketArm(r.armSubsystem),
-            new WaitCommand(1),
+            ArmSubCmds.cmds.highbasketArmWaitTillDone(r.armSubsystem),
+            //new WaitCommand(1),
             ArmSubCmds.cmds.highbasketSlide(r.armSubsystem),
             new WaitCommand(1.2),
             HighBasketPreArm(r)
