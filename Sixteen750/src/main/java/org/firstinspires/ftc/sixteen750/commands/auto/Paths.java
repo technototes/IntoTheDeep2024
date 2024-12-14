@@ -99,8 +99,9 @@ public class Paths {
                     HorizontalSlidesSequentials.intake(r)
                 )
             )
+            .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.1))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
@@ -111,7 +112,7 @@ public class Paths {
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.1))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
             .andThen(
                 new ParallelCommandGroup(
@@ -119,8 +120,9 @@ public class Paths {
                     HorizontalSlidesSequentials.intake(r)
                 )
             )
+            .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.1))
             .andThen(
                 new ParallelCommandGroup(
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
@@ -131,7 +133,7 @@ public class Paths {
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(new WaitCommand(0.3))
+            .andThen(new WaitCommand(0.1))
             .andThen(VerticalSlidesSequentials.HighBasket(r))
             .andThen(
                 new ParallelCommandGroup(
@@ -139,26 +141,27 @@ public class Paths {
                     HorizontalSlidesSequentials.intake(r)
                 )
             )
+            .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.3))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
-                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
-                    HorizontalSlidesCommands.horizontalRetract(r),
-                    VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r)
-                )
-            )
-            .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.NETSCORING_TO_AGAINST_THE_WALL
-                )
-            );
+            .andThen(new WaitCommand(0.1));
+        //            .andThen(
+        //                new ParallelCommandGroup(
+        //                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
+        //                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+        //                    HorizontalSlidesCommands.horizontalRetract(r),
+        //                    VerticalSlidesCommands.ArmTransfer(r),
+        //                    VerticalSlidesCommands.BucketTransfer(r)
+        //                )
+        //            )
+        //            .andThen(HorizontalSlidesCommands.clawOpen(r))
+        //            .andThen(new WaitCommand(0.))
+        //            .andThen(VerticalSlidesSequentials.HighBasket(r))
+        //            .andThen(
+        //                new TrajectorySequenceCommand(
+        //                    r.drivebase,
+        //                    AutoConstants.NETSCORING_TO_AGAINST_THE_WALL
+        //                )
+        //            );
         // new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
         //     .andThen(
         //         new TrajectorySequenceCommand(

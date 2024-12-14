@@ -65,7 +65,8 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
             Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
             new WaitCommand(.3),
-            BucketLift(r).alongWith(ArmTransfer(r)),
+            BucketLift(r),
+            (ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r),
             new WaitCommand(.3),
@@ -78,7 +79,8 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
             Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
             new WaitCommand(.3),
-            BucketLift(r).alongWith(ArmTransfer(r)),
+            BucketLift(r),
+            (ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
@@ -100,7 +102,8 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
             Command.create(r.horizontalSlidesSubsystem::slidesTransfer),
             new WaitCommand(.3),
-            BucketTransfer(r).alongWith(ArmTransfer(r)),
+            BucketTransfer(r),
+            (ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
