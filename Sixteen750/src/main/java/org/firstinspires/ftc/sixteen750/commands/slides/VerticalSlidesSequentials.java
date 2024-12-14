@@ -13,6 +13,8 @@ import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCom
 import com.technototes.library.command.Command;
 import com.technototes.library.command.SequentialCommandGroup;
 import com.technototes.library.command.WaitCommand;
+import com.technototes.path.command.TrajectorySequenceCommand;
+import org.firstinspires.ftc.sixteen750.AutoConstants;
 import org.firstinspires.ftc.sixteen750.Robot;
 
 public class VerticalSlidesSequentials {
@@ -49,14 +51,68 @@ public class VerticalSlidesSequentials {
         );
     }
 
+    public static SequentialCommandGroup SlidesDownAuto(Robot r) {
+        return new SequentialCommandGroup(
+            LowBasketCommand(r),
+            new WaitCommand(.1),
+            SlidesDownCommand(r),
+            transferScoreAuto(r)
+        );
+    }
+
     public static SequentialCommandGroup HighBasketAuto(Robot r) { //need to change armScore
         return new SequentialCommandGroup(
             transferScoreAuto(r),
-            new WaitCommand(.3),
+            new WaitCommand(.1),
             HighBasketCommand(r),
             BasketScoreAuto(r),
-            new WaitCommand(.5),
-            SlidesDown(r)
+            new WaitCommand(.15),
+            SlidesDownAuto(r)
+                .alongWith(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1)
+                )
+                .alongWith(HorizontalSlidesSequentials.intake(r))
+        );
+    }
+
+    public static SequentialCommandGroup HighBasketAuto2(Robot r) { //need to change armScore
+        return new SequentialCommandGroup(
+            transferScoreAuto(r),
+            new WaitCommand(.1),
+            HighBasketCommand(r),
+            BasketScoreAuto(r),
+            new WaitCommand(.15),
+            SlidesDownAuto(r)
+                .alongWith(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2)
+                )
+                .alongWith(HorizontalSlidesSequentials.intake(r))
+        );
+    }
+
+    public static SequentialCommandGroup HighBasketAuto3(Robot r) { //need to change armScore
+        return new SequentialCommandGroup(
+            transferScoreAuto(r),
+            new WaitCommand(.1),
+            HighBasketCommand(r),
+            BasketScoreAuto(r),
+            new WaitCommand(.15),
+            SlidesDownAuto(r)
+                .alongWith(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3)
+                )
+                .alongWith(HorizontalSlidesSequentials.intake(r))
+        );
+    }
+
+    public static SequentialCommandGroup HighBasketAuto4(Robot r) { //need to change armScore
+        return new SequentialCommandGroup(
+            transferScoreAuto(r),
+            new WaitCommand(.1),
+            HighBasketCommand(r),
+            BasketScoreAuto(r),
+            new WaitCommand(.15),
+            SlidesDownAuto(r)
         );
     }
 
@@ -91,7 +147,8 @@ public class VerticalSlidesSequentials {
         return new SequentialCommandGroup(
             Command.create(r.horizontalSlidesSubsystem::WristVertTransfer),
             new WaitCommand(.3),
-            BucketLift(r).alongWith(ArmTransfer(r)),
+            BucketLift(r),
+            (ArmTransfer(r)),
             new WaitCommand(.3),
             SlidesDownCommand(r)
             // commands for vertical slide bucket transfer position first, then wrist transferring
@@ -132,7 +189,8 @@ public class VerticalSlidesSequentials {
             BucketEmpty(r),
             new WaitCommand(.5),
             BucketLift(r),
-            new WaitCommand(0.2)
+            new WaitCommand(0.2),
+            BucketTransfer(r)
         );
     }
 
