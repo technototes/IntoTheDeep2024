@@ -17,7 +17,7 @@ import org.firstinspires.ftc.twenty403.controls.SafetyTestController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
 //TODO: figure out where the other splineTest is coming from (duplicate spline error)
-@Autonomous(name = "ForwardBackwardSide")
+@Autonomous(name = "ForwardBackwardSide", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class ForwardBackwardSide extends CommandOpMode {
 
