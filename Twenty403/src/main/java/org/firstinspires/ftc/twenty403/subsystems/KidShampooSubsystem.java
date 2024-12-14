@@ -14,6 +14,8 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     private Servo retainer, jaw, wrist;
     private CRServo intake;
 
+    private boolean isHardware;
+
     @Log(name = "jawPosition")
     public double jawPosition = 0;
 
@@ -44,10 +46,19 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double WRIST_STRAIGHT = .35;
 
     public KidShampooSubsystem(Hardware hw) {
+        isHardware = true;
         intake = hw.intake;
         retainer = hw.retainer;
         wrist = hw.wrist;
         jaw = hw.jaw;
+    }
+
+    public KidShampooSubsystem() {
+        isHardware = false;
+        intake = null;
+        retainer = null;
+        wrist = null;
+        jaw = null;
     }
 
     public void openRetainer() {
@@ -114,28 +125,28 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     }
 
     private void setRetainerPosition(double d) {
-        if (retainer != null) {
+        if (isHardware) {
             retainer.setPosition(d);
             retainerPos = d;
         }
     }
 
     private void setJawPosition(double d) {
-        if (jaw != null) {
+        if (isHardware) {
             jaw.setPosition(d);
             jawPosition = d;
         }
     }
 
     private void setIntakePower(double d) {
-        if (intake != null) {
+        if (isHardware) {
             intake.setPower(d);
             intakePow = d;
         }
     }
 
     private void setWristPos(double w) {
-        if (wrist != null) {
+        if (isHardware) {
             //w = Range.clip(w, 0.0, 1.0);
             wrist.setPosition(w);
             wristPosition = w;
