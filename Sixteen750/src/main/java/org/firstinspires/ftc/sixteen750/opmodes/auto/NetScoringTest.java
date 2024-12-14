@@ -14,7 +14,7 @@ import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "NetScoringTest")
+@Autonomous(name = "NetScoringTest", preselectTeleOp = "Dual Control")
 @SuppressWarnings("unused")
 public class NetScoringTest extends CommandOpMode {
 

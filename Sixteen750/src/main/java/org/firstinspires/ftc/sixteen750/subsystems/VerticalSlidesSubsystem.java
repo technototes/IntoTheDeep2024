@@ -34,16 +34,16 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public static double BucketServoIncrement = 0.05;
     public static double ArmServoIncrement = 0.05;
 
-    // @Log(name = "slidePos")
+    @Log(name = "slidePos")
     public int slidePos;
 
-    //@Log(name = "slidePow")
+    @Log(name = "slidePow")
     public double slidePow;
 
-    //@Log(name = "slideTarget")
+    @Log(name = "slideTarget")
     public int slideTargetPos; //should call this one for the slide toggle instead
 
-    //@Log(name = "armTarget")
+    @Log(name = "armTarget")
     public double armTargetPos;
 
     @Log(name = "bucketTarget")

@@ -16,7 +16,7 @@ import org.firstinspires.ftc.twenty403.commands.auto.MotorParking;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "MotorPark")
+@Autonomous(name = "MotorPark", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class MotorPark extends CommandOpMode {
 

@@ -14,7 +14,7 @@ import org.firstinspires.ftc.twenty403.commands.EZCmd;
 import org.firstinspires.ftc.twenty403.commands.auto.Testing;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "Sideways", group = "Test")
+@Autonomous(name = "Sideways", group = "Test", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class Sideways extends CommandOpMode {
 
