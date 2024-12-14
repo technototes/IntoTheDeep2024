@@ -17,7 +17,7 @@ import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "Sideways")
+@Autonomous(name = "Sideways", preselectTeleOp = "Dual Control")
 @SuppressWarnings("unused")
 public class Sideways extends CommandOpMode {
 

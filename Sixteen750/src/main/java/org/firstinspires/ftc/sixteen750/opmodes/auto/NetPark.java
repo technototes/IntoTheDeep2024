@@ -14,7 +14,7 @@ import org.firstinspires.ftc.sixteen750.commands.auto.Paths;
 import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "NetPark")
+@Autonomous(name = "NetPark", preselectTeleOp = "Dual Control")
 @SuppressWarnings("unused")
 public class NetPark extends CommandOpMode {
 

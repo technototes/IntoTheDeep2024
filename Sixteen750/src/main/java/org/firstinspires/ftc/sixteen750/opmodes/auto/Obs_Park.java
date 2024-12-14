@@ -17,7 +17,7 @@ import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "Obs_Parking")
+@Autonomous(name = "Obs_Parking", preselectTeleOp = "Dual Control")
 @SuppressWarnings("unused")
 public class Obs_Park extends CommandOpMode {
 

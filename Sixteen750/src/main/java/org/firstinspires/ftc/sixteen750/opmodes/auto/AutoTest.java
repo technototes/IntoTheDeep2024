@@ -15,7 +15,7 @@ import org.firstinspires.ftc.sixteen750.controls.DriverController;
 import org.firstinspires.ftc.sixteen750.helpers.HeadingHelper;
 import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 
-@Autonomous(name = "Auto_Test")
+@Autonomous(name = "Auto_Test", preselectTeleOp = "Dual Control")
 @SuppressWarnings("unused")
 public class AutoTest extends CommandOpMode {
 
