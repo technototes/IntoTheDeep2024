@@ -13,7 +13,7 @@ import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.commands.auto.Testing;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "FBLR", group = "test")
+@Autonomous(name = "FBLR", group = "test", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class ForwardBackward extends CommandOpMode {
 

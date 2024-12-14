@@ -16,7 +16,7 @@ import org.firstinspires.ftc.twenty403.commands.driving.DriveTestCommand;
 import org.firstinspires.ftc.twenty403.controls.DriverController;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "Fwd/Bkwd (not RR)")
+@Autonomous(name = "Fwd/Bkwd (not RR)", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class TestForwardBackward extends CommandOpMode {
 

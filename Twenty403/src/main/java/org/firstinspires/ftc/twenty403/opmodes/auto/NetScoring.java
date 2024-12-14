@@ -13,7 +13,7 @@ import org.firstinspires.ftc.twenty403.Robot;
 import org.firstinspires.ftc.twenty403.commands.auto.Paths;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
-@Autonomous(name = "NetScoring")
+@Autonomous(name = "NetScoring", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class NetScoring extends CommandOpMode {
 

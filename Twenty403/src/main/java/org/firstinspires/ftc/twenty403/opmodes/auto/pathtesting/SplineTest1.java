@@ -15,7 +15,7 @@ import org.firstinspires.ftc.twenty403.commands.auto.Testing;
 import org.firstinspires.ftc.twenty403.helpers.StartingPosition;
 
 //TODO: figure out where the other splineTest is coming from (duplicate spline error)
-@Autonomous(name = "SplineTest1")
+@Autonomous(name = "SplineTest1", preselectTeleOp = "Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class SplineTest1 extends CommandOpMode {
 
