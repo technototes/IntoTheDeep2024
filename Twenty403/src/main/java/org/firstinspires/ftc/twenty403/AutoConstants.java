@@ -80,11 +80,11 @@ public class AutoConstants {
 
 
     //stolen constants from 16750 heehee
-    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(55, 57, -135);
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(54, 50, -135);
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 180);
     public static ConfigurablePoseD NET_AGAINST_THE_WALL = new ConfigurablePoseD(35, 63, -90);
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
-    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 50, -90);
+    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(53, 49, -90);
     public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 50, -90);
     public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(53, 40, -30);
     public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 0);

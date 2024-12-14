@@ -32,11 +32,11 @@ public class ArmSubCmds {
             return Command.create(AS::lowBasket);
         }
 
-        public static Command intakePos(ArmSubsystem AS) {
+        public static Command setArmToIntake(ArmSubsystem AS) {
             return Command.create(AS::setArmToIntake);
         }
 
-        public static Command intakePosSlides(ArmSubsystem AS) {
+        public static Command setSlidesToIntake(ArmSubsystem AS) {
             return Command.create(AS::setSlidesToIntake);
         }
     }

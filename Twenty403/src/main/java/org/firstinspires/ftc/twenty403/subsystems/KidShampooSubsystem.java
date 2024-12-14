@@ -38,6 +38,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public static double INTAKE_SPIT = -.6;
 
     public static double WRIST_SCOOP = 0.35;
+    public static double AUTO_ONLY_SCOOP = 0.25;
     public static double WRIST_INC_DEC = .5;
     public static double WRIST_DUMP = 0.05;
     public static double WRIST_STRAIGHT = .35;
@@ -80,6 +81,10 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public void scoopWrist() {
         setWristPos(WRIST_SCOOP);
+    }
+
+    public void scoopWristAutoOnly() {
+        setWristPos(AUTO_ONLY_SCOOP);
     }
 
     public void straightWrist() {
