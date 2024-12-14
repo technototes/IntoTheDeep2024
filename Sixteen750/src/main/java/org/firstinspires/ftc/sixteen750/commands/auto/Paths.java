@@ -21,84 +21,12 @@ public class Paths {
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
             .alongWith(VerticalSlidesSequentials.HighBasketAuto(r))
             //   .alongWith(HorizontalSlidesSequentials.intake(r))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
-                    HorizontalSlidesSequentials.intake(r)
-                )
-            )
-            .andThen(new WaitCommand(0.3))
-            .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.55))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
-                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
-                    HorizontalSlidesCommands.horizontalRetract(r),
-                    VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r)
-                )
-            )
-            .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
-            //   .alongWith(HorizontalSlidesSequentials.intake(r))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
-                    HorizontalSlidesSequentials.intake(r)
-                )
-            )
-            .andThen(new WaitCommand(0.3))
-            .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.55))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
-                    VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r),
-                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
-                    HorizontalSlidesCommands.horizontalRetract(r)
-                )
-            )
-            .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(new WaitCommand(0.3))
-            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.NETSCORING_TO_AGAINST_THE_WALL
-                )
-                // new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
-                //     .andThen(
-                //         new TrajectorySequenceCommand(
-                //             r.drivebase,
-                //             AutoConstants.ASCENT_CLEAR_TO_ASCENT
-                //         )
-                //     )
-                //     .andThen(VerticalSlidesSequentials.transferVertical(r))
-                //     .andThen(new WaitCommand(0.3))
-                //     .andThen(VerticalSlidesSequentials.BasketAscent(r))
-                //     .andThen(new WaitCommand(2))
-            );
-    }
-
-    public static Command AscentOnly(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
-            .andThen(VerticalSlidesSequentials.transferScore(r))
-            .andThen(VerticalSlidesSequentials.BasketAscent(r))
-            .andThen(new WaitCommand(1));
-    }
-
-    public static Command SampleScoringTest2(Robot r) {
-        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
-            .alongWith(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
-                    HorizontalSlidesSequentials.intake(r)
-                )
-            )
+            //            .andThen(
+            //                new ParallelCommandGroup(
+            //                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
+            //                    HorizontalSlidesSequentials.intake(r)
+            //                )
+            //            )
             .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
             .andThen(new WaitCommand(0.1))
@@ -107,19 +35,21 @@ public class Paths {
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
                     HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
                     HorizontalSlidesCommands.horizontalRetract(r),
-                    VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r)
+                    VerticalSlidesCommands.ArmTransfer(r).andThen(
+                        VerticalSlidesCommands.BucketTransfer(r)
+                    )
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.1))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
-                    HorizontalSlidesSequentials.intake(r)
-                )
-            )
+            .andThen(VerticalSlidesSequentials.HighBasketAuto2(r))
+            //  .alongWith(HorizontalSlidesSequentials.intake(r))
+            //            .andThen(
+            //                new ParallelCommandGroup(
+            //                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
+            //                    HorizontalSlidesSequentials.intake(r)
+            //                )
+            //            )
             .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
             .andThen(new WaitCommand(0.1))
@@ -128,40 +58,38 @@ public class Paths {
                     new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
                     HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
                     HorizontalSlidesCommands.horizontalRetract(r),
-                    VerticalSlidesCommands.ArmTransfer(r),
-                    VerticalSlidesCommands.BucketTransfer(r)
+                    VerticalSlidesCommands.ArmTransfer(r).andThen(
+                        VerticalSlidesCommands.BucketTransfer(r)
+                    )
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
             .andThen(new WaitCommand(0.1))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
-            .andThen(
-                new ParallelCommandGroup(
-                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3),
-                    HorizontalSlidesSequentials.intake(r)
-                )
-            )
+            .andThen(VerticalSlidesSequentials.HighBasketAuto3(r))
             .andThen(new WaitCommand(0.1))
             .andThen(HorizontalSlidesCommands.clawChomp(r))
-            .andThen(new WaitCommand(0.1));
-        //            .andThen(
-        //                new ParallelCommandGroup(
-        //                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
-        //                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
-        //                    HorizontalSlidesCommands.horizontalRetract(r),
-        //                    VerticalSlidesCommands.ArmTransfer(r),
-        //                    VerticalSlidesCommands.BucketTransfer(r)
-        //                )
-        //            )
-        //            .andThen(HorizontalSlidesCommands.clawOpen(r))
-        //            .andThen(new WaitCommand(0.))
-        //            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
+                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+                    HorizontalSlidesCommands.horizontalRetract(r),
+                    VerticalSlidesCommands.ArmTransfer(r).andThen(
+                        VerticalSlidesCommands.BucketTransfer(r)
+                    )
+                )
+            )
+            .andThen(HorizontalSlidesCommands.clawOpen(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto4(r))
+            .andThen(new WaitCommand(0.3));
         //            .andThen(
         //                new TrajectorySequenceCommand(
         //                    r.drivebase,
-        //                    AutoConstants.NETSCORING_TO_AGAINST_THE_WALL
+        //                    AutoConstants.NETSCORING_TO_ASCENT_CLEAR
         //                )
-        //            );
+        //                        .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.ASCENT_CLEAR_TO_ASCENT))
+        //                        .alongWith(VerticalSlidesSequentials.BasketAscent(r))
         // new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
         //     .andThen(
         //         new TrajectorySequenceCommand(
@@ -173,12 +101,105 @@ public class Paths {
         //     .andThen(new WaitCommand(0.3))
         //     .andThen(VerticalSlidesSequentials.BasketAscent(r))
         //     .andThen(new WaitCommand(2))
+
+    }
+
+    public static Command AscentOnly(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+            .andThen(VerticalSlidesSequentials.transferScore(r))
+            .andThen(VerticalSlidesSequentials.BasketAscent(r))
+            .andThen(new WaitCommand(1));
+    }
+
+    public static Command SampleScoringTest2(Robot r) {
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
+            .alongWith(VerticalSlidesSequentials.HighBasketAuto(r))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE1),
+                    HorizontalSlidesSequentials.intake(r)
+                )
+            )
+            .andThen(new WaitCommand(0.1))
+            .andThen(HorizontalSlidesCommands.clawChomp(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE1_TO_NETSCORING),
+                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+                    HorizontalSlidesCommands.horizontalRetract(r),
+                    VerticalSlidesCommands.ArmTransfer(r),
+                    VerticalSlidesCommands.BucketTransfer(r)
+                )
+            )
+            .andThen(HorizontalSlidesCommands.clawOpen(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE2),
+                    HorizontalSlidesSequentials.intake(r)
+                )
+            )
+            .andThen(new WaitCommand(0.1))
+            .andThen(HorizontalSlidesCommands.clawChomp(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE2_TO_NETSCORING),
+                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+                    HorizontalSlidesCommands.horizontalRetract(r),
+                    VerticalSlidesCommands.ArmTransfer(r),
+                    VerticalSlidesCommands.BucketTransfer(r)
+                )
+            )
+            .andThen(HorizontalSlidesCommands.clawOpen(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_INTAKE3),
+                    HorizontalSlidesSequentials.intake(r)
+                )
+            )
+            .andThen(new WaitCommand(0.1))
+            .andThen(HorizontalSlidesCommands.clawChomp(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(
+                new ParallelCommandGroup(
+                    new TrajectorySequenceCommand(r.drivebase, AutoConstants.INTAKE3_TO_NETSCORING),
+                    HorizontalSlidesCommands.wristTransfer(r), //HorizontalSlidesSequentials.transferring(r),
+                    HorizontalSlidesCommands.horizontalRetract(r),
+                    VerticalSlidesCommands.ArmTransfer(r),
+                    VerticalSlidesCommands.BucketTransfer(r)
+                )
+            )
+            .andThen(HorizontalSlidesCommands.clawOpen(r))
+            .andThen(new WaitCommand(0.1))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
+            .andThen(
+                new TrajectorySequenceCommand(
+                    r.drivebase,
+                    AutoConstants.NETSCORING_TO_AGAINST_THE_WALL
+                )
+            );
+        //         new TrajectorySequenceCommand(r.drivebase, AutoConstants.NETSCORING_TO_ASCENT_CLEAR)
+        //             .andThen(
+        //                 new TrajectorySequenceCommand(
+        //                     r.drivebase,
+        //                     AutoConstants.ASCENT_CLEAR_TO_ASCENT
+        //                 )
+        //             )
+        //             .andThen(VerticalSlidesSequentials.transferVertical(r))
+        //             .andThen(new WaitCommand(0.3))
+        //             .andThen(VerticalSlidesSequentials.BasketAscent(r))
+        //             .andThen(new WaitCommand(2));
     }
 
     public static Command SampleScoringTest1(Robot r) {
         // Preload Scoring
         return new TrajectorySequenceCommand(r.drivebase, AutoConstants.START_TO_NETSCORING)
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
             .andThen(new WaitCommand(2))
             .andThen(VerticalSlidesSequentials.transferVertical(r))
             //First Intake and Scoring
@@ -197,7 +218,7 @@ public class Paths {
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
             //Second Intake and Scoring
             .andThen(
                 new ParallelCommandGroup(
@@ -214,7 +235,7 @@ public class Paths {
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
             .andThen(new WaitCommand(2))
             .andThen(VerticalSlidesSequentials.transferVertical(r))
             //Third Intake and Scoring
@@ -233,7 +254,7 @@ public class Paths {
                 )
             )
             .andThen(HorizontalSlidesCommands.clawOpen(r))
-            .andThen(VerticalSlidesSequentials.HighBasket(r))
+            .andThen(VerticalSlidesSequentials.HighBasketAuto(r))
             .andThen(new WaitCommand(2))
             .andThen(VerticalSlidesSequentials.transferVertical(r))
             //Parking and Ascent 1

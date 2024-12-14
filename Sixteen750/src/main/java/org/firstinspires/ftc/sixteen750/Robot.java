@@ -68,6 +68,7 @@ public class Robot implements Loggable {
         }
         if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
             verticalSlidesSubsystem.slidesDown();
+            verticalSlidesSubsystem.bucketServoLift();
             verticalSlidesSubsystem.armServoTransfer();
             verticalSlidesSubsystem.bucketServoTransferAtStart();
         }
