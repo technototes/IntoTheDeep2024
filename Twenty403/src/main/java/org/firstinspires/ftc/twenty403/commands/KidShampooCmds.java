@@ -43,5 +43,9 @@ public class KidShampooCmds {
         public static Command ScoopWrist(KidShampooSubsystem KS) {
             return Command.create(KS::scoopWrist);
         }
+
+        public static Command ScoopWristAutoOnly(KidShampooSubsystem KS) {
+            return Command.create(KS::scoopWristAutoOnly);
+        }
     }
 }

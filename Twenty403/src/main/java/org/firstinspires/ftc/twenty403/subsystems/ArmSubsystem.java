@@ -21,7 +21,7 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public int slideResetPos;
     public static double FEEDFORWARD_COEFFICIENT = 0.00014; //11-19-24
     public static int ROTATE_MOTOR_LOW_BASKET_SCORING_POSITION = 3100;
-    public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 3100;
+    public static int ROTATE_MOTOR_HIGH_BASKET_SCORING_POSITION = 3200;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_LOW = 300;
     public static int ROTATE_MOTOR_SPECIMEN_SCORING_POSITION_HIGH = 300;
     public static double MIN_ANGULAR_VELOCITY = 0.001;
@@ -37,8 +37,8 @@ public class ArmSubsystem implements Subsystem, Loggable {
     public static int ARM_VERTICAL = 3100;
     public static int ARM_HORIZONTAL = 1000;
     public static int INITIAL_POSITION = 150;
-    public static int INTAKE_POS = 301;
-    public static int INTAKE_POS_SLIDES = 950;
+    public static int ARM_INTAKE_POS = 250;
+    public static int INTAKE_POS_SLIDES = 800;
     public static int INCREMENT_DECREMENT = 230;
     public static int SLIDE_INC_DEC = 250;
     public static int SLIDE_MAX_POS_HORIZONTAL = 950; //new tick position
@@ -308,11 +308,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
 
     //intake position
     public void setArmToIntake() {
-        setArmPos(INTAKE_POS);
+        setArmPos(ARM_INTAKE_POS);
     }
 
     public void setSlidesToIntake() {
-        setArmPos(INTAKE_POS_SLIDES);
+        setSlidePos(INTAKE_POS_SLIDES);
     }
 
     @Override

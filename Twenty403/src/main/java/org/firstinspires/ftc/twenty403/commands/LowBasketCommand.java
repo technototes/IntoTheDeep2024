@@ -9,12 +9,6 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class LowBasketCommand {
 
-    public static SequentialCommandGroup LowBasketPreArm(Robot r) {
-        return new SequentialCommandGroup(
-            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem)
-        );
-    }
 
     public static SequentialCommandGroup LowBasket(Robot r) {
         return new SequentialCommandGroup(
@@ -24,7 +18,8 @@ public class LowBasketCommand {
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
             ArmSubCmds.cmds.lowbasketArm(r.armSubsystem),
             new WaitCommand(0.5),
-            LowBasketPreArm(r)
+            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem)
         );
     }
 }

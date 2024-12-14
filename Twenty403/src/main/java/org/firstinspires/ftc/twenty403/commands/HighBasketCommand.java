@@ -8,24 +8,23 @@ import org.firstinspires.ftc.twenty403.Robot;
 
 public class HighBasketCommand {
 
-    public static SequentialCommandGroup HighBasketPreArm(Robot r) {
-        return new SequentialCommandGroup(
-            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem)
-        );
-    }
+
 
     public static SequentialCommandGroup HighBasket(Robot r) {
         return new SequentialCommandGroup(
             KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
             KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
-            ArmSubCmds.cmds.highbasketArmWaitTillDone(r.armSubsystem),
-            //new WaitCommand(1),
+            ArmSubCmds.cmds.highbasketArm(r.armSubsystem),
+            new WaitCommand(1),
             ArmSubCmds.cmds.highbasketSlide(r.armSubsystem),
             new WaitCommand(1.2),
-            HighBasketPreArm(r)
+            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem),
+            new WaitCommand(0.3),
+            KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem)
         );
     }
 }

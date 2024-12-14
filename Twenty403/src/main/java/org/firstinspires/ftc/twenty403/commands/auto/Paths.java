@@ -92,19 +92,65 @@ public class Paths {
             )
             .andThen(IntakePositionCommand.IntakePos(r))
             .andThen(Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem))
-            .andThen(new WaitCommand(0.5))
+            //.andThen(new WaitCommand(0.5))
             .andThen(
                 new TrajectorySequenceCommand(
                     r.drivebaseSubsystem,
                     AutoConstants.INTAKE1_TO_NETSCORING
                 )
             )
-            .andThen(new WaitCommand(1))
+            .andThen(new WaitCommand(0.2))
             .alongWith(Command.create(r.armSubsystem::horizontal, r.armSubsystem))
-            .andThen(
-                HighBasketCommand.HighBasket(r).andThen(new WaitCommand(1))
+            .andThen(HighBasketCommand.HighBasket(r)
+            .andThen(new WaitCommand(0.5))
+
                 /*
-            .andThen(
+            .a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ndThen(
                 new TrajectorySequenceCommand(
                     r.drivebaseSubsystem,
                     AutoConstants.NETSCORING_TO_INTAKE2

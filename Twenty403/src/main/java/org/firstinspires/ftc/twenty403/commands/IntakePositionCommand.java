@@ -12,14 +12,17 @@ public class IntakePositionCommand {
             KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
             KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
-            ArmSubCmds.cmds.intakePos(r.armSubsystem),
-            new WaitCommand(1),
-            ArmSubCmds.cmds.intakePosSlides(r.armSubsystem),
-            new WaitCommand(1),
+            ArmSubCmds.cmds.setArmToIntake(r.armSubsystem),
+            KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
+            KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem)
+            /*new WaitCommand(0.5),
+            ArmSubCmds.cmds.setSlidesToIntake(r.armSubsystem),
+            new WaitCommand(0.5),
+            KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),
             KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
             KidShampooCmds.cmds.SlurpIntake(r.kidShampooSubsystem),
-            new WaitCommand(1),
-            KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem)
+            new WaitCommand(2),
+            KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem)*/
         );
     }
 }
