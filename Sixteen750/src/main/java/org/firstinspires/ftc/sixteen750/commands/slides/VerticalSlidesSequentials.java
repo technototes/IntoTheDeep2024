@@ -44,9 +44,8 @@ public class VerticalSlidesSequentials {
 
     public static SequentialCommandGroup SlidesDown(Robot r) {
         return new SequentialCommandGroup(
-            LowBasketCommand(r),
-            new WaitCommand(.1),
-            SlidesDownCommand(r),
+            //            LowBasketCommand(r),
+            //            new WaitCommand(.3),
             transferVertical(r)
         );
     }

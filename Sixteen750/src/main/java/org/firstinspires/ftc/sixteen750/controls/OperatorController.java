@@ -107,9 +107,9 @@ public class OperatorController {
         bucketTransfer_bucketEmpty = gamepad.ps_circle;
         armTransfer_armEmpty = gamepad.leftStickButton;
         slidesHighSequential = gamepad.dpadUp;
-        slidesLowSequential = gamepad.dpadLeft;
-        slidesDownSequential = gamepad.dpadDown;
-        slidesZero = gamepad.ps_share;
+        slidesLowSequential = gamepad.dpadDown;
+        //slidesDownSequential = gamepad.dpadDown;
+        //slidesZero = gamepad.ps_share;
         //down_high = gamepad.dpadDown;
     }
 
@@ -130,14 +130,14 @@ public class OperatorController {
         }
         if (VERTICALSLIDESUBSYSTEM) {
             //down_high.whenPressed(VerticalSlidesCommands.vertSlideToggle(robot));
-            slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
+            //slidesDownSequential.whenPressed(VerticalSlidesSequentials.SlidesDown(robot));
             bucketTransfer_bucketEmpty.whenPressed(VerticalSlidesCommands.bucketToggle(robot));
             armTransfer_armEmpty.whenPressed(VerticalSlidesCommands.armToggle(robot));
             //armIncrement.whenPressed(VerticalSlidesCommands.ArmIncrement(robot));
             //armDecrement.whenPressed(VerticalSlidesCommands.ArmDecrement(robot));
             slidesHighSequential.whenPressed(VerticalSlidesSequentials.HighBasket(robot));
             slidesLowSequential.whenPressed(VerticalSlidesSequentials.LowBasket(robot));
-            slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
+            //slidesZero.whenPressed(VerticalSlidesCommands.SlidesZero(robot));
             //slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));
             //slidesDownTesting.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
         }

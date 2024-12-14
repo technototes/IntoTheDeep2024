@@ -46,7 +46,7 @@ public class HorizontalSlidesSequentials {
             clawChomp(r),
             BucketTransfer(r),
             ArmTransfer(r),
-            new WaitCommand(0.2),
+            new WaitCommand(0.1),
             clawOpen(r)
         );
     }
@@ -57,7 +57,7 @@ public class HorizontalSlidesSequentials {
             horizontalRetract(r),
             clawChomp(r),
             SlidesDown(r),
-            new WaitCommand(0.2),
+            new WaitCommand(0.1),
             clawOpen(r)
         );
     }
