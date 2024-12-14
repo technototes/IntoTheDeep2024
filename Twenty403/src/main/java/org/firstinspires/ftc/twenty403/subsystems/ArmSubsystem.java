@@ -347,9 +347,11 @@ public class ArmSubsystem implements Subsystem, Loggable {
     }
 
     private void setArmMotorPower(double speed) {
-        double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
-        rotate1.setPower(clippedSpeed);
-        rotate2.setPower(-clippedSpeed);
+        if (isHardware) {
+            double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
+            rotate1.setPower(clippedSpeed);
+            rotate2.setPower(-clippedSpeed);
+        }
     }
 
     public void horizontal() {
