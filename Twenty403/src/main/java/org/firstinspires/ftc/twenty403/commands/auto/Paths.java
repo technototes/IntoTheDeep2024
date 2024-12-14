@@ -8,6 +8,7 @@ import com.technototes.library.command.WaitCommand;
 import com.technototes.path.command.TrajectorySequenceCommand;
 import org.firstinspires.ftc.twenty403.AutoConstants;
 import org.firstinspires.ftc.twenty403.Robot;
+import org.firstinspires.ftc.twenty403.commands.AutoHighBasketCommand;
 import org.firstinspires.ftc.twenty403.commands.HighBasketCommand;
 import org.firstinspires.ftc.twenty403.commands.IntakePositionCommand;
 
@@ -76,104 +77,22 @@ public class Paths {
 
     public static Command SampleScoring(Robot r) {
         return new TrajectorySequenceCommand(
-            r.drivebaseSubsystem,
-            AutoConstants.START_TO_NETSCORING
+                r.drivebaseSubsystem,
+                AutoConstants.START_TO_NETSCORING
         )
-            .andThen(HighBasketCommand.HighBasket(r))
-            .andThen(new WaitCommand(1))
-            .andThen(Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem))
-            .andThen(Command.create(r.armSubsystem::horizontal, r.armSubsystem))
-            //.andThen(new WaitCommand(1))
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.NETSCORING_TO_INTAKE1
-                )
-            )
-            .andThen(IntakePositionCommand.IntakePos(r))
-            .andThen(Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem))
-            //.andThen(new WaitCommand(0.5))
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.INTAKE1_TO_NETSCORING
-                )
-            )
-            .andThen(new WaitCommand(0.2))
-            .alongWith(Command.create(r.armSubsystem::horizontal, r.armSubsystem))
-            .andThen(HighBasketCommand.HighBasket(r)
-            .andThen(new WaitCommand(0.5))
+                .andThen(AutoHighBasketCommand.HighBasket(r))
+                .andThen(new WaitCommand(1))
+                .andThen(Command.create(r.armSubsystem::setSlideToZero, r.armSubsystem))
+                .andThen(Command.create(r.armSubsystem::horizontal, r.armSubsystem))
+                .andThen(Command.create(r.armSubsystem::setArmToIntake, r.armSubsystem))
 
-                /*
-            .a
+                .andThen(new WaitCommand(0.5)
 
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.PUSHY_BOT_1))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.PUSHY_BOT_2))
+                .andThen(new TrajectorySequenceCommand(r.drivebaseSubsystem, AutoConstants.PUSHY_BOT_3))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            ndThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.NETSCORING_TO_INTAKE2
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.INTAKE2_TO_NETSCORING
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.NETSCORING_TO_INTAKE3
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebaseSubsystem,
-                    AutoConstants.INTAKE3_TO_NETSCORING
-                ) */
-            );
+                );
     }
 
     public static Command ForwardBackwardSide(Robot r) {
@@ -232,7 +151,7 @@ public class Paths {
     public static Command Obs_Parking(Robot r) {
         return new TrajectorySequenceCommand(
             r.drivebaseSubsystem,
-            AutoConstants.OBS_START_TO_OBS_PARK
+            AutoConstants.OBSERVATION_PARKY_WARKY
         );
     }
 }
