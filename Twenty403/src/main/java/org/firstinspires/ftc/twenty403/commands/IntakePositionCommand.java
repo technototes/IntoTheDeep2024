@@ -8,9 +8,7 @@ public class IntakePositionCommand {
 
     public static SequentialCommandGroup IntakePos(Robot r) {
         return new SequentialCommandGroup(
-            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem),
             KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
             ArmSubCmds.cmds.setArmToIntake(r.armSubsystem),
             KidShampooCmds.cmds.ScoopWrist(r.kidShampooSubsystem),

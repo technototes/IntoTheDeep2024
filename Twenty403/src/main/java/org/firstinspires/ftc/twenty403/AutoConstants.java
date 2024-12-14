@@ -89,6 +89,17 @@ public class AutoConstants {
     public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(53, 40, -30);
     public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 0);
     public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(35, 10, 0);
+    public static ConfigurablePoseD PUSHY_1 = new ConfigurablePoseD(45, 45, -90);
+    public static ConfigurablePoseD PUSHY_2 = new ConfigurablePoseD(45, 2, -90);
+    public static ConfigurablePoseD PUSHY_3 = new ConfigurablePoseD(34, 2, -90);
+    public static ConfigurablePoseD OBS_STARTY = new ConfigurablePoseD(-20, 50, -90);
+    public static ConfigurablePoseD OBS_PARKY = new ConfigurablePoseD(-60, 50, -90);
+
+
+    //push1 34, 59
+    //push1 34, 59d
+    //push2 34, 11
+    //push3 23, 11
     //end of the crimes
 
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence>
@@ -315,6 +326,26 @@ public class AutoConstants {
             INTAKE1_TO_NETSCORING = b ->
             b.apply(INTAKE1.toPose()).lineToLinearHeading(NETSCORING.toPose()).build();
 
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSHY_BOT_1 = func ->
+            func
+                    .apply(NETSCORING.toPose())
+                    .lineToLinearHeading(PUSHY_1.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSHY_BOT_2 = func ->
+            func
+                    .apply(PUSHY_1.toPose())
+                    .lineToLinearHeading(PUSHY_2.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSHY_BOT_3 = func ->
+            func
+                    .apply(PUSHY_2.toPose())
+                    .lineToLinearHeading(PUSHY_3.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OBSERVATION_PARKY_WARKY = func ->
+            func
+                    .apply(OBS_STARTY.toPose())
+                    .lineToLinearHeading(OBS_PARKY.toPose())
+                    .build();
     //end of borrowing
 
     //New testing constants for this year's game

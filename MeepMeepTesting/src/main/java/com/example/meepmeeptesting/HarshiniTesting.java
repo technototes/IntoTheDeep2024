@@ -27,6 +27,8 @@ public class HarshiniTesting {
         public static Pose2d SUBMARINE3 = new Pose2d(5, 36, toRadians(-90));
         public static Pose2d MINI_LINE = new Pose2d(-3, 36, toRadians(90));
 
+
+
         public static Pose2d PUSH_HALF = new Pose2d(-16, 36, toRadians(90));
 
         public static Pose2d PUSH_1 = new Pose2d(-34, 45, toRadians(90));
@@ -261,21 +263,21 @@ public class HarshiniTesting {
             //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
             //.addTrajectory(AutoConstants.TANGENT_TEST.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
-//            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
 //            .build();
-            .addTrajectory(AutoConstants.FORWARD_BACKWARD1.get())
-            .addTrajectory(AutoConstants.FORWARD_BACKWARD2.get())
-            .addTrajectory(AutoConstants.FORWARD_BACKWARD3.get())
-            .addTrajectory(AutoConstants.FORWARD_BACKWARD4.get())
+//            .addTrajectory(AutoConstants.FORWARD_BACKWARD1.get())
+//            .addTrajectory(AutoConstants.FORWARD_BACKWARD2.get())
+//            .addTrajectory(AutoConstants.FORWARD_BACKWARD3.get())
+//            .addTrajectory(AutoConstants.FORWARD_BACKWARD4.get())
             .build();
 
     }
