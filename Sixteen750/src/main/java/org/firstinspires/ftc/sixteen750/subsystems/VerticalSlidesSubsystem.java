@@ -53,7 +53,7 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     public Servo armServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
-    public static PIDCoefficients slidePID = new PIDCoefficients(0.0047, 0.0, 0.00002);
+    public static PIDCoefficients slidePID = new PIDCoefficients(0.0047, 0.0, 0.0);
     private PIDFController slidePidController;
     public static double FEEDFORWARD_COEFFICIENT = -0.32;
     public static double FEEDFORWARD_DOWN = -0.26;
@@ -269,8 +269,11 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     //reset
     public void resetSlideZero() {
         slideResetPos = getSlideUnmodifiedPosition();
+        setSlideTargetPosition(getSlideCurrentPos());
+        // slideTargetPos = slideResetPos;
         // We don't want the destination to go nuts, so update the target with the new zero
-        setSlideTargetPosition(slideResetPos);
+        // setSlideTargetPosition(slideTargetPos);
+        // setSlidePos(slideResetPos);
     }
 
     //scoring methods
