@@ -5,6 +5,7 @@ import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesC
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalExtend;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalRetract;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.horizontalSmallExtend;
+import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.smallClose;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristPickup;
 import static org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands.wristTransfer;
 import static org.firstinspires.ftc.sixteen750.commands.slides.VerticalSlidesCommands.ArmTransfer;
@@ -26,6 +27,15 @@ public class HorizontalSlidesSequentials {
             clawOpen(r),
             new WaitCommand(1),
             wristPickup(r)
+        );
+    }
+    public static SequentialCommandGroup intakeClawSmall(Robot r) {
+        return new SequentialCommandGroup(
+                horizontalExtend(r),
+                wristTransfer(r),
+                smallClose(r),
+                new WaitCommand(1),
+                wristPickup(r)
         );
     }
 
