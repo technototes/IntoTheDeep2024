@@ -20,6 +20,8 @@ public class JoystickDriveCommand implements Command, Loggable {
     public double targetHeadingRads;
     public DoubleSupplier driveStraighten;
     public DoubleSupplier drive45;
+    public boolean driverDriving;
+    public boolean operatorDriving;
 
     public JoystickDriveCommand(
         DrivebaseSubsystem sub,
@@ -36,6 +38,8 @@ public class JoystickDriveCommand implements Command, Loggable {
         targetHeadingRads = -sub.getExternalHeading();
         driveStraighten = strtDrive;
         drive45 = angleDrive;
+        driverDriving = true;
+        operatorDriving = false;
     }
 
     // Use this constructor if you don't want auto-straightening

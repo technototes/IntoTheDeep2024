@@ -44,13 +44,13 @@ public class AutoConstants {
     public static ConfigurablePoseD OBSERVATION_PUSH_HALF = new ConfigurablePoseD(-47, 40, (90));
 
 
-    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(62, 52, -90); // 55, 57, -135
+    public static ConfigurablePoseD NETSCORING = new ConfigurablePoseD(62, 51, -90); // 55, 57, -135
     public static ConfigurablePoseD NET_START = new ConfigurablePoseD(35, 63, 180);
     public static ConfigurablePoseD NET_AGAINST_THE_WALL = new ConfigurablePoseD(35, 63, -90);
     public static ConfigurablePoseD NETCLEAR = new ConfigurablePoseD(52, 52, 45);
-    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 50, -90);// 59, 50, -115
-    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 50, -90);
-    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(48.5, 41.5, -45);
+    public static ConfigurablePoseD INTAKE1 = new ConfigurablePoseD(47, 49, -90);// 59, 50, -115
+    public static ConfigurablePoseD INTAKE2 = new ConfigurablePoseD(57, 49, -90);
+    public static ConfigurablePoseD INTAKE3 = new ConfigurablePoseD(48, 25, 0); // 48.9, 39, -37 (doesnt quite get it)
     public static ConfigurablePoseD ASCENT = new ConfigurablePoseD(23, 12, 0);
     public static ConfigurablePoseD ASCENT_CLEAR = new ConfigurablePoseD(35, 10, 0);
 
