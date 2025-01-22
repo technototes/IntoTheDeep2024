@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.twenty403.subsystems;
+package org.firstinspires.ftc.hoops.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.technototes.library.hardware.motor.EncodedMotor;
-import org.firstinspires.ftc.twenty403.Hardware;
+import org.firstinspires.ftc.hoops.Hardware;
 
 @Config
 public class LauncherSubsystem {
@@ -16,8 +16,8 @@ public class LauncherSubsystem {
 
     public LauncherSubsystem(Hardware h) {
         // Do stuff in here
-        top = h.armL;
-        bottom = h.armR;
+        top = h.topLaunch;
+        bottom = h.bottomLaunch;
         bottom.setDirection(DcMotorSimple.Direction.REVERSE);
         top.setDirection(DcMotorSimple.Direction.FORWARD);
         bottom.coast();

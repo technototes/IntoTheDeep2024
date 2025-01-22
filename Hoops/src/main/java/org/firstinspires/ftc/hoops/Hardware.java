@@ -22,8 +22,10 @@ public class Hardware implements Loggable {
     public List<LynxModule> hubs;
 
     public EncodedMotor<DcMotorEx> flMotor, frMotor, rlMotor, rrMotor;
-
     public IGyro imu;
+
+    public EncodedMotor<DcMotorEx> topLaunch, bottomLaunch;
+    public EncodedMotor<DcMotorEx> slurp;
 
     public Hardware(HardwareMap hwmap) {
         hubs = hwmap.getAll(LynxModule.class);
@@ -41,6 +43,13 @@ public class Hardware implements Loggable {
             this.flMotor = new EncodedMotor<>(Setup.HardwareNames.FLMOTOR);
             this.rrMotor = new EncodedMotor<>(Setup.HardwareNames.RRMOTOR);
             this.rlMotor = new EncodedMotor<>(Setup.HardwareNames.RLMOTOR);
+        }
+        if (Setup.Connected.LAUNCHER) {
+            this.topLaunch = new EncodedMotor<>(Setup.HardwareNames.TOP_LAUNCH);
+            this.bottomLaunch = new EncodedMotor<>(Setup.HardwareNames.BOTTOM_LAUNCH);
+        }
+        if (Setup.Connected.INTAKE) {
+            this.slurp = new EncodedMotor<>(Setup.HardwareNames.INTAKE);
         }
     }
 
