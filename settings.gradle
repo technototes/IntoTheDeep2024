@@ -15,6 +15,9 @@ include ':Sixteen750'
 include ':Twenty403'
 
 // These are other 'bots' that we should build until we're at competitions
-// include ':LearnBot'                                                      // FLIP: BUILD ALL BOTS
+include ':LearnBot'                                                      // FLIP: BUILD ALL BOTS
+include ':Hoops'                                                         // FLIP: BUILD ALL BOTS
+include ':Ptechnodactyl'                                                 // FLIP: BUILD ALL BOTS
 // include ':RoadRunnerQuickStart'                                          // FLIP: BUILD ALL BOTS
-include ':MeepMeepTesting'
+
+// include ':MeepMeepTesting'
