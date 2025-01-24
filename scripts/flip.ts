@@ -32,6 +32,8 @@ const technoLib: FileList = {
   files: [
     'LearnBot/build.gradle',
     'Sixteen750/build.gradle',
+    'Ptechnodactyl/build.gradle',
+    'Hoops/build.gradle',
     'Twenty403/build.gradle',
     'build.dependencies.gradle',
     'settings.gradle',
