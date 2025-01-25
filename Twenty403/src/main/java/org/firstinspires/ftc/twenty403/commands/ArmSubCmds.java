@@ -24,6 +24,10 @@ public class ArmSubCmds {
             return Command.create(AS::highBasket);
         }
 
+        public static Command highbasketArmAuto(ArmSubsystem AS) {
+            return Command.create(AS::highBasketAuto);
+        }
+
         public static Command highbasketArmWaitTillDone(ArmSubsystem AS) {
             return new MoveArmCommand(AS, AS::highBasket);
         }

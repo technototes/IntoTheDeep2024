@@ -15,15 +15,18 @@ public class AutoHighBasketCommand {
             KidShampooCmds.cmds.StopIntake(r.kidShampooSubsystem),
             KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem),
             ArmSubCmds.cmds.slideZero(r.armSubsystem),
-            ArmSubCmds.cmds.highbasketArm(r.armSubsystem),
+            ArmSubCmds.cmds.highbasketArmAuto(r.armSubsystem),
             new WaitCommand(1),
             ArmSubCmds.cmds.highbasketSlide(r.armSubsystem),
-            new WaitCommand(1.2),
+            new WaitCommand(0.8),
+            KidShampooCmds.cmds.UpRetainer(r.kidShampooSubsystem),
+            new WaitCommand(0.4),
             KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem),
-            new WaitCommand(1.5),
-            KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
-            KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem)
+            new WaitCommand(2.3),
+            KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem),
+            new WaitCommand(0.2),
+            KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem)
+
         );
     }
 }
