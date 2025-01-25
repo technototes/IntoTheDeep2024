@@ -29,6 +29,7 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
     public double retainerPos;
 
     public static double RETAINER_OPEN_POSITION = .78;
+    public static double RETAINER_UP_POSITION = 0.3;
 
     public static double RETAINER_CLOSE_POSITION = .52;
 
@@ -63,6 +64,10 @@ public class KidShampooSubsystem implements Subsystem, Loggable {
 
     public void openRetainer() {
         setRetainerPosition(RETAINER_OPEN_POSITION);
+    }
+
+    public void upRetainer() {
+        setRetainerPosition(RETAINER_UP_POSITION);
     }
 
     public void closeRetainer() {

@@ -11,6 +11,10 @@ public class KidShampooCmds {
             return Command.create(KS::openRetainer);
         }
 
+        public static Command UpRetainer(KidShampooSubsystem KS) {
+            return Command.create(KS::upRetainer);
+        }
+
         public static Command CloseRetainer(KidShampooSubsystem KS) {
             return Command.create(KS::closeRetainer);
         }

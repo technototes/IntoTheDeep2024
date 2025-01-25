@@ -22,7 +22,7 @@ public class HighBasketCommand {
             new WaitCommand(1.2),
             KidShampooCmds.cmds.DumpWrist(r.kidShampooSubsystem),
             KidShampooCmds.cmds.OpenRetainer(r.kidShampooSubsystem),
-            new WaitCommand(0.3),
+            new WaitCommand(1.2),
             KidShampooCmds.cmds.CloseRetainer(r.kidShampooSubsystem),
             KidShampooCmds.cmds.ScoopWristAutoOnly(r.kidShampooSubsystem)
         );
