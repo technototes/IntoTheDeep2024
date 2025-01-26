@@ -5,15 +5,10 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.hardware.motor.EncodedMotor;
-import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.sensor.AdafruitIMU;
-import com.technototes.library.hardware.sensor.ColorDistanceSensor;
 import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
-import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
-import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
-import com.technototes.vision.hardware.Webcam;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
 
