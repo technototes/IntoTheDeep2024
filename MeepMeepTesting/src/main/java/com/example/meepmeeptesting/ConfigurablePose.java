@@ -1,12 +1,8 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import java.util.function.DoubleFunction;
-import java.util.function.DoubleFunction;
-import java.util.function.Function;
 import java.util.function.Function;
 
 public class ConfigurablePose extends ConfigurableVector {
