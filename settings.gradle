@@ -20,4 +20,4 @@ include ':Hoops'                                                         // FLIP
 include ':Ptechnodactyl'                                                 // FLIP: BUILD ALL BOTS
 // include ':RoadRunnerQuickStart'                                          // FLIP: BUILD ALL BOTS
 
-// include ':MeepMeepTesting'
+include ':MeepMeepTesting'
