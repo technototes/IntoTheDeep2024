@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises';
+import { existsSync } from 'fs';
 import * as path from 'path';
 import { removeComments } from './helpers/removeComments.js';
 import { MakeAutoConstantsTransformer } from './helpers/AutoConstTransformer.js';
@@ -29,7 +30,23 @@ if (maybeFiles.length === 1) {
   } else {
     filesAsString.push(theStr);
   }
+} else {
+  filesAsString = maybeFiles;
 }
+let resolvedFiles = filesAsString
+  .map((val) => path.resolve(val))
+  .filter((val) => existsSync(val));
+if (resolvedFiles.length === 0) {
+  resolvedFiles = filesAsString
+    .map((val) => path.resolve(path.join('./scripts', val)))
+    .filter((val) => existsSync(val));
+  if (resolvedFiles.length === 0) {
+    console.error('No files found - sorry');
+    process.exit(1);
+  }
+}
+filesAsString = resolvedFiles;
+// console.log(filesAsString);
 // We're only finding files that include "auto" and "const" in their paths.
 const constantsFiles = filesAsString.filter(
   (val) =>
