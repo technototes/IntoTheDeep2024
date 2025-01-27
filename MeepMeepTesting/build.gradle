@@ -1,8 +1,8 @@
 apply plugin: 'java-library'
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
@@ -87,6 +87,6 @@ makeMeepMeep20403Java.mustRunAfter cleanMeepMeep
 makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
 
 dependencies {
-    implementation 'com.github.NoahBres:MeepMeep:2.0.3' // FLIP: MeepMeepLocal
+    implementation 'com.github.rh-robotics:MeepMeep:v1.1.0' // FLIP: MeepMeepLocal
     // implementation project(':MeepMeep') // FLIP: MeepMeepLocal
 }
