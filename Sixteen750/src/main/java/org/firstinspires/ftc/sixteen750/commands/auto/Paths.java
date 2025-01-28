@@ -183,63 +183,26 @@ public class Paths {
     }
 
     public static Command ObservationPushing(Robot r) {
-        return new TrajectorySequenceCommand(
-            r.drivebase,
-            AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1
-        )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9
-                )
-            )
-            .andThen(
-                new TrajectorySequenceCommand(
-                    r.drivebase,
-                    AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10
-                )
-            );
+        return new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO1)
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO2))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO3))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO4))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO5))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO6))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO7))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO8))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO9))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO9))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO10))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO11))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO12))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO13))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO14))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO15))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO16))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO17))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO18))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO19))
+            .andThen(new TrajectorySequenceCommand(r.drivebase, AutoConstants.SPEC_SCORING_AUTO20));
     }
 }
