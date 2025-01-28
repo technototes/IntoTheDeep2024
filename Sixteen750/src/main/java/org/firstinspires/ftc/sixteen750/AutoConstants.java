@@ -33,8 +33,8 @@ public class AutoConstants {
 
     public static ConfigurablePoseD PUSH_1 = new ConfigurablePoseD(-34, 45, (0));
     public static ConfigurablePoseD PUSH_2 = new ConfigurablePoseD(-34, 10, (0));
-    public static ConfigurablePoseD PUSH_3_AND_A_HALF = new ConfigurablePoseD(-46, 11, 0));
-    public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-35, 10, (0);
+    public static ConfigurablePoseD PUSH_3_AND_A_HALF = new ConfigurablePoseD(-46, 11, (0));
+    public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-35, 10, (0));
     public static ConfigurablePoseD PUSH_4 = new ConfigurablePoseD(-56, 10, (0));
     public static ConfigurablePoseD OBSERVATION_ZONE_2 = new ConfigurablePoseD(-56, 55, (0));
     public static ConfigurablePoseD PUSH_5 = new ConfigurablePoseD(-61, 10, (0));

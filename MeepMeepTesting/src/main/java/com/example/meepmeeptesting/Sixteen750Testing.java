@@ -34,12 +34,12 @@ public class Sixteen750Testing {
         // trackWidth: The width of our wheelbase (not clear what this really affects...) @TrackWidth
         MinVelocityConstraint min_vel = new MinVelocityConstraint(
             Arrays.asList(
-                new AngularVelocityConstraint(60/* @MaxAngleVelo */),
-                new MecanumVelocityConstraint(60/* @MaxVelo */, 14/* @TrackWidth */)
+                new AngularVelocityConstraint(90/* @MaxAngleVelo */),
+                new MecanumVelocityConstraint(90/* @MaxVelo */, 14/* @TrackWidth */)
             )
         );
         ProfileAccelerationConstraint prof_accel = new ProfileAccelerationConstraint(
-            30
+            75
             /* @MaxAccel */
         );
         AutoConstants.fwdFunc = (Pose2d pose) -> new TrajectoryBuilder(pose, min_vel, prof_accel);
@@ -47,7 +47,7 @@ public class Sixteen750Testing {
             new TrajectoryBuilder(pose, Math.PI + pose.getHeading(), min_vel, prof_accel);
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
             .setDimensions(14, 17)
-            .followTrajectorySequence(Sixteen750Testing::getRedTrajectory);
+            .followTrajectorySequence(Sixteen750Testing::getParkingTrajectory);
         try {
             // Try to load the field image from the repo:
             meepMeep.setBackground(ImageIO.read(new File("Field.jpg")));
@@ -59,9 +59,9 @@ public class Sixteen750Testing {
     } //Wing Red
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
-        return driveA
+        return drive
             .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_NETSCORING.get())q
+            .addTrajectory(AutoConstants.START_TO_NETSCORING.get())
             //.turn(Math.toRadians(-135))
             .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE1.get())
             .addTrajectory(AutoConstants.INTAKE1_TO_NETSCORING.get())
@@ -70,7 +70,7 @@ public class Sixteen750Testing {
             .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
             .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get())
             .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT_CLEAR.get())
-            .addTrajectory(AutoConstants.ASCENT_CLEAR_TO_ASCENT.get())bun
+            .addTrajectory(AutoConstants.ASCENT_CLEAR_TO_ASCENT.get())
             /* 
             splines
             .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
@@ -113,8 +113,6 @@ public class Sixteen750Testing {
             .addTrajectory(AutoConstants.SPEC_SCORING_AUTO18.get())
             .addTrajectory(AutoConstants.SPEC_SCORING_AUTO19.get())
             .addTrajectory(AutoConstants.SPEC_SCORING_AUTO20.get())
-
-
             .build();
     }
 
