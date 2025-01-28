@@ -59,9 +59,9 @@ public class Sixteen750Testing {
     } //Wing Red
 
     private static TrajectorySequence getRedTrajectory(DriveShim drive) {
-        return drive
+        return driveA
             .trajectorySequenceBuilder(AutoConstants.START)
-            .addTrajectory(AutoConstants.START_TO_NETSCORING.get())
+            .addTrajectory(AutoConstants.START_TO_NETSCORING.get())q
             //.turn(Math.toRadians(-135))
             .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE1.get())
             .addTrajectory(AutoConstants.INTAKE1_TO_NETSCORING.get())
@@ -70,7 +70,7 @@ public class Sixteen750Testing {
             .addTrajectory(AutoConstants.NETSCORING_TO_INTAKE3.get())
             .addTrajectory(AutoConstants.INTAKE3_TO_NETSCORING.get())
             .addTrajectory(AutoConstants.NETSCORING_TO_ASCENT_CLEAR.get())
-            .addTrajectory(AutoConstants.ASCENT_CLEAR_TO_ASCENT.get())
+            .addTrajectory(AutoConstants.ASCENT_CLEAR_TO_ASCENT.get())bun
             /* 
             splines
             .addTrajectory(AutoConstants.START_TO_RIGHT_SPIKE.get())
@@ -93,16 +93,28 @@ public class Sixteen750Testing {
             // .setReversed(true)
             //.addTrajectory(AutoConstants.NETSCORING_TO_NETSCORING_CLEAR.get())
             //.addTrajectory(AutoConstants.NETSCORING_CLEAR_TO_ASCENT.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO1.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO2.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO3.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO4.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO5.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO6.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO7.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO8.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO9.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO10.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO11.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO12.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO13.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO14.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO15.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO16.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO17.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO18.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO19.get())
+            .addTrajectory(AutoConstants.SPEC_SCORING_AUTO20.get())
+
+
             .build();
     }
 

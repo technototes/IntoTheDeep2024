@@ -31,14 +31,20 @@ public class AutoConstants {
 
     public static ConfigurablePoseD PUSH_HALF = new ConfigurablePoseD(-16, 36, (90));
 
-    public static ConfigurablePoseD PUSH_1 = new ConfigurablePoseD(-34, 45, (90));
-    public static ConfigurablePoseD PUSH_2 = new ConfigurablePoseD(-34, 10, (90));
-    public static ConfigurablePoseD PUSH_3_AND_A_HALF = new ConfigurablePoseD(-46, 11, (90));
-    public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-35, 10, (90));
-    public static ConfigurablePoseD PUSH_4 = new ConfigurablePoseD(-56, 10, (90));
-    public static ConfigurablePoseD OBSERVATION_ZONE_2 = new ConfigurablePoseD(-56, 55, (90));
-    public static ConfigurablePoseD PUSH_5 = new ConfigurablePoseD(-61, 10, (90));
-    public static ConfigurablePoseD OBSERVATION_ZONE_3 = new ConfigurablePoseD(-61, 55, (90));
+    public static ConfigurablePoseD PUSH_1 = new ConfigurablePoseD(-34, 45, (0));
+    public static ConfigurablePoseD PUSH_2 = new ConfigurablePoseD(-34, 10, (0));
+    public static ConfigurablePoseD PUSH_3_AND_A_HALF = new ConfigurablePoseD(-46, 11, 0));
+    public static ConfigurablePoseD PUSH_3 = new ConfigurablePoseD(-35, 10, (0);
+    public static ConfigurablePoseD PUSH_4 = new ConfigurablePoseD(-56, 10, (0));
+    public static ConfigurablePoseD OBSERVATION_ZONE_2 = new ConfigurablePoseD(-56, 55, (0));
+    public static ConfigurablePoseD PUSH_5 = new ConfigurablePoseD(-61, 10, (0));
+    public static ConfigurablePoseD OBSERVATION_ZONE_3 = new ConfigurablePoseD(-61, 55, (0));
+    public static ConfigurablePoseD SPEC_SCORE_1 = new ConfigurablePoseD(0,38,-90);
+    public static ConfigurablePoseD SPEC_SCORE_2 = new ConfigurablePoseD(-2,38,-90);
+    public static ConfigurablePoseD SPEC_SCORE_3 = new ConfigurablePoseD(-4,38,-90);
+    public static ConfigurablePoseD SPEC_SCORE_4 = new ConfigurablePoseD(-6,38,-90);
+    public static ConfigurablePoseD SPEC_SCORE_5 = new ConfigurablePoseD(-8,38,-90);
+    public static ConfigurablePoseD SPEC_GRAB = new ConfigurablePoseD(-52,58,90);
 
     public static ConfigurablePoseD SAMPLE_1 = new ConfigurablePoseD(-48, 26, (90));
     public static ConfigurablePoseD OBSERVATION_PUSH_HALF = new ConfigurablePoseD(-47, 40, (90));
@@ -70,60 +76,110 @@ public class AutoConstants {
 
     // These are 'trajectory pieces' which should be named like this:
     // {STARTING_POSITION}_TO_{ENDING_POSITION}
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO1 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO1 = func ->
             func
                     .apply(OBSERVATION_START.toPose())
+                    .lineToLinearHeading(SPEC_SCORE_1.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO2 = func ->
+            func
+                    .apply(SPEC_SCORE_1.toPose())
                     .lineToLinearHeading(PUSH_1.toPose())
                     .build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO2 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO3 = func ->
             func
                     .apply(PUSH_1.toPose())
                     .lineToLinearHeading(PUSH_2.toPose())
                     .build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO4 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO4 = func ->
             func
                     .apply(PUSH_2.toPose())
                     .lineToLinearHeading(PUSH_3_AND_A_HALF.toPose())
                     .build();
 
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO5 = func ->
             func
                     .apply(PUSH_3_AND_A_HALF.toPose())
                     .lineToLinearHeading(OBSERVATION_ZONE.toPose())
                     .build();
 
 
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO5 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO6 = func ->
             func
                     .apply(OBSERVATION_ZONE.toPose())
                     .lineToLinearHeading(PUSH_3_AND_A_HALF.toPose())
                     .build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO6 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO7 = func ->
             func
                     .apply(PUSH_3_AND_A_HALF.toPose())
                     .lineToLinearHeading(PUSH_4.toPose())
                     .build();
 
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO7 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO8 = func ->
             func
                     .apply(PUSH_4.toPose())
                     .lineToLinearHeading(OBSERVATION_ZONE_2.toPose())
                     .build();
 
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO8 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO9 = func ->
             func
                     .apply(OBSERVATION_ZONE_2.toPose())
                     .lineToLinearHeading(PUSH_4.toPose())
                     .build();
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO9 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO10 = func ->
             func
                     .apply(PUSH_4.toPose())
                     .lineToLinearHeading(PUSH_5.toPose())
                     .build();
 
-    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> PUSH_BOT_OBSERVATION_SIDE_AUTO10 = func ->
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO11 = func ->
             func
                     .apply(PUSH_5.toPose())
+                    .lineToLinearHeading(OBSERVATION_ZONE_3.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO12 = func ->
+            func
+                    .apply(OBSERVATION_ZONE_3.toPose())
+                    .lineToLinearHeading(SPEC_GRAB.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO13 = func ->
+            func
+                    .apply(SPEC_GRAB.toPose())
+                    .lineToLinearHeading(SPEC_SCORE_2.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO14 = func ->
+            func
+                    .apply(SPEC_SCORE_2.toPose())
+                    .lineToLinearHeading(SPEC_GRAB.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO15 = func ->
+            func
+                    .apply(SPEC_GRAB. toPose())
+                    .lineToLinearHeading(SPEC_SCORE_3.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO16 = func ->
+            func
+                    .apply(SPEC_SCORE_3.toPose())
+                    .lineToLinearHeading(SPEC_GRAB.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO17 = func ->
+            func
+                    .apply(SPEC_GRAB.toPose())
+                    .lineToLinearHeading(SPEC_SCORE_4.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO18 = func ->
+            func
+                    .apply(SPEC_SCORE_4.toPose())
+                    .lineToLinearHeading(SPEC_GRAB.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO19 = func ->
+            func
+                    .apply(SPEC_GRAB.toPose())
+                    .lineToLinearHeading(SPEC_SCORE_5.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SPEC_SCORING_AUTO20 = func ->
+            func
+                    .apply(SPEC_SCORE_5.toPose())
                     .lineToLinearHeading(OBSERVATION_ZONE_3.toPose())
                     .build();
 
