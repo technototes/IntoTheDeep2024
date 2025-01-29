@@ -12,8 +12,9 @@ public class LauncherSubsystem {
 
     public static double MAX_MOTOR_VELOCITY = 1.0;
 
-    boolean hasHardware;
+    public static double MIN_MOTOR_VELOCITY = 0.25;
 
+    boolean hasHardware;
     EncodedMotor<DcMotorEx> top;
     EncodedMotor<DcMotorEx> bottom;
 
@@ -38,8 +39,16 @@ public class LauncherSubsystem {
         // Spin the motors
         // TODO: make the motors spit the thing at the right angle
         if (hasHardware) {
-            top.setVelocity(MAX_MOTOR_VELOCITY);
-            bottom.setVelocity(MAX_MOTOR_VELOCITY);
+            if (angleInDegrees > 0) {
+                top.setVelocity(MAX_MOTOR_VELOCITY);
+                bottom.setVelocity(MIN_MOTOR_VELOCITY);
+            } else if (angleInDegrees < 0) {
+                top.setVelocity(MIN_MOTOR_VELOCITY);
+                bottom.setVelocity(MAX_MOTOR_VELOCITY);
+            } else {
+              top.setVelocity(MAX_MOTOR_VELOCITY);
+              bottom.setVelocity(MAX_MOTOR_VELOCITY);
+            }
         }
     }
 
