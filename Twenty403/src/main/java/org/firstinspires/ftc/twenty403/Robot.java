@@ -49,12 +49,16 @@ public class Robot implements Loggable {
         }
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             this.kidShampooSubsystem = new KidShampooSubsystem(hw);
+        } else {
+            this.kidShampooSubsystem = new KidShampooSubsystem();
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             this.hangSubsystem = new HangSubsystem(hw);
         }
         if (Setup.Connected.ARMSUBSYSTEM) {
             this.armSubsystem = new ArmSubsystem(hw);
+        } else {
+            this.armSubsystem = new ArmSubsystem();
         }
     }
 
