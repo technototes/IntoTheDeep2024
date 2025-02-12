@@ -24,8 +24,8 @@ public class LauncherSubsystem {
             hasHardware = true;
             top = h.topLaunch;
             bottom = h.bottomLaunch;
-            bottom.setDirection(DcMotorSimple.Direction.REVERSE);
-            top.setDirection(DcMotorSimple.Direction.FORWARD);
+            bottom.setDirection(DcMotorSimple.Direction.FORWARD);
+            top.setDirection(DcMotorSimple.Direction.REVERSE);
             bottom.coast();
             top.coast();
         } else {
@@ -46,8 +46,8 @@ public class LauncherSubsystem {
                 top.setVelocity(MIN_MOTOR_VELOCITY);
                 bottom.setVelocity(MAX_MOTOR_VELOCITY);
             } else {
-              top.setVelocity(MAX_MOTOR_VELOCITY);
-              bottom.setVelocity(MAX_MOTOR_VELOCITY);
+                top.setVelocity(MAX_MOTOR_VELOCITY);
+                bottom.setVelocity(MAX_MOTOR_VELOCITY);
             }
         }
     }

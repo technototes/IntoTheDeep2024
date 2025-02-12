@@ -25,5 +25,8 @@ public class Robot implements Loggable {
                 hw.imu
             );
         }
+        if (Setup.Connected.LAUNCHER) {
+            this.launcherSubsystem = new LauncherSubsystem(hw);
+        }
     }
 }
