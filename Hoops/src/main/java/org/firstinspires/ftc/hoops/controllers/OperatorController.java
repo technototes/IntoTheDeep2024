@@ -34,5 +34,6 @@ public class OperatorController {
 
     public void bindLaunchControls() {
         launch.whenPressed(LaunchCommands.launchCommand(robot));
+        launch.whenReleased(LaunchCommands.stopLaunchCommand(robot));
     }
 }
