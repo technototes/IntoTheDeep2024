@@ -8,7 +8,7 @@ import org.firstinspires.ftc.hoops.subsystems.LauncherSubsystem;
 public class LaunchCommands {
 
     public static Command launchCommand(Robot r) {
-        return Command.create(r.launcherSubsystem::Launch, 18.0);
+        return Command.create(r.launcherSubsystem::Launch, 45.0);
     }
 
     public static Command stopLaunchCommand(Robot r) {
