@@ -10,9 +10,9 @@ import org.firstinspires.ftc.hoops.Setup;
 @Config
 public class LauncherSubsystem {
 
-    public static double MAX_MOTOR_VELOCITY = 1.0;
+    public static double MAX_MOTOR_VELOCITY = 0.25; // 0.5 1.0
 
-    public static double MIN_MOTOR_VELOCITY = 0.25;
+    public static double MIN_MOTOR_VELOCITY = 0.075; // 0.15 0.25
 
     boolean hasHardware;
     EncodedMotor<DcMotorEx> top;
