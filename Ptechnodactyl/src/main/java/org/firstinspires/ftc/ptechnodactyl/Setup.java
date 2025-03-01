@@ -16,6 +16,7 @@ public class Setup {
         public static boolean FLYWHEEL = false;
         public static boolean WEBCAM = false;
         public static boolean EXTERNAL_IMU = true;
+        public static boolean CLAWSUBSYSTEM = false;
     }
 
     @Config
@@ -33,6 +34,7 @@ public class Setup {
         public static String DISTANCE = "d";
         public static String COLOR = "c";
         public static String CAMERA = "camera";
+        public static String CLAW = "claw";
     }
 
     @Config

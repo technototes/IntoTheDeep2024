@@ -25,7 +25,9 @@ public class Hardware implements Loggable {
     public Motor<DcMotorEx> placeholder1;
     public DcMotorEx liftMotor;
 
-    public Servo placeholder2;
+    //claw servo
+    public Servo claw;
+
     public Servo servo;
 
     public IGyro imu;
@@ -61,6 +63,9 @@ public class Hardware implements Loggable {
         }
         if (Setup.Connected.FLYWHEEL) {
             this.placeholder1 = new Motor<>(Setup.HardwareNames.FLYWHEELMOTOR);
+        }
+        if (Setup.Connected.CLAWSUBSYSTEM) {
+            this.claw = new Servo(Setup.HardwareNames.CLAW);
         }
         if (Setup.Connected.WEBCAM) {
             camera = new Webcam(Setup.HardwareNames.CAMERA);
