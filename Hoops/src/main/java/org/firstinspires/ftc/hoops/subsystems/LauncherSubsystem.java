@@ -38,7 +38,7 @@ public class LauncherSubsystem {
         } else if (angleInDegrees == 0) {
             top.setVelocity(MAX_MOTOR_VELOCITY);
             bottom.setVelocity(MAX_MOTOR_VELOCITY);
-        }
+        } 
     }
 
     public void Stop() {
