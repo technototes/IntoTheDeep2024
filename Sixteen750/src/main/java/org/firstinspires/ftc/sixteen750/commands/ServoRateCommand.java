@@ -20,9 +20,6 @@ public class ServoRateCommand implements Command{
         time = seconds;
         startPos = start;
         endPos = end;
-
-
-
     }
 
     public void initialize(){
@@ -32,13 +29,16 @@ public class ServoRateCommand implements Command{
     };
 
     public void execute(){
-
+        double x = timer.time();
+        double m = (endPos - startPos) / time;
+        double b = startPos;
+    servo.setPosition(m*x + b);
+    //slope intercept form (m = rise/run)
     };
 
     public boolean isFinished(){
-        timer.time();
+        return timer.time() >= time;
         //if the timer is greater or equal to the totaltime
-        return true;
     };
 
     //init command
