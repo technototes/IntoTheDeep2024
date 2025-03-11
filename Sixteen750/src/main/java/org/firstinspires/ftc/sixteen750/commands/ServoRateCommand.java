@@ -13,12 +13,17 @@ public class ServoRateCommand implements Command {
     private ElapsedTime timer = new ElapsedTime();
 
     public boolean isFinished() {
-        timer.time();
+        return timer.time() >= time;
     }
 
     public void initialize() {
         timer.reset();
         servo.setPosition(startPos);
+    }
+
+    // rise/run is m in mx + b
+    public void execute() {
+        servo.setPosition(((endPos - startPos) / time) * timer.time() + startPos);
     }
 
     public void ServoRateCommand(Servo servo, double time, double startPos, double endPos) {
