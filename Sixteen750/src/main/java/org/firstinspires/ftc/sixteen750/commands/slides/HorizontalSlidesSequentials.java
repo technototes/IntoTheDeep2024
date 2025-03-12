@@ -29,7 +29,7 @@ public class HorizontalSlidesSequentials {
             wristPickup(r)
         );
     }
-    public static SequentialCommandGroup intakeClawSmall(Robot r) {
+    public static SequentialCommandGroup intakeClaSmall(Robot r) {
         return new SequentialCommandGroup(
                 horizontalExtend(r),
                 wristTransfer(r),

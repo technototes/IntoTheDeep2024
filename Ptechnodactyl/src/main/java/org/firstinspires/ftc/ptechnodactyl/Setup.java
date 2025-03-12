@@ -33,6 +33,7 @@ public class Setup {
         public static String DISTANCE = "d";
         public static String COLOR = "c";
         public static String CAMERA = "camera";
+        public static String CLAW = "claw";
     }
 
     @Config

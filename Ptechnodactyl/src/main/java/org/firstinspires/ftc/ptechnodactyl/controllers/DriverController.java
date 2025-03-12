@@ -16,7 +16,7 @@ public class DriverController {
     public CommandGamepad gamepad;
 
     public Stick driveLeftStick, driveRightStick;
-    public CommandButton resetGyroButton, turboButton, snailButton;
+    public CommandButton resetGyroButton, turboButton, snailButton, clawOpen, clawClose;
     public CommandButton override;
     public CommandAxis driveStraighten;
 
@@ -37,6 +37,8 @@ public class DriverController {
         driveStraighten = gamepad.rightTrigger;
         turboButton = gamepad.leftBumper;
         snailButton = gamepad.rightBumper;
+        clawOpen = gamepad.ps_triangle;
+        clawClose = gamepad.ps_cross;
     }
 
     public void bindDriveControls() {
@@ -52,6 +54,7 @@ public class DriverController {
         turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
         snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
+        clawOpen.whenPressed()
 
         resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
     }
