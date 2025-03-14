@@ -7,13 +7,13 @@ public class Setup {
     @Config
     public static class Connected {
 
-        public static boolean DRIVEBASE = true;
-        public static boolean VERTICALSLIDESUBSYSTEM = true;
-        public static boolean HORIZONTALSLIDESUBSYSTEM = true;
+        public static boolean DRIVEBASE = false;
+        public static boolean VERTICALSLIDESUBSYSTEM = false;
+        public static boolean HORIZONTALSLIDESUBSYSTEM = false;
         public static boolean BUCKET = false;
-        public static boolean ODOSUBSYSTEM = true;
+        public static boolean ODOSUBSYSTEM = false;
         public static boolean SAFETYSUBSYSTEM = false;
-        public static boolean EXTERNAL_IMU = true;
+        public static boolean EXTERNAL_IMU = false;
         public static boolean HANGSUBSYSTEM = false;
     }
 

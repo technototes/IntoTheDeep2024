@@ -29,6 +29,7 @@ public class Hardware implements Loggable {
     public Servo armservo;
     public Servo bucketservo;
     public MotorEncoder odoF, odoR;
+    public Servo servo;
 
     /* Put other hardware here! */
 
@@ -67,6 +68,8 @@ public class Hardware implements Loggable {
             suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
             suspend2 = new EncodedMotor(Setup.HardwareNames.SUSPEND2);
         }
+
+        servo = new Servo("servo");
     }
 
     // We can read the voltage from the different hubs for fun...

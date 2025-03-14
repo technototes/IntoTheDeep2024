@@ -8,6 +8,7 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.sixteen750.Robot;
+import org.firstinspires.ftc.sixteen750.commands.ServoRateCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalAnalogCommand;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesCommands;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
@@ -57,6 +58,9 @@ public class OperatorController {
     public CommandButton basketScore;
     public CommandButton bucketTransfer_bucketEmpty;
     public CommandButton armTransfer_armEmpty;
+
+    public CommandButton servoTestOne;
+    public CommandButton servoTestTwo;
     //public CommandButton wristDecrement;
 
     //can we make a command happen when we switch modes? like horizontal retract when vertical is active vice versa
@@ -108,6 +112,9 @@ public class OperatorController {
         armTransfer_armEmpty = gamepad.leftStickButton;
         slidesHighSequential = gamepad.dpadUp;
         slidesLowSequential = gamepad.dpadDown;
+
+        servoTestOne = gamepad.dpadLeft;
+        servoTestTwo = gamepad.dpadRight;
         //slidesDownSequential = gamepad.dpadDown;
         //slidesZero = gamepad.ps_share;
         //down_high = gamepad.dpadDown;
@@ -141,5 +148,8 @@ public class OperatorController {
             //slidesUpTesting.whenPressed(VerticalSlidesCommands.SlidesUp(robot));
             //slidesDownTesting.whenPressed(VerticalSlidesCommands.SlidesDown(robot));
         }
+
+        servoTestOne.whenPressed(new ServoRateCommand(robot.servo, 4, 0, 1));
+        servoTestTwo.whenPressed(new ServoRateCommand(robot.servo, 2, 1, 0));
     }
 }

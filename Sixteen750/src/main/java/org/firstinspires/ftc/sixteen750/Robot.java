@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.sixteen750;
 
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
@@ -25,6 +26,7 @@ public class Robot implements Loggable {
     public TwoDeadWheelLocalizer localizer;
     public SafetySubsystem safetySubsystem;
     public HangSubsystem hangSubsystem;
+    public Servo servo;
 
     public Robot(Hardware hw, Alliance team, StartingPosition pos) {
         this.position = pos;
@@ -58,6 +60,7 @@ public class Robot implements Loggable {
         if (Setup.Connected.HANGSUBSYSTEM) {
             this.hangSubsystem = new HangSubsystem(hw);
         }
+        this.servo = hw.servo;
     }
 
     public void prepForStart() {
