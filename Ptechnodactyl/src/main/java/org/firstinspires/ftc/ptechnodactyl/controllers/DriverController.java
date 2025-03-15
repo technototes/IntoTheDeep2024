@@ -7,6 +7,7 @@ import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
+import org.firstinspires.ftc.ptechnodactyl.commands.ClawCommands;
 import org.firstinspires.ftc.ptechnodactyl.commands.EZCmd;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickDriveCommand;
 
@@ -54,7 +55,8 @@ public class DriverController {
         turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
         snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
-        clawOpen.whenPressed()
+        clawOpen.whenPressed(ClawCommands.clawOpen(robot.clawSubsystem));
+        clawClose.whenPressed(ClawCommands.clawClose(robot.clawSubsystem));
 
         resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
     }
