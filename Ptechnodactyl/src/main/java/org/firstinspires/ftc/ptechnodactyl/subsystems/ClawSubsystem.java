@@ -2,6 +2,7 @@ package org.firstinspires.ftc.ptechnodactyl.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.logger.Log;
 
 @Config
 public class ClawSubsystem {
@@ -10,13 +11,24 @@ public class ClawSubsystem {
     public static double CLAW_OPEN = 0;
     public static double CLAW_CLOSE = 0.4;
 
+    @Log(name = "clawpos")
+    public double clawpos;
+
+    public void setServoPosition(double r) {
+        servowervo.setPosition(r);
+        clawpos = r;
+    }
+
     public void setClawOpen() {
-        servowervo.setPosition(CLAW_OPEN);
+        setServoPosition(CLAW_OPEN);
     }
 
     public void setClawClose() {
-        servowervo.setPosition(CLAW_CLOSE);
+        setServoPosition(CLAW_CLOSE);
     }
 
+    public void periodic() {
+
+    }
 }
 

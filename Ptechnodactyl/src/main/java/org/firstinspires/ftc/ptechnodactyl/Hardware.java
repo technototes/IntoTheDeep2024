@@ -65,7 +65,7 @@ public class Hardware implements Loggable {
         if (Setup.Connected.WEBCAM) {
             camera = new Webcam(Setup.HardwareNames.CAMERA);
         }
-        if (Setup.Connected.TESTSUBSYSTEM) {
+        if (Setup.Connected.CLAWSUBSYSTEM) {
             if (Setup.Connected.SERVO) {
                 this.servo = new Servo(Setup.HardwareNames.SERVO);
             }
