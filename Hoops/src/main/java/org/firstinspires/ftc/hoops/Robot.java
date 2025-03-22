@@ -30,5 +30,8 @@ public class Robot implements Loggable {
         if (Setup.Connected.LAUNCHER) {
             this.launcherSubsystem = new LauncherSubsystem(hw);
         }
+        if (Setup.Connected.INTAKE) {
+            this.intakeSubsystem = new IntakeSubsystem(hw);
+        }
     }
 }
