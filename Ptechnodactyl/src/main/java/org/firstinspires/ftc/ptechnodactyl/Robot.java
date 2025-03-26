@@ -24,6 +24,10 @@ public class Robot implements Loggable {
                 hw.rrMotor,
                 hw.imu
             );
+            if (Setup.Connected.CLAWSUBSYSTEM){
+                this.clawSubsystem = new ClawSubsystem()
+                hw.servo
+            }
         }
     }
 }

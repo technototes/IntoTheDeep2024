@@ -29,6 +29,8 @@ public class DriverController {
         if (Setup.Connected.DRIVEBASE) {
             bindDriveControls();
         }
+        clawOpen.whenPressed(ClawCommands.clawOpen(robot.clawSubsystem));
+        clawClose.whenPressed(ClawCommands.clawClose(robot.clawSubsystem));
     }
 
     private void AssignNamedControllerButton() {
@@ -55,8 +57,8 @@ public class DriverController {
         turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
         snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
         snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
-        clawOpen.whenPressed(ClawCommands.clawOpen(robot.clawSubsystem));
-        clawClose.whenPressed(ClawCommands.clawClose(robot.clawSubsystem));
+//        clawOpen.whenPressed(ClawCommands.clawOpen(robot.clawSubsystem));
+//        clawClose.whenPressed(ClawCommands.clawClose(robot.clawSubsystem));
 
         resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
     }

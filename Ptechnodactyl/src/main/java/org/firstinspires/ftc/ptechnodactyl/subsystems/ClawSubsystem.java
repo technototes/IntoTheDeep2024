@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.ptechnodactyl.subsystems;
 
-import com.acmerobotics.dashboard.config.Config;
+import    com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
 
