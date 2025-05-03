@@ -21,16 +21,15 @@ public class Hardware implements Loggable {
 
     public List<LynxModule> hubs;
 
-    public EncodedMotor<DcMotorEx> theMotor, flMotor, frMotor, rlMotor, rrMotor;
+    public EncodedMotor<DcMotorEx> theMotor, flMotor, frMotor, rlMotor, rrMotor, arm;
     public Motor<DcMotorEx> placeholder1;
     public DcMotorEx liftMotor;
 
     public Servo placeholder2;
-    public Servo servo;
+    public Servo servo, clawServo;
 
     public IGyro imu;
     public Webcam camera;
-
     public Rev2MDistanceSensor distanceSensor;
     public ColorDistanceSensor colorSensor;
 
@@ -72,6 +71,14 @@ public class Hardware implements Loggable {
             //            if (Setup.Connected.COLOR_SENSOR) {
             //                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
             //            }
+        }
+        if (Setup.Connected.CLAWSUBSYSTEM) {
+            if (Setup.Connected.CLAWSERVO) {
+                this.clawServo = new Servo(Setup.HardwareNames.CLAWSERVO);
+            }
+            if (Setup.Connected.ARM) {
+                this.arm = new EncodedMotor<>(Setup.HardwareNames.ARM);
+            }
         }
     }
 
