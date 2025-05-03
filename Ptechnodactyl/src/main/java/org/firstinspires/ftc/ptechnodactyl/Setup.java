@@ -9,8 +9,11 @@ public class Setup {
 
         public static boolean DRIVEBASE = true;
         public static boolean TESTSUBSYSTEM = false;
+        public static boolean CLAWSUBSYSTEM = true;
         public static boolean MOTOR = false;
         public static boolean SERVO = false;
+        public static boolean ARM = true;
+        public static boolean CLAWSERVO = true;
         public static boolean DISTANCE_SENSOR = false;
         public static boolean COLOR_SENSOR = false;
         public static boolean FLYWHEEL = false;
@@ -33,6 +36,8 @@ public class Setup {
         public static String DISTANCE = "d";
         public static String COLOR = "c";
         public static String CAMERA = "camera";
+        public static String ARM = "arm";
+        public static String CLAWSERVO = "clawServo";
     }
 
     @Config
