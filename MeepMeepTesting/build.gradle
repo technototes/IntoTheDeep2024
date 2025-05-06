@@ -24,11 +24,14 @@ repositories {
 //apply from: '../build.dependencies.gradle'
 
 def buildDirLoc = layout.buildDirectory.get().getAsFile().getAbsolutePath()
-def processedLocation = "${buildDirLoc}/generated-sources"
-def frontSlashed = processedLocation.replaceAll("\\\\", "/")
+def processedLocation16750 = "${buildDirLoc}/generated-sources-16750"
+def processedLocation20403 = "${buildDirLoc}/generated-sources-20403"
+def frontSlashed16750 = processedLocation16750.replaceAll("\\\\", "/")
+def frontSlashed20403 = processedLocation20403.replaceAll("\\\\", "/")
 
 sourceSets.main.java.srcDirs += 'src/main/java'
-sourceSets.main.java.srcDirs += processedLocation
+sourceSets.main.java.srcDirs += processedLocation16750
+sourceSets.main.java.srcDirs += processedLocation20403
 
 // This is a custom gradle task to copy constants into the MeepMeep code base
 // and manipulate them to make it all buildable
@@ -42,11 +45,11 @@ task makeMeepMeep16750Java {
     def theFiles = files(fileList)
 
     inputs.files theFiles.asFileTree.files
-    outputs.dir processedLocation
+    outputs.dir processedLocation16750
 
     doLast {
         exec {
-            commandLine 'bun', 'meep', frontSlashed, 'DO_NOT_EDIT_16750', "\"" + fileList.join('" "').replace("\\\\", "/") + "\""
+            commandLine 'bun', 'meep', frontSlashed16750, 'DO_NOT_EDIT_16750', "\"" + fileList.join('" "').replace("\\\\", "/") + "\""
         }
     }
 }
@@ -61,18 +64,19 @@ task makeMeepMeep20403Java {
     def theFiles = files(fileList)
 
     inputs.files theFiles.asFileTree.files
-    outputs.dir processedLocation
+    outputs.dir processedLocation20403
 
     doLast {
         exec {
-            commandLine 'bun', 'meep', frontSlashed, 'DO_NOT_EDIT_20403',  "\"" + fileList.join('" "').replace("\\\\", "/") + "\""
+            commandLine 'bun', 'meep', frontSlashed20403, 'DO_NOT_EDIT_20403',  "\"" + fileList.join('" "').replace("\\\\", "/") + "\""
         }
     }
 }
 
 
 task cleanMeepMeep {
-    delete processedLocation
+    delete processedLocation16750
+    delete processedLocation20403
 }
 
 compileJava {
