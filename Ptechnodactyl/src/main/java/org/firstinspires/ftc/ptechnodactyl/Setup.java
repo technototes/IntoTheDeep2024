@@ -18,7 +18,7 @@ public class Setup {
         public static boolean COLOR_SENSOR = false;
         public static boolean FLYWHEEL = false;
         public static boolean WEBCAM = false;
-        public static boolean EXTERNAL_IMU = true;
+        public static boolean EXTERNAL_IMU = false;
     }
 
     @Config
