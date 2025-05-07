@@ -73,12 +73,8 @@ public class Hardware implements Loggable {
             //            }
         }
         if (Setup.Connected.CLAWSUBSYSTEM) {
-            if (Setup.Connected.CLAWSERVO) {
-                this.clawServo = new Servo(Setup.HardwareNames.CLAWSERVO);
-            }
-            if (Setup.Connected.ARM) {
-                this.arm = new EncodedMotor<>(Setup.HardwareNames.ARM);
-            }
+            this.clawServo = new Servo(Setup.HardwareNames.CLAWSERVO);
+            this.arm = new EncodedMotor<>(Setup.HardwareNames.ARM);
         }
     }
 

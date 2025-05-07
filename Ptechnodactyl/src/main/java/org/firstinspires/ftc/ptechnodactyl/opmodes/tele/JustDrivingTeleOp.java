@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
+import com.technototes.library.logger.Loggable;
 import com.technototes.library.structure.CommandOpMode;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.ptechnodactyl.Hardware;
@@ -16,7 +17,7 @@ import org.firstinspires.ftc.ptechnodactyl.helpers.StartingPosition;
 
 @TeleOp(name = "Driving w/Turbo!")
 @SuppressWarnings("unused")
-public class JustDrivingTeleOp extends CommandOpMode {
+public class JustDrivingTeleOp extends CommandOpMode implements Loggable {
 
     public Robot robot;
     public DriverController controlsDriver;
