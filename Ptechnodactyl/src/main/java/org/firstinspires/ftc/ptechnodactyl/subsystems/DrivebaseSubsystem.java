@@ -13,6 +13,7 @@ import com.technototes.path.subsystem.MecanumConstants;
 import com.technototes.path.subsystem.PathingMecanumDrivebaseSubsystem;
 import java.util.function.Supplier;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
+import org.firstinspires.ftc.ptechnodactyl.helpers.HeadingHelper;
 
 public class DrivebaseSubsystem
     extends PathingMecanumDrivebaseSubsystem
@@ -186,6 +187,10 @@ public class DrivebaseSubsystem
     public void setSnailMode() {
         Snail = true;
         Turbo = false;
+    }
+
+    public void saveHeading() {
+        HeadingHelper.saveHeading(get().getX(), get().getY(), gyro.getHeading());
     }
 
     public void setTurboMode() {

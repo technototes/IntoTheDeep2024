@@ -47,5 +47,6 @@ public class Setup {
         public static double STRAIGHTEN_SCALE_FACTOR = 0.25;
         public static double STRAIGHTEN_RANGE = .15; // Fraction of 45 degrees...
         public static double TRIGGER_THRESHOLD = 0.7;
+        public static double STRAIGHTEN_DEAD_ZONE = 0.08;
     }
 }

@@ -7,7 +7,7 @@ import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
-import org.firstinspires.ftc.ptechnodactyl.commands.EZCmd;
+import org.firstinspires.ftc.ptechnodactyl.commands.DrivingCommands;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickDriveCommand;
 
 public class DriverController {
@@ -19,10 +19,12 @@ public class DriverController {
     public CommandButton resetGyroButton, turboButton, snailButton;
     public CommandButton override;
     public CommandAxis driveStraighten;
+    public CommandAxis drive45;
 
     public DriverController(CommandGamepad g, Robot r) {
         this.robot = r;
         gamepad = g;
+        override = g.leftTrigger.getAsButton(0.5);
 
         AssignNamedControllerButton();
         if (Setup.Connected.DRIVEBASE) {
@@ -35,6 +37,7 @@ public class DriverController {
         driveLeftStick = gamepad.leftStick;
         driveRightStick = gamepad.rightStick;
         driveStraighten = gamepad.rightTrigger;
+        drive45 = gamepad.leftTrigger;
         turboButton = gamepad.leftBumper;
         snailButton = gamepad.rightBumper;
     }
@@ -45,14 +48,15 @@ public class DriverController {
                 robot.drivebaseSubsystem,
                 driveLeftStick,
                 driveRightStick,
-                driveStraighten
+                driveStraighten,
+                drive45
             )
         );
-        turboButton.whenPressed(EZCmd.Drive.TurboMode(robot.drivebaseSubsystem));
-        turboButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
-        snailButton.whenPressed(EZCmd.Drive.SnailMode(robot.drivebaseSubsystem));
-        snailButton.whenReleased(EZCmd.Drive.NormalMode(robot.drivebaseSubsystem));
 
-        resetGyroButton.whenPressed(EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem));
+        turboButton.whenPressed(DrivingCommands.TurboDriving(robot.drivebaseSubsystem));
+        turboButton.whenReleased(DrivingCommands.NormalDriving(robot.drivebaseSubsystem));
+        snailButton.whenPressed(DrivingCommands.SnailDriving(robot.drivebaseSubsystem));
+        snailButton.whenReleased(DrivingCommands.NormalDriving(robot.drivebaseSubsystem));
+        resetGyroButton.whenPressed(DrivingCommands.ResetGyro(robot.drivebaseSubsystem));
     }
 }
