@@ -1,17 +1,17 @@
-package org.firstinspires.ftc.hoops.controllers;
+package org.firstinspires.ftc.hoops.opmodes.tele;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.structure.CommandOpMode;
-import com.technototes.library.util.Alliance;
+
 import org.firstinspires.ftc.hoops.Hardware;
 import org.firstinspires.ftc.hoops.Robot;
 import org.firstinspires.ftc.hoops.Setup;
 import org.firstinspires.ftc.hoops.commands.EZCmd;
 
-@TeleOp(name = "Driving w/Turbo!")
+@TeleOp(name = "TwoControllers")
 @SuppressWarnings("unused")
 public class TwoControllers extends CommandOpMode {
 
