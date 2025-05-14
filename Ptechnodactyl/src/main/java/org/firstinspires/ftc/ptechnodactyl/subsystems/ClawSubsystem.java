@@ -4,14 +4,16 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.control.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
+import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.ptechnodactyl.Hardware;
 
 @Config
-public class ClawSubsystem implements Subsystem {
+public class ClawSubsystem implements Subsystem, Loggable {
 
     private Servo clawServo;
     private EncodedMotor<DcMotorEx> arm;
@@ -21,20 +23,25 @@ public class ClawSubsystem implements Subsystem {
     public double clawPosition = 0;
 
     public static double CLAW_OPEN_POSITION = 0.3;
-    public static double CLAW_CLOSE_POSITION = 0.7;
-    public static int INCREMENT_DECREMENT = 200;
+    public static double CLAW_CLOSE_POSITION = 0.9;
+    public static double MIN_ARM_MOTOR_SPEED = -0.2;
+    public static double MAX_ARM_MOTOR_SPEED = 0.5;
+    public static int INCREMENT_DECREMENT = 30;
     public static double FEEDFORWARD_COEFFICIENT = 0.00014;
-    public static int ARM_VERTICAL = 3100;
-    public static int ARM_HORIZONTAL = 1000;
-    public static int INITIAL_POSITION = 150;
-    public static int ARM_MAX = 0;
-    public static int ARM_MIN = 0;
+    public static int ARM_VERTICAL = 195;
+    public static int ARM_HORIZONTAL = 42;
+    public static int INITIAL_POSITION = 20;
+    public static int ARM_MAX = 320;
+    public static int ARM_MIN = 8;
 
     @Log(name = "armTarget")
     public int armTargetPos;
 
     @Log(name = "armPos")
     public int armPos;
+
+    @Log(name = "armPow")
+    public int armPow;
 
     @Log(name = "armFdFwdVal")
     public double armFeedFwdValue;
@@ -46,7 +53,7 @@ public class ClawSubsystem implements Subsystem {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.0005, 0.0, 0.0001);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0);
 
     private void setClawPosition(double d) {
         if (isHardware) {
@@ -54,6 +61,16 @@ public class ClawSubsystem implements Subsystem {
             clawPosition = d;
         }
     }
+
+    private int getArmUnmodifiedPosition() {
+        if (isHardware) {
+            return (int) arm.getSensorValue();
+        } else {
+            return 0;
+        }
+    }
+
+
 
     public ClawSubsystem(Hardware hw) {
         isHardware = true;
@@ -111,21 +128,14 @@ public class ClawSubsystem implements Subsystem {
 
     public void increment(double value) {
         int newArmPos = (int) (armTargetPos + value * INCREMENT_DECREMENT);
-        //        if (newArmPos > ARM_MAX) {
-        //            newArmPos = 3150;
-        //        } else if (newArmPos < ARM_MIN) {
-        //            newArmPos = 0;
-        //        }
+        if (newArmPos > ARM_MAX) {
+            newArmPos = ARM_MAX;
+        } else if (newArmPos < ARM_MIN) {
+            newArmPos = ARM_MIN;
+        }
         setArmPos(newArmPos);
     }
 
-    public void incrementn() {
-        increment(1.0);
-    }
-
-    public void decrement() {
-        increment(-1.0);
-    }
 
     private static double getArmAngle(double ticks) {
         // our horizontal value starts at ARM_HORIZONTAL, so we need to
@@ -139,5 +149,17 @@ public class ClawSubsystem implements Subsystem {
 
     public void closeClaw() {
         setClawPosition(CLAW_CLOSE_POSITION);
+    }
+    private void setArmMotorPower(double speed) {
+        if (isHardware) {
+            double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
+            arm.setPower(clippedSpeed);
+        }
+    }
+    @Override
+    public void periodic() {
+        armPos = getArmUnmodifiedPosition();
+        armPow = (int) armPidController.update(armPos);
+        setArmMotorPower(armPow);
     }
 }
