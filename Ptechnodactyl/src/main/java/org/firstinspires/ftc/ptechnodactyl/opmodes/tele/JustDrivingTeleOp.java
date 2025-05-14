@@ -15,7 +15,7 @@ import org.firstinspires.ftc.ptechnodactyl.controllers.DriverController;
 import org.firstinspires.ftc.ptechnodactyl.controllers.OperatorController;
 import org.firstinspires.ftc.ptechnodactyl.helpers.StartingPosition;
 
-@TeleOp(name = "Driving w/Turbo!")
+@TeleOp(name = "PT Driving w/Turbo!")
 @SuppressWarnings("unused")
 public class JustDrivingTeleOp extends CommandOpMode implements Loggable {
 
