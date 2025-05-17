@@ -30,7 +30,7 @@ public class IntakeSubsystem {
         }
     }
 
-    public void Intake(double angleInDegrees) {
+    public void Intake() {
         setSlurp(THE_VELOCITY);
     }
 

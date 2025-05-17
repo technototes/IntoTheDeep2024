@@ -10,9 +10,9 @@ import org.firstinspires.ftc.hoops.Setup;
 @Config
 public class LauncherSubsystem {
 
-    public static double MAX_MOTOR_VELOCITY = 1.0;
+    public static double MAX_MOTOR_VELOCITY = 0.25; // 0.5 1.0
 
-    public static double MIN_MOTOR_VELOCITY = 0.25;
+    public static double MIN_MOTOR_VELOCITY = 0.075; // 0.15 0.25
 
     boolean hasHardware;
     EncodedMotor<DcMotorEx> top;
@@ -24,8 +24,8 @@ public class LauncherSubsystem {
             hasHardware = true;
             top = h.topLaunch;
             bottom = h.bottomLaunch;
-            bottom.setDirection(DcMotorSimple.Direction.REVERSE);
-            top.setDirection(DcMotorSimple.Direction.FORWARD);
+            bottom.setDirection(DcMotorSimple.Direction.FORWARD);
+            top.setDirection(DcMotorSimple.Direction.REVERSE);
             bottom.coast();
             top.coast();
         } else {
@@ -46,8 +46,8 @@ public class LauncherSubsystem {
                 top.setVelocity(MIN_MOTOR_VELOCITY);
                 bottom.setVelocity(MAX_MOTOR_VELOCITY);
             } else {
-              top.setVelocity(MAX_MOTOR_VELOCITY);
-              bottom.setVelocity(MAX_MOTOR_VELOCITY);
+                top.setVelocity(MAX_MOTOR_VELOCITY);
+                bottom.setVelocity(MAX_MOTOR_VELOCITY);
             }
         }
     }
