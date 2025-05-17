@@ -53,7 +53,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.0005, 0.0, 0.0001);
 
     private void setClawPosition(double d) {
         if (isHardware) {
