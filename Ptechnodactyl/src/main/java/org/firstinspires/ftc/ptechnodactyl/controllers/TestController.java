@@ -1,0 +1,39 @@
+package org.firstinspires.ftc.ptechnodactyl.controllers;
+
+import com.technototes.library.command.CommandScheduler;
+import com.technototes.library.control.CommandButton;
+import com.technototes.library.control.CommandGamepad;
+import com.technototes.library.control.Stick;
+import org.firstinspires.ftc.ptechnodactyl.Robot;
+import org.firstinspires.ftc.ptechnodactyl.Setup;
+import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
+import org.firstinspires.ftc.ptechnodactyl.commands.JoystickIncDecCmd;
+
+public class TestController {
+
+    public Robot robot;
+    public CommandGamepad gamepad;
+    public CommandButton testPower2;
+    public CommandButton testPower;
+
+    public TestController(CommandGamepad g, Robot r) {
+        robot = r;
+        gamepad = g;
+        AssignNamedControllerButton();
+        BindControls();
+    }
+
+    private void AssignNamedControllerButton() {
+        testPower = gamepad.leftBumper;
+        testPower2 = gamepad.rightBumper;
+    }
+
+    public void BindControls() {
+        bindTestControls();
+    }
+
+    public void bindTestControls() {
+        testPower.whenPressed(ClawCmds.cmds.PowTest(robot.clawSubsystem));
+        testPower2.whenPressed(ClawCmds.cmds.PowTest2(robot.clawSubsystem));
+    }
+}

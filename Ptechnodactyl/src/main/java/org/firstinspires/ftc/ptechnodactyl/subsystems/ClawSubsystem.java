@@ -24,12 +24,12 @@ public class ClawSubsystem implements Subsystem, Loggable {
 
     public static double CLAW_OPEN_POSITION = 0.3;
     public static double CLAW_CLOSE_POSITION = 0.9;
-    public static double MIN_ARM_MOTOR_SPEED = -0.2;
+    public static double MIN_ARM_MOTOR_SPEED = -0.5;
     public static double MAX_ARM_MOTOR_SPEED = 0.5;
     public static int INCREMENT_DECREMENT = 30;
-    public static double FEEDFORWARD_COEFFICIENT = 0.00014;
-    public static int ARM_VERTICAL = 195;
-    public static int ARM_HORIZONTAL = 42;
+    public static double FEEDFORWARD_COEFFICIENT = 0;
+    public static int ARM_VERTICAL = 165;
+    public static int ARM_HORIZONTAL = 29;
     public static int INITIAL_POSITION = 20;
     public static int ARM_MAX = 320;
     public static int ARM_MIN = 8;
@@ -41,7 +41,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
     public int armPos;
 
     @Log(name = "armPow")
-    public int armPow;
+    public double armPow;
 
     @Log(name = "armFdFwdVal")
     public double armFeedFwdValue;
@@ -53,7 +53,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.0002, 0.0, 0);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.005, 0.0, 0);
 
     private void setClawPosition(double d) {
         if (isHardware) {
@@ -69,8 +69,6 @@ public class ClawSubsystem implements Subsystem, Loggable {
             return 0;
         }
     }
-
-
 
     public ClawSubsystem(Hardware hw) {
         isHardware = true;
@@ -110,9 +108,6 @@ public class ClawSubsystem implements Subsystem, Loggable {
                 //                    //increase armFeedFwdValue to avoid slamming or increase D in PID
                 //                    armFeedFwdValue += ARM_SLAM_PREVENTION;
                 //                }
-                if (Math.abs(armFeedFwdValue) < 0.1) {
-                    armFeedFwdValue = 0.0;
-                }
 
                 return armFeedFwdValue;
             }
@@ -136,6 +131,15 @@ public class ClawSubsystem implements Subsystem, Loggable {
         setArmPos(newArmPos);
     }
 
+    public void powIncrement() {
+        armPow = armPow + 0.05;
+        setArmMotorPower(armPow);
+    }
+
+    public void powDecrement() {
+        armPow = armPow - 0.05;
+        setArmMotorPower(armPow);
+    }
 
     private static double getArmAngle(double ticks) {
         // our horizontal value starts at ARM_HORIZONTAL, so we need to
@@ -150,16 +154,18 @@ public class ClawSubsystem implements Subsystem, Loggable {
     public void closeClaw() {
         setClawPosition(CLAW_CLOSE_POSITION);
     }
+
     private void setArmMotorPower(double speed) {
         if (isHardware) {
             double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
             arm.setPower(clippedSpeed);
         }
     }
+
     @Override
     public void periodic() {
         armPos = getArmUnmodifiedPosition();
-        armPow = (int) armPidController.update(armPos);
+        armPow = armPidController.update(armPos);
         setArmMotorPower(armPow);
     }
 }
