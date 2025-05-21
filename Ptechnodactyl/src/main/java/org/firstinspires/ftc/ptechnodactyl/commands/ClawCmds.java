@@ -14,5 +14,13 @@ public class ClawCmds {
         public static Command CloseClaw(ClawSubsystem CS) {
             return Command.create(CS::closeClaw);
         }
+
+        public static Command PowTest(ClawSubsystem CS) {
+            return Command.create(CS::powIncrement);
+        }
+
+        public static Command PowTest2(ClawSubsystem CS) {
+            return Command.create(CS::powDecrement);
+        }
     }
 }
