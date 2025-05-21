@@ -12,8 +12,6 @@ public class Setup {
         public static boolean CLAWSUBSYSTEM = true;
         public static boolean MOTOR = false;
         public static boolean SERVO = false;
-        public static boolean ARM = true;
-        public static boolean CLAWSERVO = true;
         public static boolean DISTANCE_SENSOR = false;
         public static boolean COLOR_SENSOR = false;
         public static boolean FLYWHEEL = false;
@@ -37,7 +35,9 @@ public class Setup {
         public static String COLOR = "c";
         public static String CAMERA = "camera";
         public static String ARM = "arm";
-        public static String CLAWSERVO = "clawServo";
+        public static String CLAMP = "clamp";
+        public static String LEFTDIFFY = "ldiffy";
+        public static String RIGHTDIFFY = "rdiffy";
     }
 
     @Config

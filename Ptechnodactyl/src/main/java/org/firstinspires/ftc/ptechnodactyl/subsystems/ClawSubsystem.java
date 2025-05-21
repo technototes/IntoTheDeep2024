@@ -15,24 +15,40 @@ import org.firstinspires.ftc.ptechnodactyl.Hardware;
 @Config
 public class ClawSubsystem implements Subsystem, Loggable {
 
-    private Servo clawServo;
+    private Servo clamp, leftDiffy, rightDiffy;
     private EncodedMotor<DcMotorEx> arm;
     private boolean isHardware;
 
-    @Log(name = "clawPosition")
-    public double clawPosition = 0;
+    @Log(name = "clampPosition")
+    public double clampPosition = 0;
 
-    public static double CLAW_OPEN_POSITION = 0.3;
-    public static double CLAW_CLOSE_POSITION = 0.9;
+    @Log(name = "leftDiffyPosition")
+    public double leftDiffyPosition = 0;
+
+    @Log(name = "rightDiffyPosition")
+    public double rightDiffyPosition = 0;
+
+    public static double CLAMP_OPEN_POSITION = 0.5;
+    public static double CLAMP_CLOSE_POSITION = 0.96;
+    public static double CLAW_DOWN_LEFT_POSITION = 0.84;
+    public static double CLAW_DOWN_RIGHT_POSITION = 0.84;
+    public static double CLAW_NEUTRAL_LEFT_POSITION = 0.17;
+    public static double CLAW_NEUTRAL_RIGHT_POSITION = 0.87;
+    public static double CLAW_DPADL_LEFT_POSITION = 0.26;
+    public static double CLAW_DPADL_RIGHT_POSITION = 0.74;
+    public static double CLAW_DPADR_LEFT_POSITION = 0.74;
+    public static double CLAW_DPADR_RIGHT_POSITION = 0.26;
+    public static double CLAW_DPADU_LEFT_POSITION = 0.98;
+    public static double CLAW_DPADU_RIGHT_POSITION = 0.02;
     public static double MIN_ARM_MOTOR_SPEED = -0.5;
     public static double MAX_ARM_MOTOR_SPEED = 0.5;
     public static int INCREMENT_DECREMENT = 30;
     public static double FEEDFORWARD_COEFFICIENT = 0;
-    public static int ARM_VERTICAL = 165;
-    public static int ARM_HORIZONTAL = 29;
-    public static int INITIAL_POSITION = 20;
-    public static int ARM_MAX = 320;
-    public static int ARM_MIN = 8;
+    public static int ARM_VERTICAL = 0;
+    public static int ARM_HORIZONTAL = 0;
+    public static int INITIAL_POSITION = 0;
+    public static int ARM_MAX = 0;
+    public static int ARM_MIN = 0;
 
     @Log(name = "armTarget")
     public int armTargetPos;
@@ -53,12 +69,26 @@ public class ClawSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.005, 0.0, 0);
+    public static PIDCoefficients armPID = new PIDCoefficients(0, 0.0, 0);
 
-    private void setClawPosition(double d) {
+    private void setClampPosition(double d) {
         if (isHardware) {
-            clawServo.setPosition(d);
-            clawPosition = d;
+            clamp.setPosition(d);
+            clampPosition = d;
+        }
+    }
+
+    private void setLeftDiffyPos(double d) {
+        if (isHardware) {
+            leftDiffy.setPosition(d);
+            leftDiffyPosition = d;
+        }
+    }
+
+    private void setRightDiffyPos(double d) {
+        if (isHardware) {
+            rightDiffy.setPosition(d);
+            rightDiffyPosition = d;
         }
     }
 
@@ -72,7 +102,9 @@ public class ClawSubsystem implements Subsystem, Loggable {
 
     public ClawSubsystem(Hardware hw) {
         isHardware = true;
-        clawServo = hw.clawServo;
+        clamp = hw.clampServo;
+        leftDiffy = hw.leftDiffy;
+        rightDiffy = hw.rightDiffy;
         arm = hw.arm;
         armPidController = new PIDFController(
             armPID,
@@ -112,12 +144,14 @@ public class ClawSubsystem implements Subsystem, Loggable {
                 return armFeedFwdValue;
             }
         );
-        setArmPos(INITIAL_POSITION);
+        //        setArmPos(INITIAL_POSITION);
     }
 
     public ClawSubsystem() {
         isHardware = false;
-        clawServo = null;
+        clamp = null;
+        leftDiffy = null;
+        rightDiffy = null;
         arm = null;
     }
 
@@ -147,12 +181,52 @@ public class ClawSubsystem implements Subsystem, Loggable {
         return ((Math.PI / 2.0) * (ticks - ARM_HORIZONTAL)) / (ARM_VERTICAL - ARM_HORIZONTAL);
     }
 
-    public void openClaw() {
-        setClawPosition(CLAW_OPEN_POSITION);
+    public void openClamp() {
+        setClampPosition(CLAMP_OPEN_POSITION);
     }
 
-    public void closeClaw() {
-        setClawPosition(CLAW_CLOSE_POSITION);
+    public void closeClamp() {
+        setClampPosition(CLAMP_CLOSE_POSITION);
+    }
+
+    public void downLeftClaw() {
+        setLeftDiffyPos(CLAW_DOWN_LEFT_POSITION);
+    }
+
+    public void downRightClaw() {
+        setRightDiffyPos(CLAW_DOWN_RIGHT_POSITION);
+    }
+
+    public void neutralLeftClaw() {
+        setLeftDiffyPos(CLAW_NEUTRAL_LEFT_POSITION);
+    }
+
+    public void neutralRightClaw() {
+        setRightDiffyPos(CLAW_NEUTRAL_RIGHT_POSITION);
+    }
+
+    public void dpadlLeftClaw() {
+        setLeftDiffyPos(CLAW_DPADL_LEFT_POSITION);
+    }
+
+    public void dpadlRightClaw() {
+        setRightDiffyPos(CLAW_DPADL_RIGHT_POSITION);
+    }
+
+    public void dpadrLeftClaw() {
+        setLeftDiffyPos(CLAW_DPADR_LEFT_POSITION);
+    }
+
+    public void dpadrRightClaw() {
+        setRightDiffyPos(CLAW_DPADR_RIGHT_POSITION);
+    }
+
+    public void dpaduLeftClaw() {
+        setLeftDiffyPos(CLAW_DPADU_LEFT_POSITION);
+    }
+
+    public void dpaduRightClaw() {
+        setRightDiffyPos(CLAW_DPADU_RIGHT_POSITION);
     }
 
     private void setArmMotorPower(double speed) {

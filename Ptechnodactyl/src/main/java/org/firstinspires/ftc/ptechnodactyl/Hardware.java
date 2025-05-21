@@ -26,7 +26,7 @@ public class Hardware implements Loggable {
     public DcMotorEx liftMotor;
 
     public Servo placeholder2;
-    public Servo servo, clawServo;
+    public Servo servo, clampServo, leftDiffy, rightDiffy;
 
     public IGyro imu;
     public Webcam camera;
@@ -73,7 +73,9 @@ public class Hardware implements Loggable {
             //            }
         }
         if (Setup.Connected.CLAWSUBSYSTEM) {
-            this.clawServo = new Servo(Setup.HardwareNames.CLAWSERVO);
+            this.clampServo = new Servo(Setup.HardwareNames.CLAMP);
+            this.leftDiffy = new Servo(Setup.HardwareNames.LEFTDIFFY);
+            this.rightDiffy = new Servo(Setup.HardwareNames.RIGHTDIFFY);
             this.arm = new EncodedMotor<>(Setup.HardwareNames.ARM);
         }
     }
