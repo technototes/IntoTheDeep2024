@@ -9,7 +9,7 @@ import org.firstinspires.ftc.ptechnodactyl.Hardware;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.controllers.DriverController;
 
-@TeleOp(name = "PlainDrive")
+@TeleOp(name = "One Controller")
 @SuppressWarnings("unused")
 public class PlainDrive extends CommandOpMode implements Loggable {
 

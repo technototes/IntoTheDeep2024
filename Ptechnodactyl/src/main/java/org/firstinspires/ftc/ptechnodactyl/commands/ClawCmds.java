@@ -8,11 +8,11 @@ public class ClawCmds {
 
     public static class cmds {
 
-        public static Command OpenClaw(ClawSubsystem CS) {
+        public static Command OpenClamp(ClawSubsystem CS) {
             return Command.create(CS::openClamp);
         }
 
-        public static Command CloseClaw(ClawSubsystem CS) {
+        public static Command CloseClamp(ClawSubsystem CS) {
             return Command.create(CS::closeClamp);
         }
 

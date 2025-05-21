@@ -17,7 +17,8 @@ public class OperatorController {
     public CommandGamepad gamepad;
     public CommandButton openClaw;
     public CommandButton closeClaw;
-    public Stick armStick;
+
+    //    public Stick armStick;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -29,7 +30,7 @@ public class OperatorController {
     private void AssignNamedControllerButton() {
         openClaw = gamepad.leftBumper;
         closeClaw = gamepad.rightBumper;
-        armStick = gamepad.rightStick;
+        //        armStick = gamepad.rightStick;
     }
 
     public void BindControls() {
@@ -39,8 +40,8 @@ public class OperatorController {
     }
 
     public void bindClawSubsystemControls() {
-        openClaw.whenPressed(ClawCmds.cmds.OpenClaw(robot.clawSubsystem));
-        closeClaw.whenPressed(ClawCmds.cmds.CloseClaw(robot.clawSubsystem));
-        CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
+        openClaw.whenPressed(ClawCmds.cmds.OpenClamp(robot.clawSubsystem));
+        closeClaw.whenPressed(ClawCmds.cmds.CloseClamp(robot.clawSubsystem));
+        //        CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }
