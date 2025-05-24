@@ -24,20 +24,20 @@ public class ClawSubsystem implements Subsystem, Loggable {
 
     public static double CLAW_OPEN_POSITION = 0.3;
     public static double CLAW_CLOSE_POSITION = 0.9;
-    public static double MIN_ARM_MOTOR_SPEED = -0.5;
-    public static double MAX_ARM_MOTOR_SPEED = 0.5;
-    public static int INCREMENT_DECREMENT = 30;
-    public static double FEEDFORWARD_COEFFICIENT = 0;
+    public static double MIN_ARM_MOTOR_SPEED = -1;
+    public static double MAX_ARM_MOTOR_SPEED = 1;
+    public static int INCREMENT_DECREMENT = 10;
+    public static double FEEDFORWARD_COEFFICIENT = 0.65;
     public static int ARM_VERTICAL = 165;
-    public static int ARM_HORIZONTAL = 29;
+    public static int ARM_HORIZONTAL = 53;
     public static int INITIAL_POSITION = 20;
     public static int ARM_MAX = 320;
     public static int ARM_MIN = 8;
 
     @Log(name = "armTarget")
+    @Log(name = "armPos")
     public int armTargetPos;
 
-    @Log(name = "armPos")
     public int armPos;
 
     @Log(name = "armPow")
@@ -53,7 +53,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.005, 0.0, 0);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.05, 0.0, 0);
 
     private void setClawPosition(double d) {
         if (isHardware) {
@@ -112,7 +112,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
                 return armFeedFwdValue;
             }
         );
-        setArmPos(INITIAL_POSITION);
+        setArmPos(ARM_HORIZONTAL);
     }
 
     public ClawSubsystem() {
@@ -132,13 +132,15 @@ public class ClawSubsystem implements Subsystem, Loggable {
     }
 
     public void powIncrement() {
-        armPow = armPow + 0.05;
-        setArmMotorPower(armPow);
+        setArmPos(armTargetPos + 1);
+    }
+
+    public void setArmHorizontal() {
+        setArmPos(ARM_HORIZONTAL);
     }
 
     public void powDecrement() {
-        armPow = armPow - 0.05;
-        setArmMotorPower(armPow);
+        setArmPos(armTargetPos - 1);
     }
 
     private static double getArmAngle(double ticks) {
@@ -160,6 +162,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
             double clippedSpeed = Range.clip(speed, MIN_ARM_MOTOR_SPEED, MAX_ARM_MOTOR_SPEED);
             arm.setPower(clippedSpeed);
         }
+        armPow = speed;
     }
 
     @Override
