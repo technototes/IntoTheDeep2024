@@ -15,6 +15,8 @@ public class TestController {
     public CommandGamepad gamepad;
     public CommandButton testPower2;
     public CommandButton testPower;
+    public CommandButton armHorizontal;
+    public Stick armStick;
 
     public TestController(CommandGamepad g, Robot r) {
         robot = r;
@@ -26,6 +28,8 @@ public class TestController {
     private void AssignNamedControllerButton() {
         testPower = gamepad.leftBumper;
         testPower2 = gamepad.rightBumper;
+        armStick = gamepad.rightStick;
+        armHorizontal = gamepad.ps_circle;
     }
 
     public void BindControls() {
@@ -33,7 +37,9 @@ public class TestController {
     }
 
     public void bindTestControls() {
-        testPower.whenPressed(ClawCmds.cmds.PowTest(robot.clawSubsystem));
-        testPower2.whenPressed(ClawCmds.cmds.PowTest2(robot.clawSubsystem));
+        testPower.whenPressed(robot.clawSubsystem::powIncrement);
+        testPower2.whenPressed(robot.clawSubsystem::powDecrement);
+        armHorizontal.whenPressed(robot.clawSubsystem::setArmHorizontal);
+        CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }
