@@ -35,9 +35,9 @@ public class ClawSubsystem implements Subsystem, Loggable {
     public static int ARM_MIN = 8;
 
     @Log(name = "armTarget")
-    @Log(name = "armPos")
     public int armTargetPos;
 
+    @Log(name = "armPos")
     public int armPos;
 
     @Log(name = "armPow")
