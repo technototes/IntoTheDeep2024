@@ -39,7 +39,6 @@ public class TestController {
     public void bindTestControls() {
         testPower.whenPressed(robot.clawSubsystem::powIncrement);
         testPower2.whenPressed(robot.clawSubsystem::powDecrement);
-        armHorizontal.whenPressed(robot.clawSubsystem::setArmHorizontal);
         CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }
