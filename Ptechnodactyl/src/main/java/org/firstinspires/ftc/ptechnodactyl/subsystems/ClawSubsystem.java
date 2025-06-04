@@ -26,12 +26,12 @@ public class ClawSubsystem implements Subsystem, Loggable {
     public static double CLAW_CLOSE_POSITION = 0.9;
     public static double MIN_ARM_MOTOR_SPEED = -1;
     public static double MAX_ARM_MOTOR_SPEED = 1;
-    public static int INCREMENT_DECREMENT = 10;
-    public static double FEEDFORWARD_COEFFICIENT = 0.65;
+    public static int INCREMENT_DECREMENT = 5;
+    public static double FEEDFORWARD_COEFFICIENT = 0.25;
     public static int ARM_VERTICAL = 165;
     public static int ARM_HORIZONTAL = 53;
     public static int INITIAL_POSITION = 20;
-    public static int ARM_MAX = 320;
+    public static int ARM_MAX = 327;
     public static int ARM_MIN = 8;
 
     @Log(name = "armTarget")
@@ -53,7 +53,7 @@ public class ClawSubsystem implements Subsystem, Loggable {
         armTargetPos = e;
     }
 
-    public static PIDCoefficients armPID = new PIDCoefficients(0.05, 0.0, 0);
+    public static PIDCoefficients armPID = new PIDCoefficients(0.02, 0.0, 0);
 
     private void setClawPosition(double d) {
         if (isHardware) {
@@ -131,12 +131,16 @@ public class ClawSubsystem implements Subsystem, Loggable {
         setArmPos(newArmPos);
     }
 
-    public void powIncrement() {
-        setArmPos(armTargetPos + 1);
+    public void incrementn() {
+        increment(1);
     }
 
-    public void setArmHorizontal() {
-        setArmPos(ARM_HORIZONTAL);
+    public void decrement() {
+        increment(-1);
+    }
+
+    public void powIncrement() {
+        setArmPos(armTargetPos + 1);
     }
 
     public void powDecrement() {
@@ -155,6 +159,14 @@ public class ClawSubsystem implements Subsystem, Loggable {
 
     public void closeClaw() {
         setClawPosition(CLAW_CLOSE_POSITION);
+    }
+
+    public void setArmVertical() {
+        setArmPos(ARM_VERTICAL);
+    }
+
+    public void setArmHorizontal() {
+        setArmPos(ARM_HORIZONTAL);
     }
 
     private void setArmMotorPower(double speed) {
