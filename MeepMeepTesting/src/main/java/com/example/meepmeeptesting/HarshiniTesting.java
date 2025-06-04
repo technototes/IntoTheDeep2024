@@ -60,10 +60,29 @@ public class HarshiniTesting {
         public static Pose2d ASCENT_CLEAR = new Pose2d(35, 10, 0);
         // end of "borrowed" constants
 
+        public static Pose2d CURVE_1 = new Pose2d(0, 0, 90);
+        public static Pose2d CURVE_2 = new Pose2d(0, 20, 90);
+        public static Pose2d CURVE_3 = new Pose2d(10, 30, 0);
+        public static Pose2d CURVE_4 = new Pose2d(20, 20, -90);
+        public static Pose2d CURVE_5 = new Pose2d(20, 0, -90);
+        public static Pose2d CURVE_6 = new Pose2d(10, -10, 180);
+        public static Pose2d CURVE_7 = new Pose2d(0, 0, 90);
+
         //public static Pose2d OBSERVATION_ZONE = new Pose2d(-60, 55, toRadians(135));
 
         //sample side auto
         //Lines for Into the Deeeeeeeep
+
+        public static final Supplier<Trajectory> OVAL = () ->
+            func
+                .apply(CURVE_1)
+                .lineToLinearHeading(CURVE_2)
+                .splineToLinearHeading(CURVE_3, Math.PI - CURVE_3.getHeading())
+                .splineToLinearHeading(CURVE_4, Math.PI - CURVE_4.getHeading())
+                .lineToLinearHeading(CURVE_5)
+                .splineToLinearHeading(CURVE_6, Math.PI - CURVE_6.getHeading())
+                .splineToLinearHeading(CURVE_7, Math.PI - CURVE_7.getHeading())
+                .build();
 
         public static final Supplier<Trajectory> FORWARD_BACKWARD1 = () ->
             func.apply(REST).lineToLinearHeading(FORWARD).build();
@@ -195,7 +214,7 @@ public class HarshiniTesting {
 
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.OBSERVATION_START)
+            .trajectorySequenceBuilder(AutoConstants.CURVE_1)
             //.addTrajectory(AutoConstants.OBSERVATION_TEST1.get())
             // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST1QUARTER.get())
             // dont use.addTrajectory(AutoConstants.OBSERVATION_TEST2.get())
@@ -204,21 +223,22 @@ public class HarshiniTesting {
             //.addTrajectory(AutoConstants.OBSERVATION_TEST5.get())
             //.addTrajectory(AutoConstants.OBSERVATION_TEST6.get())
             //.addTrajectory(AutoConstants.TANGENT_TEST.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
-            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO1.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO2.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO4HALF.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO5.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO6.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO7.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO8.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO9.get())
+            //            .addTrajectory(AutoConstants.PUSH_BOT_OBSERVATION_SIDE_AUTO10.get())
             //            .build();
             //            .addTrajectory(AutoConstants.FORWARD_BACKWARD1.get())
             //            .addTrajectory(AutoConstants.FORWARD_BACKWARD2.get())
             //            .addTrajectory(AutoConstants.FORWARD_BACKWARD3.get())
             //            .addTrajectory(AutoConstants.FORWARD_BACKWARD4.get())
+            .addTrajectory(AutoConstants.OVAL.get())
             .build();
     }
 }

@@ -83,16 +83,16 @@ task cleanMeepMeep {
     delete processedLocation20403
 }
 
-compileJava {
-    dependsOn makeMeepMeep20403Java, makeMeepMeep16750Java
-}
+//compileJava {
+//    dependsOn makeMeepMeep20403Java, makeMeepMeep16750Java
+//}
 
-clean {
-    dependsOn cleanMeepMeep
-}
+//clean {
+//    dependsOn cleanMeepMeep
+//}
 
-makeMeepMeep20403Java.mustRunAfter cleanMeepMeep
-makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
+//makeMeepMeep20403Java.mustRunAfter cleanMeepMeep
+//makeMeepMeep16750Java.mustRunAfter cleanMeepMeep
 
 dependencies {
     implementation 'com.github.rh-robotics:MeepMeep:v1.1.0' // FLIP: MeepMeepLocal
