@@ -6,7 +6,7 @@ import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstra
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.ProfileAccelerationConstraint;
-import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
+//import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
