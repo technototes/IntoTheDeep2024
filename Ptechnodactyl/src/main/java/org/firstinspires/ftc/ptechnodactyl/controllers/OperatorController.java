@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.ptechnodactyl.controllers;
 
-import com.technototes.library.command.Command;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
-import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickIncDecCmd;
-import org.firstinspires.ftc.ptechnodactyl.subsystems.ClawSubsystem;
 
 public class OperatorController {
 
@@ -20,6 +17,7 @@ public class OperatorController {
     public Stick armStick;
     public CommandButton ArmHorizontal;
     public CommandButton ArmVertical;
+    public CommandButton intake;
 
     public OperatorController(CommandGamepad g, Robot r) {
         robot = r;
@@ -34,6 +32,7 @@ public class OperatorController {
         armStick = gamepad.rightStick;
         ArmHorizontal = gamepad.ps_circle;
         ArmVertical = gamepad.ps_triangle;
+        intake = gamepad.dpadRight;
     }
 
     public void BindControls() {
@@ -43,10 +42,11 @@ public class OperatorController {
     }
 
     public void bindClawSubsystemControls() {
-        openClaw.whenPressed(ClawCmds.cmds.OpenClaw(robot.clawSubsystem));
-        closeClaw.whenPressed(ClawCmds.cmds.CloseClaw(robot.clawSubsystem));
+        openClaw.whenPressed(robot.clawSubsystem::openClaw);
+        closeClaw.whenPressed(robot.clawSubsystem::closeClaw);
         ArmVertical.whenPressed(robot.clawSubsystem::setArmVertical);
         ArmHorizontal.whenPressed(robot.clawSubsystem::setArmHorizontal);
+        intake.whenPressed(robot.clawSubsystem::setArmIntake);
         CommandScheduler.scheduleJoystick(new JoystickIncDecCmd(robot.clawSubsystem, armStick));
     }
 }

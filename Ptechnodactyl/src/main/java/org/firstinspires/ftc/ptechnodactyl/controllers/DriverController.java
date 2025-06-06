@@ -18,8 +18,6 @@ public class DriverController {
     public Stick driveLeftStick, driveRightStick;
     public CommandButton resetGyroButton, turboButton, snailButton;
     public CommandButton override;
-    public CommandAxis driveStraighten;
-    public CommandAxis drive45;
 
     public DriverController(CommandGamepad g, Robot r) {
         this.robot = r;
@@ -36,21 +34,13 @@ public class DriverController {
         resetGyroButton = gamepad.ps_options;
         driveLeftStick = gamepad.leftStick;
         driveRightStick = gamepad.rightStick;
-        driveStraighten = gamepad.rightTrigger;
-        drive45 = gamepad.leftTrigger;
         turboButton = gamepad.leftBumper;
         snailButton = gamepad.rightBumper;
     }
 
     public void bindDriveControls() {
         CommandScheduler.scheduleJoystick(
-            new JoystickDriveCommand(
-                robot.drivebaseSubsystem,
-                driveLeftStick,
-                driveRightStick,
-                driveStraighten,
-                drive45
-            )
+            new JoystickDriveCommand(robot.drivebaseSubsystem, driveLeftStick, driveRightStick)
         );
 
         turboButton.whenPressed(DrivingCommands.TurboDriving(robot.drivebaseSubsystem));

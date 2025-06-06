@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.ptechnodactyl.controllers;
 
+import android.support.v4.app.INotificationSideChannel;
 import com.technototes.library.command.CommandScheduler;
 import com.technototes.library.control.CommandAxis;
 import com.technototes.library.control.CommandButton;
@@ -7,10 +8,8 @@ import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
 import org.firstinspires.ftc.ptechnodactyl.Setup;
-import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.commands.DrivingCommands;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickDriveCommand;
-import org.firstinspires.ftc.ptechnodactyl.commands.JoystickIncDecCmd;
 
 public class OneController {
 
@@ -24,8 +23,7 @@ public class OneController {
     public CommandButton resetGyroButton, turboButton, snailButton;
     public CommandButton increment;
     public CommandButton decrement;
-    public CommandAxis driveStraighten;
-    public CommandAxis drive45;
+    public CommandButton intake;
 
     public OneController(CommandGamepad g, Robot r) {
         robot = r;
@@ -44,10 +42,9 @@ public class OneController {
         resetGyroButton = gamepad.ps_options;
         driveLeftStick = gamepad.leftStick;
         driveRightStick = gamepad.rightStick;
-        driveStraighten = gamepad.rightTrigger;
-        drive45 = gamepad.leftTrigger;
         turboButton = gamepad.leftBumper;
         snailButton = gamepad.rightBumper;
+        intake = gamepad.dpadRight;
     }
 
     public void BindControls() {
@@ -60,21 +57,18 @@ public class OneController {
     }
 
     public void bindClawSubsystemControls() {
-        openClaw.whenPressed(ClawCmds.cmds.OpenClaw(robot.clawSubsystem));
-        closeClaw.whenPressed(ClawCmds.cmds.CloseClaw(robot.clawSubsystem));
+        openClaw.whenPressed(robot.clawSubsystem::openClaw);
+        closeClaw.whenPressed(robot.clawSubsystem::closeClaw);
         ArmVertical.whenPressed(robot.clawSubsystem::setArmVertical);
         ArmHorizontal.whenPressed(robot.clawSubsystem::setArmHorizontal);
+        increment.whenPressed(robot.clawSubsystem::incrementn);
+        decrement.whenPressed(robot.clawSubsystem::decrement);
+        intake.whenPressed(robot.clawSubsystem::setArmIntake);
     }
 
     public void bindDriveControls() {
         CommandScheduler.scheduleJoystick(
-            new JoystickDriveCommand(
-                robot.drivebaseSubsystem,
-                driveLeftStick,
-                driveRightStick,
-                driveStraighten,
-                drive45
-            )
+            new JoystickDriveCommand(robot.drivebaseSubsystem, driveLeftStick, driveRightStick)
         );
 
         turboButton.whenPressed(DrivingCommands.TurboDriving(robot.drivebaseSubsystem));
