@@ -5,8 +5,6 @@ import com.technototes.library.control.CommandButton;
 import com.technototes.library.control.CommandGamepad;
 import com.technototes.library.control.Stick;
 import org.firstinspires.ftc.ptechnodactyl.Robot;
-import org.firstinspires.ftc.ptechnodactyl.Setup;
-import org.firstinspires.ftc.ptechnodactyl.commands.ClawCmds;
 import org.firstinspires.ftc.ptechnodactyl.commands.JoystickIncDecCmd;
 
 public class TestController {
