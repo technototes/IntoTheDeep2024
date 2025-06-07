@@ -6,7 +6,7 @@ import com.acmerobotics.roadrunner.trajectory.constraints.AngularVelocityConstra
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.MinVelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.ProfileAccelerationConstraint;
-//import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
+import com.robotcode.shared.DO_NOT_EDIT_20403.AutoConstants;
 import java.io.*;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
@@ -60,13 +60,12 @@ public class Twenty403Testing {
 
     private static TrajectorySequence getTestTrajectory(DriveShim drive) {
         return drive
-            .trajectorySequenceBuilder(AutoConstants.FIRST)
-            .addTrajectory(AutoConstants.FIRST_TO_SECOND.get())
-            .addTrajectory(AutoConstants.SECOND_TO_THIRD.get())
-            .addTrajectory(AutoConstants.THIRD_TO_FOURTH.get())
-            .addTrajectory(AutoConstants.FOURTH_TO_FIFTH.get())
-            .addTrajectory(AutoConstants.FIFTH_TO_SIXTH.get())
-            .addTrajectory(AutoConstants.SIXTH_TO_SEVENTH.get())
+            .trajectorySequenceBuilder(AutoConstants.CURVE_1)
+            .addTrajectory(AutoConstants.OVAL.get())
+            .addTrajectory(AutoConstants.OVAL2.get())
+            .addTrajectory(AutoConstants.OVAL3.get())
+            .addTrajectory(AutoConstants.OVAL4.get())
+            .addTrajectory(AutoConstants.OVAL5.get())
             .build();
     }
 }

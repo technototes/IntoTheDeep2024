@@ -48,6 +48,33 @@ public class AutoConstants {
     public static ConfigurablePoseD ELEVENTH = new ConfigurablePoseD(-56, 13, 90);
     public static ConfigurablePoseD TWELFTH = new ConfigurablePoseD(-61, 13, 90);
     public static ConfigurablePoseD THIRTEENTH = new ConfigurablePoseD(-61, 48, 90);
+    public static ConfigurablePoseD CURVE_1 = new ConfigurablePoseD(0, 0, 90);
+    public static ConfigurablePoseD CURVE_2 = new ConfigurablePoseD(0, 20, 90);
+    public static ConfigurablePoseD CURVE_3 = new ConfigurablePoseD(10, 30, 0);
+    public static ConfigurablePoseD CURVE_4 = new ConfigurablePoseD(20, 20, -90);
+    public static ConfigurablePoseD CURVE_5 = new ConfigurablePoseD(20, 0, -90);
+    public static ConfigurablePoseD CURVE_6 = new ConfigurablePoseD(10, -10, 180);
+    public static ConfigurablePoseD CURVE_7 = new ConfigurablePoseD(0, 0, 90);
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OVAL =
+            func -> func.apply(CURVE_1.toPose())
+                    .lineToLinearHeading(CURVE_2.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OVAL2 =
+            func -> func.apply(CURVE_2.toPose())
+                    .splineToLinearHeading(CURVE_3.toPose(), Math.PI - CURVE_3.getHeading())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OVAL3 =
+            func -> func.apply(CURVE_3.toPose())
+                    .splineToLinearHeading(CURVE_4.toPose(), Math.PI - CURVE_4.getHeading())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OVAL4 =
+            func -> func.apply(CURVE_4.toPose())
+                    .lineToLinearHeading(CURVE_5.toPose())
+                    .build();
+    public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> OVAL5 =
+            func -> func.apply(CURVE_5.toPose())
+                    .splineToLinearHeading(CURVE_7.toPose(), Math.PI - CURVE_7.getHeading())
+                    .build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> FIRST_TO_SECOND = func -> func.apply(FIRST.toPose()).lineToLinearHeading(SECOND.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> SECOND_TO_THIRD = func -> func.apply(SECOND.toPose()).lineToLinearHeading(THIRD.toPose()).build();
     public static final Function<Function<Pose2d, TrajectorySequenceBuilder>, TrajectorySequence> THIRD_TO_FOURTH = func -> func.apply(THIRD.toPose()).lineToLinearHeading(FOURTH.toPose()).build();
