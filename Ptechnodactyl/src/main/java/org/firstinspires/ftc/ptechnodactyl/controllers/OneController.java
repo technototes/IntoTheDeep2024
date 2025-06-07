@@ -23,7 +23,6 @@ public class OneController {
     public CommandButton resetGyroButton, turboButton, snailButton;
     public CommandButton increment;
     public CommandButton decrement;
-    public CommandButton intake;
 
     public OneController(CommandGamepad g, Robot r) {
         robot = r;
@@ -44,7 +43,6 @@ public class OneController {
         driveRightStick = gamepad.rightStick;
         turboButton = gamepad.leftBumper;
         snailButton = gamepad.rightBumper;
-        intake = gamepad.dpadRight;
     }
 
     public void BindControls() {
@@ -63,7 +61,6 @@ public class OneController {
         ArmHorizontal.whenPressed(robot.clawSubsystem::setArmHorizontal);
         increment.whenPressed(robot.clawSubsystem::incrementn);
         decrement.whenPressed(robot.clawSubsystem::decrement);
-        intake.whenPressed(robot.clawSubsystem::setArmIntake);
     }
 
     public void bindDriveControls() {

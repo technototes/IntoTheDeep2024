@@ -107,8 +107,8 @@ public class JoystickDriveCommand implements Command, Loggable {
 
             // The math & signs looks wonky, because this makes things field-relative
             // (Remember that "3 O'Clock" is zero degrees)
-            double yvalue = -y.getAsDouble();
-            double xvalue = -x.getAsDouble();
+            double yvalue = y.getAsDouble();
+            double xvalue = x.getAsDouble();
             if (driveStraighten != null) {
                 if (driveStraighten.getAsDouble() > 0.7) {
                     if (Math.abs(yvalue) > Math.abs(xvalue)) xvalue = 0;
