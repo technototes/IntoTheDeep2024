@@ -40,6 +40,8 @@ public class Setup {
         public static String CLAWSERVO = "clawservo";
         public static String WRISTSERVO = "wristservo";
         public static String LINKSERVO = "linkservo";
+
+        public static String OTOS = "otos";
     }
 
     @Config
