@@ -11,10 +11,10 @@ public class Setup {
         public static boolean VERTICALSLIDESUBSYSTEM = true;
         public static boolean HORIZONTALSLIDESUBSYSTEM = true;
         public static boolean BUCKET = false;
-        public static boolean ODOSUBSYSTEM = true;
-        public static boolean SAFETYSUBSYSTEM = false;
+        public static boolean ODOSUBSYSTEM = false;
+        public static boolean SAFETYSUBSYSTEM = true;
         public static boolean EXTERNAL_IMU = true;
-        public static boolean HANGSUBSYSTEM = false;
+        public static boolean HANGSUBSYSTEM = true;
     }
 
     @Config

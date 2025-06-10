@@ -2,6 +2,7 @@ package org.firstinspires.ftc.sixteen750;
 
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.technototes.library.hardware.motor.EncodedMotor;
@@ -29,6 +30,7 @@ public class Hardware implements Loggable {
     public Servo armservo;
     public Servo bucketservo;
     public MotorEncoder odoF, odoR;
+    public SparkFunOTOS odo;
 
     /* Put other hardware here! */
 
@@ -67,6 +69,7 @@ public class Hardware implements Loggable {
             suspend = new EncodedMotor(Setup.HardwareNames.SUSPEND);
             suspend2 = new EncodedMotor(Setup.HardwareNames.SUSPEND2);
         }
+        odo = hwmap.get(SparkFunOTOS.class, "odo");
     }
 
     // We can read the voltage from the different hubs for fun...
