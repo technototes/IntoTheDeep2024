@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.sixteen750;
 
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.util.Alliance;
 import org.firstinspires.ftc.sixteen750.commands.slides.HorizontalSlidesSequentials;
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.sixteen750.helpers.StartingPosition;
 import org.firstinspires.ftc.sixteen750.subsystems.DrivebaseSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.HangSubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.HorizontalSlidesSubsystem;
+import org.firstinspires.ftc.sixteen750.subsystems.OTOSLocalizer;
 import org.firstinspires.ftc.sixteen750.subsystems.SafetySubsystem;
 import org.firstinspires.ftc.sixteen750.subsystems.TwoDeadWheelLocalizer;
 import org.firstinspires.ftc.sixteen750.subsystems.VerticalSlidesSubsystem;
@@ -22,7 +24,7 @@ public class Robot implements Loggable {
     public DrivebaseSubsystem drivebase;
     public VerticalSlidesSubsystem verticalSlidesSubsystem;
     public HorizontalSlidesSubsystem horizontalSlidesSubsystem;
-    public TwoDeadWheelLocalizer localizer;
+    public OTOSLocalizer localizer;
     public SafetySubsystem safetySubsystem;
     public HangSubsystem hangSubsystem;
 
@@ -32,7 +34,7 @@ public class Robot implements Loggable {
         this.initialVoltage = hw.voltage();
 
         if (Setup.Connected.ODOSUBSYSTEM) {
-            this.localizer = new TwoDeadWheelLocalizer(hw.odoR, hw.odoF);
+            this.localizer = new OTOSLocalizer(hw.odo);
         } else {
             this.localizer = null;
         }
@@ -45,11 +47,10 @@ public class Robot implements Loggable {
 
         if (Setup.Connected.DRIVEBASE) {
             drivebase = new DrivebaseSubsystem(hw.fl, hw.fr, hw.rl, hw.rr, hw.imu, localizer);
-
-            if (localizer != null) {
-                // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
-                localizer.setDrivebase(this.drivebase);
-            }
+            //            if (localizer != null) {
+            //                // YOU MUST CALL THIS IMMEDIATELY AFTER CREATING THE DRIVEBASE!
+            //                localizer.setDrivebase(this.drivebase);
+            //            }
         }
 
         if (Setup.Connected.SAFETYSUBSYSTEM) {

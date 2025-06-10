@@ -156,7 +156,7 @@ public class DrivebaseSubsystem
         EncodedMotor<DcMotorEx> rl,
         EncodedMotor<DcMotorEx> rr,
         IGyro i,
-        TwoTrackingWheelLocalizer l
+        OTOSLocalizer l
     ) {
         super(fl, fr, rl, rr, i, () -> DriveConstants.class);
         fl2 = fl;
