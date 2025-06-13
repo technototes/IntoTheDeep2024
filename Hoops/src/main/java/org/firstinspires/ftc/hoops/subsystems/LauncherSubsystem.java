@@ -3,12 +3,15 @@ package org.firstinspires.ftc.hoops.subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.technototes.library.general.Periodic;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.logger.Loggable;
+import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.hoops.Hardware;
 import org.firstinspires.ftc.hoops.Setup;
 
 @Config
-public class LauncherSubsystem {
+public class LauncherSubsystem implements Subsystem, Loggable {
 
     public static double MAX_MOTOR_VELOCITY = 0.25; // 0.5 1.0
 

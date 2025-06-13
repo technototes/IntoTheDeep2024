@@ -4,18 +4,20 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.technototes.library.command.CommandScheduler;
+import com.technototes.library.general.Periodic;
 import com.technototes.library.structure.CommandOpMode;
 import org.firstinspires.ftc.hoops.Hardware;
 import org.firstinspires.ftc.hoops.Robot;
 import org.firstinspires.ftc.hoops.Setup;
 import org.firstinspires.ftc.hoops.commands.EZCmd;
+import org.firstinspires.ftc.hoops.controllers.allinOneController;
 
 @TeleOp(name = "AllInOneTele")
 @SuppressWarnings("unused")
 public class AllInOneTele extends CommandOpMode {
 
     public Robot robot;
-    public org.firstinspires.ftc.hoops.controllers.AllinOneController Allcontrols;
+    public allinOneController Allcontrols;
 
     public Hardware hardware;
 
@@ -24,11 +26,10 @@ public class AllInOneTele extends CommandOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         hardware = new Hardware(hardwareMap);
         robot = new Robot(hardware);
+        CommandScheduler.register(robot.launcherSubsystem);
+        CommandScheduler.register(robot.intakeSubsystem);
         if (Setup.Connected.DRIVEBASE) {
-            Allcontrols = new org.firstinspires.ftc.hoops.controllers.AllinOneController(
-                driverGamepad,
-                robot
-            );
+            Allcontrols = new allinOneController(driverGamepad, robot);
 
             CommandScheduler.scheduleForState(
                 EZCmd.Drive.ResetGyro(robot.drivebaseSubsystem),

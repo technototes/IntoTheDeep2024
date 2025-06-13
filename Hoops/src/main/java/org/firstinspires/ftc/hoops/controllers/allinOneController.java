@@ -13,7 +13,7 @@ import org.firstinspires.ftc.hoops.commands.IntakeCommands;
 import org.firstinspires.ftc.hoops.commands.JoystickDriveCommand;
 import org.firstinspires.ftc.hoops.commands.LaunchCommands;
 
-public class AllinOneController {
+public class allinOneController {
 
     public Robot robot;
     public CommandGamepad gamepad;
@@ -26,7 +26,7 @@ public class AllinOneController {
     public CommandButton intake;
     public CommandButton intakeandlaunch;
 
-    public AllinOneController(CommandGamepad g, Robot r) {
+    public allinOneController(CommandGamepad g, Robot r) {
         this.robot = r;
         gamepad = g;
 

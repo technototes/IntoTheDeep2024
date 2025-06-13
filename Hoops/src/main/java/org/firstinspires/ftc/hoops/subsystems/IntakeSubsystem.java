@@ -3,11 +3,13 @@ package org.firstinspires.ftc.hoops.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.technototes.library.hardware.motor.EncodedMotor;
+import com.technototes.library.logger.Loggable;
+import com.technototes.library.subsystem.Subsystem;
 import org.firstinspires.ftc.hoops.Hardware;
 import org.firstinspires.ftc.hoops.Setup;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
-public class IntakeSubsystem {
+public class IntakeSubsystem implements Subsystem, Loggable {
 
     boolean hasHardware;
     EncodedMotor<DcMotorEx> slurp;
