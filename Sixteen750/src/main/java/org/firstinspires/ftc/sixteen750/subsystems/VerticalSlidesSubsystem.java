@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.command.WaitCommand;
 import com.technototes.library.hardware.motor.EncodedMotor;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -49,8 +49,8 @@ public class VerticalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "bucketTarget")
     public double bucketTargetPos;
 
-    public Servo bucketServo;
-    public Servo armServo;
+    public ServoGroup bucketServo;
+    public ServoGroup armServo;
     public EncodedMotor<DcMotorEx> slideMotor;
     private boolean isHardware;
     public static PIDCoefficients slidePID = new PIDCoefficients(0.0047, 0.0, 0.0);

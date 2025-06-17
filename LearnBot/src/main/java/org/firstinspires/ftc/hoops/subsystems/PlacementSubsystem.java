@@ -2,7 +2,7 @@ package org.firstinspires.ftc.hoops.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -17,7 +17,7 @@ public class PlacementSubsystem implements Subsystem, Loggable {
     public static double ScoreServo = 0.5;
 
     public static double ArmServo = 0.5;
-    public Servo armServo;
+    public ServoGroup armServo;
 
     public static double ScoreServoInput = 0.5;
 
@@ -27,7 +27,7 @@ public class PlacementSubsystem implements Subsystem, Loggable {
 
     public static double ArmServoOutput = 0.5;
 
-    public Servo scoreServo;
+    public ServoGroup scoreServo;
     public DcMotorEx liftMotor;
     private boolean isHardware;
 

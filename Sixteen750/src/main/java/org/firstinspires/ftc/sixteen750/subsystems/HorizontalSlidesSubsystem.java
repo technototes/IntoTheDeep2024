@@ -2,7 +2,7 @@ package org.firstinspires.ftc.sixteen750.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -48,9 +48,9 @@ public class HorizontalSlidesSubsystem implements Subsystem, Loggable {
     @Log(name = "horizontalSlide")
     public double slidePos;
 
-    public Servo wristServo;
-    public Servo clawServo;
-    public Servo linkServo;
+    public ServoGroup wristServo;
+    public ServoGroup clawServo;
+    public ServoGroup linkServo;
     private final boolean isHardware; //not currently used, is there a use for it or should we delete?
 
     public HorizontalSlidesSubsystem(Hardware hw) {

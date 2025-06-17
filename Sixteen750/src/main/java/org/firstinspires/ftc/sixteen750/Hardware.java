@@ -9,7 +9,7 @@ import com.technototes.library.hardware.sensor.AdafruitIMU;
 import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.encoder.MotorEncoder;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Loggable;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
@@ -22,12 +22,12 @@ public class Hardware implements Loggable {
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr;
     public EncodedMotor suspend;
     public EncodedMotor suspend2;
-    public Servo clawservo;
-    public Servo wristservo;
-    public Servo linkservo;
+    public ServoGroup clawservo;
+    public ServoGroup wristservo;
+    public ServoGroup linkservo;
     public EncodedMotor<DcMotorEx> slidemotor;
-    public Servo armservo;
-    public Servo bucketservo;
+    public ServoGroup armservo;
+    public ServoGroup bucketservo;
     public MotorEncoder odoF, odoR;
 
     /* Put other hardware here! */
@@ -50,13 +50,13 @@ public class Hardware implements Loggable {
             rr = new EncodedMotor<DcMotorEx>(Setup.HardwareNames.RR_DRIVE_MOTOR);
         }
         if (Setup.Connected.HORIZONTALSLIDESUBSYSTEM) {
-            clawservo = new Servo(Setup.HardwareNames.CLAWSERVO);
-            wristservo = new Servo(Setup.HardwareNames.WRISTSERVO);
-            linkservo = new Servo(Setup.HardwareNames.LINKSERVO);
+            clawservo = new ServoGroup(Setup.HardwareNames.CLAWSERVO);
+            wristservo = new ServoGroup(Setup.HardwareNames.WRISTSERVO);
+            linkservo = new ServoGroup(Setup.HardwareNames.LINKSERVO);
         }
         if (Setup.Connected.VERTICALSLIDESUBSYSTEM) {
-            armservo = new Servo(Setup.HardwareNames.ARMSERVO);
-            bucketservo = new Servo(Setup.HardwareNames.BUCKETSERVO);
+            armservo = new ServoGroup(Setup.HardwareNames.ARMSERVO);
+            bucketservo = new ServoGroup(Setup.HardwareNames.BUCKETSERVO);
             slidemotor = new EncodedMotor<>(Setup.HardwareNames.SLIDEMOTOR);
         }
         if (Setup.Connected.ODOSUBSYSTEM) {

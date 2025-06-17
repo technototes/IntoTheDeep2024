@@ -1,28 +1,27 @@
 package org.firstinspires.ftc.ptechnodactyl.subsystems;
 
-import com.acmerobotics.dashboard.config.Config;
-import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.servo.Servo;
-import com.technototes.library.hardware.servo.ServoProfiler;
-import com.technototes.library.subsystem.Subsystem;
-
-import java.util.function.Supplier;
-
+import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.ARM_CONSTRAINTS;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.CARRY;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.COLLECT;
-import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.ARM_CONSTRAINTS;
+import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.DIFFERENTIAL;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.DOWN;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.DUMP;
-import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.DIFFERENTIAL;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.FAKE_CARRY;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.IN;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.OUT;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.SLIGHT_CARRY;
 import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmConstants.UP;
 
-@SuppressWarnings("unused")
+import com.acmerobotics.dashboard.config.Config;
+import com.qualcomm.robotcore.util.Range;
+import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.ServoProfiler;
+import com.technototes.library.subsystem.Subsystem;
+import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class ArmSubsystem implements Subsystem, Supplier<String> {
+
     /**
      * Deposit is am arm to hold and drop freight
      *
@@ -31,22 +30,29 @@ public class ArmSubsystem implements Subsystem, Supplier<String> {
      */
     @Config
     public static class ArmConstants {
+
         //public static double MIN = 0, MAX = 0.5;
-        public static double DUMP = 0.55, CARRY = 0.25, FAKE_CARRY = 0.15, COLLECT = 0.03, AUTO_CARRY = 0.3, SLIGHT_CARRY = 0.15;
+        public static double DUMP = 0.55, CARRY = 0.25, FAKE_CARRY = 0.15, COLLECT =
+            0.03, AUTO_CARRY = 0.3, SLIGHT_CARRY = 0.15;
         public static double IN = 0.02, UP = 0.3, OUT = 0.6, DOWN = 0.75;
         public static double DIFFERENTIAL = 2.8;
-        public static ServoProfiler.Constraints ARM_CONSTRAINTS = new ServoProfiler.Constraints(5, 5, 5);
+        public static ServoProfiler.Constraints ARM_CONSTRAINTS = new ServoProfiler.Constraints(
+            5,
+            5,
+            5
+        );
     }
 
-    public Servo dumpServo;
-    public Servo armServo;
+    public ServoGroup dumpServo;
+    public ServoGroup armServo;
     public ServoProfiler armController;
 
-    public ArmSubsystem(Servo l, Servo r) {
+    public ArmSubsystem(ServoGroup l, ServoGroup r) {
         dumpServo = l;
         armServo = r;
-        armController = new ServoProfiler(armServo).setConstraints(ARM_CONSTRAINTS).setTargetPosition(UP);
-
+        armController = new ServoProfiler(armServo)
+            .setConstraints(ARM_CONSTRAINTS)
+            .setTargetPosition(UP);
     }
 
     /**

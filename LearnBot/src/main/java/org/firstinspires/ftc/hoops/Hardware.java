@@ -11,7 +11,7 @@ import com.technototes.library.hardware.sensor.ColorDistanceSensor;
 import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Loggable;
 import com.technototes.vision.hardware.Webcam;
 import java.util.List;
@@ -25,8 +25,8 @@ public class Hardware implements Loggable {
     public Motor<DcMotorEx> placeholder1;
     public DcMotorEx liftMotor;
 
-    public Servo placeholder2;
-    public Servo servo;
+    public ServoGroup placeholder2;
+    public ServoGroup servo;
 
     public IGyro imu;
     public Webcam camera;
@@ -67,7 +67,7 @@ public class Hardware implements Loggable {
         }
         if (Setup.Connected.TESTSUBSYSTEM) {
             if (Setup.Connected.SERVO) {
-                this.servo = new Servo(Setup.HardwareNames.SERVO);
+                this.servo = new ServoGroup(Setup.HardwareNames.SERVO);
             }
             //            if (Setup.Connected.COLOR_SENSOR) {
             //                this.colorSensor = new ColorDistanceSensor(Setup.HardwareNames.COLOR);
