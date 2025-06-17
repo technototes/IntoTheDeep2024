@@ -14,7 +14,7 @@ import static org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem.ArmCon
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.hardware.servo.ServoProfiler;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.function.Supplier;
@@ -43,11 +43,11 @@ public class ArmSubsystem implements Subsystem, Supplier<String> {
         );
     }
 
-    public ServoGroup dumpServo;
-    public ServoGroup armServo;
+    public Servo dumpServo;
+    public Servo armServo;
     public ServoProfiler armController;
 
-    public ArmSubsystem(ServoGroup l, ServoGroup r) {
+    public ArmSubsystem(Servo l, Servo r) {
         dumpServo = l;
         armServo = r;
         armController = new ServoProfiler(armServo)
