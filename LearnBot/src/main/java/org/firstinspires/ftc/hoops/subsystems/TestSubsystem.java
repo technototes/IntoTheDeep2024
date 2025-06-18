@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.Range;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -37,7 +37,7 @@ public class TestSubsystem implements Subsystem, Loggable {
     // but only while/if the the distance is greater than 10cm
     private EncodedMotor<DcMotorEx> theMotor;
 
-    private Servo servo;
+    private ServoGroup servo;
 
     private Rev2MDistanceSensor theSensor;
     private boolean running;

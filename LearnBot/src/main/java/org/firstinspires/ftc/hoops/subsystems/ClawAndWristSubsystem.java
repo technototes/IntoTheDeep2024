@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.hoops.subsystems;
 
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -31,11 +31,11 @@ public class ClawAndWristSubsystem implements Subsystem, Loggable {
     @Log(name = "Wrist")
     public double WristPos;
 
-    private Servo claw1;
-    private Servo claw2;
-    private Servo wrist;
+    private ServoGroup claw1;
+    private ServoGroup claw2;
+    private ServoGroup wrist;
 
-    public ClawAndWristSubsystem(Servo c1, Servo c2, Servo w) {
+    public ClawAndWristSubsystem(ServoGroup c1, ServoGroup c2, ServoGroup w) {
         claw1 = c1;
         claw2 = c2;
         wrist = w;

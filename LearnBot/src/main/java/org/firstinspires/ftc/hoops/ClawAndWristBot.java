@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.hoops;
 
-import com.technototes.library.hardware.servo.Servo;
+import com.technototes.library.hardware.servo.ServoGroup;
 import org.firstinspires.ftc.hoops.subsystems.ClawAndWristSubsystem;
 
 //@Config
@@ -13,6 +13,10 @@ public class ClawAndWristBot {
     public ClawAndWristSubsystem caw;
 
     public ClawAndWristBot() {
-        caw = new ClawAndWristSubsystem(new Servo(CLAW1), new Servo(CLAW2), new Servo(WRIST));
+        caw = new ClawAndWristSubsystem(
+            new ServoGroup(CLAW1),
+            new ServoGroup(CLAW2),
+            new ServoGroup(WRIST)
+        );
     }
 }
