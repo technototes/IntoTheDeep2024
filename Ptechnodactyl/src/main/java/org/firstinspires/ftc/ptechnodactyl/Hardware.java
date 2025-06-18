@@ -3,6 +3,7 @@ package org.firstinspires.ftc.ptechnodactyl;
 import static org.firstinspires.ftc.ptechnodactyl.Hardware.HardwareConstants.*;
 import static org.firstinspires.ftc.ptechnodactyl.Robot.SubsystemConstants.*;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.technototes.library.hardware.motor.EncodedMotor;
 import com.technototes.library.hardware.motor.Motor;
@@ -10,8 +11,7 @@ import com.technototes.library.hardware.sensor.ColorDistanceSensor;
 import com.technototes.library.hardware.sensor.IMU;
 import com.technototes.library.hardware.sensor.IMU.AxesSigns;
 import com.technototes.library.hardware.sensor.Rev2MDistanceSensor;
-import com.technototes.library.hardware.servo;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import com.technototes.vision.hardware.Webcam;
 import org.firstinspires.ftc.ptechnodactyl.subsystems.ArmSubsystem;
@@ -57,11 +57,11 @@ public class Hardware implements Loggable {
 
     public EncodedMotor<DcMotorEx> liftMotor;
 
-    public ServoGroup dumpServo;
-    public ServoGroup armServo;
+    public Servo dumpServo;
+    public Servo armServo;
 
-    public ServoGroup turretServo;
-    public ServoGroup slideServo;
+    public Servo turretServo;
+    public Servo slideServo;
 
     public EncodedMotor<DcMotorEx> flDriveMotor;
     public EncodedMotor<DcMotorEx> frDriveMotor;
@@ -77,33 +77,33 @@ public class Hardware implements Loggable {
 
     public Motor<DcMotorEx> carouselMotor;
 
-    public ServoGroup capServo;
+    public Servo capServo;
 
     public Webcam camera;
 
-    public ServoGroup brake;
+    public Servo brake;
 
-    public ServoGroup capLeftArmServo;
-    public ServoGroup capRightArmServo;
-    public ServoGroup capArmServos;
+    public Servo capLeftArmServo;
+    public Servo capRightArmServo;
+    public Servo capArmServos;
 
-    public ServoGroup capClawServo;
-    public ServoGroup capTurretServo;
+    public Servo capClawServo;
+    public Servo capTurretServo;
 
     public Hardware() {
         if (BRAKE_ENABLED) {
-            brake = new ServoGroup(BRAKE).startAt(BrakeSubsystem.BrakeConstants.UP);
+            brake = new Servo(BRAKE).startAt(BrakeSubsystem.BrakeConstants.UP);
         }
         if (LIFT_ENABLED) {
             liftMotor = new EncodedMotor<DcMotorEx>(LIFT).brake().tare();
         }
         if (ARM_ENABLED) {
-            dumpServo = new ServoGroup(DUMP).invert().startAt(ArmSubsystem.ArmConstants.CARRY);
-            armServo = new ServoGroup(ARM).startAt(ArmSubsystem.ArmConstants.UP);
+            dumpServo = new Servo(DUMP).invert().startAt(ArmSubsystem.ArmConstants.CARRY);
+            armServo = new Servo(ARM).startAt(ArmSubsystem.ArmConstants.UP);
         }
         if (EXTENSION_ENABLED) {
-            slideServo = new ServoGroup(SLIDE).startAt(ExtensionSubsystem.ExtensionConstants.IN);
-            turretServo = new ServoGroup(TURRET)
+            slideServo = new Servo(SLIDE).startAt(ExtensionSubsystem.ExtensionConstants.IN);
+            turretServo = new Servo(TURRET)
                 .startAt(ExtensionSubsystem.ExtensionConstants.CENTER)
                 .expandedRange();
         }
@@ -112,7 +112,11 @@ public class Hardware implements Loggable {
             frDriveMotor = new EncodedMotor<>(FR_MOTOR);
             rlDriveMotor = new EncodedMotor<>(RL_MOTOR);
             rrDriveMotor = new EncodedMotor<>(RR_MOTOR);
-            imu = new IMU(HardwareConstants.IMU).remapAxes(AxesOrder.YXZ, AxesSigns.NPP);
+            imu = new IMU(
+                IMU,
+                RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+            ).remapAxesAndSigns(AxesOrder.YXZ, AxesSigns.NPP);
             leftRangeSensor = new Rev2MDistanceSensor(L_RANGE).onUnit(DistanceUnit.INCH);
             rightRangeSensor = new Rev2MDistanceSensor(R_RANGE).onUnit(DistanceUnit.INCH);
             frontRangeSensor = new Rev2MDistanceSensor(F_RANGE).onUnit(DistanceUnit.INCH);
@@ -128,16 +132,16 @@ public class Hardware implements Loggable {
             intakeSensor = new ColorDistanceSensor(INTAKE_COLOR).onUnit(DistanceUnit.INCH);
         }
         if (CAP_ENABLED) {
-            capLeftArmServo = new ServoGroup("caparml").onRange(0.25, 0.65).invert();
-            capRightArmServo = new ServoGroup("caparmr").onRange(0.35, 0.75);
-            capArmServos = new ServoGroup(capLeftArmServo, capRightArmServo).startAt(
-                CapSubsystem.CapConstants.ARM_INIT
-            );
+            capLeftArmServo = new Servo("caparml")
+                .onRange(0.25, 0.65)
+                .invert()
+                .startAt(CapSubsystem.CapConstants.ARM_INIT);
+            capRightArmServo = new Servo("caparmr")
+                .onRange(0.35, 0.75)
+                .startAt(CapSubsystem.CapConstants.ARM_INIT);
 
-            capClawServo = new ServoGroup("capclaw").startAt(CapSubsystem.CapConstants.CLAW_CLOSE);
-            capTurretServo = new ServoGroup("capturr").startAt(
-                CapSubsystem.CapConstants.TURRET_INIT
-            );
+            capClawServo = new Servo("capclaw").startAt(CapSubsystem.CapConstants.CLAW_CLOSE);
+            capTurretServo = new Servo("capturr").startAt(CapSubsystem.CapConstants.TURRET_INIT);
         }
     }
 }

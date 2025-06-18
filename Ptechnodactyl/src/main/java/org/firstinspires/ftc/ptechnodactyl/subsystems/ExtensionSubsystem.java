@@ -2,7 +2,7 @@ package org.firstinspires.ftc.ptechnodactyl.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.util.Range;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.function.Supplier;
 
@@ -19,10 +19,10 @@ public class ExtensionSubsystem implements Subsystem, Supplier<String> {
             0.75;
     }
 
-    public ServoGroup slideServo;
-    public ServoGroup turretServo;
+    public Servo slideServo;
+    public Servo turretServo;
 
-    public ExtensionSubsystem(ServoGroup s, ServoGroup t) {
+    public ExtensionSubsystem(Servo s, Servo t) {
         slideServo = s;
         turretServo = t;
     }

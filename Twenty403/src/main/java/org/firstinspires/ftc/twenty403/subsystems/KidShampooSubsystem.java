@@ -2,7 +2,7 @@ package org.firstinspires.ftc.twenty403.subsystems;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.hardware.motor.CRServo;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Log;
 import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.twenty403.Hardware;
 @Config
 public class KidShampooSubsystem implements Subsystem, Loggable {
 
-    private ServoGroup retainer, jaw, wrist;
+    private Servo retainer, jaw, wrist;
     private CRServo intake;
 
     private boolean isHardware;

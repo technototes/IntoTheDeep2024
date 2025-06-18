@@ -4,7 +4,7 @@ import static org.firstinspires.ftc.ptechnodactyl.subsystems.CapSubsystem.CapCon
 
 import com.acmerobotics.dashboard.config.Config;
 import com.technototes.library.command.CommandScheduler;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.hardware.servo.ServoProfiler;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.function.Supplier;
@@ -30,15 +30,15 @@ public class CapSubsystem implements Subsystem, Supplier<String> {
         );
     }
 
-    public ServoGroup armServo;
-    public ServoGroup clawServo;
+    public Servo armServo;
+    public Servo clawServo;
 
-    public ServoGroup turretServo;
+    public Servo turretServo;
 
     public ServoProfiler armProfiler;
     public ServoProfiler turretProfiler;
 
-    public CapSubsystem(ServoGroup arm, ServoGroup claw, ServoGroup turret) {
+    public CapSubsystem(Servo arm, Servo claw, Servo turret) {
         CommandScheduler.register(this);
         armServo = arm;
         clawServo = claw;

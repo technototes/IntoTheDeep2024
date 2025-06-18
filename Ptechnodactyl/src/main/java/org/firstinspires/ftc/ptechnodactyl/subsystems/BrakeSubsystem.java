@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.ptechnodactyl.subsystems;
 
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.subsystem.Subsystem;
 import java.util.function.Supplier;
 
@@ -13,9 +13,9 @@ public class BrakeSubsystem implements Subsystem, Supplier<Boolean> {
     }
 
     private boolean isBraking;
-    public ServoGroup servo;
+    public Servo servo;
 
-    public BrakeSubsystem(ServoGroup s) {
+    public BrakeSubsystem(Servo s) {
         servo = s;
         isBraking = false;
     }

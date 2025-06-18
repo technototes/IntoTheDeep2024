@@ -11,7 +11,7 @@ import com.technototes.library.hardware.motor.Motor;
 import com.technototes.library.hardware.sensor.AdafruitIMU;
 import com.technototes.library.hardware.sensor.IGyro;
 import com.technototes.library.hardware.sensor.IMU;
-import com.technototes.library.hardware.servo.ServoGroup;
+import com.technototes.library.hardware.servo.Servo;
 import com.technototes.library.logger.Loggable;
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
@@ -25,7 +25,7 @@ public class Hardware implements Loggable {
     public IGyro imu;
     public EncodedMotor<DcMotorEx> fl, fr, rl, rr, armL, armR;
     public IEncoder odoF, odoR;
-    public ServoGroup retainer, jaw, wrist;
+    public Servo retainer, jaw, wrist;
     public CRServo intake;
     public Motor suspend;
     public EncodedMotor<DcMotorEx> rotate1, rotate2, slides;
@@ -53,9 +53,9 @@ public class Hardware implements Loggable {
         }
         if (Setup.Connected.KIDSSHAMPOOSUBSYSTEM) {
             intake = new CRServo(Setup.HardwareNames.INTAKE);
-            retainer = new ServoGroup(Setup.HardwareNames.RETAINER);
-            wrist = new ServoGroup(Setup.HardwareNames.WRIST);
-            jaw = new ServoGroup(Setup.HardwareNames.JAW);
+            retainer = new Servo(Setup.HardwareNames.RETAINER);
+            wrist = new Servo(Setup.HardwareNames.WRIST);
+            jaw = new Servo(Setup.HardwareNames.JAW);
         }
         if (Setup.Connected.HANGSUBSYSTEM) {
             suspend = new Motor(Setup.HardwareNames.SUSPEND);

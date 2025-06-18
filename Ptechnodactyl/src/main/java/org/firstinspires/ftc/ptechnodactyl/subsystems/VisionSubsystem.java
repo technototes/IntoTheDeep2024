@@ -12,7 +12,7 @@ import com.technototes.library.logger.Loggable;
 import com.technototes.library.subsystem.Subsystem;
 import com.technototes.library.util.Color;
 import com.technototes.vision.hardware.Webcam;
-import org.firstinspires.ftc.ptechnodactyl.opmodes.TeleOpBase;
+import org.firstinspires.ftc.ptechnodactyl.opmodes.tele.TeleOpBase;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
@@ -31,7 +31,7 @@ public class VisionSubsystem implements Subsystem, Loggable {
 
     @LogConfig.DenyList({ TeleOpBase.RedTeleOp.class, TeleOpBase.BlueTeleOp.class })
     @LogConfig.Run(duringRun = false, duringInit = true)
-    @Log.Number(name = "Barcode", color = Color.GREEN)
+    @Log.Number(name = "Barcode")
     public BarcodePipeline barcodePipeline = new BarcodePipeline();
 
     public Webcam camera;
